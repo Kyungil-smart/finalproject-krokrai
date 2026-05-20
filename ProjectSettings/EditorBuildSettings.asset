@@ -11,4 +11,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/02Scenes/PersonalScene/mjy.unity
     guid: 95f45efb816ca2b40ae0bd44fbb9e192
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: dea553bbcbb09a540bd2392790a52f8e, type: 3}
