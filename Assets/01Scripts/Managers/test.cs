@@ -18,8 +18,8 @@ public class AddressableTest : MonoBehaviour
 
     public void ReleaseImage1()
     {
-        manager.ReleaseImageSprite(testImage1);
-        manager.ReleaseImageSprite(testImage2);
+        manager.ReleaseSprite("TestSprite");
+        manager.ReleaseSprite("TestSprite1");
     }
 
     public void LoadAllSprites()
@@ -32,10 +32,6 @@ public class AddressableTest : MonoBehaviour
 
     public void ReleaseImage2AndRenderer1()
     {
-        manager.ReleaseImageSprite(testImage1);
-        manager.ReleaseImageSprite(testImage2);
-        manager.ReleaseRendererSprite(renderer1);
-        manager.ReleaseRendererSprite(renderer2);
-        
+        manager.ReleaseAll();
     }
 }
