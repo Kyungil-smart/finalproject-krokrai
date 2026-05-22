@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
@@ -5,53 +7,107 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class AddressableManager : MonoBehaviour
 {
-    private AsyncOperationHandle<Sprite> spriteHandle;
+    public static AddressableManager instance;
     
+    private Dictionary<string, AsyncOperationHandle<Sprite>> spriteHandle
+    = new Dictionary<string, AsyncOperationHandle<Sprite>>();
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    // Image용 Sprite 로드
+    // 사용법: AddressableManager.Instance.LoadImageSprite("스프라이트의 어드레스Key", 타겟이미지);
     public void LoadImageSprite(string key, Image targetImage)
     {
-        spriteHandle = Addressables.LoadAssetAsync<Sprite>(key);
-
-        spriteHandle.Completed += handle =>
+        // 로드된 이미지는 재사용 하는 코드
+        if (spriteHandle.ContainsKey(key))
         {
-            if (handle.Status == AsyncOperationStatus.Succeeded)
-            {
-                targetImage.sprite = handle.Result;
+            targetImage.sprite = spriteHandle[key].Result;
+            return;
+        }
 
-                Log.Message("로드 성공");
+        AsyncOperationHandle<Sprite> handle = Addressables.LoadAssetAsync<Sprite>(key);
+        
+        handle.Completed += h =>
+        {
+            if (h.Status == AsyncOperationStatus.Succeeded)
+            {
+                spriteHandle[key] = h;
+                targetImage.sprite = h.Result;
+                Log.Message($"로드 성공 : {key}");
+            }
+            else
+            {
+                Log.Message($"로드 실패 : {key}");
             }
         };
     }
     
+    // Sprite Renderer용 Sprite 로드
+    // 사용법: AddressableManager.Instance.LoadRendererSprite("스프라이트의 어드레스Key", 렌더러)
     public void LoadRendererSprite(string key, SpriteRenderer renderer)
     {
-        spriteHandle = Addressables.LoadAssetAsync<Sprite>(key);
-
-        spriteHandle.Completed += handle =>
+        if (spriteHandle.ContainsKey(key))
         {
-            if (handle.Status == AsyncOperationStatus.Succeeded)
-            {
-                renderer.sprite = handle.Result;
+            renderer.sprite = spriteHandle[key].Result;
+            return;
+        }
 
-                Log.Message("로드 성공");
+        AsyncOperationHandle<Sprite> handle = Addressables.LoadAssetAsync<Sprite>(key);
+        
+        handle.Completed += h =>
+        {
+            if (h.Status == AsyncOperationStatus.Succeeded)
+            {
+                spriteHandle[key] = h;
+                renderer.sprite = h.Result;
+                Log.Message($"로드 성공 : {key}");
+            }
+            else
+            {
+                Log.Message($"로드 실패 : {key}");
             }
         };
     }
     
-    public void ReleaseImageSprite(Image targetImage)
+    // Release - 사용한 스프라이트 해제
+    // 사용법: AddressableManager.Instance.ReleaseSprite("해제할 스프라이트의 어드레스key")
+    //        AddressableManager.Instance.ReleaseAll(); -> 씬 전환시 이전 씬의 모든 스프라이드 해제
+    public void ReleaseSprite(string key)
     {
-        targetImage.sprite = null;
-        
-        Addressables.Release(spriteHandle);
-        
+        if (!spriteHandle.ContainsKey(key));
+        {
+            Log.Message($"해제할 스프라이트 없음 : {key}");
+        }
+
+        Addressables.Release(spriteHandle[key]);
+        spriteHandle.Remove(key);
         Log.Message("로드 해제");
     }
     
-    public void ReleaseRendererSprite(SpriteRenderer renderer)
+    public void ReleaseAll()
     {
-        renderer.sprite = null;
+        foreach (var handle in spriteHandle.Values)
+        {
+            Addressables.Release(handle);
+        }
         
-        Addressables.Release(spriteHandle);
-        
-        Log.Message("로드 해제");
+        spriteHandle.Clear();
+        Log.Message("모든 스프라이트 로드 해제");
+    }
+
+    // 앱 종료 또는 오브젝트 파괴 시 자동 해제
+    private void OnDestroy()
+    {
+        ReleaseAll();
     }
 }
