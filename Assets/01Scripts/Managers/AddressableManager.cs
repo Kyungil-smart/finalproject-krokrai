@@ -7,21 +7,12 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class AddressableManager : MonoBehaviour
 {
-    public static AddressableManager instance;
-    
     private Dictionary<string, AsyncOperationHandle<Sprite>> spriteHandle
     = new Dictionary<string, AsyncOperationHandle<Sprite>>();
 
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        instance = this;
-        DontDestroyOnLoad(gameObject);
+        // 서비스 로케이터에서 연결
     }
 
     // Image용 Sprite 로드
@@ -84,7 +75,7 @@ public class AddressableManager : MonoBehaviour
     //        AddressableManager.Instance.ReleaseAll(); -> 씬 전환시 이전 씬의 모든 스프라이드 해제
     public void ReleaseSprite(string key)
     {
-        if (!spriteHandle.ContainsKey(key));
+        if (!spriteHandle.ContainsKey(key))
         {
             Log.Message($"해제할 스프라이트 없음 : {key}");
         }
@@ -109,5 +100,6 @@ public class AddressableManager : MonoBehaviour
     private void OnDestroy()
     {
         ReleaseAll();
+        // 서비스 로케이터 해제
     }
 }
