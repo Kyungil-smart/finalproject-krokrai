@@ -101,5 +101,4 @@ public void ReleaseInstance(GameObject obj)
 
 # 참고 문서
 
-- Unity Addressables 공식 문서  
-  https://docs.unity3d.com/Packages/com.unity.addressables@latest/
+- [Unity Addressables 공식 문서](https://docs.unity3d.com/Packages/com.unity.addressables@latest/)
