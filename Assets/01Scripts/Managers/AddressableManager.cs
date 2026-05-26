@@ -5,16 +5,16 @@ using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-public class AddressableManager : MonoBehaviour, IAddressableManager, IManagerBooter
+public class AddressableManager : MonoBehaviour
 {
     private Dictionary<string, AsyncOperationHandle<Sprite>> spriteHandle
     = new Dictionary<string, AsyncOperationHandle<Sprite>>();
 
     private void Awake()
     {
-        Register();
+        ServiceLocator.Register<AddressableManager>(this);
     }
-    
+
     // Image용 Sprite 로드
     // 사용법: AddressableManager.Instance.LoadImageSprite("스프라이트의 어드레스Key", 타겟이미지);
     public void LoadImageSprite(string key, Image targetImage)
@@ -100,10 +100,7 @@ public class AddressableManager : MonoBehaviour, IAddressableManager, IManagerBo
     private void OnDestroy()
     {
         ReleaseAll();
-        UnRegister();
-    }
-    
-    public void Register() => ServiceLocator.Register<IAddressableManager>(this);
 
-    public void UnRegister() => ServiceLocator.UnRegister<IAddressableManager>(this);
+        ServiceLocator.UnRegister<AddressableManager>(this);
+    }
 }
