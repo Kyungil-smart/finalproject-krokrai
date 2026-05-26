@@ -359,7 +359,3 @@ mySequence.Append(transform.DOMoveX(45, 1))
 		  .PrependInterval(1) 
 		  .Insert(0, transform.DOScale(new Vector3(3,3,3), mySequence.Duration()));
 ```
-
-![alt text](<스크린샷 2026-05-21 100805.png>)
-
-![alt text](<스크린샷 2026-05-21 100743.png>)
