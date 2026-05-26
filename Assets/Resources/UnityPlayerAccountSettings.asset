@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58a3bc647e70774b8c7225eb3b51e7e, type: 3}
   m_Name: UnityPlayerAccountSettings
   m_EditorClassIdentifier: 
-  clientId: 
-  scopeMask: 7
+  clientId: nyanstar3
+  scopeMask: 1
   useCustomDeepLinkUri: 0
   customScheme: 
   customHost: 

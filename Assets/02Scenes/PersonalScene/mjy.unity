@@ -475,19 +475,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 652957360}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Test, Assembly-CSharp
-        m_MethodName: Ssss
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &652957360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -732,8 +720,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 812d80205ea8fc74b92270fffbdeaa19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loginButton: {fileID: 0}
-  _logoutButton: {fileID: 0}
+  _loginButton: {fileID: 652957359}
+  _logoutButton: {fileID: 1835779517}
   _statusText: {fileID: 1363003277}
 --- !u!1 &1137718854
 GameObject:
@@ -1077,19 +1065,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1835779518}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Test, Assembly-CSharp
-        m_MethodName: Ssss
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1835779518
 MonoBehaviour:
   m_ObjectHideFlags: 0
