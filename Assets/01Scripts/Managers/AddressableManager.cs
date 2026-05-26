@@ -12,7 +12,7 @@ public class AddressableManager : MonoBehaviour
 
     private void Awake()
     {
-        // 서비스 로케이터에서 연결
+        ServiceLocator.Register<AddressableManager>(this);
     }
 
     // Image용 Sprite 로드
@@ -100,6 +100,7 @@ public class AddressableManager : MonoBehaviour
     private void OnDestroy()
     {
         ReleaseAll();
-        // 서비스 로케이터 해제
+
+        ServiceLocator.UnRegister<AddressableManager>(this);
     }
 }
