@@ -1,3 +1,12 @@
+/*
+작성자 : nekioEmilia
+작성일 : 26-05-26
+수정일 : 26-05-26
+
+역할 : 시뮬레이터 SaftAreaZone에 UI가 위치할 수 있게 해주는 클래스
+방식 : 시뮬레이터에서 회전 해보면서 SaftArea에 UI가 들어오는지 확인 - 최상위 Canvas에 할당
+*/ 
+
 using UnityEngine;
 
 [RequireComponent(typeof(RectTransform))]
