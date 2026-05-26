@@ -23,5 +23,5 @@ public class UIManager : MonoBehaviour, IUIManager, IManagerBooter
 
     public void Register() => ServiceLocator.Register<IUIManager>(this);
 
-    public void UnRegister() => ServiceLocator.Register<IUIManager>(this);
+    public void UnRegister() => ServiceLocator.UnRegister<IUIManager>(this);
 }
