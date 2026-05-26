@@ -15,4 +15,5 @@ EditorBuildSettings:
     path: Assets/02Scenes/PersonalScene/kyb.unity
     guid: 0f1f5ff01c83be54aacba016b696cd2f
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: a6353fe40f6ae7d4d8d4eecc75bd2eee, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: dea553bbcbb09a540bd2392790a52f8e, type: 3}
