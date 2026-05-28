@@ -3,43 +3,29 @@ using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
 using Firebase.Firestore;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class BackendManager : MonoBehaviour
+public class BackendManager : MonoBehaviour, IManagerBooter, IBackendManager
 {
-    public static BackendManager Instance { get; private set; }
 
     private FirebaseApp _app;
-    public static FirebaseApp App => Instance._app;
+    public FirebaseApp App => _app;
 
     private FirebaseAuth _auth;
-    public static FirebaseAuth Auth => Instance._auth;
+    public FirebaseAuth Auth => _auth;
 
     private FirebaseDatabase _database;
-    public static FirebaseDatabase Database => Instance._database;
+    public FirebaseDatabase Database => _database;
 
     private FirebaseFirestore _firestore;
-    public static FirebaseFirestore Firestore => Instance._firestore;
+    public FirebaseFirestore Firestore => _firestore;
 
     private static readonly TaskCompletionSource<bool> _readyTcs = new();
-    public static Task<bool> ReadyTask => _readyTcs.Task;
+    public Task<bool> ReadyTask => _readyTcs.Task;
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
             bool isAvailable = task.Result == DependencyStatus.Available; // 자동 로그인을 위해 변경 되었음.
@@ -64,5 +50,15 @@ public class BackendManager : MonoBehaviour
 
             _readyTcs.TrySetResult(isAvailable);
         });
+    }
+
+    public void Register()
+    {
+        ServiceLocator.Register<IBackendManager>(this);
+    }
+
+    public void UnRegister()
+    {
+        ServiceLocator.UnRegister<IBackendManager>(this);
     }
 }
