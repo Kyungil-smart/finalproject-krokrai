@@ -1,0 +1,9 @@
+누적 보상 단계 ID	누적 보상 단계	목표 페스타 조건	누적 보상 ID
+Gauge_Reward_Id	Gauge_Step	Goal_Point	Reward_Accrue_Id
+Int	Int	Int	Int
+5201	1	100	5101
+5202	2	200	5102
+5203	3	300	5103
+5204	4	400	5104
+5205	5	500	5105
+5206	6	600	5106

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d64942ee8dd2c40b72aa9ae5c3ef1c, type: 3}
+  m_Name: Mission_ListSO 31
+  m_EditorClassIdentifier: 
+  Mission_Id: 0
+  Day_Index: 0
+  Mission_Order: 0
+  Mission_Desc: 
+  Check_Desc: 0
+  Mission_Type: 0
+  Target_Id: 0
+  Goal_Value: 0
+  Festa_Point: 0
+  Reward_Daliy_Id: 0
+  Mission_String_Id: 
