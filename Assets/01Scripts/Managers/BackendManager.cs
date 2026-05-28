@@ -1,6 +1,8 @@
 ﻿using Firebase;
 using Firebase.Auth;
+using Firebase.Database;
 using Firebase.Extensions;
+using Firebase.Firestore;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,6 +17,12 @@ public class BackendManager : MonoBehaviour
 
     private FirebaseAuth _auth;
     public static FirebaseAuth Auth => Instance._auth;
+
+    private FirebaseDatabase _database;
+    public static FirebaseDatabase Database => Instance._database;
+
+    private FirebaseFirestore _firestore;
+    public static FirebaseFirestore Firestore => Instance._firestore;
 
     private static readonly TaskCompletionSource<bool> _readyTcs = new();
     public static Task<bool> ReadyTask => _readyTcs.Task;
@@ -40,6 +48,8 @@ public class BackendManager : MonoBehaviour
             {
                 _app = FirebaseApp.DefaultInstance;
                 _auth = FirebaseAuth.DefaultInstance;
+                _database = FirebaseDatabase.DefaultInstance;
+                _firestore = FirebaseFirestore.DefaultInstance;
 
                 Log.Message("Firebase 의존성 주입 완료");
             }
@@ -48,6 +58,8 @@ public class BackendManager : MonoBehaviour
                 Log.Message($"Firebase 의존성 주입 실패, 사유 : {task.Result}");
                 _app = null;
                 _auth = null;
+                _database = null;
+                _firestore = null;
             }
 
             _readyTcs.TrySetResult(isAvailable);
