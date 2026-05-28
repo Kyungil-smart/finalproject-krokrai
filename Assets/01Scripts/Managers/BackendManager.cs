@@ -1,4 +1,11 @@
-﻿using Firebase;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-05-28
+
+ 역할 : Firebase에 접근을 하기 위한 manager
+ 방식 : Firebase에서 지원하는 의존성 주입을 사용하여, 미리 선언된 class 들에 의존성 주입
+ */
+using Firebase;
 using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
