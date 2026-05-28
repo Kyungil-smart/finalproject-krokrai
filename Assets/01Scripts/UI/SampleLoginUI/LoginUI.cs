@@ -32,7 +32,7 @@ public class LoginUI : MonoBehaviour
 
     private async Task TryAutoLoginAsync()
     {
-        bool firebaseOk = await BackendManager.ReadyTask;
+        bool firebaseOk = await ServiceLocator.Get<IBackendManager>().ReadyTask;
         if (!firebaseOk)
         {
             UpdateStatus("Firebase 초기화 실패");
@@ -43,7 +43,7 @@ public class LoginUI : MonoBehaviour
         {
             await UnityAuthService.InitializeAsync();
 
-            FirebaseUser user = BackendManager.Auth.CurrentUser;
+            FirebaseUser user = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser;
             if (user == null)
             {
                 UpdateStatus("대기");

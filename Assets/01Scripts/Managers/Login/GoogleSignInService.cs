@@ -36,8 +36,8 @@ public static class GoogleSignInService
 
     public static void SignOut()
     {
-        if (BackendManager.Auth?.CurrentUser == null) return;
-        BackendManager.Auth.SignOut();
+        if (ServiceLocator.Get<IBackendManager>().Auth?.CurrentUser == null) return;
+        ServiceLocator.Get<IBackendManager>().Auth.SignOut();
         Debug.Log("GoogleSignInService: Firebase 로그아웃");
     }
 
