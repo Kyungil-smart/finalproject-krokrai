@@ -11,22 +11,26 @@ using UnityEngine;
 public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
 {
     private UserDatas _userData;
+    /// <summary>
+    /// 최상위 Script, 대부분의 경우 사용 X
+    /// </summary>
     public UserDatas UserDatas => _userData;
-
+    /// <summary>
+    /// 프로필 데이터
+    /// </summary>
     public ProFile ProFile => _userData.Profile;
+    /// <summary>
+    /// 접속 데이터
+    /// </summary>
+    public Attendance Attendance => _userData.Attendance;
+    /// <summary>
+    /// 이벤트 데이터
+    /// </summary>
+    public Event_Missions Event_Missions => _userData.Event_Mission;
 
-    CollectionReference _profile;
-
-    [ContextMenu("DataLoad")]
-    public void GetCollection() => _profile = BackendManager.Firestore.Collection("User1");
-
-    [ContextMenu("DataRead")]
-    public void ReadData()
+    public void ReadData(string uid)
     {
-        Log.Message(_profile.ToString());
-        DocumentReference dr = _profile.Document("Profile");
-
-        _profile.GetSnapshotAsync().ContinueWithOnMainThread(task =>
+        BackendManager.Firestore.Collection("User1").Document(uid).GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
             if (task.IsCanceled || task.IsFaulted)
             {
@@ -34,24 +38,20 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
                 return;
             }
 
-            QuerySnapshot snap = task.Result;
+            DocumentSnapshot snapshot = task.Result;
 
             bool isFind = false;
 
-            foreach (var snapshot in snap)
+            Log.Message($"식별된 UID : {snapshot.Id}");
+            try
             {
-                if (snapshot.Id != "UID1") continue;
-                Log.Message(snapshot.Id);
-                try
-                {
-                    _userData = snapshot.ConvertTo<UserDatas>();
-                    Log.Message($"{_userData.GetType()} 등록 완료");
-                    isFind = true;
-                }
-                catch (System.Exception e)
-                {
-                    Log.Message(e.Message);
-                }
+                _userData = snapshot.ConvertTo<UserDatas>();
+                Log.Message($"{_userData.ToString()} 등록 완료");
+                isFind = true;
+            }
+            catch (System.Exception e)
+            {
+                Log.Message(e.Message);
             }
 
             if (!isFind)
