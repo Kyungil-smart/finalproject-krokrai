@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6410f1504c9e95c458a540c19ec17813, type: 3}
+  m_Name: DataBaker_Mission_Type_String_Language
+  m_EditorClassIdentifier: 
+  _tsvFile: {fileID: 9027929339269108002, guid: b1977cb6aef406946bc6a777de7b658d, type: 3}
+  _startCol: 4
+  _sOs:
+  - {fileID: 11400000, guid: 8d43b1ac9100f8841b6295dbeb2073f2, type: 2}
+  - {fileID: 11400000, guid: 605ee336362e16e4e8f748430773ff4e, type: 2}
+  - {fileID: 11400000, guid: 8615f90148e4b034382b0f18db213c0d, type: 2}
+  - {fileID: 11400000, guid: 6c5fbd3b5c2e93744bdc3a7d84f5966c, type: 2}
+  - {fileID: 11400000, guid: 796b8e890e7d21043a7af2afb1639d3c, type: 2}
+  - {fileID: 11400000, guid: 798686823fa3a824097fbc9792fca2c2, type: 2}
+  - {fileID: 11400000, guid: 44bcff303738a044783a3738865cfa7a, type: 2}
+  - {fileID: 11400000, guid: 2bfaab0b20c020143819a3987f9b0913, type: 2}
+  - {fileID: 11400000, guid: 8e7fb45570704144eb97fc4009b41436, type: 2}
+  - {fileID: 11400000, guid: a5409b68ac1c5de4da4c697b672aaf91, type: 2}
+  - {fileID: 11400000, guid: ee6cedc2f5329b24e8755f5696fd1157, type: 2}
+  - {fileID: 11400000, guid: 307bee153fe2fbe46bb4a1e15b88c851, type: 2}

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6410f1504c9e95c458a540c19ec17813, type: 3}
+  m_Name: DataBaker_Mission_Gauge_Setting
+  m_EditorClassIdentifier: 
+  _tsvFile: {fileID: 9027929339269108002, guid: 4e05d91705969084f91fd516067cf949, type: 3}
+  _startCol: 4
+  _sOs:
+  - {fileID: 11400000, guid: fc1af33874fa5984bba528358ef285d5, type: 2}
+  - {fileID: 11400000, guid: e8afd46f5e312d248800e4c5030b3a35, type: 2}
+  - {fileID: 11400000, guid: acf0844e88dc05c48a6fa72b3363fe17, type: 2}
+  - {fileID: 11400000, guid: a4ac8920c5cb49841b140f635070cebf, type: 2}
+  - {fileID: 11400000, guid: 092f39eb58ce81c419ad3ad89eefb026, type: 2}
+  - {fileID: 11400000, guid: 1728ac30f92415347abfa760010b97f8, type: 2}

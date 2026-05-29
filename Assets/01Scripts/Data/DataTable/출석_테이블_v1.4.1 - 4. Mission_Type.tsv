@@ -1,0 +1,15 @@
+미션 분류	텍스트 고유 키
+Mission_Type	Mission_String_Id
+Int	String
+101	Mission_Type_101
+102	Mission_Type_102
+103	Mission_Type_103
+104	Mission_Type_104
+105	Mission_Type_105
+106	Mission_Type_106
+107	Mission_Type_107
+108	Mission_Type_108
+201	Mission_Type_201
+202	Mission_Type_202
+301	Mission_Type_301
+302	Mission_Type_302

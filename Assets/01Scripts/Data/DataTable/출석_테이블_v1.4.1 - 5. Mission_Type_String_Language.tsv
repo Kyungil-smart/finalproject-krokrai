@@ -1,0 +1,15 @@
+텍스트 고유 키	미션 분류	한국어	영어	일본어	중국어
+Mission_String_Id	Mission_Type	ko	en	jp	ch
+String	Int	String	String	String	String
+Mission_Type_101	101	{0} {1}개 조합	Merge {1} {0}	{0}を{1}個合成	合成{1}个{0}
+Mission_Type_102	102	아무 아이템 {1}개 조합	Merge any items {1} times	任意のアイテムを{1}個合成	任意道具合成{1}次
+Mission_Type_103	103	{0} {1}개 획득	Obtain {1} {0}	{0}を{1}個獲得	获得{1}个{0}
+Mission_Type_104	104	아무 아이템 {1}회 획득	Obtain any items {1} times	任意のアイテムを{1}個獲得	任意道具获得{1}次
+Mission_Type_105	105	{0} {1}개 사용	Use {1} {0}	{0}を{1}個使用	使用{1}个{0}
+Mission_Type_106	106	아무 아이템 {1}회 사용	Use any items {1} times	任意のアイテムを{1}回使用	任意道具使用{1}次
+Mission_Type_107	107	{0} {1}개 생성	Create {1} {0}	{0}を{1}個生成	生成{1}个{0}
+Mission_Type_108	108	아무 아이템 {1}회 생성	Create any items {1} times	任意のアイテムを{1}回生成	任意道具生成{1}次
+Mission_Type_201	201	{0} {1} 사용	Spend {1} {0}	{0}を{1}消費	消耗{1}{0}
+Mission_Type_202	202	{0} {1} 획득	Obtain {1} {0}	{0}を{1}獲得	获得{1}{0}
+Mission_Type_301	301	게임 {1}회 접속하기	Log in to the game {1} time(s)	ゲームに{1}回ログイン	登录游戏{1}次
+Mission_Type_302	302	미니게임 {1}회 플레이	Play the mini-game {1} time(s)	ミニゲームを{1}回プレイ	游玩迷你游戏{1}次

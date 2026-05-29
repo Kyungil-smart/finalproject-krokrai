@@ -1,0 +1,8 @@
+아이템 리소스 스트링 키	아이템 리소스 경로
+Item_String_Res_Id	Item_Res
+String	String
+Item_Res_100001	UI/Icons/icon_Coin
+Item_Res_100002	UI/Icons/icon_Gem
+Item_Res_100003	UI/Icons/icon_Meow_Stone
+Item_Res_100004	UI/Icons/icon_Fluffy_Doll
+Item_Res_100005	UI/Icons/icon_Meow_Claw
