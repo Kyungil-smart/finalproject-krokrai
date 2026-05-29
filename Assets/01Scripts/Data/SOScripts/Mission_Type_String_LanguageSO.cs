@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/*
+작성자 : 김영빈
+작성일 : 26-05-29
+
+역할 : 미선 분류, 텍스트 고유 키 + 로컬라이제이션을 위한 string이 담겨 있는 SO
+*/
+
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "Mission_Type_String_LanguageSO", menuName = "Scriptable Objects/Mission_Type_String_LanguageSO")]
 public class Mission_Type_String_LanguageSO : ScriptableObject, ISetSOData
