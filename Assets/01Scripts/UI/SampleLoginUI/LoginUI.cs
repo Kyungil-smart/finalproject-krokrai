@@ -13,8 +13,6 @@ public class LoginUI : MonoBehaviour
     [SerializeField] private Button _logoutButton;
     [SerializeField] private TextMeshProUGUI _statusText;
 
-    public FirebaseUser user;
-
     private bool _isProcessing;
 
     private void Awake() => UpdateStatus("초기화...");
@@ -106,7 +104,7 @@ public class LoginUI : MonoBehaviour
         await UnityAuthService.InitializeAsync();
 
         UpdateStatus("Google 로그인 시도...");
-        user = await GoogleSignInService.SignInAsync();
+        FirebaseUser user = await GoogleSignInService.SignInAsync();
 
         UpdateStatus("UGS 인증 시도...");
         string firebaseIdToken = await user.TokenAsync(false);
