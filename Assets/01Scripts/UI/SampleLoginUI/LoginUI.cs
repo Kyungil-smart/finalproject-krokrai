@@ -3,13 +3,17 @@ using System;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoginUI : MonoBehaviour
 {
+    [SerializeField] private Button _gameStart;
     [SerializeField] private Button _loginButton;
     [SerializeField] private Button _logoutButton;
     [SerializeField] private TextMeshProUGUI _statusText;
+
+    public FirebaseUser user;
 
     private bool _isProcessing;
 
@@ -20,14 +24,21 @@ public class LoginUI : MonoBehaviour
 
     private void BindButtonEvents()
     {
+        _gameStart.onClick.AddListener(OnGameStartClicked);
         _loginButton.onClick.AddListener(OnLoginClicked);
         _logoutButton.onClick.AddListener(OnLogoutClicked);
     }
 
     private void UnbindButtonEvents()
     {
+        _gameStart.onClick.RemoveListener(OnGameStartClicked);
         _loginButton.onClick.RemoveListener(OnLoginClicked);
         _logoutButton.onClick.RemoveListener(OnLogoutClicked);
+    }
+
+    private void OnGameStartClicked()
+    {
+        SceneManager.LoadScene(1);
     }
 
     private async Task TryAutoLoginAsync()
@@ -69,6 +80,7 @@ public class LoginUI : MonoBehaviour
     private async void OnLoginClicked()
     {
         if (_isProcessing) return;
+        UpdateStatus($"로그인 시도 중...");
         _isProcessing = true;
         SetButtonsInteractable(false);
 
@@ -84,6 +96,7 @@ public class LoginUI : MonoBehaviour
         {
             _isProcessing = false;
             SetButtonsInteractable(true);
+            SceneManager.LoadScene(0);
         }
     }
 
@@ -93,7 +106,7 @@ public class LoginUI : MonoBehaviour
         await UnityAuthService.InitializeAsync();
 
         UpdateStatus("Google 로그인 시도...");
-        FirebaseUser user = await GoogleSignInService.SignInAsync();
+        user = await GoogleSignInService.SignInAsync();
 
         UpdateStatus("UGS 인증 시도...");
         string firebaseIdToken = await user.TokenAsync(false);

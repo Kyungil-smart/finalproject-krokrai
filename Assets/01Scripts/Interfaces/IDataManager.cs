@@ -8,5 +8,6 @@ public interface IDataManager
     public ProFile ProFile { get; }
     public Attendance Attendance { get; }
     public Event_Missions Event_Missions { get; }
-    public void ReadData(string uid);
+
+    public void SaveData();
 }

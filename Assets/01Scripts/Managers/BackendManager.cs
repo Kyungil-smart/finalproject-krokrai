@@ -28,7 +28,7 @@ public class BackendManager : MonoBehaviour, IManagerBooter, IBackendManager
     private FirebaseFirestore _firestore;
     public FirebaseFirestore Firestore => _firestore;
 
-    private static readonly TaskCompletionSource<bool> _readyTcs = new();
+    private static readonly TaskCompletionSource<bool> _readyTcs = new(false);
     public Task<bool> ReadyTask => _readyTcs.Task;
 
     private void Awake()
@@ -43,6 +43,8 @@ public class BackendManager : MonoBehaviour, IManagerBooter, IBackendManager
                 _auth = FirebaseAuth.DefaultInstance;
                 _database = FirebaseDatabase.DefaultInstance;
                 _firestore = FirebaseFirestore.DefaultInstance;
+
+                _firestore.Settings.PersistenceEnabled = false;
 
                 Log.Message("Firebase 의존성 주입 완료");
             }

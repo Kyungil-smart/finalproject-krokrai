@@ -16,7 +16,7 @@ public static class GoogleSignInService
             string idToken = await GetGoogleIdTokenFromCredentialManagerAsync();  
             Credential credential = GoogleAuthProvider.GetCredential(idToken, null);
             
-            FirebaseUser user = await BackendManager.Auth.SignInWithCredentialAsync(credential);  
+            FirebaseUser user = await ServiceLocator.Get<IBackendManager>().Auth.SignInWithCredentialAsync(credential);  
             Debug.Log($"GoogleSignInService: Android Credential Manager 로그인 완료 - UID={user.UserId}");  
             return user;
 #elif UNITY_IOS && !UNITY_EDITOR

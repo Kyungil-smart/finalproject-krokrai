@@ -47,6 +47,7 @@ public class Bootstraper : MonoBehaviour
                 return;
             }
             (manager as IManagerBooter).Register();
+            Log.Message($"{manager.ToString()} 등록 완료");
         }
     }
     private void UnRegisterManagers()

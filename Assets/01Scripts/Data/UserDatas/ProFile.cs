@@ -12,11 +12,11 @@ using System;
 public class ProFile
 {
     [FirestoreProperty]
-    public string NickName { get; set; }
+    public string NickName { get; set; } = string.Empty;
     [FirestoreProperty]
-    public long followerCount { get; set; }
+    public long followerCount { get; set; } = 100;
     [FirestoreProperty]
-    public long followingCount { get; set; }
+    public long followingCount { get; set; } = 10;
     [FirestoreProperty]
-    public long profileImage { get; set; }
+    public long profileImage { get; set; } = 600003;
 }

@@ -12,7 +12,7 @@ using System;
 public class EventState
 {
     [FirestoreProperty]
-    public long Mission_State { get; set; }
+    public long Mission_State { get; set; } = new();
     [FirestoreProperty]
-    public long Mission_State_Flag { get; set; }
+    public long Mission_State_Flag { get; set; } = new();
 }

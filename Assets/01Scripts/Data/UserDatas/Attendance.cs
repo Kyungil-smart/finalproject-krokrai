@@ -12,20 +12,20 @@ using System;
 public class Attendance
 {
     [FirestoreProperty]
-    public bool Final_Reward_Received { get; set; }
+    public bool Final_Reward_Received { get; set; } = new();
     
     [FirestoreProperty]
-    public DateTime Join_TimeStamp { get; set; }
-    
-    [FirestoreProperty]
-    public DateTime Last_Login_TimeStamp { get; set; }
-    
-    [FirestoreProperty]
-    public int Recent_Gauge_Step { get; set; }
-    
-    [FirestoreProperty]
-    public int Total_Festa_Point { get; set; }
+    public DateTime Join_TimeStamp { get; set; } = DateTime.Now;
 
     [FirestoreProperty]
-    public ulong User_Active_Day { get; set; }
+    public DateTime Last_Login_TimeStamp { get; set; } = new();
+
+    [FirestoreProperty]
+    public int Recent_Gauge_Step { get; set; } = new();
+
+    [FirestoreProperty]
+    public int Total_Festa_Point { get; set; } = new();
+
+    [FirestoreProperty]
+    public ulong User_Active_Day { get; set; } = new();
 }
