@@ -1,6 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-05-28
+ 수정일 : 26-05-29
 
  역할 : Backend Manager를 Service locator에 등록
 */ 

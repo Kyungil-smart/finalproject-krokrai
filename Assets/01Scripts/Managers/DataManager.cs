@@ -1,7 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-05-27
- 수정일 : 26-05-28
+ 수정일 : 26-05-29
 
  역할 : Firebase Store 및 RTDB와 연동으로 데이터 읽기 및 쓰기
  방식 : Firestore에는 최상위 경로에서 User만 찾은 후 Script에 밀어 넣는 방식
@@ -32,8 +32,6 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
     /// 이벤트 데이터
     /// </summary>
     public Event_Missions Event_Missions => _userData.Event_Mission;
-
-    public bool isReady { get; private set; }
 
     // rtdb 연동할 위치
 
@@ -93,6 +91,10 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
     }
     
 
+    /// <summary>
+    /// store에 저장이 필요한 경우 호출
+    /// 후에 자동 저장 구현 예정 현재은 수동 저장 필요
+    /// </summary>
     public void SaveData()
     {
         if (_userID == null || _userID == "")
@@ -124,7 +126,6 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
             if (await ServiceLocator.Get<IBackendManager>().ReadyTask)
             {
                 _userID = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.UserId;
-                isReady = true;
                 ReadData();
                 Log.Message("User ID 성공적으로 입력됌");
             }

@@ -1,4 +1,11 @@
-﻿using Firebase.Auth;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-05-29
+
+ 역할 : test 및 sample용 Login UI
+ 방식 : UnityAuthService script에 접근하여 Google 로그인을 시도 및 기기에 남아 있는 Token을 사용해 자동 로그인
+*/
+using Firebase.Auth;
 using System;
 using System.Threading.Tasks;
 using TMPro;

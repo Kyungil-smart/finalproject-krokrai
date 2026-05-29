@@ -1,6 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-05-29
+
+ 역할 : Service Locator 연결용 interface
+ */
 
 public interface IDataManager
 {
