@@ -28,6 +28,7 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
     /// </summary>
     public Event_Missions Event_Missions => _userData.Event_Mission;
 
+    
     public void ReadData(string uid)
     {
         BackendManager.Firestore.Collection("User1").Document(uid).GetSnapshotAsync().ContinueWithOnMainThread(task =>
@@ -61,6 +62,7 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
         }
         );
     }
+    
 
     public void Register() => ServiceLocator.Register<IDataManager>(this);
     public void UnRegister() => ServiceLocator.UnRegister<IDataManager>(this);
