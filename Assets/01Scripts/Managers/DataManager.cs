@@ -9,12 +9,15 @@
 using Firebase.Extensions;
 using Firebase.Firestore;
 using System;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
 {
+    private bool _readyToSave;
+    public bool CanSave => _readyToSave;
+
     private string _userID;
+
     private UserDatas _userData;
     /// <summary>
     /// 최상위 Script, 대부분의 경우 사용 X
@@ -62,18 +65,19 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
                 Log.Message("신규 유저 감지됌. Firestore에 정보 생성");
                 _userData = new();
                 _userData.Event_Mission.Init();
-                // TODO : 유저 닉네임 기획에 따라 여기 추가 필요
+                ProFile.NickName = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.DisplayName;
+                _readyToSave = true;
                 SaveData();
             }
             else
             {
                 bool isFind = false;
 
-                Log.Message($"식별된 UID : {snapshot.Id}");
                 try
                 {
                     _userData = snapshot.ConvertTo<UserDatas>();
                     Log.Message($"{_userData.ToString()} 등록 완료");
+                    _readyToSave = true;
                     isFind = true;
                 }
                 catch (System.Exception e)
@@ -86,6 +90,7 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
                     Log.Message($"해당 UID를 찾을 수 없습니다.");
                 }
             }
+            Attendance.Last_Login_TimeStamp = DateTime.Now;
         }
         );
     }
@@ -93,10 +98,10 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
 
     /// <summary>
     /// store에 저장이 필요한 경우 호출
-    /// 후에 자동 저장 구현 예정 현재은 수동 저장 필요
     /// </summary>
     public void SaveData()
     {
+        if (!_readyToSave) return;
         if (_userID == null || _userID == "")
         {
             Log.Message("user의 번호가 빈 값 또는 null 일 수 없습니다.");
@@ -119,6 +124,11 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
         );
     }
 
+    private void OnApplicationQuit()
+    {
+        SaveData();
+    }
+
     private async void ReadUserID()
     {
         try
@@ -136,13 +146,10 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
         }
     }
 
-    private void OnDestroy()
-    {
-        SaveData();
-    }
     public void Register()
     {
         ServiceLocator.Register<IDataManager>(this);
+        _readyToSave = false;
         ReadUserID();
     }
     public void UnRegister() => ServiceLocator.UnRegister<IDataManager>(this);

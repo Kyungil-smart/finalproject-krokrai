@@ -12,5 +12,7 @@ public interface IDataManager
     public Attendance Attendance { get; }
     public Event_Missions Event_Missions { get; }
 
+    public bool CanSave { get; }
+
     public void SaveData();
 }

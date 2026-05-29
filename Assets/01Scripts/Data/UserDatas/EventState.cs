@@ -11,8 +11,33 @@ using System;
 [Serializable, FirestoreData]
 public class EventState
 {
+    private long _mission_State = 0;
+    private long _mission_State_Flag = 0;
+
     [FirestoreProperty]
-    public long Mission_State { get; set; } = new();
+    public long Mission_State
+    {
+        get
+        {
+            return _mission_State;
+        }
+        set
+        {
+            _mission_State = value;
+            ServiceLocator.Get<IDataAutoSaveManager>().RequestSave();
+        }
+    }
     [FirestoreProperty]
-    public long Mission_State_Flag { get; set; } = new();
+    public long Mission_State_Flag
+    {
+        get
+        {
+            return _mission_State_Flag;
+        }
+        set
+        {
+            _mission_State_Flag = value;
+            ServiceLocator.Get<IDataAutoSaveManager>().RequestSave();
+        }
+    }
 }
