@@ -91,6 +91,7 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
         }
         );
     }
+    
 
     public void SaveData()
     {
