@@ -23,7 +23,13 @@ public class TimeSimulator : MonoBehaviour
     private DateTime _currentGameTime;
 
     // 드롭다운에 들어갈 추가 시간(분), 추가 할 시간이 더있다면 배열에 추가하시면 됩니당
-    private readonly int[] _timeOptions = { 10, 30, 60, 360, 1440 };
+    private readonly DateTime[] _timeOptions =
+    {
+        DateTime.MinValue.AddMinutes(10),
+        DateTime.MinValue.AddHours(1),
+        DateTime.MinValue.AddDays(1),
+        DateTime.MinValue.AddDays(7)
+    };
     
     private void Awake()
     {
@@ -45,16 +51,21 @@ public class TimeSimulator : MonoBehaviour
         // 현재 드롭다운에 선택된 인덱스 가져오기
         int selectedIndex = _timeDropdown.value;
         
-        // 선택된 인덱스에 해당하는 분(min) 가져오기
-        int minutesToAdd = _timeOptions[selectedIndex];
+        // 선택된 인덱스에 해당하는 경과시간 가져오기
+        DateTime selected = _timeOptions[selectedIndex];
         
         // 게임 시간 경과 버튼눌렀을때 경과하기
-        _currentGameTime = _currentGameTime.AddMinutes(minutesToAdd);
+        _currentGameTime = _currentGameTime
+            .AddDays(selected.Day - 1 ) // 기본적으로 1일이 추가되어서 1을 빼줘야함
+            .AddHours(selected.Hour)
+            .AddMinutes(selected.Minute);
         
         // 현재시간 텍스트 갱신
         UpdateTimeText();
         
-        Log.Message($" {minutesToAdd}분 경과 -> {_currentGameTime}");
+        // TODO: 파이어 베이스에 시간 데이터 넘길때 아래 코드 사용(파이어베이스 매니저 이름 다르면 변경)
+        // FirebaseManager.Instance.UpdateGameTime(_currentGameTime)
+        Log.Message($" 적용 완료! -> {_currentGameTime}");
     }
 
     private void UpdateTimeText()
