@@ -1288,7 +1288,7 @@ GameObject:
   - component: {fileID: 5003308760434331892}
   - component: {fileID: 9161866803553249821}
   m_Layer: 5
-  m_Name: AttendancePanel
+  m_Name: AttendancePanel_trash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

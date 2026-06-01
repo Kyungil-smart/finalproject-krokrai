@@ -1,0 +1,7 @@
+번호	포스트 ID	댓글 ID	출력 순서
+index	postId	commentId	displayOrder
+int	int	int	int
+1	101001	300001	1
+2	101001	300002	2
+3	101001	300003	3
+4	101001	300004	4

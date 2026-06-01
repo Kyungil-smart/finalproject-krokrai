@@ -1,0 +1,5 @@
+b메시지 ID	발신자 이름
+messageId	senderName
+int	int
+800001	400001
+800002	400002

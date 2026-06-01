@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6410f1504c9e95c458a540c19ec17813, type: 3}
+  m_Name: DataBaker_Comment_Table
+  m_EditorClassIdentifier: 
+  _tsvFile: {fileID: 9027929339269108002, guid: 0875d5aeda7321642a0acc9f473ee9eb, type: 3}
+  _startCol: 4
+  _sOs:
+  - {fileID: 11400000, guid: 3dcc777ec29b0c64d9106fa33599e5fa, type: 2}
+  - {fileID: 11400000, guid: bea0c0b4cec1cc24ca759b77a31b8c69, type: 2}
+  - {fileID: 11400000, guid: 7fe4364f6c81429468d69a4af7535b9d, type: 2}
+  - {fileID: 11400000, guid: 8dffcc87288434741b1233d4bd2a5404, type: 2}

@@ -1,0 +1,6 @@
+번호	포스트 ID	해시태그 ID	출력 순서
+index	postId	hashtagId	displayOrder
+int	int	int	int
+1	101001	200001	1
+2	101001	200002	2
+3	102001	200003	1
