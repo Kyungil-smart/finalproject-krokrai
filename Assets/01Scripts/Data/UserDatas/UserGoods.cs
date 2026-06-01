@@ -59,7 +59,8 @@ public class UserGoods
             ServiceLocator.Get<IDataAutoSaveManager>().RequestRTDBSave();
         }
     }
-    public long FurDool_
+
+    public long FurDoll_
     {
         get
         {
