@@ -6,10 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/02Scenes/Live/LoginScene.unity
+    guid: bd028ac91bedf1a42b6b2a2f2970246a
+  - enabled: 1
     path: Assets/02Scenes/Live/MainScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
+  - enabled: 0
     path: Assets/02Scenes/PersonalScene/mjy.unity
     guid: 95f45efb816ca2b40ae0bd44fbb9e192
+  - enabled: 0
+    path: Assets/02Scenes/PersonalScene/kyb.unity
+    guid: 0f1f5ff01c83be54aacba016b696cd2f
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: a6353fe40f6ae7d4d8d4eecc75bd2eee, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: dea553bbcbb09a540bd2392790a52f8e, type: 3}
