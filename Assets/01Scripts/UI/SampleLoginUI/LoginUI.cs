@@ -1,12 +1,21 @@
-﻿using Firebase.Auth;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-05-29
+
+ 역할 : test 및 sample용 Login UI
+ 방식 : UnityAuthService script에 접근하여 Google 로그인을 시도 및 기기에 남아 있는 Token을 사용해 자동 로그인
+*/
+using Firebase.Auth;
 using System;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoginUI : MonoBehaviour
 {
+    [SerializeField] private Button _gameStart;
     [SerializeField] private Button _loginButton;
     [SerializeField] private Button _logoutButton;
     [SerializeField] private TextMeshProUGUI _statusText;
@@ -20,19 +29,26 @@ public class LoginUI : MonoBehaviour
 
     private void BindButtonEvents()
     {
+        _gameStart.onClick.AddListener(OnGameStartClicked);
         _loginButton.onClick.AddListener(OnLoginClicked);
         _logoutButton.onClick.AddListener(OnLogoutClicked);
     }
 
     private void UnbindButtonEvents()
     {
+        _gameStart.onClick.RemoveListener(OnGameStartClicked);
         _loginButton.onClick.RemoveListener(OnLoginClicked);
         _logoutButton.onClick.RemoveListener(OnLogoutClicked);
     }
 
+    private void OnGameStartClicked()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     private async Task TryAutoLoginAsync()
     {
-        bool firebaseOk = await BackendManager.ReadyTask;
+        bool firebaseOk = await ServiceLocator.Get<IBackendManager>().ReadyTask;
         if (!firebaseOk)
         {
             UpdateStatus("Firebase 초기화 실패");
@@ -43,7 +59,7 @@ public class LoginUI : MonoBehaviour
         {
             await UnityAuthService.InitializeAsync();
 
-            FirebaseUser user = BackendManager.Auth.CurrentUser;
+            FirebaseUser user = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser;
             if (user == null)
             {
                 UpdateStatus("대기");
@@ -69,6 +85,7 @@ public class LoginUI : MonoBehaviour
     private async void OnLoginClicked()
     {
         if (_isProcessing) return;
+        UpdateStatus($"로그인 시도 중...");
         _isProcessing = true;
         SetButtonsInteractable(false);
 
@@ -84,6 +101,7 @@ public class LoginUI : MonoBehaviour
         {
             _isProcessing = false;
             SetButtonsInteractable(true);
+            SceneManager.LoadScene(0);
         }
     }
 

@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-05-28
+ 
+ 역할 : Unity 클라우드 기반으로 인증 서비스 연결
+ 방식 : Unity Project를 Cloud로 연결 후 내부에 OpenID를 사용해 Google 로그인
+*/
+using System;
 using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
-using UnityEngine;
 
 public static class UnityAuthService
 {
