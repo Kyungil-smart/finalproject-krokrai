@@ -130,7 +130,7 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
         }
         ServiceLocator.Get<IBackendManager>()
             .Firestore
-            .Collection("User1")
+            .Collection("Users")
             .Document(_userID)
             .GetSnapshotAsync()
             .ContinueWithOnMainThread(task =>
@@ -191,7 +191,7 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
         }
 
         ServiceLocator.Get<IBackendManager>()
-            .Firestore.Collection("User1")
+            .Firestore.Collection("Users")
             .Document(_userID)
             .SetAsync(_userData)
             .ContinueWithOnMainThread(task =>
