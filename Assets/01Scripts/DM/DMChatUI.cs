@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,16 +14,22 @@ public class DMChatUI : MonoBehaviour
     [Header("Test Profile")]
     [SerializeField] private Sprite testProfileSprite;
 
+    [Header("Choice")]
+    [SerializeField] private GameObject choiceArea;
+    [SerializeField] private Transform choiceContent;
+    [SerializeField] private GameObject choiceButtonPrefab;
+
+    [Header("Scroll")]
+    [SerializeField] private ScrollRect scrollRect;
+    [SerializeField] private VerticalLayoutGroup chatContentLayoutGroup;
+    [SerializeField] private RectTransform choiceAreaRect;
+    [SerializeField] private int defaultBottomPadding = 50;
+    [SerializeField] private float choicePaddingOffset = 10f;
+
     private string previousSpeakerType = "";
 
     public void AddOpponentMessage(string message)
     {
-        if (chatContent == null || opponentBubblePrefab == null)
-        {
-            Debug.LogError("ChatContent 또는 OpponentBubblePrefab이 연결되지 않았습니다.");
-            return;
-        }
-
         GameObject bubble = Instantiate(opponentBubblePrefab, chatContent);
 
         DMBubbleUI bubbleUI = bubble.GetComponentInChildren<DMBubbleUI>();
@@ -39,16 +47,11 @@ public class DMChatUI : MonoBehaviour
         previousSpeakerType = "NPC";
 
         RebuildChatLayout();
+        ScrollToBottom();
     }
 
     public void AddPlayerMessage(string message)
     {
-        if (chatContent == null || playerBubblePrefab == null)
-        {
-            Debug.LogError("ChatContent 또는 PlayerBubblePrefab이 연결되지 않았습니다.");
-            return;
-        }
-
         GameObject bubble = Instantiate(playerBubblePrefab, chatContent);
 
         DMBubbleUI bubbleUI = bubble.GetComponentInChildren<DMBubbleUI>();
@@ -64,13 +67,72 @@ public class DMChatUI : MonoBehaviour
         previousSpeakerType = "PLAYER";
 
         RebuildChatLayout();
+        ScrollToBottom();
+    }
+
+    public void ShowChoices(string[] choices, Action<int> onChoiceSelected)
+    {
+        ClearChoices();
+
+        if (choiceArea != null)
+            choiceArea.SetActive(true);
+
+        for (int i = 0; i < choices.Length; i++)
+        {
+            int index = i;
+
+            GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContent);
+            DMChoiceButtonUI choiceButton = buttonObj.GetComponentInChildren<DMChoiceButtonUI>();
+
+            if (choiceButton == null)
+            {
+                Debug.LogError("ChoiceButtonPrefab에 DMChoiceButtonUI가 없습니다.");
+                return;
+            }
+
+            choiceButton.SetData(choices[i], () =>
+            {
+                HideChoices();
+
+                onChoiceSelected?.Invoke(index);
+
+                RebuildChatLayout();
+                ScrollToBottom();
+            });
+        }
+
+        ApplyChoicePadding();
+        RebuildChatLayout();
+        ScrollToBottom();
+    }
+
+    public void ClearChoices()
+    {
+        if (choiceContent == null)
+            return;
+
+        foreach (Transform child in choiceContent)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    public void HideChoices()
+    {
+        ClearChoices();
+
+        if (choiceArea != null)
+            choiceArea.SetActive(false);
+
+        if (chatContentLayoutGroup != null)
+            chatContentLayoutGroup.padding.bottom = defaultBottomPadding;
+
+        RebuildChatLayout();
+        ScrollToBottom();
     }
 
     public void ClearChat()
     {
-        if (chatContent == null)
-            return;
-
         foreach (Transform child in chatContent)
         {
             Destroy(child.gameObject);
@@ -78,7 +140,27 @@ public class DMChatUI : MonoBehaviour
 
         previousSpeakerType = "";
 
+        HideChoices();
+
         RebuildChatLayout();
+        ScrollToBottom();
+    }
+
+    private void ApplyChoicePadding()
+    {
+        if (chatContentLayoutGroup == null || choiceAreaRect == null)
+            return;
+
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(choiceAreaRect);
+
+        float choiceHeight = LayoutUtility.GetPreferredHeight(choiceAreaRect);
+
+        if (choiceHeight <= 0)
+            choiceHeight = choiceAreaRect.rect.height;
+
+        chatContentLayoutGroup.padding.bottom =
+            Mathf.CeilToInt(choiceHeight + choicePaddingOffset);
     }
 
     private void RebuildChatLayout()
@@ -88,5 +170,21 @@ public class DMChatUI : MonoBehaviour
         RectTransform contentRect = chatContent as RectTransform;
         if (contentRect != null)
             LayoutRebuilder.ForceRebuildLayoutImmediate(contentRect);
+    }
+
+    private void ScrollToBottom()
+    {
+        StartCoroutine(ScrollToBottomRoutine());
+    }
+
+    private IEnumerator ScrollToBottomRoutine()
+    {
+        yield return null;
+        yield return null;
+
+        Canvas.ForceUpdateCanvases();
+
+        if (scrollRect != null)
+            scrollRect.verticalNormalizedPosition = 0f;
     }
 }
