@@ -6,9 +6,13 @@
  역할 : Firebase Store 및 RTDB와 연동으로 데이터 읽기 및 쓰기
  방식 : Firestore에는 최상위 경로에서 User만 찾은 후 Script에 밀어 넣는 방식
  */
+using Firebase.Database;
 using Firebase.Extensions;
 using Firebase.Firestore;
 using System;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
@@ -37,6 +41,85 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
     public Event_Missions Event_Missions => _userData.Event_Mission;
 
     // rtdb 연동할 위치
+    private UserGoods _userGoods;
+    public UserGoods UserGoods=> _userGoods;
+
+    private DatabaseReference _rtdb;
+
+    private void ReadRTDBData()
+    {
+        // RTDB
+        _rtdb = ServiceLocator.Get<IBackendManager>()
+            .Database
+            .RootReference
+            .Child("Users")
+            .Child(_userID);
+
+        _rtdb.GetValueAsync()
+            .ContinueWithOnMainThread(async task =>
+            {
+                if (task.IsFaulted || task.IsCanceled)
+                {
+                    Log.MessageColor($"Store의 정보를 읽기 중 실패 또는 취소 되었습니다. {task.Exception.GetBaseException().Message}", Color.red);
+                    return;
+                }
+                DataSnapshot snapShot = task.Result;
+
+                if (!snapShot.Exists)
+                {
+                    Log.Message("신규 유저 감지 됌");
+                    _userGoods = new UserGoods();
+                    NewRTDBDataSave();
+                    return;
+                }
+
+                try
+                {
+                    string json = snapShot.GetRawJsonValue();
+                    _userGoods = JsonUtility.FromJson<UserGoods>(json);
+                    Log.Message("RTDB 유저 데이터 불러오기 성공");
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            });
+    }
+
+    private void NewRTDBDataSave()
+    {
+        string json = JsonUtility.ToJson(_userGoods);
+        _rtdb.SetRawJsonValueAsync(json)
+            .ContinueWithOnMainThread(task =>
+            {
+                if (task.IsCompleted)
+                {
+                    Log.Message("신규 유저 재화 등록 완료");
+                }
+                else
+                {
+                    Log.Message("신규 유저 재화 등록 실패");
+                }
+            });
+    }
+
+    public async void SaveRTDBData()
+    {
+        try
+        {
+            string json = JsonUtility.ToJson(_userGoods);
+            await _rtdb.SetRawJsonValueAsync(json);
+            Log.Message("재화 업데이트 완료");
+        }
+        catch
+        {
+            throw;
+        }
+        finally
+        {
+            Log.Message("유저 데이터 저장 완료");
+        }
+    }
 
     private void ReadData()
     {
@@ -54,7 +137,7 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
         {
             if (task.IsCanceled || task.IsFaulted)
             {
-                Log.MessageColor($"읽기 중 실패 또는 취소 되었습니다. {task.Exception.GetBaseException().Message}",Color.red);
+                Log.MessageColor($"Store의 정보를 읽기 중 실패 또는 취소 되었습니다. {task.Exception.GetBaseException().Message}",Color.red);
                 return;
             }
 
@@ -94,7 +177,6 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
         }
         );
     }
-    
 
     /// <summary>
     /// store에 저장이 필요한 경우 호출
@@ -137,6 +219,7 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
             {
                 _userID = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.UserId;
                 ReadData();
+                ReadRTDBData();
                 Log.Message("User ID 성공적으로 입력됌");
             }
         }

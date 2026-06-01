@@ -8,4 +8,5 @@
 public interface IDataAutoSaveManager
 {
     public void RequestSave();
+    public void RequestRTDBSave();
 }

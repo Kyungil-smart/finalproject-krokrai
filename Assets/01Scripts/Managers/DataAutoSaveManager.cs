@@ -14,6 +14,7 @@ using UnityEngine;
 public class DataAutoSaveManager : MonoBehaviour, IManagerBooter, IDataAutoSaveManager
 {
     private CancellationTokenSource _cts;
+    private CancellationTokenSource _rtdbCts;
 
     public void RequestSave()
     {
@@ -24,22 +25,50 @@ public class DataAutoSaveManager : MonoBehaviour, IManagerBooter, IDataAutoSaveM
         _ = DelaySaveAsync(_cts.Token);
     }
 
+    public void RequestRTDBSave()
+    {
+        if (!ServiceLocator.Get<IDataManager>().CanSave) return;
+        _rtdbCts?.Cancel();
+        _rtdbCts = new CancellationTokenSource();
+
+        _ = DelayRTDBSaveAsync(_rtdbCts.Token);
+    }
+
     private async Task DelaySaveAsync(CancellationToken token)
     {
         try
         {
-            await Task.Delay(1500, token);
+            await Task.Delay(1000, token);
 
             if (!token.IsCancellationRequested)
             {
                 ServiceLocator.Get<IDataManager>().SaveData();
-                Log.Message("저장 완료");
+                Log.Message("Store Data 저장 완료");
             }
         }
         catch (OperationCanceledException e) { }
         catch (Exception e)
         {
-            Log.Message($"저장 대기 중 문제 발생 {e}");
+            Log.Message($"Store Data 저장 대기 중 문제 발생 {e}");
+        }
+    }
+
+    private async Task DelayRTDBSaveAsync(CancellationToken token)
+    {
+        try
+        {
+            await Task.Delay(500, token);
+
+            if (!token.IsCancellationRequested)
+            {
+                ServiceLocator.Get<IDataManager>().SaveRTDBData();
+                Log.Message("RTDB Data 저장 완료");
+            }
+        }
+        catch (OperationCanceledException e) { }
+        catch (Exception e)
+        {
+            Log.Message($"RTDB Data 저장 대기 중 문제 발생 {e}");
         }
     }
 
