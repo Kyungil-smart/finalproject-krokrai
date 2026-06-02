@@ -14,6 +14,8 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재 업데이트 마다 데이터 추가 생성은 미구현
 {
+    public event Action OnUserDataReseted;
+
     private bool _readyToSave;
     public bool CanSave => _readyToSave;
 
@@ -81,6 +83,13 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
                     throw e;
                 }
             });
+    }
+    public void ResetUserData()
+    {
+        _userGoods = new UserGoods();
+        _userData = new UserDatas();
+        _userData.Event_Mission.Init();
+        OnUserDataReseted?.Invoke();
     }
 
     private void NewRTDBDataSave()

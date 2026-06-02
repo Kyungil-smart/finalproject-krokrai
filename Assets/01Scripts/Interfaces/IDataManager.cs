@@ -1,12 +1,18 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-05-29
+ 수정일 : 26-06-02
 
  역할 : Service Locator 연결용 interface
  */
 
+using System;
+
 public interface IDataManager
 {
+    public event Action OnUserDataReseted;
+    public void ResetUserData();
+
     public UserDatas UserDatas { get; }
     public ProFile ProFile { get; }
     public Attendance Attendance { get; }
