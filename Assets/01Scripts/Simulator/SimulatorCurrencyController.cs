@@ -52,6 +52,7 @@ public class SimulatorCurrencyController : MonoBehaviour
     {
         goods = ServiceLocator.Get<IDataManager>().UserGoods;
         followers = ServiceLocator.Get<IDataManager>().ProFile;
+        RefreshUI();
     }
 
     public void ResetButton()
@@ -65,7 +66,7 @@ public class SimulatorCurrencyController : MonoBehaviour
     /// </summary>
     public void RefreshUI()
     {
-        energyText.text = $"{goods.Energy_:NO}";
+        energyText.text = $"{goods.Energy_:N0}";
         coinText.text = $"{goods.Coin_:N0}";
         gemText.text = $"{goods.Gem_:N0}";
         stoneText.text = $"{goods.Stone_:N0}";
