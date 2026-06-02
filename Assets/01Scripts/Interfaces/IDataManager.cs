@@ -6,6 +6,7 @@
  역할 : Service Locator 연결용 interface
  */
 
+using Firebase.Firestore;
 using System;
 
 public interface IDataManager
@@ -19,6 +20,8 @@ public interface IDataManager
     public Event_Missions Event_Missions { get; }
 
     public UserGoods UserGoods { get; }
+
+    public DateTime _simulationCurrentTime { get; set; }
 
     public bool CanSave { get; }
 

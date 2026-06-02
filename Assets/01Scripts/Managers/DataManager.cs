@@ -21,6 +21,8 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
 
     private string _userID;
 
+    public DateTime _simulationCurrentTime { get; set; }
+
     private UserDatas _userData;
     /// <summary>
     /// 최상위 Script, 대부분의 경우 사용 X
