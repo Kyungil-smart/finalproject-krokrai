@@ -1,7 +1,7 @@
 /*
  작성자 : NekioEmilia
  작성일 : 26-06-01
- 수정일 : 
+ 수정일 : 26-06-02
 
  역할 : Dialogue 테이블의 정보를 가지고 있는 SO
 */
@@ -9,24 +9,13 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Dialogue_TableSO", menuName = "Scriptable Objects/Dialogue_TableSO")]
-public class Dialogue_TableSO : ScriptableObject, ISetSOData
+public class Dialogue_TableSO : ScriptableObject
 {
-    public int dialogId;
-    public int messageId;
-    public Dialogue_TableEnum senderType;
-    public string dialogText;
-    public int nextDialogId;
-    public int choiceGroupId;
-    public bool isEnd;
-    
-    public void SetData(string[] datas)
-    {
-        datas[0].SetData(out dialogId);
-        datas[1].SetData(out messageId);
-        datas[2].SetData<Dialogue_TableEnum>(out senderType);
-        dialogText = datas[3];
-        datas[4].SetData(out nextDialogId);
-        datas[5].SetData(out choiceGroupId);
-        datas[6].SetData(out isEnd);
-    }
+    [SOInject(0)] public int dialogId;
+    [SOInject(1)]public int messageId;
+    [SOInject(2)] public Dialogue_TableEnum senderType;
+    [SOInject(3)] public string dialogText;
+    [SOInject(4)] public int nextDialogId;
+    [SOInject(5)] public int choiceGroupId;
+    [SOInject(6)] public bool isEnd;
 }

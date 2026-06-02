@@ -1,8 +1,8 @@
 /*
 작성자 : NekioEmilia
-수정자 : 
+수정자 : NekioEmilia
 작성일 : 26-05-29
-수정일 : 26-05-29
+수정일 : 26-06-02
 
 역할 : 미션의 대한 정보를 담고 있는 SO
 */
@@ -10,32 +10,17 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "Mission_ListSO", menuName = "Scriptable Objects/Mission_ListSO")]
-public class Mission_ListSO : ScriptableObject, ISetSOData
+public class Mission_ListSO : ScriptableObject
 {
-    public int Mission_Id;
-    public int Day_Index;
-    public int Mission_Order;
-    public string Mission_Desc;
-    public bool Check_Desc;
-    public int Mission_Type;
-    public int Target_Id;
-    public int Goal_Value;
-    public int Festa_Point;
-    public int Reward_Daliy_Id;
-    public string Mission_String_Id;
-    
-    public void SetData(string[] datas)
-    {
-        datas[0].SetData(out Mission_Id);
-        datas[1].SetData(out Day_Index);
-        datas[2].SetData(out Mission_Order);
-        Mission_Desc = datas[3];
-        datas[4].SetData(out Check_Desc);
-        datas[5].SetData(out Mission_Type);
-        datas[6].SetData(out Target_Id);
-        datas[7].SetData(out Goal_Value);
-        datas[8].SetData(out Festa_Point);
-        datas[9].SetData(out Reward_Daliy_Id);
-        Mission_String_Id = datas[10];
-    }
+    [SOInject(0)] public int Mission_Id;
+    [SOInject(1)] public int Day_Index;
+    [SOInject(2)] public int Mission_Order;
+    [SOInject(3)] public string Mission_Desc;
+    [SOInject(4)] public bool Check_Desc;
+    [SOInject(5)] public int Mission_Type;
+    [SOInject(6)] public int Target_Id;
+    [SOInject(7)] public int Goal_Value;
+    [SOInject(8)] public int Festa_Point;
+    [SOInject(9)] public int Reward_Daliy_Id;
+    [SOInject(10)] public string Mission_String_Id;
 }

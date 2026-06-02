@@ -1,6 +1,7 @@
 /*
 작성자 : 김영빈
 작성일 : 26-05-29
+수정일 : 26-06-02
 
 역할 : 미션 보상에 대한 것을 담고 있는 SO
 */
@@ -8,22 +9,12 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Reward_Group_TableSO", menuName = "Scriptable Objects/Reward_Group_TableSO")]
-public class Reward_Group_TableSO : ScriptableObject, ISetSOData
+public class Reward_Group_TableSO : ScriptableObject
 {
-    public int Index;
-    public int Reward_Group_Id;
-    public int Reward_Order;
-    public string Reward_Name;
-    public int Reward_Id;
-    public int Amount;
-    
-    public void SetData(string[] datas)
-    {
-        datas[0].SetData(out Index);
-        datas[1].SetData(out Reward_Group_Id);
-        datas[2].SetData(out Reward_Order);
-        Reward_Name = datas[3];
-        datas[4].SetData(out Reward_Id);
-        datas[5].SetData(out Amount);
-    }
+    [SOInject(0)] public int Index;
+    [SOInject(1)] public int Reward_Group_Id;
+    [SOInject(2)] public int Reward_Order;
+    [SOInject(3)] public string Reward_Name;
+    [SOInject(4)] public int Reward_Id;
+    [SOInject(5)] public int Amount;
 }

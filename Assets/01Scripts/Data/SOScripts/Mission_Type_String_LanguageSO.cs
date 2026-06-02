@@ -1,6 +1,7 @@
 ﻿/*
 작성자 : 김영빈
 작성일 : 26-05-29
+수정일 : 26-06-02
 
 역할 : 미선 분류, 텍스트 고유 키 + 로컬라이제이션을 위한 string이 담겨 있는 SO
 */
@@ -8,22 +9,12 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Mission_Type_String_LanguageSO", menuName = "Scriptable Objects/Mission_Type_String_LanguageSO")]
-public class Mission_Type_String_LanguageSO : ScriptableObject, ISetSOData
+public class Mission_Type_String_LanguageSO : ScriptableObject
 {
-    public string Mission_String_Id;
-    public int Mission_Type;
-    public string ko;
-    public string en;
-    public string jp;
-    public string ch;
-    
-    public void SetData(string[] datas)
-    {
-        Mission_String_Id = datas[0];
-        datas[1].SetData(out Mission_Type);
-        ko = datas[2];
-        en = datas[3];
-        jp = datas[4];
-        ch = datas[5];
-    }
+    [SOInject(0)] public string Mission_String_Id;
+    [SOInject(1)] public int Mission_Type;
+    [SOInject(2)] public string ko;
+    [SOInject(3)] public string en;
+    [SOInject(4)] public string jp;
+    [SOInject(5)] public string ch;
 }
