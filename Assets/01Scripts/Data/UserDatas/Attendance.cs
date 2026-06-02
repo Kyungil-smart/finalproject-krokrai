@@ -12,12 +12,12 @@ using System;
 [Serializable, FirestoreData]
 public class Attendance
 {
-    private bool _final_Reward_Received;
+    private bool _final_Reward_Received = false;
     private DateTime _join_TimeStamp = DateTime.Now;
     private DateTime _last_Login_TimeStamp = DateTime.Now;
-    private int _recent_Gauge_Step;
-    private int _total_Festa_Point;
-    private ulong _user_Active_Day;
+    private int _recent_Gauge_Step = 0;
+    private int _total_Festa_Point = 0;
+    private ulong _user_Active_Day = 0;
 
     [FirestoreProperty]
     public bool Final_Reward_Received
