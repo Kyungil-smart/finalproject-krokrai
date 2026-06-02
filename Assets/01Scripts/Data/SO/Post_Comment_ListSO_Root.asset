@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58aced0d5befe5040b8e2b4f6ee5208f, type: 3}
-  m_Name: Post_Hashtag_ListSO_Root
+  m_Name: Post_Comment_ListSO_Root
   m_EditorClassIdentifier: 
   scriptableObjects:
-  - {fileID: 11400000, guid: ce12b1331b1fc5a479ae839275a9a1d4, type: 2}
-  - {fileID: 11400000, guid: 3a359cc9eccc6bb4b9c5a349994beb6c, type: 2}
-  - {fileID: 11400000, guid: 3ea2d61f3aecb6a46a6d7ef166f856b8, type: 2}
+  - {fileID: 11400000, guid: 05394e3f13be0c548b602981c8612042, type: 2}
+  - {fileID: 11400000, guid: c9c79d0a2654f1b42a2bfbfd99458988, type: 2}
+  - {fileID: 11400000, guid: c0163f8bb18088d4f9716a00aa508475, type: 2}
+  - {fileID: 11400000, guid: f694247d427ca87499d22e85b26b0653, type: 2}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0e9fbbb02252747a3da0e01e496972, type: 3}
   m_Name: Post_Hashtag_ListSO_Row_1
   m_EditorClassIdentifier: 
-  index: 200002
-  postId: 0
-  hashtagId: 0
-  displayOrder: 0
+  index: 2
+  postId: 101001
+  hashtagId: 200002
+  displayOrder: 2
