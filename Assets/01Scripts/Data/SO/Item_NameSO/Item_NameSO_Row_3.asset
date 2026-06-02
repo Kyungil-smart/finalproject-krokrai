@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6627f981c73c4afcae3cffbc9b053d28, type: 3}
+  m_Name: Item_NameSO_Row_3
+  m_EditorClassIdentifier: 
+  Item_String_Name_Id: Item_Name_100004
+  ko: "\uD138\uBB49\uCE58 \uC778\uD615"
+  en: Fluffy Doll
+  jp: "\u6BDB\u7389\u306E\u306C\u3044\u3050\u308B\u307F"
+  ch: "\u6BDB\u7ED2\u73A9\u5076\r"
