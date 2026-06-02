@@ -1,10 +1,10 @@
 /*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-01
+수정일 : 26-06-02
 
 역할 : DM 목록 UI 생성 및 DM 클릭 시 대화창 전환
-방식 : DMTableSO 배열을 읽고 previewDialogId로 DialogueSO를 찾아 미리보기 텍스트를 표시
+방식 : DM_TableSO의 messageId를 기준으로 Dialogue_TableSO를 찾아 미리보기 텍스트를 표시
 */
 
 using UnityEngine;
@@ -19,8 +19,8 @@ public class DMListUI : MonoBehaviour
     [SerializeField] private GameObject dmChatPanel;
 
     [Header("DM Data")]
-    [SerializeField] private DMTableSO[] dmTables;
-    [SerializeField] private DMDialogueSO[] dialogueSOs;
+    [SerializeField] private DM_TableSO[] dmTables;
+    [SerializeField] private Dialogue_TableSO[] dialogueSOs;
 
     private void Start()
     {
@@ -40,11 +40,11 @@ public class DMListUI : MonoBehaviour
 
         if (dmTables == null || dmTables.Length == 0)
         {
-            Log.Message("DMTableSO 데이터가 없습니다.");
+            Log.Message("DM_TableSO 데이터가 없습니다.");
             return;
         }
 
-        foreach (DMTableSO dm in dmTables)
+        foreach (DM_TableSO dm in dmTables)
         {
             if (dm == null)
                 continue;
@@ -59,36 +59,44 @@ public class DMListUI : MonoBehaviour
                 continue;
             }
 
-            string previewText = GetPreviewText(dm.previewDialogId);
+            string previewText = GetPreviewText(dm.messageId);
 
             itemUI.SetData(
-                dm.senderName,
+                dm.senderName.ToString(),
                 previewText,
-                dm.hasUnread,
+                false,
                 () => OnClickDM(dm)
             );
         }
     }
 
-    private string GetPreviewText(int previewDialogId)
+    private string GetPreviewText(int messageId)
     {
         if (dialogueSOs == null)
             return "";
 
-        foreach (DMDialogueSO dialogue in dialogueSOs)
+        Dialogue_TableSO previewDialogue = null;
+
+        foreach (Dialogue_TableSO dialogue in dialogueSOs)
         {
             if (dialogue == null)
                 continue;
 
-            if (dialogue.dialogId == previewDialogId)
-                return dialogue.dialogText;
+            if (dialogue.messageId != messageId)
+                continue;
+
+            if (previewDialogue == null || dialogue.dialogId < previewDialogue.dialogId)
+                previewDialogue = dialogue;
         }
 
-        Log.Message($"Preview Dialogue ID를 찾을 수 없습니다 : {previewDialogId}");
+        if (previewDialogue != null)
+            return previewDialogue.dialogText;
+
+        Log.Message($"Message ID에 해당하는 Preview Dialogue를 찾을 수 없습니다 : {messageId}");
         return "";
     }
 
-    private void OnClickDM(DMTableSO dmData)
+    private void OnClickDM(DM_TableSO dmData)
     {
         if (dmData == null)
         {
@@ -113,9 +121,15 @@ public class DMListUI : MonoBehaviour
 
         runner.OpenNpcDM(dmData);
     }
-    
+
     public void BackToDMList()
     {
+        if (dmChatPanel == null || dmListPanel == null)
+        {
+            Log.Message("DM 패널이 연결되지 않았습니다.");
+            return;
+        }
+
         DMConversationRunner runner =
             dmChatPanel.GetComponent<DMConversationRunner>();
 

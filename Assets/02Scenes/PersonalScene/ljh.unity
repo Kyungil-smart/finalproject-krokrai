@@ -341,7 +341,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &244353927
 MonoBehaviour:
@@ -862,28 +862,18 @@ MonoBehaviour:
   dmListPanel: {fileID: 871584406}
   dmChatPanel: {fileID: 6032777794670003074}
   dmTables:
-  - {fileID: 11400000, guid: 62a1cc93c41a1e545b4d0e7526ac463f, type: 2}
-  - {fileID: 11400000, guid: 5fff39e948c31984c87f609534733143, type: 2}
+  - {fileID: 11400000, guid: f2e24188d3cef1e45815d3317565a85f, type: 2}
+  - {fileID: 11400000, guid: e5780fbd5b563d34db7ec369b9c91b7c, type: 2}
   dialogueSOs:
-  - {fileID: 11400000, guid: 0692810a661c92d41b725ff611392888, type: 2}
-  - {fileID: 11400000, guid: 7393f67d4fd53f844ba524889f74d034, type: 2}
-  - {fileID: 11400000, guid: 88e928d7801764949b885603ab0becc5, type: 2}
-  - {fileID: 11400000, guid: 1b42704df79c2ab438cfadf2aa0f9563, type: 2}
-  - {fileID: 11400000, guid: 6b040739288740043a94fb390d5576d9, type: 2}
-  - {fileID: 11400000, guid: f38313f5fae5dbd4fa67f4ce19d0a2e0, type: 2}
-  - {fileID: 11400000, guid: e8a79de33aa40534283406ca501dd49c, type: 2}
-  - {fileID: 11400000, guid: 72477e9768f9a2d4fa556031200bbd58, type: 2}
-  - {fileID: 11400000, guid: fb54bcb562a796e4987c91bd38c667eb, type: 2}
-  - {fileID: 11400000, guid: 404b2c95f3cb20744bd132325389d521, type: 2}
-  - {fileID: 11400000, guid: e1464e5e200f71a4293d447514556d65, type: 2}
-  - {fileID: 11400000, guid: 896e7bedc3421d1408f4eea33385ebec, type: 2}
-  - {fileID: 11400000, guid: 706c69d32eb055040b87434a72303eda, type: 2}
-  - {fileID: 11400000, guid: efcabf799e868be4294ecd6126fcbfd9, type: 2}
-  - {fileID: 11400000, guid: 496650ac2adf71440a006eae8470cd2d, type: 2}
-  - {fileID: 11400000, guid: e4ef4d7065a3dfd4686fa3f0bf946c1f, type: 2}
-  - {fileID: 11400000, guid: f7d98d615bc72be4183b056e990a6843, type: 2}
-  - {fileID: 11400000, guid: 8dbc9c3d527f82c4395d444f0b86bee7, type: 2}
-  - {fileID: 11400000, guid: 0c0a9e2f69d994a4d91b042f0fd81158, type: 2}
+  - {fileID: 11400000, guid: 82d5cb13408d875428014b4b2507837d, type: 2}
+  - {fileID: 11400000, guid: 5e627e18d364cd44585a4d1c66d0e167, type: 2}
+  - {fileID: 11400000, guid: fa585168403329b44b6d5b14beaa3d44, type: 2}
+  - {fileID: 11400000, guid: 98a35a67797a43e45aee0c2eeffea058, type: 2}
+  - {fileID: 11400000, guid: a4ad0683574402d47a6aa8fbd7cd93ed, type: 2}
+  - {fileID: 11400000, guid: fc9f0f726e501824c820132508e57bbc, type: 2}
+  - {fileID: 11400000, guid: 0a0636d2042132b43a6fe89ae9aef2ef, type: 2}
+  - {fileID: 11400000, guid: 0e3827ba91ecb924a89df47ac4864ef7, type: 2}
+  - {fileID: 11400000, guid: bf93b28e55d85034a98aba0ec32aae8b, type: 2}
 --- !u!1 &1640704281
 GameObject:
   m_ObjectHideFlags: 0
@@ -5919,7 +5909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &6066908759861244243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6142,35 +6132,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chatUI: {fileID: 6164707670989061283}
-  currentDM: {fileID: 11400000, guid: 62a1cc93c41a1e545b4d0e7526ac463f, type: 2}
+  currentDM: {fileID: 11400000, guid: f2e24188d3cef1e45815d3317565a85f, type: 2}
   dialogueSOs:
-  - {fileID: 11400000, guid: 0692810a661c92d41b725ff611392888, type: 2}
-  - {fileID: 11400000, guid: 7393f67d4fd53f844ba524889f74d034, type: 2}
-  - {fileID: 11400000, guid: 88e928d7801764949b885603ab0becc5, type: 2}
-  - {fileID: 11400000, guid: 1b42704df79c2ab438cfadf2aa0f9563, type: 2}
-  - {fileID: 11400000, guid: 6b040739288740043a94fb390d5576d9, type: 2}
-  - {fileID: 11400000, guid: f38313f5fae5dbd4fa67f4ce19d0a2e0, type: 2}
-  - {fileID: 11400000, guid: e8a79de33aa40534283406ca501dd49c, type: 2}
-  - {fileID: 11400000, guid: 72477e9768f9a2d4fa556031200bbd58, type: 2}
-  - {fileID: 11400000, guid: fb54bcb562a796e4987c91bd38c667eb, type: 2}
-  - {fileID: 11400000, guid: 404b2c95f3cb20744bd132325389d521, type: 2}
-  - {fileID: 11400000, guid: e1464e5e200f71a4293d447514556d65, type: 2}
-  - {fileID: 11400000, guid: 896e7bedc3421d1408f4eea33385ebec, type: 2}
-  - {fileID: 11400000, guid: 706c69d32eb055040b87434a72303eda, type: 2}
-  - {fileID: 11400000, guid: efcabf799e868be4294ecd6126fcbfd9, type: 2}
-  - {fileID: 11400000, guid: 496650ac2adf71440a006eae8470cd2d, type: 2}
-  - {fileID: 11400000, guid: e4ef4d7065a3dfd4686fa3f0bf946c1f, type: 2}
-  - {fileID: 11400000, guid: f7d98d615bc72be4183b056e990a6843, type: 2}
-  - {fileID: 11400000, guid: 8dbc9c3d527f82c4395d444f0b86bee7, type: 2}
-  - {fileID: 11400000, guid: 0c0a9e2f69d994a4d91b042f0fd81158, type: 2}
+  - {fileID: 11400000, guid: 82d5cb13408d875428014b4b2507837d, type: 2}
+  - {fileID: 11400000, guid: 5e627e18d364cd44585a4d1c66d0e167, type: 2}
+  - {fileID: 11400000, guid: fa585168403329b44b6d5b14beaa3d44, type: 2}
+  - {fileID: 11400000, guid: 98a35a67797a43e45aee0c2eeffea058, type: 2}
+  - {fileID: 11400000, guid: a4ad0683574402d47a6aa8fbd7cd93ed, type: 2}
+  - {fileID: 11400000, guid: fc9f0f726e501824c820132508e57bbc, type: 2}
+  - {fileID: 11400000, guid: 0a0636d2042132b43a6fe89ae9aef2ef, type: 2}
+  - {fileID: 11400000, guid: 0e3827ba91ecb924a89df47ac4864ef7, type: 2}
+  - {fileID: 11400000, guid: bf93b28e55d85034a98aba0ec32aae8b, type: 2}
   choiceSOs:
-  - {fileID: 11400000, guid: b75c31fb7d85ca44a97ead8dcd22ce88, type: 2}
-  - {fileID: 11400000, guid: 8ce88dd27c22eb14ebf12a3bbc8e7769, type: 2}
-  - {fileID: 11400000, guid: da59791b20a88b24486b5097d458a711, type: 2}
-  - {fileID: 11400000, guid: 0181d786885c1eb40a0baf03953183a2, type: 2}
-  - {fileID: 11400000, guid: fd52fb92383445e459d7ec0f11b35388, type: 2}
-  - {fileID: 11400000, guid: 260456ab9310f114cacc6ffede883718, type: 2}
-  - {fileID: 11400000, guid: a58ef3604f209a242a190886a4aa0003, type: 2}
+  - {fileID: 11400000, guid: 9388200c8bc34d4458f8c1692b91a108, type: 2}
+  - {fileID: 11400000, guid: 6b65d3bf58ec8ab418fa01283bfb7bc0, type: 2}
   messageDelay: 1
 --- !u!222 &6241142485524347976
 CanvasRenderer:
@@ -7762,7 +7737,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 398.05}
-  m_SizeDelta: {x: 1070, y: 0}
+  m_SizeDelta: {x: 1070, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8742247178436280579
 MonoBehaviour:
