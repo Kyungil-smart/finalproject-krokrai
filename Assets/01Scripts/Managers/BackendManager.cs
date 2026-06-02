@@ -1,37 +1,54 @@
-﻿using Firebase;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-05-28
+ 수정일 : 26-05-29
+
+ 역할 : Firebase에 접근을 하기 위한 manager
+ 방식 : Firebase에서 지원하는 의존성 주입을 사용하여, 미리 선언된 class 들에 의존성 주입
+ */
+using Firebase;
 using Firebase.Auth;
+using Firebase.Database;
 using Firebase.Extensions;
-using System.Collections;
-using System.Collections.Generic;
+using Firebase.Firestore;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class BackendManager : MonoBehaviour
+public class BackendManager : MonoBehaviour, IManagerBooter, IBackendManager
 {
-    public static BackendManager Instance { get; private set; }
 
     private FirebaseApp _app;
-    public static FirebaseApp App => Instance._app;
+    /// <summary>
+    /// Firebase App에 접근
+    /// </summary>
+    public FirebaseApp App => _app;
 
     private FirebaseAuth _auth;
-    public static FirebaseAuth Auth => Instance._auth;
+    /// <summary>
+    /// Firebase Auth에 접근
+    /// </summary>
+    public FirebaseAuth Auth => _auth;
 
-    private static readonly TaskCompletionSource<bool> _readyTcs = new();
-    public static Task<bool> ReadyTask => _readyTcs.Task;
+    private FirebaseDatabase _database;
+    /// <summary>
+    /// Firebase DB에 접근
+    /// </summary>
+    public FirebaseDatabase Database => _database;
+
+    private FirebaseFirestore _firestore;
+    /// <summary>
+    /// Firebase store에 접근
+    /// </summary>
+    public FirebaseFirestore Firestore => _firestore;
+
+    private static readonly TaskCompletionSource<bool> _readyTcs = new(false);
+    /// <summary>
+    /// 초기화 후 접근이 필요한 경우를 위한 비동기 변수
+    /// </summary>
+    public Task<bool> ReadyTask => _readyTcs.Task;
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
             bool isAvailable = task.Result == DependencyStatus.Available; // 자동 로그인을 위해 변경 되었음.
@@ -40,6 +57,10 @@ public class BackendManager : MonoBehaviour
             {
                 _app = FirebaseApp.DefaultInstance;
                 _auth = FirebaseAuth.DefaultInstance;
+                _database = FirebaseDatabase.DefaultInstance;
+                _firestore = FirebaseFirestore.DefaultInstance;
+
+                _firestore.Settings.PersistenceEnabled = false;
 
                 Log.Message("Firebase 의존성 주입 완료");
             }
@@ -48,9 +69,15 @@ public class BackendManager : MonoBehaviour
                 Log.Message($"Firebase 의존성 주입 실패, 사유 : {task.Result}");
                 _app = null;
                 _auth = null;
+                _database = null;
+                _firestore = null;
             }
 
             _readyTcs.TrySetResult(isAvailable);
         });
     }
+
+    public void Register() => ServiceLocator.Register<IBackendManager>(this);
+
+    public void UnRegister() => ServiceLocator.UnRegister<IBackendManager>(this);
 }
