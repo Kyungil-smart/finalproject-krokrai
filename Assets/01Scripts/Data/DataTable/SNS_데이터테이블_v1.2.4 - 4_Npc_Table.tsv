@@ -1,8 +1,0 @@
-NPC ID	계정 이름(영어만 가능)	인증마크 여부	닉네임	소개 문구	프로필 사진	팔로워 수	팔로잉 수
-npcId	npcAccountName	hasMark	npcDisplayName	npcBio	npcImage	npcFollowCount	npcFollowingCount
-int	string	bool	string	string	int	int	int
-400001	pawsome_whiskers	1	STR_NAME_000001	STR_BIO_000001	501001	6000000	0
-400002	myo.myo	0	STR_NAME_000002	STR_BIO_000002	501002	80	0
-400003	jiwoo._.	0	STR_NAME_000003	STR_BIO_000003	501003	80	0
-400004	meowmoew	0	STR_NAME_000004	STR_BIO_000004	501004	80	0
-400005	i.love.cat	0	STR_NAME_000005	STR_BIO_000005	501005	1000	0

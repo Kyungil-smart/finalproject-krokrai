@@ -1,8 +1,0 @@
-아이템 ID	아이템 이름 스트링 키	아이템 리소스 스트링 키
-Item_Id	Item_String_Name_Id	Item_String_Res_Id
-Int	String	String
-100001	Item_Name_100001	Item_Res_100001
-100002	Item_Name_100002	Item_Res_100002
-100003	Item_Name_100003	Item_Res_100003
-100004	Item_Name_100004	Item_Res_100004
-100005	Item_Name_100005	Item_Res_100005

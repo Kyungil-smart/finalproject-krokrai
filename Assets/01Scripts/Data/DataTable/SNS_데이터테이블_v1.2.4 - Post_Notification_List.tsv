@@ -1,8 +1,0 @@
-번호	포스트 ID	알림 템플릿	출력 순서	해당 댓글	참조된 NPC ID
-index	postId	notiTemplate	displayOrder	commentId	referencedNpcId
-int	int	int	int	int	int
-1	102001	700001	1	300001	0
-2	102001	700001	2	300002	0
-3	102001	700001	3	300003	0
-4	102001	700003	4	0	400001
-5	102001	700005	5	0	400001

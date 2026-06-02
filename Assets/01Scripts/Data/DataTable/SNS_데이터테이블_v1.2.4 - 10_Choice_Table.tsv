@@ -1,5 +1,0 @@
-선택지 그룹 ID	선택지 번호	선택지 내용	다음 대화 ID
-choiceGroupId	choiceNum	choiceText	nextDialogId
-int	int	string	int
-1000001	1	STR_DIA_000006	900101
-1000001	2	STR_DIA_000007	900201
