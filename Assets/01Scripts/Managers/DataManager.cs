@@ -89,6 +89,7 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
         _userGoods = new UserGoods();
         _userData = new UserDatas();
         _userData.Event_Mission.Init();
+        SaveRTDBData();
         OnUserDataReseted?.Invoke();
     }
 
@@ -154,7 +155,6 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
                 Log.Message("신규 유저 감지됌. Firestore에 정보 생성");
                 _userData = new();
                 _userData.Event_Mission.Init();
-                ProFile.NickName = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.DisplayName;
                 _readyToSave = true;
                 SaveData();
             }
