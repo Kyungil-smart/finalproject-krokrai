@@ -11,11 +11,15 @@ public class ProfileController : MonoBehaviour
 
     private void OnEnable()
     {
-        _profileName.text = ServiceLocator.Get<IDataManager>().ProFile.NickName;
         _profileName.text = ServiceLocator.Get<IDataManager>().ProFile.followerCount.ToString();
         _profileName.text = ServiceLocator.Get<IDataManager>().ProFile.followingCount.ToString();
         ServiceLocator.Get<IAddressableManager>().LoadImageSprite(
             ServiceLocator.Get<IDataManager>().ProFile.profileImage.ToString(),
             _profileImage);
+    }
+
+    private void Start()
+    {
+        _profileName.text = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.UserId;
     }
 }
