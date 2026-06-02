@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58aced0d5befe5040b8e2b4f6ee5208f, type: 3}
+  m_Name: Dialogue_TableSO_Root
+  m_EditorClassIdentifier: 
+  scriptableObjects:
+  - {fileID: 11400000, guid: 82d5cb13408d875428014b4b2507837d, type: 2}
+  - {fileID: 11400000, guid: 5e627e18d364cd44585a4d1c66d0e167, type: 2}
+  - {fileID: 11400000, guid: fa585168403329b44b6d5b14beaa3d44, type: 2}
+  - {fileID: 11400000, guid: 98a35a67797a43e45aee0c2eeffea058, type: 2}
+  - {fileID: 11400000, guid: a4ad0683574402d47a6aa8fbd7cd93ed, type: 2}
+  - {fileID: 11400000, guid: fc9f0f726e501824c820132508e57bbc, type: 2}
+  - {fileID: 11400000, guid: 0a0636d2042132b43a6fe89ae9aef2ef, type: 2}
+  - {fileID: 11400000, guid: 0e3827ba91ecb924a89df47ac4864ef7, type: 2}
+  - {fileID: 11400000, guid: bf93b28e55d85034a98aba0ec32aae8b, type: 2}
