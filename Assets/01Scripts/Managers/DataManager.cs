@@ -1,7 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-05-27
- 수정일 : 26-05-29
+ 수정일 : 26-06-02
 
  역할 : Firebase Store 및 RTDB와 연동으로 데이터 읽기 및 쓰기
  방식 : Firestore에는 최상위 경로에서 User만 찾은 후 Script에 밀어 넣는 방식
@@ -10,13 +10,12 @@ using Firebase.Database;
 using Firebase.Extensions;
 using Firebase.Firestore;
 using System;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
 {
+    public event Action OnUserDataReseted;
+
     private bool _readyToSave;
     public bool CanSave => _readyToSave;
 
@@ -84,6 +83,13 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager
                     throw e;
                 }
             });
+    }
+    public void ResetUserData()
+    {
+        _userGoods = new UserGoods();
+        _userData = new UserDatas();
+        _userData.Event_Mission.Init();
+        OnUserDataReseted?.Invoke();
     }
 
     private void NewRTDBDataSave()
