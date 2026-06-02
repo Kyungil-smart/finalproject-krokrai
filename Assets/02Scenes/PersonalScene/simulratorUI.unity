@@ -301,14 +301,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6557767553178649972, guid: 4fb1284c43707ba4fae0f7cf0acf5d71, type: 3}
-      propertyPath: m_Options.m_Options.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557767553178649972, guid: 4fb1284c43707ba4fae0f7cf0acf5d71, type: 3}
-      propertyPath: m_Options.m_Options.Array.data[4].m_Text
-      value: "\uC2DC\uAC04 \uCD08\uAE30\uD654"
-      objectReference: {fileID: 0}
     - target: {fileID: 7782969650747491579, guid: 4fb1284c43707ba4fae0f7cf0acf5d71, type: 3}
       propertyPath: m_LocalPosition.x
       value: 385.86954
