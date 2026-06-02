@@ -59,18 +59,11 @@ public class SimulatorCurrencyController : MonoBehaviour
         ServiceLocator.Get<IDataManager>().ResetUserData();
     }
 
-    /// <summary>
-    /// 재화 추가 함수
-    /// </summary>
-    public void AddCurrency(CurrencyType type, int amount)
-    {
-        RefreshUI();
-    }
     
     /// <summary>
     /// 현재 재화 UI 갱신
     /// </summary>
-    private void RefreshUI()
+    public void RefreshUI()
     {
         energyText.text = $"{goods.Energy_:NO}";
         coinText.text = $"{goods.Coin_:N0}";

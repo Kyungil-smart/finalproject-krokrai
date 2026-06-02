@@ -29,7 +29,6 @@ public class SimulatorCurrencyAddButton : MonoBehaviour
     {
         int amount = GetDropdownAmount();
 
-        controller.AddCurrency(currencyType, amount);
         
         // 버튼이 눌렸을 때 실제로 Firebase에 반영
         UserGoods goods = ServiceLocator.Get<IDataManager>().UserGoods;
@@ -58,8 +57,8 @@ public class SimulatorCurrencyAddButton : MonoBehaviour
             case CurrencyType.Follower:
                 followers.followerCount += amount;
                 break;
-            
         }
+        controller.RefreshUI();
     }
 
     /// <summary>
