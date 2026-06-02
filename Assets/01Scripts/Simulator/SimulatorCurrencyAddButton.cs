@@ -12,6 +12,7 @@ ex) 1k -> 1000
 ex) 1m -> 1000000
 */
 
+using System;
 using TMPro;
 using UnityEngine;
 

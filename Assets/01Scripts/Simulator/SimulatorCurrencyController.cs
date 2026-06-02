@@ -11,6 +11,7 @@
 추후 DataManager 및 Firebase 연동 예정
 */
 
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -25,69 +26,58 @@ public class SimulatorCurrencyController : MonoBehaviour
     [SerializeField] private TMP_Text clawText;
     [SerializeField] private TMP_Text followerText;
     
-    // TODO:
-    // 현재는 로컬 데이터만 관리
-    // 추후 DataManager, Firebase 연동 시
-    // 저장 및 로드 로직 연결 필요
+    private UserGoods goods;
+    private ProFile followers;
     
-    private int energy;
-    private int coin;
-    private int gem;
-    private int stone;
-    private int furDoll;
-    private int claw;
-    private int follower;
+    
+    private void Awake()
+    {
+        goods = ServiceLocator.Get<IDataManager>().UserGoods;
+        followers = ServiceLocator.Get<IDataManager>().ProFile;
+        
+    }
+
+    private void OnEnable()
+    {
+        ServiceLocator.Get<IDataManager>().OnUserDataReseted += ResetClicked;
+        RefreshUI();
+    }
+
+    private void OnDisable()
+    {
+        ServiceLocator.Get<IDataManager>().OnUserDataReseted -= ResetClicked;
+    }
+
+    private void ResetClicked()
+    {
+        goods = ServiceLocator.Get<IDataManager>().UserGoods;
+        followers = ServiceLocator.Get<IDataManager>().ProFile;
+    }
+
+    public void ResetButton()
+    {
+        ServiceLocator.Get<IDataManager>().ResetUserData();
+    }
 
     /// <summary>
     /// 재화 추가 함수
     /// </summary>
     public void AddCurrency(CurrencyType type, int amount)
     {
-        switch (type)
-        {
-            case CurrencyType.Energy:
-                energy += amount;
-                break;
-
-            case CurrencyType.Coin:
-                coin += amount;
-                break;
-
-            case CurrencyType.Gem:
-                gem += amount;
-                break;
-
-            case CurrencyType.Stone:
-                stone += amount;
-                break;
-
-            case CurrencyType.FurDoll:
-                furDoll += amount;
-                break;
-
-            case CurrencyType.Claw:
-                claw += amount;
-                break;
-
-            case CurrencyType.Follower:
-                follower += amount;
-                break;
-        }
-        
         RefreshUI();
     }
-
+    
     /// <summary>
     /// 현재 재화 UI 갱신
     /// </summary>
     private void RefreshUI()
     {
-        energyText.text = $"{energy:N0}";
-        coinText.text = $"{coin:N0}";
-        gemText.text = $"{gem:N0}";
-        stoneText.text = $"{stone:N0}";
-        furDollText.text = $"{furDoll:N0}";
-        clawText.text = $"{claw:N0}";
-        followerText.text = $"{follower:N0}";
+        energyText.text = $"{goods.Energy_:NO}";
+        coinText.text = $"{goods.Coin_:N0}";
+        gemText.text = $"{goods.Gem_:N0}";
+        stoneText.text = $"{goods.Stone_:N0}";
+        furDollText.text = $"{goods.FurDoll_:N0}";
+        clawText.text = $"{goods.Claw_:N0}";
+        followerText.text = $"{followers.followerCount:N0}";
     }
 }
