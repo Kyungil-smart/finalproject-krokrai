@@ -9,18 +9,10 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Post_Hashtag_ListSO", menuName = "Scriptable Objects/Post_Hashtag_ListSO")]
-public class Post_Hashtag_ListSO : ScriptableObject, ISetSOData
+public class Post_Hashtag_ListSO : ScriptableObject
 {
-    public int index;
-    public int postId;
-    public int hashtagId;
-    public int displayOrder;
-    
-    public void SetData(string[] datas)
-    {
-        datas[0].SetData(out index);
-        datas[1].SetData(out postId);
-        datas[2].SetData(out hashtagId);
-        datas[3].SetData(out displayOrder);
-    }
+    [SOInject(0)] public int index;
+    [SOInject(1)] public int postId;
+    [SOInject(2)] public int hashtagId;
+    [SOInject(3)] public int displayOrder;
 }
