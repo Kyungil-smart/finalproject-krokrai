@@ -1,7 +1,7 @@
 ﻿/*
 작성자 : krokrai
 작성일 : 26-05-20
-수정일 : 26-05-20
+수정일 : 26-06-04
 
 역할 : Pop UI의 재사용을 위한 Manager
 방식 : PopUp을 GameManager에 등록하고 PopUp()에서 구현
@@ -19,6 +19,11 @@ public class UIManager : MonoBehaviour, IUIManager, IManagerBooter
     {
         // 여기에 팝업 상세 구현
         Log.MessageColor("팝업!", Color.red);
+    }
+
+    public void UploadedPost(int imgNum)
+    {
+        // 여기에 Img 번호를 기반으로 탐색 후 댓글 및 해시 태그 등을 추가
     }
 
     public void Register() => ServiceLocator.Register<IUIManager>(this);
