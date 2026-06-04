@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58aced0d5befe5040b8e2b4f6ee5208f, type: 3}
+  m_Name: String_TableSO_Root
+  m_EditorClassIdentifier: 
+  scriptableObjects:
+  - {fileID: 11400000, guid: 3f205cc2dc8f52442a2faab746b4f505, type: 2}
+  - {fileID: 11400000, guid: de655780ead080a4293bdc105a03f1e7, type: 2}
+  - {fileID: 11400000, guid: aec628de2eb366a4e90f2042e76f4b30, type: 2}
+  - {fileID: 11400000, guid: 62593d88b4a6c294aa6f5782fd6ecbdd, type: 2}
+  - {fileID: 11400000, guid: e091cf4eeb89acb4b9aac09776d34138, type: 2}
+  - {fileID: 11400000, guid: dc3dcc58b7da1bd428f024ef43363a49, type: 2}
+  - {fileID: 11400000, guid: 26ebde055e1202546b38f809ffda109a, type: 2}
+  - {fileID: 11400000, guid: be4bcb4396e813844a48f21667bd48f8, type: 2}
+  - {fileID: 11400000, guid: f24be9d507a77e842b6704f3b91c0dac, type: 2}
+  - {fileID: 11400000, guid: cf8a46e9ddaee134ead8f9c2c558dd09, type: 2}
+  - {fileID: 11400000, guid: c9647a57ca74bed409bd050a4fc019bb, type: 2}
+  - {fileID: 11400000, guid: c7217545f20b2314f9ed5e463a130db1, type: 2}
+  - {fileID: 11400000, guid: 72746dece4cf9a046b4d9da85b6256aa, type: 2}
+  - {fileID: 11400000, guid: 66bb4f79a759e3b4e930cb4ccb2d6001, type: 2}
+  - {fileID: 11400000, guid: 44705c25c30a71844ae3457a5f2198aa, type: 2}
+  - {fileID: 11400000, guid: c2ffbbbd32497e44ba3d8306e229ffae, type: 2}
+  - {fileID: 11400000, guid: b3fbd391d3e03034ead6b455078a8dd5, type: 2}
+  - {fileID: 11400000, guid: 8a485d5aafcd909468ba7536920f9515, type: 2}
+  - {fileID: 11400000, guid: b0f074e6a7980054f91dc025bfd66a82, type: 2}
+  - {fileID: 11400000, guid: e758b1fbfb808a74d8ac5b8008330d90, type: 2}
+  - {fileID: 11400000, guid: 1bb8fed6364e1ce4081ad5e0bc7514fa, type: 2}
+  - {fileID: 11400000, guid: 9cee3d52c2f54694db67f347304355f6, type: 2}
