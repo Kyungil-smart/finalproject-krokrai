@@ -129,7 +129,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 9.569611, y: 0, z: -0.42944336, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -372,7 +372,7 @@ MonoBehaviour:
   bubbleLayoutElement: {fileID: 5947683933918410257}
   maxWidth: 600
   paddingWidth: 30
-  paddingHeight: 18
+  paddingHeight: 40
   minRowHeight: 45
 --- !u!114 &-575025496436991605
 MonoBehaviour:
