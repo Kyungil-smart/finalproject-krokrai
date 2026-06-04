@@ -1,7 +1,8 @@
 ﻿/*
 작성자 : krokrai
+수정자 : NekioEmilia
 작성일 : 26-05-21
-수정일 : 26-05-21
+수정일 : 26-05-29
 
 역할 : 문자열을 변환 및 예외 처리 간편화
 방식 : TryParse를 이용해 분기 처리
@@ -47,7 +48,13 @@ public static class StringExtensions
     public static void SetData(this string s, out bool b,
         [CallerFilePath] string filePath = "")
     {
-        if (s == "" || s == null)
+        if (s == "1" || s == "0")
+        {
+            b = s == "1" ? true : false;
+            return;
+        }
+        
+        else if (s == "" || s == null)
         {
             b = default;
             Log.Message("기본 값 적용 됌 : bool");

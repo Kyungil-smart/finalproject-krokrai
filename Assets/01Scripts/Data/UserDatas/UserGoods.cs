@@ -4,12 +4,12 @@ using UnityEngine;
 [Serializable]
 public class UserGoods
 {
-    [SerializeField] private long Energy;
-    [SerializeField] private long Coin;
-    [SerializeField] private long Gem;
-    [SerializeField] private long Stone;
-    [SerializeField] private long FurDoll;
-    [SerializeField] private long Claw;
+    [SerializeField] private long Energy = 0;
+    [SerializeField] private long Coin = 0;
+    [SerializeField] private long Gem = 0;
+    [SerializeField] private long Stone = 0;
+    [SerializeField] private long FurDoll = 0;
+    [SerializeField] private long Claw = 0;
 
     public long Energy_
     {
@@ -59,7 +59,8 @@ public class UserGoods
             ServiceLocator.Get<IDataAutoSaveManager>().RequestRTDBSave();
         }
     }
-    public long FurDool_
+
+    public long FurDoll_
     {
         get
         {
