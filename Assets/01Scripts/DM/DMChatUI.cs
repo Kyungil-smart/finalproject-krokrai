@@ -1,3 +1,12 @@
+/*
+작성자 : 이종현
+작성일 : 26-06-01
+수정일 : 26-06-04
+
+역할 : DM 채팅 UI 출력 담당
+방식 : 말풍선 생성, 선택지 생성, 스크롤 처리 및 채팅 레이아웃 갱신
+*/
+
 using System;
 using System.Collections;
 using UnityEngine;
@@ -36,7 +45,7 @@ public class DMChatUI : MonoBehaviour
 
         if (bubbleUI == null)
         {
-            Debug.LogError("상대 말풍선 프리팹에 DMBubbleUI가 없습니다.");
+            Log.Message("상대 말풍선 프리팹에 DMBubbleUI가 없습니다.");
             return;
         }
 
@@ -58,7 +67,7 @@ public class DMChatUI : MonoBehaviour
 
         if (bubbleUI == null)
         {
-            Debug.LogError("플레이어 말풍선 프리팹에 DMBubbleUI가 없습니다.");
+            Log.Message("플레이어 말풍선 프리팹에 DMBubbleUI가 없습니다.");
             return;
         }
 
@@ -86,7 +95,7 @@ public class DMChatUI : MonoBehaviour
 
             if (choiceButton == null)
             {
-                Debug.LogError("ChoiceButtonPrefab에 DMChoiceButtonUI가 없습니다.");
+                Log.Message("ChoiceButtonPrefab에 DMChoiceButtonUI가 없습니다.");
                 return;
             }
 

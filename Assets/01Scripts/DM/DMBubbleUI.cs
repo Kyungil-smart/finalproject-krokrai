@@ -1,3 +1,12 @@
+/*
+작성자 : 이종현
+작성일 : 26-06-01
+수정일 : 26-06-04
+
+역할 : 채팅 말풍선 UI 담당
+방식 : 텍스트 길이에 따라 말풍선 크기를 조절하고 프로필 표시 여부를 처리
+*/
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

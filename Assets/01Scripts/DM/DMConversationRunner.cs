@@ -19,7 +19,7 @@ public class DMConversationRunner : MonoBehaviour
     [SerializeField] private DMChatUI chatUI;
 
     [Header("SO Data")]
-    [SerializeField] private DM_TableSO currentDM;
+    private DM_TableSO currentDM;
     [SerializeField] private Dialogue_TableSO[] dialogueSOs;
     [SerializeField] private Choice_TableSO[] choiceSOs;
 
@@ -82,17 +82,6 @@ public class DMConversationRunner : MonoBehaviour
         {
             pair.Value.Sort((a, b) => a.choiceNum.CompareTo(b.choiceNum));
         }
-    }
-
-    public void OpenNpcDM()
-    {
-        if (currentDM == null)
-        {
-            Log.Message("CurrentDM이 연결되지 않았습니다.");
-            return;
-        }
-
-        OpenNpcDM(currentDM);
     }
 
     public void OpenNpcDM(DM_TableSO dmData)
