@@ -1,3 +1,11 @@
+/*
+작성자 : 23M-RFT68
+작성일 : 26-06-04
+수정일 : 26-06-04
+
+역할 : SO로부터 데이터를 받아와서 프리펩의 이미지와 텍스트를 변경해줄 역할
+방식 : SO와 Addressable로 텍스트와 이미지 변환
+*/
 using System;
 using System.Collections;
 using System.Collections.Generic;

@@ -1,3 +1,11 @@
+/*
+작성자 : 23M-RFT68
+작성일 : 26-06-04
+수정일 : 26-06-04
+
+역할 : 게시물 포스팅 버튼이 눌렸을때 알림 UI 오브젝트를 활성화 하고 알림창에서 프리펩을 타입별로 생성
+방식 : 프리펩화 된 알림 타입을 생성하고 알림 팝업 오브젝트를 활성화 해서 알림을 활성화함
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,7 +48,4 @@ public class NotificationController : MonoBehaviour
         if (_redNoticePrefab != null) _redNoticePrefab.SetActive(true);
         if (_redExclamationmark != null) _redExclamationmark.SetActive(true);
     }
-
-
-
 }
