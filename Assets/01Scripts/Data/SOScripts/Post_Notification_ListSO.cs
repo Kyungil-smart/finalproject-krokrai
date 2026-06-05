@@ -1,7 +1,8 @@
 ﻿/*
  작성자 : NekioEmilia
+ 수정자 : krokrai
  작성일 : 26-06-01
- 수정일 : 26-06-02
+ 수정일 : 26-06-05
 
  역할 : Post_notification_List의 정보를 가지고 있는 SO
 */
