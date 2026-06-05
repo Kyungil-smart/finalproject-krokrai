@@ -1,18 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class MissionPersenter : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //TODO MissionPresenter 완성 및 View 작성, UI 데이터테이블 받아와 교체
 }
