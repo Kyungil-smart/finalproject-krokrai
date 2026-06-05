@@ -133,11 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &316445619 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4199013538144804805, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
-  m_PrefabInstance: {fileID: 1853394826}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,6 +395,91 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1743887552 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6846933473731518341, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+  m_PrefabInstance: {fileID: 1853394826}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1743887554 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2356366463896724623, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+  m_PrefabInstance: {fileID: 1853394826}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743887552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1743887556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743887552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b25bb68f2d90343a602e8551d448e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPopup: {fileID: 0}
+--- !u!114 &1743887557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743887552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1743887554}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1743887556}
+        m_TargetAssemblyTypeName: PopupUI, Assembly-CSharp
+        m_MethodName: OpenPopup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1853394826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -534,14 +614,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 4199013538144804805, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5234972825756278711}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5527501646962687169, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
       insertIndex: 5
       addedObject: {fileID: 1906787959}
+    - targetCorrespondingSourceObject: {fileID: 6846933473731518341, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1743887557}
+    - targetCorrespondingSourceObject: {fileID: 6846933473731518341, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1743887556}
   m_SourcePrefab: {fileID: 100100000, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
 --- !u!1 &1906787956 stripped
 GameObject:
@@ -572,6 +655,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1988794271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1988794273}
+  - component: {fileID: 1988794272}
+  m_Layer: 5
+  m_Name: MainCurrencyController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1988794272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988794271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9da01bb0c9162634a9448320ea8c167e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyText: {fileID: 843909721}
+  coinText: {fileID: 1445979154}
+  gemText: {fileID: 1987842890}
+  stoneText: {fileID: 2002235434}
+  furDollText: {fileID: 12427614}
+  clawText: {fileID: 1634624291}
+--- !u!224 &1988794273
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988794271}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 540, y: 1170}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2002235434 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4181626728386323886, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
@@ -3589,6 +3726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
+  mainCurrencyController: {fileID: 0}
   currencyType: 5
   amountDropdown: {fileID: 3852396806576081388}
 --- !u!114 &1068366249257884201
@@ -4627,6 +4765,7 @@ RectTransform:
   m_Children:
   - {fileID: 1024489960025428677}
   - {fileID: 4075132274072199405}
+  - {fileID: 5234972825756278711}
   m_Father: {fileID: 7782969650241969498}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5834,12 +5973,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 520c3ef3909d2684d98ccfe3cf8e1f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainEnergyText: {fileID: 843909721}
-  mainCoinText: {fileID: 1445979154}
-  mainGemText: {fileID: 1987842890}
-  mainStoneText: {fileID: 2002235434}
-  mainFurDollText: {fileID: 12427614}
-  mainClawText: {fileID: 1634624291}
   energyText: {fileID: 8218133003141476433}
   coinText: {fileID: 8832162395067160739}
   gemText: {fileID: 3406942607240607174}
@@ -5972,6 +6105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
+  mainCurrencyController: {fileID: 0}
   currencyType: 6
   amountDropdown: {fileID: 163390643656487726}
 --- !u!1 &2022603582430849005
@@ -6071,6 +6205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
+  mainCurrencyController: {fileID: 0}
   currencyType: 0
   amountDropdown: {fileID: 2943400331124881376}
 --- !u!224 &2046129836901744038
@@ -11158,6 +11293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
+  mainCurrencyController: {fileID: 0}
   currencyType: 2
   amountDropdown: {fileID: 1700651541865252475}
 --- !u!224 &4075132274072199405
@@ -14216,7 +14352,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 316445619}
+  m_Father: {fileID: 1405537549111229250}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5242091828748507367
 MonoBehaviour:
@@ -14867,6 +15003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
+  mainCurrencyController: {fileID: 0}
   currencyType: 3
   amountDropdown: {fileID: 7524759325742913490}
 --- !u!1 &5542986469702294715
@@ -18898,6 +19035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
+  mainCurrencyController: {fileID: 0}
   currencyType: 1
   amountDropdown: {fileID: 7676849344167889691}
 --- !u!1 &7225089639516626769
@@ -23332,6 +23470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
+  mainCurrencyController: {fileID: 0}
   currencyType: 4
   amountDropdown: {fileID: 1287957882212331992}
 --- !u!222 &8997196951851720492
@@ -23744,3 +23883,4 @@ SceneRoots:
   - {fileID: 1016743186}
   - {fileID: 1853394826}
   - {fileID: 7782969650241969498}
+  - {fileID: 1988794273}
