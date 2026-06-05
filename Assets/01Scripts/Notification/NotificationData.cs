@@ -15,83 +15,56 @@ using UnityEngine.UI;
 
 public class NotificationData : MonoBehaviour
 {
-    [SerializeField] private AutoSOGen_ContaineSO _textData;
-    
     [SerializeField] private TextMeshProUGUI _textBox;
     [SerializeField] private Image _profileImage;
     [SerializeField] private Image _postImage;
     [SerializeField] private Button _postImageButton;
-    
-    private Notification_TableSO _notiSOData;
 
-    private void Start()
-    {
-        PrefabCreated();
-    }
+    private int _notiTempladteID;
 
-    private void PrefabCreated()
+    /// <summary>
+    /// SO 데이터를 받아서 프리펩 UI 채우기
+    /// </summary>
+    /// <param name="so"></param>
+    public void Setup(Notification_TableSO so)
     {
-        SetNoticeImage();
-        SetNoticeText();
-    }
+        _notiTempladteID = so.notiTemplateId;
 
-    private void SetNoticeImage()
-    {
+        // 텍스트 세팅
+        if (_textBox != null)
+        {
+            string text = ServiceLocator.Get<IString_TableManager>().GetString(so.notiText, SystemLanguage.Korean);
+
+            _textBox.text = text;
+        }
+
+        // NPC 프로필 이미지 세팅
         if (_profileImage != null)
         {
-            ServiceLocator.Get<AddressableManager>().LoadImageSprite(들어갈 이미지의 어드레스 키, _profileImage);
+            // TODO: NPC의 프로필 이미지의 어드레서블 키 값을 대입해줘야함
+            ServiceLocator.Get<AddressableManager>().LoadImageSprite("", _profileImage);
         }
 
+        // 포스트 이미지 세팅 (팔로우 제외)
         if (_postImage != null)
         {
-            ServiceLocator.Get<AddressableManager>().LoadImageSprite(들어갈 이미지의 어드레스 키, _postImage);
+            // TODO: 포스트 이미지의 어드레서블 키 값을 대입해줘야함
+            ServiceLocator.Get<AddressableManager>().LoadImageSprite("", _postImage);
+        }
+
+        // 포스트 버튼 연결 (팔로우 제외)
+        if (_postImageButton != null)
+        {
+            _postImageButton.onClick.RemoveAllListeners();
+            _postImageButton.onClick.AddListener(OnPostButtonClicked);
         }
     }
 
-    private void SetNoticeText()
+    // TODO: 포스팅 시스템 끝나면 연결 - 포스트 이미지 눌렀을때 해당 게시물로 이동하기 위함
+    private void OnPostButtonClicked()
     {
-        if (_notiSOData.notiType == Notification_TableEnum.COMMENT)
-        {
-            _textBox.text = _notiSOData.notiText;
-        }
-
-        if (_notiSOData.notiType == Notification_TableEnum.FOLLOW)
-        {
-            _textBox.text = _notiSOData.notiText;
-        }
-
-        if (_notiSOData.notiType == Notification_TableEnum.LIKE)
-        {
-            _textBox.text = _notiSOData.notiText;
-        }
+        // TODO: 게시물 포스팅 시스템 끝나면 연결해서 포스팅 고유번호 생성 후 버튼에 넘겨주기
+        // PostManger.Instance.OpenPost(_notiTemplateId);
+        Log.Message($" 게시물 클릭: {_notiTempladteID}");
     }
-
-    private void SetNoticeImageButton()
-    {
-        if (_postImage != null) SetNoticeImage(); return;
-        
-        
-
-    }
-
-
-
-    // public void Test()
-    // {
-    //     
-    //     
-    //     if (_textData.scriptableObjects[0] is Notification_TableSO)
-    //     {
-    //         Notification_TableSO abc = _textData.scriptableObjects[0] as Notification_TableSO;   
-    //         
-    //         (_textData.scriptableObjects[0] as Notification_TableSO).notiText;
-    //        
-    //         ServiceLocator.Get<AddressableManager>().LoadImageSprite();
-    //         
-    //         
-    //     }
-    // }
-
-
-
 }
