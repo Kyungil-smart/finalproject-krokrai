@@ -827,7 +827,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c52a75bd049caf44828e18e043ea155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textData: {fileID: 11400000, guid: 7724c3bbd8ff451449be8ac489e58935, type: 2}
+  _notiSO: {fileID: 0}
+  _textBox: {fileID: 0}
+  _profileImage: {fileID: 0}
+  _postImage: {fileID: 0}
+  _postImageButton: {fileID: 0}
 --- !u!114 &1147619518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -840,9 +844,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d051b33497ea1ce44bbf77edcde7a6d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _notiSOData: {fileID: 0}
   _commentPrefab: {fileID: 0}
   _followPrefab: {fileID: 0}
   _likePrefab: {fileID: 0}
+  _redNoticePrefab: {fileID: 0}
+  _redExclamationmark: {fileID: 0}
+  _removeRedNoticeButton: {fileID: 0}
   _contentView: {fileID: 1903427433}
 --- !u!224 &1577604951 stripped
 RectTransform:
