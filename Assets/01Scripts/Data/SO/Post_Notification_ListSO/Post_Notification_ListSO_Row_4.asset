@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 5
   postId: 102001
-  notiTemplate: 700005
-  displayOrder: 5
-  commentId: 0
-  referencedNpcId: 400001
+  notiTemplate: 700001
+  displayOrder: 1
+  commentText: "STR_CMT_000005\r"
+  referencedNpcId: 400009

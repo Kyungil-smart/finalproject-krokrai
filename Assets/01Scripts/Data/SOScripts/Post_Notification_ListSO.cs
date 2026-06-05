@@ -1,4 +1,4 @@
-/*
+﻿/*
  작성자 : NekioEmilia
  작성일 : 26-06-01
  수정일 : 26-06-02
@@ -16,6 +16,6 @@ public class Post_Notification_ListSO : ScriptableObject
     [SOInject(1)] public int postId;
     [SOInject(2)] public int notiTemplate;
     [SOInject(3)] public int displayOrder;
-    [SOInject(4)] public int commentId;
-    [SOInject(5)] public int referencedNpcId;
+    [SOInject(5)] public string commentText;
+    [SOInject(4)] public int referencedNpcId;
 }
