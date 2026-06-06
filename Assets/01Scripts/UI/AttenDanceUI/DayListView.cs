@@ -15,7 +15,7 @@ using UnityEngine.UI;
 
 public class DayListView : MonoBehaviour
 {
-    public event Action<int> OnDayClicked;
+    // public event Action<int> OnDayClicked;
     
     [SerializeField] private GameObject[] lockObjects;
     [SerializeField] private Button[] dayBtns;
@@ -32,9 +32,17 @@ public class DayListView : MonoBehaviour
             dayBtns[i].onClick.AddListener(() =>
             {
                 ToggleOutline(index);
-                OnDayClicked?.Invoke(index);
+                // OnDayClicked?.Invoke(index);
+
+                ServiceLocator.Get<IEventManager>().ClickDay(index);
             });
         }
+    }
+
+    private void OnEnable()
+    {
+        ToggleOutline(0);
+        // ServiceLocator.Get<IEventManager>().ClickDay(1); // 오류
     }
 
     /// <summary>
