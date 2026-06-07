@@ -25,24 +25,34 @@ public class NotificationData : MonoBehaviour
     /// <summary>
     /// SO 데이터를 받아서 프리펩 UI 채우기
     /// </summary>
-    /// <param name="so"></param>
-    public void Setup(Notification_TableSO so)
+    public void Setup(Notification_TableSO so, string convertedText)
     {
         _notiTempladteID = so.notiTemplateId;
 
         // 텍스트 세팅
         if (_textBox != null)
         {
-            var stringManager = ServiceLocator.Get<IString_TableManager>();
-            if (stringManager == null)
+            if (_textBox != null)
             {
-                Log.Message($"초기화 안됨");
-                _textBox.text = so.notiText; // 임시
+                _textBox.text = convertedText;
+                
             }
-            else
-            {
-                _textBox.text = stringManager.GetString(so.notiText, SystemLanguage.Korean);
-            }
+
+            // var stringManager = ServiceLocator.Get<IString_TableManager>();
+            // if (stringManager == null)
+            // {
+            //     Log.Message($"초기화 안됨");
+            //     _textBox.text = so.notiText; // 임시
+            // }
+            // else
+            // {
+            //     string text = stringManager.GetString(so.notiText, SystemLanguage.Korean);
+            //     
+            //     Log.Message($"키: {so.notiText} / 결과 : {text}");
+            //     
+            //     _textBox.text = text ?? so.notiText;
+            //     
+            // }
 
             // string text = ServiceLocator.Get<IString_TableManager>().GetString(so.notiText, SystemLanguage.Korean);
 
