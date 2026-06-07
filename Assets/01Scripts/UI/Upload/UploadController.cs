@@ -124,7 +124,7 @@ public class UploadController : MonoBehaviour
         if (_currentPost == 0 || !(100000 < _currentPost && _currentPost < 200000))
             return;
 
-        ServiceLocator.Get<IDataManager>().UserDatas.UserPost.Add(_currentPost.ToString(), false);
+        ServiceLocator.Get<IDataManager>().UserDatas.UserPost.Add(_currentPost.ToString(), new UserPostState());
         ServiceLocator.Get<IDataManager>().UserDatas.ImgList[_currentPost.ToString()].isUploaded = true;
         
         _upLoadImgs[_currentPost].PostedImg();

@@ -106,6 +106,6 @@ public class ProfileController : MonoBehaviour
 
     private void Start()
     {
-        _profileName.text = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.UserId;
+        _profileName.text = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.DisplayName;
     }
 }
