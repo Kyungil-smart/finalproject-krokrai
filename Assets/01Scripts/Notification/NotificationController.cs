@@ -13,8 +13,9 @@ using UnityEngine.UI;
 
 public class NotificationController : MonoBehaviour
 {
-    [SerializeField] private AutoSOGen_ContaineSO _notiSOData;              // SO 컨테이너
-    
+    [SerializeField] private AutoSOGen_ContaineSO _notiSOData;              // 알림 정보 SO 컨테이너
+    [SerializeField] private AutoSOGen_ContaineSO _stringSOData;            // 대사 SO 컨테이너
+     
     [SerializeField] private GameObject _commentPrefab;
     [SerializeField] private GameObject _followPrefab;                      // 알림 프리펩 3개
     [SerializeField] private GameObject _likePrefab;
@@ -40,43 +41,67 @@ public class NotificationController : MonoBehaviour
             Log.Message($"SO 연결안됨"); 
             return;
         }
+     
+        // 타입별 분류
+        List<Notification_TableSO> likes = new List<Notification_TableSO>();
+        List<Notification_TableSO> follows = new List<Notification_TableSO>();
+        List<Notification_TableSO> comments = new List<Notification_TableSO>();
         
         // 인덱스 범위 확인
         for (int i = 0; i < _notiSOData.scriptableObjects.Length; i++)
         {
             // SO 배열에서 해당 인덱스의 SO를 Notification_TableSO로 캐스팅
-            if (!(_notiSOData.scriptableObjects[i] is Notification_TableSO so))
-            {
-                Log.Message($"NotificationTavleSo 캐스팅 실패: {i}");
-                continue; // 실패해도 다음 SO 진행
-            }
-                       
-            // notiType에 맞는 프리팹 선택
-            GameObject prefab = GetPrefabByType(so.notiType);
-            if (prefab == null) continue;
+            if (!(_notiSOData.scriptableObjects[i] is Notification_TableSO so)) continue;
 
-            // 해당 타입 프리팹 생성
-            SpawnNotification(prefab, so);
+            switch (so.notiType)
+            {
+                case Notification_TableEnum.LIKE: likes.Add(so); break;
+                case Notification_TableEnum.FOLLOW: follows.Add(so); break;
+                case Notification_TableEnum.COMMENT: comments.Add(so); break;
+            }
         }
+
+        // like -> Follow -> Comment 순으로 생성
+        // SetAsLastSibling으로 순서대로 아래에 쌓임
+       foreach (var so in likes) SpawnNotification(_likePrefab, so);
+       foreach (var so in follows) SpawnNotification(_followPrefab, so);
+       foreach (var so in comments) SpawnNotification(_commentPrefab, so);
         
-        Log.Message($"알림 추가 3개 완료: {_notiSOData.scriptableObjects.Length}개");
+        Log.Message($"알림 추가 완료");
         TurnOnRedNotice();
     }
-    
-    // notiType에 맞는 프리팹 반환
-    private GameObject GetPrefabByType(Notification_TableEnum notiType)
-    {
-        switch (notiType)
-        {
-            case Notification_TableEnum.COMMENT: return _commentPrefab;
-            case Notification_TableEnum.LIKE: return _likePrefab;
-            case Notification_TableEnum.FOLLOW: return _followPrefab;
-            default:
-                Log.Message($"알수 없는 타입: {notiType}");
-                return null;
-        }
-    }
 
+    /// <summary>
+    /// 알림 테이블 키값을 넣으면 스트링 SO 안에서 텍스트를 가져옵니다.
+    /// </summary>
+    public string GetLocalizedTextDirect(string stringId)
+    {
+        if (_stringSOData == null || _stringSOData.scriptableObjects == null)
+        {
+            Log.Message("스트링 SO 컨터이너 연결 안됨");
+            return stringId;
+        }
+
+        // 키값의 앞뒤 공백 제거
+        string cleanInputId = stringId.Trim();
+        
+        // 스트링 컨테이너 내부 배열 전부 탐색
+        for (int i = 0; i < _stringSOData.scriptableObjects.Length; i++)
+        {
+            if (_stringSOData.scriptableObjects[i] is String_TableSO stringSO)
+            {
+                // 스트링 테이블 so에 들어있는 키값도 공백이 있을수 있으니 Trim() 사용
+                string cleanTableId = stringSO.stringId.Trim();
+                
+                // 공백 없앤 순수 스트링 키값만 비교
+                if (cleanTableId == cleanInputId)
+                {
+                    return stringSO.KR;
+                }
+            }
+        }
+        return stringId;
+    }
 
     // 프리펩 1개 생성하고 SO 데이터를 채워주는 내부 함수
     private void SpawnNotification(GameObject prefab, Notification_TableSO so)
@@ -96,13 +121,15 @@ public class NotificationController : MonoBehaviour
         var notificationData = item.GetComponent<NotificationData>();
         if (notificationData != null)
         {
-            notificationData.Setup(so);
+            string convertedText = GetLocalizedTextDirect(so.notiText);
+            
+            notificationData.Setup(so, convertedText);
         }
         else
         {
             Log.Message($"NotificationData 컴포넌트가 없습니다.");
         }
-        
+       
         // 최신 알림이 맨 위로 오도록 첫번째 온 알림이 밑으로 쌓임
         item.transform.SetAsFirstSibling();
         
