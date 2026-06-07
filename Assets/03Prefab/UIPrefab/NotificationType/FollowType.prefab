@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 6624812466693132892}
   - component: {fileID: 4670550136178942957}
   - component: {fileID: 3984593954316118928}
+  - component: {fileID: 4520739667153382209}
   m_Layer: 5
   m_Name: FollowType
   m_TagString: Untagged
@@ -212,6 +213,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4520739667153382209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282598576676437762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c52a75bd049caf44828e18e043ea155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textBox: {fileID: 8704763363661468404}
+  _profileImage: {fileID: 5132879974333692955}
+  _postImage: {fileID: 0}
+  _postImageButton: {fileID: 0}
 --- !u!1 &3742325317288310607
 GameObject:
   m_ObjectHideFlags: 0
