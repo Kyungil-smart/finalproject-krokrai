@@ -32,8 +32,7 @@ public class NotificationController : MonoBehaviour
     /// <summary>
     /// 포스팅 버튼에 온클릭으로 연결할 함수
     /// </summary>
-    /// <param name="soIndex"></param>
-    public void AddNotification(int soIndex)
+    public void AddNotification()
     {
         // SO 여부 확인
         if (_notiSOData == null)
@@ -43,29 +42,42 @@ public class NotificationController : MonoBehaviour
         }
         
         // 인덱스 범위 확인
-        if (soIndex < 0 || soIndex >= _notiSOData.scriptableObjects.Length)
+        for (int i = 0; i < _notiSOData.scriptableObjects.Length; i++)
         {
-            Log.Message($"SO 인덱스 범위 초과: {soIndex}");
-            return;            
-        }
-        
-        // SO 배열에서 해당 인덱스의 SO를 Notification_TableSO로 캐스팅
-        if (!(_notiSOData.scriptableObjects[soIndex] is Notification_TableSO so))
-        {
-            Log.Message($"NotificationTavleSo 캐스팅 실패: {soIndex}");
-            return;
-        }
+            // SO 배열에서 해당 인덱스의 SO를 Notification_TableSO로 캐스팅
+            if (!(_notiSOData.scriptableObjects[i] is Notification_TableSO so))
+            {
+                Log.Message($"NotificationTavleSo 캐스팅 실패: {i}");
+                continue; // 실패해도 다음 SO 진행
+            }
+                       
+            // notiType에 맞는 프리팹 선택
+            GameObject prefab = GetPrefabByType(so.notiType);
+            if (prefab == null) continue;
 
-        // Like / Follow / Comment 프리펩 3개 전부 생성
-        SpawnNotification(_likePrefab, so);
-        SpawnNotification(_followPrefab, so);
-        SpawnNotification(_commentPrefab, so);
+            // 해당 타입 프리팹 생성
+            SpawnNotification(prefab, so);
+        }
         
-        Log.Message($"알림 추가 3개 완료: {so.notiTemplateId}");
-        
+        Log.Message($"알림 추가 3개 완료: {_notiSOData.scriptableObjects.Length}개");
         TurnOnRedNotice();
     }
     
+    // notiType에 맞는 프리팹 반환
+    private GameObject GetPrefabByType(Notification_TableEnum notiType)
+    {
+        switch (notiType)
+        {
+            case Notification_TableEnum.COMMENT: return _commentPrefab;
+            case Notification_TableEnum.LIKE: return _likePrefab;
+            case Notification_TableEnum.FOLLOW: return _followPrefab;
+            default:
+                Log.Message($"알수 없는 타입: {notiType}");
+                return null;
+        }
+    }
+
+
     // 프리펩 1개 생성하고 SO 데이터를 채워주는 내부 함수
     private void SpawnNotification(GameObject prefab, Notification_TableSO so)
     {
@@ -91,8 +103,9 @@ public class NotificationController : MonoBehaviour
             Log.Message($"NotificationData 컴포넌트가 없습니다.");
         }
         
-        // 최신 알림이 맨 위로 오도록 첫번째 자식으로 이동
-        item.transform.SetAsFirstSibling();
+        // 최신 알림이 맨 위로 오도록 첫번째 자식으로 이동 (기획에서 원한건 위에서 아래로 쌓이는 스택형인데 SO를 반대로 넣어주셔서)
+        // (SO 순서 때문에 SetAsFirstSibling();을 Last로 바꿨습니당)
+        item.transform.SetAsLastSibling();
         
         // 축적되는 리스트에 추가
         _items.Add(item);
