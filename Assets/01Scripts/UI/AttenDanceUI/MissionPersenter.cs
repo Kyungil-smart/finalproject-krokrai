@@ -15,6 +15,7 @@ public class MissionPersenter : MonoBehaviour
 
     private void Awake()
     {
+        // 오류 -> 
         ServiceLocator.Get<IEventManager>().OnDayClicked += OnDayTabChangedMission;
         view.OnSlotRewardRequested += OnRewardClaimed;
     }

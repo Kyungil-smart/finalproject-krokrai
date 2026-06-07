@@ -17,6 +17,11 @@ public class RewardPopupView : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void OpenPopup(List<Reward_Group_TableSO> rewardDatas)
     {
         gameObject.SetActive(true);
