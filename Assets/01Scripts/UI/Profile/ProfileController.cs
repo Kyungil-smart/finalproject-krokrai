@@ -28,6 +28,7 @@ public class ProfileController : MonoBehaviour
 
     [Header("게시물 prefab")]
     [SerializeField] private GameObject _postPrefab;
+    [SerializeField] private GameObject _post;
 
     List<GameObject> _posts = new(8);
 
@@ -52,16 +53,15 @@ public class ProfileController : MonoBehaviour
 
     private void OnEnable()
     {
-        //_postedCount = ServiceLocator.Get<IDataManager>().UserDatas.UserPost.Count;
+        _postedCount = ServiceLocator.Get<IDataManager>().UserDatas.UserPost.Count;
 
-        if (true)//_currentPostNum < _postedCount)
+        if (_currentPostNum < _postedCount)
         {
             // ProfilePostController 선언 후 생성 요청
             GameObject obj;
             ProfilePostController post;
 
-            var imgs = new UserDatas().UserPost;//ServiceLocator.Get<IDataManager>().UserDatas.UserPost;
-            imgs.Add("102001", false);
+            var imgs = ServiceLocator.Get<IDataManager>().UserDatas.UserPost;
 
             _postedCount = 1;
 
@@ -84,7 +84,7 @@ public class ProfileController : MonoBehaviour
                 obj.name = $"Post_{i}";
                 post = obj.GetComponent<ProfilePostController>();
                 if (_postTables.ContainsKey(keys[i]))
-                    post.SetPost( _postTables[keys[i]].postImage);
+                    post.SetPost( _postTables[keys[i]].postImage,_post);
                 else
                 {
                     Log.Message("Table에 존재하지 않습니다.");
@@ -97,15 +97,15 @@ public class ProfileController : MonoBehaviour
             _postCount.text = _currentPostNum.ToString();
         }
 
-        _profileFollower.text = "101"; //ServiceLocator.Get<IDataManager>().ProFile.followerCount.ToString();
-        _profileFollowing.text = "1111"; // ServiceLocator.Get<IDataManager>().ProFile.followingCount.ToString();
-        /*ServiceLocator.Get<IAddressableManager>().LoadImageSprite(
+        _profileFollower.text = ServiceLocator.Get<IDataManager>().ProFile.followerCount.ToString();
+        _profileFollowing.text = ServiceLocator.Get<IDataManager>().ProFile.followingCount.ToString();
+        ServiceLocator.Get<IAddressableManager>().LoadImageSprite(
             ServiceLocator.Get<IDataManager>().ProFile.profileImage.ToString(),
-            _profileImage);*/
+            _profileImage);
     }
 
     private void Start()
     {
-        //_profileName.text = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.UserId;
+        _profileName.text = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.UserId;
     }
 }

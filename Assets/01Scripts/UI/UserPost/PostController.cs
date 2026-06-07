@@ -108,7 +108,7 @@ public class PostController : MonoBehaviour
             obj = Instantiate(_postComment, _intantiateTarget);
             obj.name = $"comment_{i}";
             var temp = obj.GetComponent<PostCommentController>();
-            temp.SetComment(list[i].comment, list[i].so.npcId.ToString(), list[i].so.npcImage); // TODO : 여기까지 완성 테스트 필요
+            temp.SetComment(list[i].comment, list[i].so.npcId.ToString(), list[i].so.npcImage);
         }
     }
 

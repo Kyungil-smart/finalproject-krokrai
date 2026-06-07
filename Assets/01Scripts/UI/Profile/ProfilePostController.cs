@@ -15,6 +15,8 @@ public class ProfilePostController : MonoBehaviour
 
     private int _postNum;
 
+    //임시
+    GameObject _post;
     // post 내용도 출력 필요
 
     private void OnEnable()
@@ -27,13 +29,14 @@ public class ProfilePostController : MonoBehaviour
         _button.onClick.RemoveAllListeners();
     }
 
-    public void SetPost(int postNum)
+    public void SetPost(int postNum,GameObject post)
     {
         if (postNum == 0 || postNum < -1)
         {
             Log.Message($"UserPost 번호가 잘 못 입력되었습니다. [{postNum}]");
             return;
         }
+        _post = post;
 
         if(_button == null || _image == null)
         {
@@ -42,12 +45,14 @@ public class ProfilePostController : MonoBehaviour
         }
 
         _postNum = postNum;
-        Log.Message($"{_postNum} / {_image == null}");
         ServiceLocator.Get<IAddressableManager>().LoadImageSprite(_postNum.ToString(), _image);
     }
 
     private void OnClicked()
     {
+        Log.Message("버튼 클릭");
+        _post.SetActive(true);
+        _post.GetComponent<PostController>().SetPost(_postNum);
         //ServiceLocator.Get<IUIManager>().UploadedPost(_postNum);
     }
 }

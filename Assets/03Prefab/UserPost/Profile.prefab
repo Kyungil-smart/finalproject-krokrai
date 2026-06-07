@@ -1474,6 +1474,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3138278352578244541}
   - component: {fileID: 678293386891809215}
+  - component: {fileID: 2558779542844163631}
   m_Layer: 5
   m_Name: Profile
   m_TagString: Untagged
@@ -1513,17 +1514,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e24e72eef6e9446a15741d72a87b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _datas: {fileID: 0}
-  _hashTag: {fileID: 0}
+  _datas: {fileID: 11400000, guid: a414170c9b01013468883286422d56b9, type: 2}
+  _hashTag: {fileID: 11400000, guid: dd81ca779902205428d868444ec061c5, type: 2}
   _userName: {fileID: 1339730386860996536}
   _postImg: {fileID: 259642342460986183}
   _postLike: {fileID: 3390608704000070259}
   _postLikeImg: {fileID: 249608235797052064}
   _postShare: {fileID: 4086880967373199705}
   _postLikeCount: {fileID: 3488218924294091389}
-  _hashTagText: {fileID: 0}
+  _hashTagText: {fileID: 8814779464015806816}
   _postContent: {fileID: 3419242976487569651}
   _postComment: {fileID: 895976101489086188, guid: 215753572c32fa44d8979d5a9892747c, type: 3}
+  _intantiateTarget: {fileID: 3973482110416277005}
+  _postListComp: {fileID: 2558779542844163631}
+--- !u!114 &2558779542844163631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7292722920579173810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48f166bab1e8fe6498419c169cc7bd43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _comment: {fileID: 11400000, guid: 4e165a431d6271a40b1b89a2d697b825, type: 2}
+  _hashTag: {fileID: 11400000, guid: dd81ca779902205428d868444ec061c5, type: 2}
+  _hashTag_Table: {fileID: 11400000, guid: 7936aed67575a1446b133d277158ef7c, type: 2}
+  _npc_Table: {fileID: 11400000, guid: 48efc221b62b6c440a1d182f65614cd1, type: 2}
 --- !u!1 &7427663086949880216
 GameObject:
   m_ObjectHideFlags: 0
