@@ -19,7 +19,6 @@ using UnityEngine;
 public class SimulatorCurrencyAddButton : MonoBehaviour
 {
     [SerializeField] private SimulatorCurrencyController controller;
-    [SerializeField] private MainCurrencyController mainCurrencyController;
     [SerializeField] private CurrencyType currencyType;
     [SerializeField] private TMP_Dropdown amountDropdown;
 
@@ -60,7 +59,6 @@ public class SimulatorCurrencyAddButton : MonoBehaviour
                 break;
         }
         controller.RefreshUI();
-        mainCurrencyController.RefreshUI();
     }
 
     /// <summary>

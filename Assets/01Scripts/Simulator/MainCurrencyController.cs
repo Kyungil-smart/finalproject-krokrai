@@ -20,11 +20,16 @@ public class MainCurrencyController : MonoBehaviour
     [SerializeField] private TMP_Text furDollText;
     [SerializeField] private TMP_Text clawText;
 
+    private void Awake()
+    {
+        ServiceLocator.Get<IDataAutoSaveManager>().SetMainCurrencyController(this);
+    }
+
     private void OnEnable()
     {
         RefreshUI();
     }
-
+    
     /// <summary>
     /// 메인 화면 재화 UI 갱신
     /// </summary>
