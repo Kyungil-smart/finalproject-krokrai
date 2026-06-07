@@ -103,9 +103,8 @@ public class NotificationController : MonoBehaviour
             Log.Message($"NotificationData 컴포넌트가 없습니다.");
         }
         
-        // 최신 알림이 맨 위로 오도록 첫번째 자식으로 이동 (기획에서 원한건 위에서 아래로 쌓이는 스택형인데 SO를 반대로 넣어주셔서)
-        // (SO 순서 때문에 SetAsFirstSibling();을 Last로 바꿨습니당)
-        item.transform.SetAsLastSibling();
+        // 최신 알림이 맨 위로 오도록 첫번째 온 알림이 밑으로 쌓임
+        item.transform.SetAsFirstSibling();
         
         // 축적되는 리스트에 추가
         _items.Add(item);
