@@ -15,7 +15,7 @@ using UnityEngine.UI;
 
 public class FestaView : MonoBehaviour
 {
-    public event Action OnChestClicked;
+    public event Action<int> OnChestClicked;
     
     [SerializeField] private Slider festaSlider;
     [SerializeField] private GameObject[] festaRewardOpenObjects;
@@ -30,7 +30,7 @@ public class FestaView : MonoBehaviour
             
             chestButtons[i].onClick.AddListener(() =>
             {
-                OnChestClicked?.Invoke();
+                OnChestClicked?.Invoke(index);
             });
         }
     }

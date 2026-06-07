@@ -601,6 +601,13 @@ MonoBehaviour:
   missionProgressText: {fileID: 9168150257949177033}
   rewardButton: {fileID: 3864244152503436662}
   clearBackGround: {fileID: 3250211257693237068}
+  rewardItemSlots:
+  - {fileID: 2735844510189799142}
+  - {fileID: 290238117711486929}
+  - {fileID: 6554721614115129050}
+  targetImage: {fileID: 0}
+  defaultSprite: {fileID: 0}
+  changeSprite: {fileID: 0}
 --- !u!1 &331929830150219612
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,9 +642,9 @@ RectTransform:
   - {fileID: 2130008637490485166}
   m_Father: {fileID: 7637973503932894674}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 134.5, y: -50}
   m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!222 &2267199168518078036
@@ -704,6 +711,7 @@ GameObject:
   - component: {fileID: 8633567365501924465}
   - component: {fileID: 7770079361173137612}
   - component: {fileID: 1498710522132612499}
+  - component: {fileID: 4280121065664269093}
   m_Layer: 5
   m_Name: AttenDanceUICanvas
   m_TagString: Untagged
@@ -797,6 +805,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4280121065664269093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351463112251927135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8ed966347ca2a489ec7892e0d3e02e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  closeButton: {fileID: 1068574960057996080}
 --- !u!1 &385138071658549798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,9 +1496,9 @@ RectTransform:
   - {fileID: 7303722989443096645}
   m_Father: {fileID: 8415574262551754735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 215.83334, y: -50}
   m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!222 &7619021524852475983
@@ -3546,6 +3567,13 @@ MonoBehaviour:
   missionProgressText: {fileID: 6976934602419677775}
   rewardButton: {fileID: 2837086408656341944}
   clearBackGround: {fileID: 7308960991970633907}
+  rewardItemSlots:
+  - {fileID: 7939588107624852910}
+  - {fileID: 5134006241548702562}
+  - {fileID: 2933281977927064719}
+  targetImage: {fileID: 0}
+  defaultSprite: {fileID: 0}
+  changeSprite: {fileID: 0}
 --- !u!1 &1578203108161847614
 GameObject:
   m_ObjectHideFlags: 0
@@ -3580,9 +3608,9 @@ RectTransform:
   - {fileID: 2826937258375257440}
   m_Father: {fileID: 5818873754168765264}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 215.83334, y: -50}
   m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!222 &220659570201132955
@@ -4656,6 +4684,13 @@ MonoBehaviour:
   missionProgressText: {fileID: 4499779861844222920}
   rewardButton: {fileID: 599373040430551940}
   clearBackGround: {fileID: 2917759104604742994}
+  rewardItemSlots:
+  - {fileID: 6933360584449759290}
+  - {fileID: 1623693440446910946}
+  - {fileID: 8400339670681802124}
+  targetImage: {fileID: 0}
+  defaultSprite: {fileID: 0}
+  changeSprite: {fileID: 0}
 --- !u!1 &2219325847815692239
 GameObject:
   m_ObjectHideFlags: 0
@@ -4810,9 +4845,9 @@ RectTransform:
   - {fileID: 5278609024875150145}
   m_Father: {fileID: 5179114564031718254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 215.83334, y: -50}
   m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!222 &4921374806390900906
@@ -5674,9 +5709,9 @@ RectTransform:
   - {fileID: 244991235850356835}
   m_Father: {fileID: 8415574262551754735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 134.5, y: -50}
   m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!222 &1101129889363922538
@@ -6777,6 +6812,13 @@ MonoBehaviour:
   missionProgressText: {fileID: 656572207415312833}
   rewardButton: {fileID: 8053805586124040458}
   clearBackGround: {fileID: 6031327587312088682}
+  rewardItemSlots:
+  - {fileID: 1527946281365053980}
+  - {fileID: 2507650723258006554}
+  - {fileID: 4850576621207903112}
+  targetImage: {fileID: 723281976733899152}
+  defaultSprite: {fileID: 21300000, guid: 1f2225948a838624f8240b13646f9c7f, type: 3}
+  changeSprite: {fileID: 21300000, guid: 50c40022235bfa34eb3ef4d4a3128a83, type: 3}
 --- !u!1 &3082976025177935007
 GameObject:
   m_ObjectHideFlags: 0
@@ -7812,9 +7854,9 @@ RectTransform:
   - {fileID: 779701253025657620}
   m_Father: {fileID: 5818873754168765264}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 134.5, y: -50}
   m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!222 &7493417527823211102
@@ -8023,9 +8065,9 @@ RectTransform:
   - {fileID: 7403394710965791696}
   m_Father: {fileID: 7637973503932894674}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 53.16667, y: -50}
   m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!222 &5674329781938211659
@@ -9302,6 +9344,7 @@ GameObject:
   - component: {fileID: 6111387274672563205}
   - component: {fileID: 5709850715569355041}
   - component: {fileID: 1338538288668781664}
+  - component: {fileID: 246845749830047864}
   m_Layer: 0
   m_Name: Reward_Item_3
   m_TagString: Untagged
@@ -9324,9 +9367,9 @@ RectTransform:
   - {fileID: 1027542933753430750}
   m_Father: {fileID: 5588609438970061521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 408.3333, y: -75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!222 &5709850715569355041
@@ -9367,6 +9410,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &246845749830047864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4172088102389118728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ff0089ef62d724cb7dbb741abedd7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 1338538288668781664}
+  amountText: {fileID: 6902153975825189293}
 --- !u!1 &4186713125024182778
 GameObject:
   m_ObjectHideFlags: 0
@@ -9378,6 +9435,7 @@ GameObject:
   - component: {fileID: 4518670695172903186}
   - component: {fileID: 127512749079196168}
   - component: {fileID: 7155633611258773665}
+  - component: {fileID: 5066554948974081369}
   m_Layer: 0
   m_Name: Reward_Item_2
   m_TagString: Untagged
@@ -9400,9 +9458,9 @@ RectTransform:
   - {fileID: 3923290518427558999}
   m_Father: {fileID: 5588609438970061521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!222 &127512749079196168
@@ -9443,6 +9501,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5066554948974081369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4186713125024182778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ff0089ef62d724cb7dbb741abedd7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 7155633611258773665}
+  amountText: {fileID: 5159483274109015243}
 --- !u!1 &4192357081475046254
 GameObject:
   m_ObjectHideFlags: 0
@@ -9770,6 +9842,7 @@ GameObject:
   - component: {fileID: 1648260449426423465}
   - component: {fileID: 3643823455384918050}
   - component: {fileID: 1306621882110639926}
+  - component: {fileID: 2078284226227455984}
   m_Layer: 0
   m_Name: Reward_Item_1
   m_TagString: Untagged
@@ -9792,9 +9865,9 @@ RectTransform:
   - {fileID: 3588664739983866833}
   m_Father: {fileID: 5588609438970061521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 91.66667, y: -75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!222 &3643823455384918050
@@ -9835,6 +9908,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2078284226227455984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4218221931213827541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ff0089ef62d724cb7dbb741abedd7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 1306621882110639926}
+  amountText: {fileID: 2991734697521974153}
 --- !u!1 &4256260426306885381
 GameObject:
   m_ObjectHideFlags: 0
@@ -10387,9 +10474,9 @@ RectTransform:
   - {fileID: 5696848346837938560}
   m_Father: {fileID: 5818873754168765264}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 53.16667, y: -50}
   m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!222 &7859764838365219105
@@ -11119,6 +11206,13 @@ MonoBehaviour:
   missionProgressText: {fileID: 33501214147432413}
   rewardButton: {fileID: 2633177549541460484}
   clearBackGround: {fileID: 167519045019528345}
+  rewardItemSlots:
+  - {fileID: 8534227460409019195}
+  - {fileID: 2244249343925398936}
+  - {fileID: 5702249101158753812}
+  targetImage: {fileID: 0}
+  defaultSprite: {fileID: 0}
+  changeSprite: {fileID: 0}
 --- !u!1 &4806767088013363952
 GameObject:
   m_ObjectHideFlags: 0
@@ -12342,6 +12436,7 @@ GameObject:
   - component: {fileID: 5456401972263911427}
   - component: {fileID: 3920731495428016319}
   - component: {fileID: 7859513583333798598}
+  - component: {fileID: 7437691808617641690}
   m_Layer: 5
   m_Name: Festa_Gauge
   m_TagString: Untagged
@@ -12426,6 +12521,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   view: {fileID: 3920731495428016319}
+  rewardModel: {fileID: 7437691808617641690}
+  rewardPopupView: {fileID: 3122146509599839923}
+--- !u!114 &7437691808617641690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5364960557769626176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ef66690f06b224299db79dacec852a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewardGroupSO: {fileID: 11400000, guid: 75c703ce8fe917449b90bcbfe3263c7b, type: 2}
 --- !u!1 &5480419281923780202
 GameObject:
   m_ObjectHideFlags: 0
@@ -12803,9 +12913,9 @@ RectTransform:
   - {fileID: 7597362093368738417}
   m_Father: {fileID: 7637973503932894674}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 215.83334, y: -50}
   m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!222 &5678489223041279408
@@ -13248,6 +13358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5476748756073966586}
+  - component: {fileID: 3122146509599839923}
   m_Layer: 0
   m_Name: Reward_Popup
   m_TagString: Untagged
@@ -13271,6 +13382,23 @@ Transform:
   - {fileID: 5199310196147428822}
   m_Father: {fileID: 5742989532981052102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3122146509599839923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5766164634309059229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7032faaf7fdc558499788680f5909022, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupItemSlots:
+  - {fileID: 2078284226227455984}
+  - {fileID: 5066554948974081369}
+  - {fileID: 246845749830047864}
+  confirmButton: {fileID: 5454800348320627172}
 --- !u!1 &5863275738863583906
 GameObject:
   m_ObjectHideFlags: 0
@@ -14657,9 +14785,9 @@ RectTransform:
   - {fileID: 60396316948129357}
   m_Father: {fileID: 8415574262551754735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 53.16667, y: -50}
   m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!222 &7303775387792190584
@@ -16129,7 +16257,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1657471847433402503}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: bd8ed966347ca2a489ec7892e0d3e02e, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6949595321952250684
 GameObject:
   m_ObjectHideFlags: 0
@@ -16164,9 +16304,9 @@ RectTransform:
   - {fileID: 3321908493766068953}
   m_Father: {fileID: 5179114564031718254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 53.16667, y: -50}
   m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!222 &1859271263897934483
@@ -16679,9 +16819,9 @@ RectTransform:
   - {fileID: 3838233088927682295}
   m_Father: {fileID: 5179114564031718254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 134.5, y: -50}
   m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!222 &8817559868131257952
@@ -18654,6 +18794,7 @@ GameObject:
   - component: {fileID: 6304065241910503374}
   - component: {fileID: 8358256348136463158}
   - component: {fileID: 6229905985154613887}
+  - component: {fileID: 952097552077772588}
   m_Layer: 0
   m_Name: Mission_Full
   m_TagString: Untagged
@@ -18724,7 +18865,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   view: {fileID: 8358256348136463158}
-  model: {fileID: 6229905985154613887}
+  rewardPopupView: {fileID: 3122146509599839923}
+  missionModel: {fileID: 6229905985154613887}
+  rewardModel: {fileID: 952097552077772588}
 --- !u!114 &8358256348136463158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18751,6 +18894,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missionListSO: {fileID: 11400000, guid: 07fded729abe6124f8f9f9d6d613e556, type: 2}
+--- !u!114 &952097552077772588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8314738528578493752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ef66690f06b224299db79dacec852a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewardGroupSO: {fileID: 11400000, guid: 75c703ce8fe917449b90bcbfe3263c7b, type: 2}
 --- !u!1 &8322244547134494454
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ using UnityEngine;
 public class MissionPersenter : MonoBehaviour
 {
     [SerializeField] private MissionView view;
+    [SerializeField] private RewardPopupView rewardPopupView;
     [SerializeField] private MissionDataModel missionModel;
     [SerializeField] private RewardDataModel rewardModel;
     
@@ -59,6 +60,13 @@ public class MissionPersenter : MonoBehaviour
 
         ServiceLocator.Get<IDataManager>().Event_Missions.Event_490[_currentDayKey][idString].Mission_State_Flag = 2;
 
+        var rewardList = rewardModel.GetRewardGroup(targetMission.Reward_Daliy_Id);
+
+        if (rewardList != null)
+        {
+            rewardPopupView.OpenPopup(rewardList);
+        }
+        
         int gaugeAmount = targetMission.Festa_Point;
         ServiceLocator.Get<IEventManager>().GaugeIncrease(gaugeAmount);
     }
