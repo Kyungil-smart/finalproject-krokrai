@@ -23,6 +23,11 @@ public class MissionDataModel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// missionId를 기반으로 미션의 SO 데이터를 반환
+    /// </summary>
+    /// <param name="missionId">검색할 미션의 고유 ID (ex: 49011)</param>
+    /// <returns>해당 Id와 일치하는 미션 SO데이터, 존재하지 않으면 null</returns>
     public Mission_ListSO GetMissionListData(int missionId)
     {
         if (_missionLists.ContainsKey(missionId))

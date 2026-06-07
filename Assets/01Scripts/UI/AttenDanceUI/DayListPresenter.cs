@@ -17,7 +17,6 @@ using UnityEngine;
 public class DayListPresent : MonoBehaviour
 {
     [SerializeField] private DayListView _view;
-    // Lock 풀면 Interactable 활성화
 
     private DateTime _joinTimeStamp;
     private DateTime _lastLoginTime;
@@ -40,10 +39,10 @@ public class DayListPresent : MonoBehaviour
 
     void SetTimestamp()
     {
-        // _joinTimeStamp = ServiceLocator.Get<IDataManager>().Attendance.Join_TimeStamp;
-        _joinTimeStamp = new DateTime(2026, 06, 01, 0,0,0);
-        // _lastLoginTime = ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp; 
-        _lastLoginTime = new DateTime(2026, 06, 03, 0,0,0);;
+        _joinTimeStamp = ServiceLocator.Get<IDataManager>().Attendance.Join_TimeStamp;
+        // _joinTimeStamp = new DateTime(2026, 06, 01, 0,0,0);
+        _lastLoginTime = ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp; 
+        // _lastLoginTime = new DateTime(2026, 06, 03, 0,0,0);;
     }
 
     
@@ -52,16 +51,15 @@ public class DayListPresent : MonoBehaviour
         if (_lastLoginTime.Date != _currentTime.Date)
         {
             // 연-월-일만 비교해서 다르면 +1
-            // ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day += 1;
+            ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day += 1;
             
-            // ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp = _currentTime.Date; // Last_Login 업데이트
+            ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp = _currentTime.Date; // Last_Login 업데이트
         }
     }
 
     private void RefreshUI()
     {
-        int activeDay = // (int)Math.Min(ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day, 7); 
-            7;    
+        int activeDay = (int)Math.Min(ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day, 7); 
         
         for (int i = 0; i < 7; i++)
         {
