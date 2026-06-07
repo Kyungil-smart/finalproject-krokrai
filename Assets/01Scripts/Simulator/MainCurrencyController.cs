@@ -27,7 +27,13 @@ public class MainCurrencyController : MonoBehaviour
 
     private void OnEnable()
     {
+        ServiceLocator.Get<IDataManager>().OnUserDataReseted += RefreshUI;
         RefreshUI();
+    }
+
+    private void OnDisable()
+    {
+        ServiceLocator.Get<IDataManager>().OnUserDataReseted -= RefreshUI;
     }
     
     /// <summary>
