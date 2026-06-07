@@ -33,24 +33,35 @@ public class NotificationData : MonoBehaviour
         // 텍스트 세팅
         if (_textBox != null)
         {
-            string text = ServiceLocator.Get<IString_TableManager>().GetString(so.notiText, SystemLanguage.Korean);
+            var stringManager = ServiceLocator.Get<IString_TableManager>();
+            if (stringManager == null)
+            {
+                Log.Message($"초기화 안됨");
+                _textBox.text = so.notiText; // 임시
+            }
+            else
+            {
+                _textBox.text = stringManager.GetString(so.notiText, SystemLanguage.Korean);
+            }
 
-            _textBox.text = text;
+            // string text = ServiceLocator.Get<IString_TableManager>().GetString(so.notiText, SystemLanguage.Korean);
+
+            // _textBox.text = text;
         }
 
-        // NPC 프로필 이미지 세팅
-        if (_profileImage != null)
-        {
-            // TODO: NPC의 프로필 이미지의 어드레서블 키 값을 대입해줘야함
-            ServiceLocator.Get<AddressableManager>().LoadImageSprite("", _profileImage);
-        }
-
-        // 포스트 이미지 세팅 (팔로우 제외)
-        if (_postImage != null)
-        {
-            // TODO: 포스트 이미지의 어드레서블 키 값을 대입해줘야함
-            ServiceLocator.Get<AddressableManager>().LoadImageSprite("", _postImage);
-        }
+        // // NPC 프로필 이미지 세팅
+        // if (_profileImage != null)
+        // {
+        //     // TODO: NPC의 프로필 이미지의 어드레서블 키 값을 대입해줘야함
+        //     ServiceLocator.Get<AddressableManager>().LoadImageSprite("", _profileImage);
+        // }
+        
+        // // 포스트 이미지 세팅 (팔로우 제외)
+        // if (_postImage != null)
+        // {
+        //     // TODO: 포스트 이미지의 어드레서블 키 값을 대입해줘야함
+        //     ServiceLocator.Get<AddressableManager>().LoadImageSprite("", _postImage);
+        // }
 
         // 포스트 버튼 연결 (팔로우 제외)
         if (_postImageButton != null)
