@@ -945,7 +945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -3730,7 +3730,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
-  mainCurrencyController: {fileID: 1988794272}
   currencyType: 5
   amountDropdown: {fileID: 3852396806576081388}
 --- !u!114 &1068366249257884201
@@ -4346,7 +4345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -5513,7 +5512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -6109,7 +6108,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
-  mainCurrencyController: {fileID: 0}
   currencyType: 6
   amountDropdown: {fileID: 163390643656487726}
 --- !u!1 &2022603582430849005
@@ -6209,7 +6207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
-  mainCurrencyController: {fileID: 1988794272}
   currencyType: 0
   amountDropdown: {fileID: 2943400331124881376}
 --- !u!224 &2046129836901744038
@@ -8370,7 +8367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -10864,7 +10861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -11297,7 +11294,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
-  mainCurrencyController: {fileID: 1988794272}
   currencyType: 2
   amountDropdown: {fileID: 1700651541865252475}
 --- !u!224 &4075132274072199405
@@ -15007,7 +15003,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
-  mainCurrencyController: {fileID: 1988794272}
   currencyType: 3
   amountDropdown: {fileID: 7524759325742913490}
 --- !u!1 &5542986469702294715
@@ -17663,7 +17658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -18424,7 +18419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -19039,7 +19034,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
-  mainCurrencyController: {fileID: 1988794272}
   currencyType: 1
   amountDropdown: {fileID: 7676849344167889691}
 --- !u!1 &7225089639516626769
@@ -19806,7 +19800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -20214,7 +20208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -22040,7 +22034,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8339489705561894539
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23474,7 +23468,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
-  mainCurrencyController: {fileID: 1988794272}
   currencyType: 4
   amountDropdown: {fileID: 1287957882212331992}
 --- !u!222 &8997196951851720492
