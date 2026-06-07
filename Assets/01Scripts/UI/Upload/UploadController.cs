@@ -125,7 +125,8 @@ public class UploadController : MonoBehaviour
             return;
 
         ServiceLocator.Get<IDataManager>().UserDatas.UserPost.Add(_currentPost.ToString(), false);
-
+        ServiceLocator.Get<IDataManager>().UserDatas.ImgList[_currentPost.ToString()].isUploaded = true;
+        
         _upLoadImgs[_currentPost].PostedImg();
         _postImg.sprite = null;
 
