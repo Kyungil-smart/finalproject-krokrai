@@ -27,11 +27,11 @@ public class ProfilePostController : MonoBehaviour
         _button.onClick.RemoveAllListeners();
     }
 
-    public void SetPost(int imgNum)
+    public void SetPost(int postNum)
     {
-        if (imgNum == 0 || imgNum < -1)
+        if (postNum == 0 || postNum < -1)
         {
-            Log.Message($"Image 번호가 잘 못 입력되었습니다. [{imgNum}]");
+            Log.Message($"UserPost 번호가 잘 못 입력되었습니다. [{postNum}]");
             return;
         }
 
@@ -41,14 +41,13 @@ public class ProfilePostController : MonoBehaviour
             _image = GetComponentInChildren<Image>();
         }
 
-        _postNum = imgNum;
-        Log.Message(_postNum);
-        //ServiceLocator.Get<IAddressableManager>().LoadImageSprite(imgNum.ToString(), _image);
-        
+        _postNum = postNum;
+        Log.Message($"{_postNum} / {_image == null}");
+        ServiceLocator.Get<IAddressableManager>().LoadImageSprite(_postNum.ToString(), _image);
     }
 
     private void OnClicked()
     {
-        ServiceLocator.Get<IUIManager>().UploadedPost(_postNum);
+        //ServiceLocator.Get<IUIManager>().UploadedPost(_postNum);
     }
 }

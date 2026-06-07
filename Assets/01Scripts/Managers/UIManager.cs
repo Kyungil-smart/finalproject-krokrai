@@ -11,6 +11,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour, IUIManager, IManagerBooter
 {
     [SerializeField] private GameObject _popups;
+    [SerializeField] private GameObject _post;
 
     /// <summary>
     /// Interface 구현용 팝업 함수 실제 호출은 ServiceLocator에서 호출
@@ -23,7 +24,7 @@ public class UIManager : MonoBehaviour, IUIManager, IManagerBooter
 
     public void UploadedPost(int imgNum)
     {
-        // 여기에 Img 번호를 기반으로 탐색 후 댓글 및 해시 태그 등을 추가
+        _post.SetActive(true);
     }
 
     public void Register() => ServiceLocator.Register<IUIManager>(this);
