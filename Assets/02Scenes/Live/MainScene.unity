@@ -584,6 +584,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5971272330806122950, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6523548034595727300, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -3726,7 +3730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
-  mainCurrencyController: {fileID: 0}
+  mainCurrencyController: {fileID: 1988794272}
   currencyType: 5
   amountDropdown: {fileID: 3852396806576081388}
 --- !u!114 &1068366249257884201
@@ -6205,7 +6209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
-  mainCurrencyController: {fileID: 0}
+  mainCurrencyController: {fileID: 1988794272}
   currencyType: 0
   amountDropdown: {fileID: 2943400331124881376}
 --- !u!224 &2046129836901744038
@@ -11293,7 +11297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
-  mainCurrencyController: {fileID: 0}
+  mainCurrencyController: {fileID: 1988794272}
   currencyType: 2
   amountDropdown: {fileID: 1700651541865252475}
 --- !u!224 &4075132274072199405
@@ -15003,7 +15007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
-  mainCurrencyController: {fileID: 0}
+  mainCurrencyController: {fileID: 1988794272}
   currencyType: 3
   amountDropdown: {fileID: 7524759325742913490}
 --- !u!1 &5542986469702294715
@@ -19035,7 +19039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
-  mainCurrencyController: {fileID: 0}
+  mainCurrencyController: {fileID: 1988794272}
   currencyType: 1
   amountDropdown: {fileID: 7676849344167889691}
 --- !u!1 &7225089639516626769
@@ -23470,7 +23474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1943343184672160344}
-  mainCurrencyController: {fileID: 0}
+  mainCurrencyController: {fileID: 1988794272}
   currencyType: 4
   amountDropdown: {fileID: 1287957882212331992}
 --- !u!222 &8997196951851720492
