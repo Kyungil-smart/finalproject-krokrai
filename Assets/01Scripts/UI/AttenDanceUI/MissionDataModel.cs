@@ -1,24 +1,34 @@
-using System;
-using System.Collections;
+/*
+작성자 : NekioEmilia
+수정자 : 
+
+작성일 : 26-06-08
+수정일 : 
+
+역할 : 미션 SO 데이터를 캐싱하고 반환하는 Model 스크립트
+방식 : Presenter에서 미션 ID를 넘겨주면, 해당 ID의 전체 SO 데이터를 반환함
+*/
+
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MissionDataModel : MonoBehaviour
 {
     [SerializeField] private AutoSOGen_ContaineSO missionListSO;
-
+    
     private Dictionary<int, Mission_ListSO> _missionLists = new();
 
     private void Awake()
     {
-        Mission_ListSO m;
-        
         for (int i = 0; i < missionListSO.scriptableObjects.Length; i++)
         {
-            if (missionListSO.scriptableObjects[i] is Mission_ListSO)
+            // is as 문법 최적화
+            if (missionListSO.scriptableObjects[i] is Mission_ListSO m)
             {
-                m = (missionListSO.scriptableObjects[i] as Mission_ListSO);
-                _missionLists.Add(m.Mission_Id , m);
+                if (!_missionLists.ContainsKey(m.Mission_Id))
+                {
+                    _missionLists.Add(m.Mission_Id , m);
+                }
             }
         }
     }

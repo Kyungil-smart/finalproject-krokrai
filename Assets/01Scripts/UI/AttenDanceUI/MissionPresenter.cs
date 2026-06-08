@@ -1,9 +1,18 @@
+/*
+작성자 : NekioEmilia
+수정자 : 
 
-using System;
+작성일 : 26-06-08 (생성일 기준)
+수정일 :
+
+역할 : 미션 UI와 데이터사이를 제어하는 Presenter 스크립트
+방식 : Day 탭을 누르면 DB에서 진행도를 읽어와 View에 뿌리고, 보상 수령 시 DB 갱신 후 페스타 게이지를 올림
+*/
+
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissionPersenter : MonoBehaviour
+public class MissionPresenter : MonoBehaviour
 {
     [SerializeField] private MissionView view;
     [SerializeField] private RewardPopupView rewardPopupView;
@@ -13,19 +22,23 @@ public class MissionPersenter : MonoBehaviour
     private List<Mission_ListSO> _currentMissions = new();
     private string _currentDayKey;
 
-    private void Awake()
+    private void Start()
     {
-        // 오류 -> 
+        // Awake -> Start (유니티 이벤트 매니저가 문제인가?)
         ServiceLocator.Get<IEventManager>().OnDayClicked += OnDayTabChangedMission;
         view.OnSlotRewardRequested += OnRewardClaimed;
     }
 
     private void OnDestroy()
     {
-        ServiceLocator.Get<IEventManager>().OnDayClicked -= OnDayTabChangedMission;
-        view.OnSlotRewardRequested -= OnRewardClaimed;
+        ServiceLocator.Get<IEventManager>().OnDayClicked -= OnDayTabChangedMission; 
+        if (view != null) view.OnSlotRewardRequested -= OnRewardClaimed;
     }
 
+    /// <summary>
+    /// EventManager를 통해 N일차 탭이 눌렸을 때 호출되어 해당 일차의 미션 목록을 갱신해주는 메서드
+    /// </summary>
+    /// <param name="day"></param>
     private void OnDayTabChangedMission(int day)
     {
         _currentDayKey = $"Day_{day}";
@@ -41,6 +54,8 @@ public class MissionPersenter : MonoBehaviour
         {
             int missionId = int.Parse(item.Key);
             var missionListSO = missionModel.GetMissionListData(missionId);
+
+            if (missionListSO == null) return;
             
             _currentMissions.Add(missionListSO);
             dbStateList.Add(item.Value);
@@ -54,6 +69,10 @@ public class MissionPersenter : MonoBehaviour
         view.UpdateAllMissions(_currentMissions, dbStateList, allRewardGroupList);
     }
     
+    /// <summary>
+    /// 보상 받기 버튼 눌렀을 때 호출되는 메서드
+    /// </summary>
+    /// <param name="slotIndex"></param>
     private void OnRewardClaimed(int slotIndex)
     {
         Mission_ListSO targetMission = _currentMissions[slotIndex];

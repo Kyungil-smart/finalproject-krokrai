@@ -1,3 +1,13 @@
+/*
+작성자 : NekioEmilia
+수정자 : 
+ 
+작성일 : 26-06-08
+수정일 : 
+
+역할 : 미션 UI의 전체 목록을 관리하고 갱신하는 View 스크립트
+방식 : Presenter로부터 데이터를 받아 각각의 MissionSlotView에 데이터를 분배함
+*/
 
 using UnityEngine;
 using System;
@@ -5,7 +15,7 @@ using System.Collections.Generic;
 
 public class MissionView : MonoBehaviour
 {
-    public event Action<int> OnSlotRewardRequested; // 보상 Action
+    public event Action<int> OnSlotRewardRequested; // 보상 버튼 클릭 Action
 
     [SerializeField] private MissionSlotView[] missionSlots;
 
@@ -27,7 +37,7 @@ public class MissionView : MonoBehaviour
     /// </summary>
     /// <param name="missionSoData">MissionList SO 데이터 리스트</param>
     /// <param name="dbStates">미션 진행도 리스트</param>
-    /// <param name="rewardDataList"></param>
+    /// <param name="rewardDataList">각 미션별 보상 리스트</param>
     public void UpdateAllMissions(List<Mission_ListSO> missionSoData, List<EventState> dbStates, List<List<Reward_Group_TableSO>> rewardDataList)
     {
         for (int i = 0; i < missionSlots.Length; i++)
@@ -64,6 +74,6 @@ public class MissionView : MonoBehaviour
         int currentState = (int)dbState.Mission_State;
         int flag = (int)dbState.Mission_State_Flag;
         
-        missionSlots[index].UpdateSlotUI(missionDesc, goal, currentState, flag, rewardData);
+        missionSlots[index].UpdateSlotUI(missionDesc, currentState, goal, flag, rewardData);
     }
 }

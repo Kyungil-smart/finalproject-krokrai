@@ -1,9 +1,9 @@
 /*
 작성자 : NekioEmilia
-수정자 : 
+수정자 : NekioEmilia
  
 작성일 : 26-06-05
-수정일 : 
+수정일 : 26-06-08
 
 역할 : 출석체크 UI의 Festa Slider와 보물상자에 접근한 Presenter 스크립트 FestaView와 통신
 방식 : Presenter를 UI에 적용시키면 View도 같이 따라옴
@@ -19,12 +19,13 @@ public class FestaPresenter : MonoBehaviour
     private int _recentGaugeStep;
     private bool _finalRewardReceived;
 
+    [SerializeField] private GaugeDataModel gaugeModel;
     [SerializeField] private FestaView view;
     [SerializeField] private RewardDataModel rewardModel;
     [SerializeField] private RewardPopupView rewardPopupView;
     
 
-    private void Awake()
+    private void Start()
     {
         ServiceLocator.Get<IEventManager>().OnGaugeIncrease += HandleGaugeIncrease;
     }
@@ -50,14 +51,18 @@ public class FestaPresenter : MonoBehaviour
     {
         _totalFestaPoint += amount; 
         
-        ServiceLocator.Get<IDataManager>().Attendance.Total_Festa_Point = _totalFestaPoint;
+        // ServiceLocator.Get<IDataManager>().Attendance.Total_Festa_Point = _totalFestaPoint;
         
         ReFreshUI();
     }
 
     private void HandleChestClick(int chestIndex)
     {
-        int rewardGroupId = 5101 + chestIndex;
+        var gaugeSO = gaugeModel.GetGaugeSetting(chestIndex + 1);
+
+        if (gaugeSO == null) return;
+
+        int rewardGroupId = gaugeSO.Reward_Accrue_Id;
 
         var rewardList = rewardModel.GetRewardGroup(rewardGroupId);
 
@@ -69,13 +74,13 @@ public class FestaPresenter : MonoBehaviour
 
     void SetPoint()
     {
-        _totalFestaPoint = ServiceLocator.Get<IDataManager>().Attendance.Total_Festa_Point;
-        _recentGaugeStep = ServiceLocator.Get<IDataManager>().Attendance.Recent_Gauge_Step;
-        _finalRewardReceived = ServiceLocator.Get<IDataManager>().Attendance.Final_Reward_Received;
+        // _totalFestaPoint = ServiceLocator.Get<IDataManager>().Attendance.Total_Festa_Point;
+        // _recentGaugeStep = ServiceLocator.Get<IDataManager>().Attendance.Recent_Gauge_Step;
+        // _finalRewardReceived = ServiceLocator.Get<IDataManager>().Attendance.Final_Reward_Received;
         
-        // _totalFestaPoint = 500;
-        // _recentGaugeStep = 5;
-        // _finalRewardReceived = false;
+        _totalFestaPoint = 0;
+        _recentGaugeStep = 0;
+        _finalRewardReceived = false;
     }
 
     private void ReFreshUI()

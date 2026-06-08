@@ -1,12 +1,12 @@
 /*
 작성자 : NekioEmilia
-수정자 : 
+수정자 : NekioEmilia
  
 작성일 : 26-06-05
-수정일 : 
+수정일 : 26-06-07
 
 역할 : 출석체크 UI의 Festa Slider와 보물상자에 접근한 View 스크립트 FestaPresenter와 통신
-방식 : Presenter를 UI에 적용시키면 View도 같이 따라옴
+방식 : Presenter에서 UpdateFestaUI를 불러와서 Festa (보물상자 UI)를 갱신
 */
 
 using System;
@@ -62,3 +62,4 @@ public class FestaView : MonoBehaviour
         }
     }
 }
+ 

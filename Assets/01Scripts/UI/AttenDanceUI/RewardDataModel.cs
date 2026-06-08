@@ -1,5 +1,14 @@
-using System;
-using System.Collections;
+/*
+작성자 : NekioEmilia
+수정자 : 
+ 
+작성일 : 26-06-08
+수정일 : 
+
+역할 : Reward_Group_Table의 SO를 반환해주는 스크립트
+방식 : Presenter에서 그룹 ID를 넘겨주면 해당 그룹의 보상 리스트를 반환함
+*/
+
 using System.Collections.Generic;
 using UnityEngine;
 
