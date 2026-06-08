@@ -99,9 +99,9 @@ public class ProfileController : MonoBehaviour
 
         _profileFollower.text = ServiceLocator.Get<IDataManager>().ProFile.followerCount.ToString();
         _profileFollowing.text = ServiceLocator.Get<IDataManager>().ProFile.followingCount.ToString();
-        ServiceLocator.Get<IAddressableManager>().LoadImageSprite(
+        /*ServiceLocator.Get<IAddressableManager>().LoadImageSprite(
             ServiceLocator.Get<IDataManager>().ProFile.profileImage.ToString(),
-            _profileImage);
+            _profileImage);*/
     }
 
     private void Start()

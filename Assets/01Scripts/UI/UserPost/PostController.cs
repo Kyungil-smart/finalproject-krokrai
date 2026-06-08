@@ -51,6 +51,12 @@ public class PostController : MonoBehaviour
     private void OnEnable()
     {
         _user = ServiceLocator.Get<IDataManager>().UserDatas;
+        _postLike.onClick.AddListener(OnClickHeart);
+    }
+
+    private void OnDisable()
+    {
+        _postLike.onClick.RemoveListener(OnClickHeart);
     }
 
     public void SetPost(int postNum)
@@ -61,6 +67,7 @@ public class PostController : MonoBehaviour
             return;
         }
 
+        _postNum = postNum;
         // 좋아요 여부에 따른 활성화 체크 db UserPost 참조
 
         for (int i = 0; i < _datas.scriptableObjects.Length; i++)
@@ -71,6 +78,7 @@ public class PostController : MonoBehaviour
                 // 게시물 좋아요 수
                 _postLikeCount.text = so.likeCount.ToString();
                 // 게시물 사진
+                Debug.Log(so.postImage);
                 ServiceLocator.Get<IAddressableManager>().LoadImageSprite(so.postImage.ToString(), _postImg);
 
                 // 해쉬 태크
@@ -87,7 +95,7 @@ public class PostController : MonoBehaviour
         }
 
         // 좋아요 여부
-        _isLiked = false;
+        _isLiked = _user.UserPost[postNum.ToString()].isLiked;
         _postLikeImg.SetActive(_isLiked);
         // 여기에 좋아요 표시한 게시물 UserPost에 접근해서 상태 전환
     }
@@ -115,6 +123,7 @@ public class PostController : MonoBehaviour
     private void OnClickHeart()
     {
         _isLiked = !_isLiked;
+        _user.UserPost[_postNum.ToString()].isLiked = _isLiked;
         _postLikeImg.SetActive(_isLiked);
     }
 }

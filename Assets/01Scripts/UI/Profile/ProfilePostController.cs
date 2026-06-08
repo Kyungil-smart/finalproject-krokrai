@@ -31,11 +31,12 @@ public class ProfilePostController : MonoBehaviour
 
     public void SetPost(int postNum,GameObject post)
     {
-        if (postNum == 0 || postNum < -1)
+        if (postNum == 0 || postNum < 0)
         {
             Log.Message($"UserPost 번호가 잘 못 입력되었습니다. [{postNum}]");
             return;
         }
+
         _post = post;
 
         if(_button == null || _image == null)
@@ -45,7 +46,9 @@ public class ProfilePostController : MonoBehaviour
         }
 
         _postNum = postNum;
+
         ServiceLocator.Get<IAddressableManager>().LoadImageSprite(_postNum.ToString(), _image);
+        
     }
 
     private void OnClicked()

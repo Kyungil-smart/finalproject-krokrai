@@ -35,6 +35,8 @@ public class PostListCompression : MonoBehaviour
 
     private void Awake()
     {
+        _commentComp = new Dictionary<int, List<PostComment>>(8);
+        _hashTagComp = new Dictionary<int, string>(8);
         _hashTagSTR = new Dictionary<int, string>();
         foreach(var t in _hashTag_Table.scriptableObjects)
         {
@@ -82,8 +84,39 @@ public class PostListCompression : MonoBehaviour
                     postComp = new List<PostComment>(8);
                 }
 
+                if (t.commentText == string.Empty) continue;
+
                 //postComp.comment.Add(stringManager.GetStringSO(t.commentText).KR);
-                postComp.Add(new PostComment(stringManager.GetStringSO(t.commentText).KR, _npc[t.referencedNpcId]));
+                if (_npc.ContainsKey(t.referencedNpcId))
+                {
+                    if (stringManager.GetStringSO(t.commentText) == null)
+                    {
+                        postComp.Add(
+                    new PostComment(stringManager.GetStringSO("STR_CMT_000005").KR,
+                                                    _npc[400001]));
+                    }
+                    else
+                    {
+                        postComp.Add(
+                        new PostComment(stringManager.GetStringSO(t.commentText).KR,
+                                                        _npc[t.referencedNpcId]));
+                    }
+                }
+                else
+                {
+                    if (stringManager.GetStringSO(t.commentText) == null)
+                    {
+                        postComp.Add(
+                    new PostComment(stringManager.GetStringSO("STR_CMT_000005").KR,
+                                                    _npc[400001]));
+                    }
+                    else
+                    {
+                        postComp.Add(
+                        new PostComment(stringManager.GetStringSO(t.commentText).KR,
+                                                        _npc[400001]));
+                    }
+                }
             }
         }
     }
@@ -109,7 +142,7 @@ public class PostListCompression : MonoBehaviour
                     sb.Clear();
                 }
 
-                sb.Append(stringManager.GetStringSO(_hashTagSTR[currentPostID]).KR);
+                sb.Append(stringManager.GetStringSO(_hashTagSTR[t.hashtagId]).KR);
             }
         }
     }
