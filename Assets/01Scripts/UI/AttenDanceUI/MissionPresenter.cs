@@ -77,6 +77,7 @@ public class MissionPresenter : MonoBehaviour
             }
         }
 
+        /*
         if (getDailyDB == null)
         {
             getDailyDB = new Dictionary<string, EventState>();
@@ -87,6 +88,7 @@ public class MissionPresenter : MonoBehaviour
                 getDailyDB.Add((startId + i).ToString(), new EventState { Mission_State = 99, Mission_State_Flag = 1});
             }
         }
+        */
         
         List<EventState> dbStateList = new();
         List<List<Reward_Group_TableSO>> allRewardGroupList = new List<List<Reward_Group_TableSO>>(); // 5개의 미션 보상 리스트 
@@ -156,8 +158,8 @@ public class MissionPresenter : MonoBehaviour
         else
         {
             // DB가 null일 때 UI 강제 갱신
-            EventState mockState = new EventState { Mission_State = 99, Mission_State_Flag = 2 };
-            missionView.UpdateSingleSlot(slotIndex, targetMission, mockState, rewardList);
+            // EventState mockState = new EventState { Mission_State = 99, Mission_State_Flag = 2 };
+            // missionView.UpdateSingleSlot(slotIndex, targetMission, mockState, rewardList);
         }
 
         CheckAndOpenStoryPopup(dailyDB);

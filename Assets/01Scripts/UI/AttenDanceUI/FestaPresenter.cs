@@ -61,7 +61,7 @@ public class FestaPresenter : MonoBehaviour
     {
         _totalFestaPoint += amount; 
         
-        // ServiceLocator.Get<IDataManager>().Attendance.Total_Festa_Point = _totalFestaPoint;
+        ServiceLocator.Get<IDataManager>().Attendance.Total_Festa_Point = _totalFestaPoint;
         
         ReFreshUI();
     }
@@ -84,13 +84,13 @@ public class FestaPresenter : MonoBehaviour
 
     void SetPoint()
     {
-        // _totalFestaPoint = ServiceLocator.Get<IDataManager>().Attendance.Total_Festa_Point;
-        // _recentGaugeStep = ServiceLocator.Get<IDataManager>().Attendance.Recent_Gauge_Step;
-        // _finalRewardReceived = ServiceLocator.Get<IDataManager>().Attendance.Final_Reward_Received;
+        _totalFestaPoint = ServiceLocator.Get<IDataManager>().Attendance.Total_Festa_Point;
+        _recentGaugeStep = ServiceLocator.Get<IDataManager>().Attendance.Recent_Gauge_Step;
+        _finalRewardReceived = ServiceLocator.Get<IDataManager>().Attendance.Final_Reward_Received;
         
-        _totalFestaPoint = 0;
-        _recentGaugeStep = 0;
-        _finalRewardReceived = false;
+        // _totalFestaPoint = 0;
+        // _recentGaugeStep = 0;
+        // _finalRewardReceived = false;
     }
 
     private void ReFreshUI()

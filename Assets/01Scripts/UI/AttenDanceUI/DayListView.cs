@@ -33,7 +33,6 @@ public class DayListView : MonoBehaviour
             dayBtns[i].onClick.AddListener(() =>
             {
                 ToggleOutline(index);
-                // OnDayClicked?.Invoke(index);
 
                 ServiceLocator.Get<IEventManager>().ClickDay(index + 1);
             });

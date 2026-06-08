@@ -37,10 +37,10 @@ public class DayListPresent : MonoBehaviour
     /// </summary>
     void SetTimestamp()
     {
-        // _joinTimeStamp = ServiceLocator.Get<IDataManager>().Attendance.Join_TimeStamp;
-        _joinTimeStamp = new DateTime(2026, 06, 01, 0,0,0);
-        // _lastLoginTime = ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp; 
-        _lastLoginTime = new DateTime(2026, 06, 03, 0,0,0);;
+        _joinTimeStamp = ServiceLocator.Get<IDataManager>().Attendance.Join_TimeStamp;
+        // _joinTimeStamp = new DateTime(2026, 06, 01, 0,0,0);
+        _lastLoginTime = ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp; 
+        // _lastLoginTime = new DateTime(2026, 06, 03, 0,0,0);;
     }
 
     /// <summary>
@@ -53,8 +53,8 @@ public class DayListPresent : MonoBehaviour
             _activeDay += 1;
 
             // 연-월-일만 비교해서 다르면 +1
-            // ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day += 1;
-            // ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp = _currentTime.Date; // Last_Login 업데이트
+            ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day += 1;
+            ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp = _currentTime.Date; // Last_Login 업데이트
         }
     }
 
@@ -63,8 +63,8 @@ public class DayListPresent : MonoBehaviour
     /// </summary>
     private void RefreshUI()
     {
-        // int activeDay = (int)Math.Min(ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day, 7); 
-        int activeDay = (int)Math.Min(_activeDay, 7);
+        int activeDay = (int)Math.Min(ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day, 7); 
+        // int activeDay = (int)Math.Min(_activeDay, 7);
         
         for (int i = 0; i < 7; i++)
         {
