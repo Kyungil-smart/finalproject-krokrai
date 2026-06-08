@@ -25,53 +25,21 @@ public class NotificationData : MonoBehaviour
     /// <summary>
     /// SO 데이터를 받아서 프리펩 UI 채우기
     /// </summary>
-    public void Setup(Notification_TableSO so, string convertedText)
+    public void Setup(Notification_TableSO so, string finalText, string npcImageKey, string postImageKey)
     {
         _notiTempladteID = so.notiTemplateId;
 
         // 텍스트 세팅
         if (_textBox != null)
-        {
-            if (_textBox != null)
-            {
-                _textBox.text = convertedText;
-                
-            }
+            _textBox.text = finalText;
 
-            // var stringManager = ServiceLocator.Get<IString_TableManager>();
-            // if (stringManager == null)
-            // {
-            //     Log.Message($"초기화 안됨");
-            //     _textBox.text = so.notiText; // 임시
-            // }
-            // else
-            // {
-            //     string text = stringManager.GetString(so.notiText, SystemLanguage.Korean);
-            //     
-            //     Log.Message($"키: {so.notiText} / 결과 : {text}");
-            //     
-            //     _textBox.text = text ?? so.notiText;
-            //     
-            // }
-
-            // string text = ServiceLocator.Get<IString_TableManager>().GetString(so.notiText, SystemLanguage.Korean);
-
-            // _textBox.text = text;
-        }
-
-        // // NPC 프로필 이미지 세팅
-        // if (_profileImage != null)
-        // {
-        //     // TODO: NPC의 프로필 이미지의 어드레서블 키 값을 대입해줘야함
-        //     ServiceLocator.Get<AddressableManager>().LoadImageSprite("", _profileImage);
-        // }
+        // NPC 프로필 이미지 세팅
+        if (_profileImage != null && !string.IsNullOrEmpty(npcImageKey))
+            ServiceLocator.Get<AddressableManager>().LoadImageSprite(npcImageKey, _profileImage);
         
-        // // 포스트 이미지 세팅 (팔로우 제외)
-        // if (_postImage != null)
-        // {
-        //     // TODO: 포스트 이미지의 어드레서블 키 값을 대입해줘야함
-        //     ServiceLocator.Get<AddressableManager>().LoadImageSprite("", _postImage);
-        // }
+        // 포스트 이미지 세팅 (팔로우 제외)
+        if (_postImage != null && !string.IsNullOrEmpty(postImageKey))
+            ServiceLocator.Get<AddressableManager>().LoadImageSprite(postImageKey, _postImage);
 
         // 포스트 버튼 연결 (팔로우 제외)
         if (_postImageButton != null)
