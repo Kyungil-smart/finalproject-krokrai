@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b25bb68f2d90343a602e8551d448e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetPopup: {fileID: 8303314416134470431}
+  _targetPopup: {fileID: 115317354160670984}
 --- !u!114 &1445979154 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8205117202876729366, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
@@ -411,19 +411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1743887556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1743887552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1b25bb68f2d90343a602e8551d448e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _targetPopup: {fileID: 0}
 --- !u!114 &1743887557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,19 +454,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1743887554}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1743887556}
-        m_TargetAssemblyTypeName: PopupUI, Assembly-CSharp
-        m_MethodName: OpenPopup
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1001 &1853394826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -589,9 +564,25 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6523548034595727300, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523548034595727300, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523548034595727300, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1906787959}
+    - target: {fileID: 6523548034595727300, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1906787956}
+    - target: {fileID: 6523548034595727300, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6523548034595727300, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OpenPopup
@@ -599,6 +590,14 @@ PrefabInstance:
     - target: {fileID: 6523548034595727300, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PopupUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523548034595727300, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PopupUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523548034595727300, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7811960121638930403, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
       propertyPath: m_text
@@ -616,19 +615,31 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 349888027804859258, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+    - {fileID: 4350100173827735925, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+    - {fileID: 8098152850816947899, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+    - {fileID: 2311902101452975607, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+    - {fileID: 5540219079925633852, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+    - {fileID: 8123050501518193972, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+    - {fileID: 5860600585764166857, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+    - {fileID: 53641425123077385, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+    - {fileID: 8345894020819576215, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+    - {fileID: 5184044812103713211, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+    - {fileID: 4439443934980156332, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+    - {fileID: 4366971364623575982, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+    - {fileID: 519248916560739972, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+    - {fileID: 5755878160872593099, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
+    - {fileID: 2558612135397165199, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5527501646962687169, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
-      insertIndex: 5
+      insertIndex: -1
       addedObject: {fileID: 1906787959}
     - targetCorrespondingSourceObject: {fileID: 6846933473731518341, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1743887557}
-    - targetCorrespondingSourceObject: {fileID: 6846933473731518341, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1743887556}
   m_SourcePrefab: {fileID: 100100000, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
 --- !u!1 &1906787956 stripped
 GameObject:
@@ -647,7 +658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b25bb68f2d90343a602e8551d448e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetPopup: {fileID: 8303314416134470431}
+  _targetPopup: {fileID: 115317354160670984}
 --- !u!114 &1987842890 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5687539581095050941, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
@@ -880,13 +891,14 @@ GameObject:
   - component: {fileID: 7293117068316888611}
   - component: {fileID: 1709922025947255260}
   - component: {fileID: 6316870057768452104}
+  - component: {fileID: 7293117068316888612}
   m_Layer: 5
   m_Name: Simulator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &128831788907892202
 GameObject:
   m_ObjectHideFlags: 0
@@ -11119,7 +11131,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!1 &3998687330480355265
 GameObject:
@@ -19153,6 +19165,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115317354160670984}
   m_CullTransparentMesh: 1
+--- !u!225 &7293117068316888612
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115317354160670984}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &7300742540558621537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22034,7 +22058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8339489705561894539
 RectTransform:
   m_ObjectHideFlags: 0
