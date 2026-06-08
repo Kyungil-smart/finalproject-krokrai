@@ -15,7 +15,7 @@ using System.Collections.Generic;
 
 public class MissionView : MonoBehaviour
 {
-    public event Action<int> OnSlotRewardRequested; // 보상 버튼 클릭 Action
+    public event Action<int> OnSlotRewardRequested; // 보상 버튼 클릭 Action // < 오류 원인
 
     [SerializeField] private MissionSlotView[] missionSlots;
 

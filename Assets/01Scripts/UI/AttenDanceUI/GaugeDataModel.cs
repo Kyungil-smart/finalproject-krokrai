@@ -44,6 +44,6 @@ public class GaugeDataModel : MonoBehaviour
             return _gaugeData[gaugeRewardId];
         }
 
-        return null;
+        return null; // 여기가 문제일수도 << 확인
     }
 }

@@ -8,6 +8,7 @@
 역할 : 미션 UI와 데이터사이를 제어하는 Presenter 스크립트
 */
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ public class MissionPresenter : MonoBehaviour
     [SerializeField] private RewardDataModel rewardModel;
 
     [Header("스토리 데이터")] 
-    [SerializeField] private List<Story_TableSO> storyDataLIst = new();
+    [SerializeField] private List<Story_TableSO> storyDataList = new();
     [SerializeField] private StoryPopupView storyPopupView;
     
     private List<Mission_ListSO> _currentMissions = new();
@@ -28,15 +29,31 @@ public class MissionPresenter : MonoBehaviour
 
     private void Start()
     {
-        // Awake -> Start (유니티 이벤트 매니저가 문제인가?)
-        ServiceLocator.Get<IEventManager>().OnDayClicked += OnDayTabChangedMission;
-        missionView.OnSlotRewardRequested += OnRewardClaimed;
+        var eventManager = ServiceLocator.Get<IEventManager>();
+        if (eventManager != null)
+        {
+            eventManager.OnDayClicked += OnDayTabChangedMission;
+        }
+
+        if (missionView != null)
+        {
+            missionView.OnSlotRewardRequested += OnRewardClaimed;
+        }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        ServiceLocator.Get<IEventManager>().OnDayClicked -= OnDayTabChangedMission; 
-        missionView.OnSlotRewardRequested -= OnRewardClaimed;
+        var eventManager = ServiceLocator.Get<IEventManager>();
+        if (eventManager != null)
+        {
+            eventManager.OnDayClicked -= OnDayTabChangedMission; // 오류
+        }
+
+        if (missionView != null)
+        {
+            missionView.OnSlotRewardRequested -= OnRewardClaimed;
+        }
+        
     }
 
     /// <summary>
@@ -99,6 +116,13 @@ public class MissionPresenter : MonoBehaviour
     /// <param name="slotIndex"></param>
     private void OnRewardClaimed(int slotIndex)
     {
+        if (_currentMissions == null || slotIndex < 0 || slotIndex >= _currentMissions.Count)
+        {
+            Log.Message($"[데이터 불일치] 빈 슬롯을 클릭했습니다 (요청 인덱스: {slotIndex}, 현재 리스트 개수: {_currentMissions?.Count}");
+            // 오류
+            return;
+        }
+        
         Mission_ListSO targetMission = _currentMissions[slotIndex];
         string idString = targetMission.Mission_Id.ToString();
 
@@ -167,7 +191,7 @@ public class MissionPresenter : MonoBehaviour
             int currentDayNum = int.Parse(_currentDayKey.Replace("Day_", ""));
             string targetStoryId = $"STORY_DAY_{currentDayNum}";
             
-            Story_TableSO targetStory = storyDataLIst.Find(x => x.Story_Id == targetStoryId);
+            Story_TableSO targetStory = storyDataList.Find(x => x.Story_Id == targetStoryId);
 
             if (targetStory != null)
             {

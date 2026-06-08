@@ -28,6 +28,8 @@ public class StoryPopupView : MonoBehaviour
 
     public void OpenPopup(string title, string content)
     {
+        Log.Message("OpenPopup 메서드 실행됨");
+        
         string realContent = content.Replace("\\n", "\n");
 
         titleText.text = title;

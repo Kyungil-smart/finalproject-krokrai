@@ -22,7 +22,18 @@ public class RewardPopupView : MonoBehaviour
     {
         if (confirmButton != null)
         {
-            confirmButton.onClick.AddListener(() => gameObject.SetActive(false));
+            confirmButton.onClick.RemoveAllListeners();
+            
+            
+            confirmButton.onClick.AddListener(() =>
+            {
+                Log.Message("버튼 클릭됨");
+                gameObject.SetActive(false);
+            });
+        }
+        else
+        {
+            Log.Message("confirmButton is null");
         }
     }
 

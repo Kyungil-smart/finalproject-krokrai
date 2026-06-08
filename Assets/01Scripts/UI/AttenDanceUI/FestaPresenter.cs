@@ -24,27 +24,37 @@ public class FestaPresenter : MonoBehaviour
     [SerializeField] private RewardDataModel rewardModel;
     [SerializeField] private RewardPopupView rewardPopupView;
     
-
     private void Start()
     {
-        ServiceLocator.Get<IEventManager>().OnGaugeIncrease += HandleGaugeIncrease;
-    }
+        var eventManager = ServiceLocator.Get<IEventManager>();
 
-    private void OnDestroy()
-    {
-        ServiceLocator.Get<IEventManager>().OnGaugeIncrease -= HandleGaugeIncrease;
-    }
-    
-    private void OnEnable()
-    {
-        view.OnChestClicked += HandleChestClick;
+        if (eventManager != null)
+        {
+            eventManager.OnGaugeIncrease += HandleGaugeIncrease;
+        }
+
+        if (view != null)
+        {
+            view.OnChestClicked += HandleChestClick;
+        }
+        
         SetPoint();
         ReFreshUI();
     }
 
     private void OnDisable()
     {
-        view.OnChestClicked -= HandleChestClick;
+        var eventManager = ServiceLocator.Get<IEventManager>();
+
+        if (eventManager != null)
+        {
+            eventManager.OnGaugeIncrease -= HandleGaugeIncrease;
+        }
+
+        if (view != null)
+        {
+            view.OnChestClicked -= HandleChestClick;
+        }
     }
 
     private void HandleGaugeIncrease(int amount)
@@ -58,7 +68,7 @@ public class FestaPresenter : MonoBehaviour
 
     private void HandleChestClick(int chestIndex)
     {
-        var gaugeSO = gaugeModel.GetGaugeSetting(chestIndex + 1);
+        var gaugeSO = gaugeModel.GetGaugeSetting(chestIndex + 1); // 
 
         if (gaugeSO == null) return;
 
