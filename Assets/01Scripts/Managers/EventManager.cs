@@ -12,7 +12,7 @@
 using System;
 using UnityEngine;
 
-public class EventManager : MonoBehaviour, IEventManager
+public class EventManager : MonoBehaviour, IEventManager, IManagerBooter
 {
     
     public event Action<int> OnDayClicked; // Day 탭이 클릭되었을 때 발생하는 이벤트
