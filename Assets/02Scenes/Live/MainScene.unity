@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b25bb68f2d90343a602e8551d448e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetPopup: {fileID: 115317354160670984}
+  _targetPopup: {fileID: 8303314416134470431}
 --- !u!114 &1445979154 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8205117202876729366, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b25bb68f2d90343a602e8551d448e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetPopup: {fileID: 115317354160670984}
+  _targetPopup: {fileID: 8303314416134470431}
 --- !u!114 &1987842890 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5687539581095050941, guid: 4e4cfaa1e06daa3428a804c7aaea57f7, type: 3}
@@ -897,7 +897,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &128831788907892202
 GameObject:
   m_ObjectHideFlags: 0
@@ -22045,7 +22045,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8339489705561894539
 RectTransform:
   m_ObjectHideFlags: 0
