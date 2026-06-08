@@ -35,7 +35,7 @@ public class PopupUI : MonoBehaviour
             Log.Message("TargetPopup이 연결되지 않았습니다.");
             return;
         }
-
+        Log.Message("ClosePopup 호출");
         _targetPopup.SetActive(false);
     }
 
