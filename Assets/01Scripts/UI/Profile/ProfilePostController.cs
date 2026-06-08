@@ -13,7 +13,8 @@ public class ProfilePostController : MonoBehaviour
     [SerializeField] private Image _image;
     [SerializeField] private Button _button;
 
-    private int _postNum;
+    private int _postImg;
+    private int _postId;
 
     //임시
     GameObject _post;
@@ -29,11 +30,11 @@ public class ProfilePostController : MonoBehaviour
         _button.onClick.RemoveAllListeners();
     }
 
-    public void SetPost(int postNum,GameObject post)
+    public void SetPost(int postImg, int postId,GameObject post)
     {
-        if (postNum == 0 || postNum < 0)
+        if (postImg == 0 || postImg < 0)
         {
-            Log.Message($"UserPost 번호가 잘 못 입력되었습니다. [{postNum}]");
+            Log.Message($"UserPost 번호가 잘 못 입력되었습니다. [{postImg}]");
             return;
         }
 
@@ -45,9 +46,10 @@ public class ProfilePostController : MonoBehaviour
             _image = GetComponentInChildren<Image>();
         }
 
-        _postNum = postNum;
+        _postId = postId;
+        _postImg = postImg;
 
-        ServiceLocator.Get<IAddressableManager>().LoadImageSprite(_postNum.ToString(), _image);
+        ServiceLocator.Get<IAddressableManager>().LoadImageSprite(_postImg.ToString(), _image);
         
     }
 
@@ -55,7 +57,7 @@ public class ProfilePostController : MonoBehaviour
     {
         Log.Message("버튼 클릭");
         _post.SetActive(true);
-        _post.GetComponent<PostController>().SetPost(_postNum);
+        _post.GetComponent<PostController>().SetPost(_postImg, _postId);
         //ServiceLocator.Get<IUIManager>().UploadedPost(_postNum);
     }
 }

@@ -84,7 +84,7 @@ public class ProfileController : MonoBehaviour
                 obj.name = $"Post_{i}";
                 post = obj.GetComponent<ProfilePostController>();
                 if (_postTables.ContainsKey(keys[i]))
-                    post.SetPost( _postTables[keys[i]].postImage,_post);
+                    post.SetPost( _postTables[keys[i]].postImage, _postTables[keys[i]].postID, _post);
                 else
                 {
                     Log.Message("Table에 존재하지 않습니다.");

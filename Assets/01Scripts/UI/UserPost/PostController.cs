@@ -22,7 +22,7 @@ public class PostController : MonoBehaviour
     [SerializeField] TextMeshProUGUI _userName;
 
     [Header("게시물")]
-    [SerializeField] Image _postImg;
+    [SerializeField] Image _postImgUI;
     [SerializeField] Button _postLike;
     [SerializeField] GameObject _postLikeImg;
     [SerializeField] Button _postShare;
@@ -39,7 +39,8 @@ public class PostController : MonoBehaviour
     private List<GameObject> _comments;
     private UserDatas _user;
 
-    private int _postNum;
+    private int _postImgNum;
+    private int _postId;
 
     bool _isLiked = false;
 
@@ -59,33 +60,33 @@ public class PostController : MonoBehaviour
         _postLike.onClick.RemoveListener(OnClickHeart);
     }
 
-    public void SetPost(int postNum)
+    public void SetPost(int postImg, int postId)
     {
-        if (postNum < 101000 || 190000 < postNum)
-        {
-            Log.Message($"잘 못된 숫자 입력 {postNum}");
-            return;
-        }
-
-        _postNum = postNum;
+        _postImgNum = postImg;
+        _postId = postId;
         // 좋아요 여부에 따른 활성화 체크 db UserPost 참조
-
+        
         for (int i = 0; i < _datas.scriptableObjects.Length; i++)
         {
-            if (_datas.scriptableObjects[i] is Post_TableSO && (_datas.scriptableObjects[i] as Post_TableSO).postID == postNum)
+            if (_datas.scriptableObjects[i] is Post_TableSO)// && (_datas.scriptableObjects[i] as Post_TableSO).postID == postNum)
             {
+                if (!((_datas.scriptableObjects[i] as Post_TableSO).postImage == postImg))
+                    continue;
+                
                 var so = (_datas.scriptableObjects[i] as Post_TableSO);
+
                 // 게시물 좋아요 수
                 _postLikeCount.text = so.likeCount.ToString();
+
                 // 게시물 사진
                 Debug.Log(so.postImage);
-                ServiceLocator.Get<IAddressableManager>().LoadImageSprite(so.postImage.ToString(), _postImg);
+                ServiceLocator.Get<IAddressableManager>().LoadImageSprite(so.postImage.ToString(), _postImgUI);
 
                 // 해쉬 태크
-                _hashTagText.text = _postListComp.GetHashTags(postNum);
+                _hashTagText.text = _postListComp.GetHashTags(_postId);
 
                 //본문
-                _postContent.text = ServiceLocator.Get<IString_TableManager>().GetStringSO(postNum.ToString()).KR; // 언어 설정 어디서 함?
+                _postContent.text = ServiceLocator.Get<IString_TableManager>().GetStringSO(_postId.ToString()).KR; // 언어 설정 어디서 함?
 
                 // 댓글
                 CommentManager();
@@ -95,7 +96,7 @@ public class PostController : MonoBehaviour
         }
 
         // 좋아요 여부
-        _isLiked = _user.UserPost[postNum.ToString()].isLiked;
+        _isLiked = _user.UserPost[postImg.ToString()].isLiked;
         _postLikeImg.SetActive(_isLiked);
         // 여기에 좋아요 표시한 게시물 UserPost에 접근해서 상태 전환
     }
@@ -108,7 +109,7 @@ public class PostController : MonoBehaviour
         }
         
         int count = _postListComp.GetCommentCounts();
-        List<PostComment> list = _postListComp.GetComments(_postNum);
+        List<PostComment> list = _postListComp.GetComments(_postImgNum);
         GameObject obj;
 
         for (int i = 0; i < count; i++)
@@ -123,7 +124,7 @@ public class PostController : MonoBehaviour
     private void OnClickHeart()
     {
         _isLiked = !_isLiked;
-        _user.UserPost[_postNum.ToString()].isLiked = _isLiked;
+        _user.UserPost[_postImgNum.ToString()].isLiked = _isLiked;
         _postLikeImg.SetActive(_isLiked);
     }
 }
