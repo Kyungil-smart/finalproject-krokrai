@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-06-08
+
+ 역할 : 나눠어진 문자 table들을 압축하여 저장
+ 방식 : 나눠어져 있는 문자 table들을 하나로 합친 후 Dictionary에 보관 및 class로 통해서 한번에 여러개를 출력 가능하게 압축
+ */
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;

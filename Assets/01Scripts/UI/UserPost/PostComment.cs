@@ -1,9 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-06-08
+
+ 역할 : prefab화 되어, 댓글 하나를 당담
+ 방식 : prefab화 된 상태로 PostConttroller에서 정보를 주입 받아온 후 해당 형식에 맞게 Textmeshpro에 전달
+ */
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
-using System.Drawing.Text;
 
 public class PostCommentController : MonoBehaviour
 {

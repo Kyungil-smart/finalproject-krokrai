@@ -1,7 +1,8 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-06-04
- 
+ 수정일 : 26-06-08 
+
  역할 : Profile tab에 들어왔을 때 Profile에 필요한 Data를 등록
  방식 : DataManager에 등록된 Data를 갖고 와서 등록 및 게시물이 추가 등록 되었는 지 판정 및 생성
  */
@@ -57,7 +58,6 @@ public class ProfileController : MonoBehaviour
 
         if (_currentPostNum < _postedCount)
         {
-            // ProfilePostController 선언 후 생성 요청
             GameObject obj;
             ProfilePostController post;
 
@@ -99,9 +99,9 @@ public class ProfileController : MonoBehaviour
 
         _profileFollower.text = ServiceLocator.Get<IDataManager>().ProFile.followerCount.ToString();
         _profileFollowing.text = ServiceLocator.Get<IDataManager>().ProFile.followingCount.ToString();
-        /*ServiceLocator.Get<IAddressableManager>().LoadImageSprite(
+        ServiceLocator.Get<IAddressableManager>().LoadImageSprite(
             ServiceLocator.Get<IDataManager>().ProFile.profileImage.ToString(),
-            _profileImage);*/
+            _profileImage);
     }
 
     private void Start()

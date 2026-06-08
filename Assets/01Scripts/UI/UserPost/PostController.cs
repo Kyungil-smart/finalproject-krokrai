@@ -1,13 +1,13 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-06-04
+ 수정일 : 26-06-08
 
  역할 : 게시물에 필요한 정보를 출력
  방식 : 댓글을 제외한 모든 데이터를 이 곳에서 처리 및 댓글은 객체로 분리
  */
 
 using System.Collections.Generic;
-using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -99,7 +99,6 @@ public class PostController : MonoBehaviour
         // 좋아요 여부
         _isLiked = _user.UserPost[_postId.ToString()].isLiked;
         _postLikeImg.SetActive(_isLiked);
-        // 여기에 좋아요 표시한 게시물 UserPost에 접근해서 상태 전환
     }
 
     private void CommentManager()
