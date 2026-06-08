@@ -12,24 +12,9 @@ using System;
 [Serializable, FirestoreData]
 public class ProFile
 {
-    private string _nickname;
     private long _followerCount = 100;
     private long _followingCount = 10;
     private long _profileImage = 60003;
-
-    [FirestoreProperty]
-    public string NickName
-    { 
-        get
-        {
-            return _nickname;
-        }
-        set
-        {
-            _nickname = value;
-            ServiceLocator.Get<IDataAutoSaveManager>().RequestSave();
-        }
-    }
 
     [FirestoreProperty]
     public long followerCount
