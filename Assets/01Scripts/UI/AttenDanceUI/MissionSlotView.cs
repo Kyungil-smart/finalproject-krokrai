@@ -20,8 +20,8 @@ public class MissionSlotView : MonoBehaviour
     public event Action<int> OnRewardClicked;
 
     [Header("UI연결")] [SerializeField] private Slider missionProgressSlider;
-    [SerializeField] private TextMeshProUGUI missionNameText;
-    [SerializeField] private TextMeshProUGUI missionProgressText;
+    // [SerializeField] private TextMeshProUGUI missionNameText;
+    // [SerializeField] private TextMeshProUGUI missionProgressText;
     [SerializeField] private Button rewardButton;
     [SerializeField] private GameObject clearBackGround;
 
@@ -46,13 +46,13 @@ public class MissionSlotView : MonoBehaviour
     /// <summary>
     /// 전달받은 데이터로 미션 슬롯의 텍스트, 슬라이더, 버튼 상태, 보상 아이콘을 갱신하는 메서드
     /// </summary>
-    public void UpdateSlotUI(string missionName, int currentState, int goalValue, int flag, List<Reward_Group_TableSO> rewardData)
+    public void UpdateSlotUI(string missionName, int currentState, int goalValue, int flag/*List<Reward_Group_TableSO> rewardData*/)
     {
-        missionNameText.text = missionName;
+        // missionNameText.text = missionName;
         
         // 현재 진행도가 목표치 못뚫게 막음
-        int displayState = Mathf.Min(currentState, goalValue);
-        missionProgressText.text = $"{displayState} / {goalValue}"; 
+        // int displayState = Mathf.Min(currentState, goalValue);
+        // missionProgressText.text = $"{displayState} / {goalValue}"; 
         
         missionProgressSlider.value = goalValue > 0 ? (float)currentState / goalValue : 0f; // 정규화
 
@@ -75,6 +75,7 @@ public class MissionSlotView : MonoBehaviour
             if (clearBackGround != null) clearBackGround.SetActive(true);
         }
 
+        /*
         for (int i = 0; i < rewardItemSlots.Length; i++)
         {
             if (rewardData != null && i < rewardData.Count)
@@ -89,5 +90,6 @@ public class MissionSlotView : MonoBehaviour
                 rewardItemSlots[i].gameObject.SetActive(false);
             }
         }
+        */
     }
 }

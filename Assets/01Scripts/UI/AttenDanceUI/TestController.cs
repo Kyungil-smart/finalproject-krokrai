@@ -36,7 +36,7 @@ public class TestController : MonoBehaviour
 
                 foreach (var slot in missionSlots)
                 {
-                    slot.UpdateSlotUI("122", 100, 100, 1, null);
+                    slot.UpdateSlotUI("122", 100, 100, 1);
                 }
             });
         }

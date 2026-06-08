@@ -74,6 +74,6 @@ public class MissionView : MonoBehaviour
         int currentState = (int)dbState.Mission_State;
         int flag = (int)dbState.Mission_State_Flag;
         
-        missionSlots[index].UpdateSlotUI(missionDesc, currentState, goal, flag, rewardData);
+        missionSlots[index].UpdateSlotUI(missionDesc, currentState, goal, flag/*, rewardData*/);
     }
 }
