@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dcd48d32b4ea5c4f822cc03644c6daf, type: 3}
+  m_Name: Story_TableSO_Row_2
+  m_EditorClassIdentifier: 
+  Story_Id: STORY_DAY_3
+  ko_Title: "\uC870\uAE08\uC529 \uC5F4\uB9AC\uB294 \uB9C8\uC74C"
+  en_Title: Opening Up, Bit by Bit
+  jp_Title: "\u5C11\u3057\u305A\u3064\u958B\u304F\u5FC3"
+  ch_Title: "\u9010\u6E10\u655E\u5F00\u7684\u5FC3\u6249"
+  ko_Text: "\"\uC624\uB298 \uCC98\uC74C\uC73C\uB85C \uAF2C\uB9AC\uB97C \uC138\uC6CC\uC8FC\uC5C8\uB2E4.\\n\uAE30\uBD84\uC774
+    \uC870\uAE08 \uD480\uB9B0 \uAC78\uAE4C?\""
+  en_Text: '"It raised its tail for the first time today.\nIs it feeling a bit better?"'
+  jp_Text: "\"\u4ECA\u65E5\u521D\u3081\u3066\u5C3B\u5C3E\u3092\u7ACB\u3066\u3066\u304F\u308C\u305F\u3002\\n\u5C11\u3057\u6A5F\u5ACC\u304C\u76F4\u3063\u305F\u306E\u304B\u306A\uFF1F\""
+  ch_Text: "\"\u4ECA\u5929\u7B2C\u4E00\u6B21\u5BF9\u6211\u7AD6\u8D77\u4E86\u5C3E\u5DF4\u3002\\n\u5FC3\u60C5\u7A0D\u5FAE\u597D\u4E00\u70B9\u4E86\u5417\uFF1F\""

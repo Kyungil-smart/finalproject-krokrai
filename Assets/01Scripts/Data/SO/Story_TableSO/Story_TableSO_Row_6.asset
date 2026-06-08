@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dcd48d32b4ea5c4f822cc03644c6daf, type: 3}
+  m_Name: Story_TableSO_Row_6
+  m_EditorClassIdentifier: 
+  Story_Id: STORY_DAY_7
+  ko_Title: "\uBB18\uD55C \uC778\uC5F0\uC758 \uC644\uC131"
+  en_Title: Completion of a Strange Bond
+  jp_Title: "\u5947\u5999\u306A\u7E01\u306E\u5B8C\u6210"
+  ch_Title: "\u5947\u5999\u7F18\u5206\u7684\u5706\u6EE1"
+  ko_Text: "\"\uCC98\uC74C \uB9CC\uB0AC\uC744 \uB550 \uC0C1\uC0C1\uB3C4 \uBABB \uD588\uB358
+    \uB9CC\uD07C \uAC00\uAE4C\uC6CC\uC84C\uB2E4.\\n\uB108\uC640 \uB9CC\uB098\uC11C
+    \uC815\uB9D0 \uB2E4\uD589\uC774\uC57C.\""
+  en_Text: '"We''ve become closer than I could have ever imagined when we first met.\nI''m
+    so glad I met you."'
+  jp_Text: "\"\u521D\u3081\u3066\u4F1A\u3063\u305F\u6642\u306F\u60F3\u50CF\u3082\u3067\u304D\u306A\u304B\u3063\u305F\u307B\u3069\u8FD1\u304F\u306A\u3063\u305F\u3002\\n\u3042\u306A\u305F\u306B\u51FA\u4F1A\u3048\u3066\u672C\u5F53\u306B\u3088\u304B\u3063\u305F\u3002\""
+  ch_Text: "\"\u53D8\u5F97\u6BD4\u521D\u6B21\u89C1\u9762\u65F6\u65E0\u6CD5\u60F3\u8C61\u7684\u8FD8\u8981\u4EB2\u8FD1\u3002\\n\u80FD\u4E0E\u4F60\u76F8\u9047\u771F\u662F\u592A\u597D\u4E86\u3002\""
