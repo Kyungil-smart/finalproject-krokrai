@@ -13,12 +13,12 @@ using UnityEngine;
 public class MainCurrencyController : MonoBehaviour
 {
     [Header("메인 화면 재화 UI")]
-    [SerializeField] private TMP_Text energyText;
-    [SerializeField] private TMP_Text coinText;
-    [SerializeField] private TMP_Text gemText;
-    [SerializeField] private TMP_Text stoneText;
-    [SerializeField] private TMP_Text furDollText;
-    [SerializeField] private TMP_Text clawText;
+    [SerializeField] private TMP_Text _energyText;
+    [SerializeField] private TMP_Text _coinText;
+    [SerializeField] private TMP_Text _gemText;
+    [SerializeField] private TMP_Text _stoneText;
+    [SerializeField] private TMP_Text _furDollText;
+    [SerializeField] private TMP_Text _clawText;
 
     private void Awake()
     {
@@ -57,11 +57,11 @@ public class MainCurrencyController : MonoBehaviour
 
         UserGoods goods = dataManager.UserGoods;
 
-        energyText.text = $"{goods.Energy_:N0}";
-        coinText.text = $"{goods.Coin_:N0}";
-        gemText.text = $"{goods.Gem_:N0}";
-        stoneText.text = $"{goods.Stone_:N0}";
-        furDollText.text = $"{goods.FurDoll_:N0}";
-        clawText.text = $"{goods.Claw_:N0}";
+        _energyText.text = $"{goods.Energy_:N0}";
+        _coinText.text = $"{goods.Coin_:N0}";
+        _gemText.text = $"{goods.Gem_:N0}";
+        _stoneText.text = $"{goods.Stone_:N0}";
+        _furDollText.text = $"{goods.FurDoll_:N0}";
+        _clawText.text = $"{goods.Claw_:N0}";
     }
 }
