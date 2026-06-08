@@ -2605,7 +2605,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000087720335}
+  m_AnchoredPosition: {x: 0, y: 0.00008648315}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2808884789507994123
@@ -3623,7 +3623,7 @@ MonoBehaviour:
       - m_Target: {fileID: 8458220899168210713}
         m_TargetAssemblyTypeName: NotificationController, Assembly-CSharp
         m_MethodName: AddNotification
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6926,6 +6926,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _notiSOData: {fileID: 11400000, guid: 7724c3bbd8ff451449be8ac489e58935, type: 2}
   _stringSOData: {fileID: 11400000, guid: 72e20a151154804479374df10f9cdf07, type: 2}
+  _postNotiSOData: {fileID: 11400000, guid: 4e165a431d6271a40b1b89a2d697b825, type: 2}
+  _npcSOData: {fileID: 11400000, guid: 48efc221b62b6c440a1d182f65614cd1, type: 2}
+  _postSOData: {fileID: 11400000, guid: a414170c9b01013468883286422d56b9, type: 2}
   _commentPrefab: {fileID: 4720200645076260820, guid: 6d89bf1e993feb34bba2c7a7f20c4f63, type: 3}
   _followPrefab: {fileID: 2282598576676437762, guid: 19b5ba999e8844a43afca514f51f45a4, type: 3}
   _likePrefab: {fileID: 2551272309444997583, guid: 42fb56fb73001444ca395d85d32b7504, type: 3}
