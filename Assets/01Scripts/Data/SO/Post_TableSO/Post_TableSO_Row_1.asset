@@ -16,6 +16,7 @@ MonoBehaviour:
   postProFile: 400001
   postImage: 502002
   likeCount: 486931
+  getFollower: 15
   captionText: STR_CAP_000002
   getRoute: 0
   postID: 101002

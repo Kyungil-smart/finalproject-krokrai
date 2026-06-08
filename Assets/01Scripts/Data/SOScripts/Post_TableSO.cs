@@ -15,7 +15,8 @@ public class Post_TableSO : ScriptableObject
     [SOInject(2)] public int postProFile;
     [SOInject(3)] public int postImage;
     [SOInject(4)] public int likeCount;
-    [SOInject(5)] public string captionText;
-    [SOInject(6)] public Route getRoute;
+    [SOInject(5)] public int getFollower;
+    [SOInject(6)] public string captionText;
+    [SOInject(7)] public Route getRoute;
     [SOInject(0)] public int postID;
 }
