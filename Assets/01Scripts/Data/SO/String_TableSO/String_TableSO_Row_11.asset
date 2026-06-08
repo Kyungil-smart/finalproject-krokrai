@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_11
   m_EditorClassIdentifier: 
-  stringId: STR_NOTI_000005
-  KR: "{npcAccountName}\uB2D8 \uC678 {extraNumber}\uBA85\uC774 \uD68C\uC6D0\uB2D8\uC758
-    \uC0AC\uC9C4\uC744 \uC88B\uC544\uD569\uB2C8\uB2E4."
-  EN: "\uC601\uC5B4\r"
+  stringId: STR_CMT_000002
+  KR: "\uC0DD\uC120 \uC57C\uBB34\uC9C0\uAC8C \uBB3C\uACE0 \uC788\uB294 \uAC83 \uBD10
+    \u314B\u314B\u314B"
+  EN: "\uC601\uC5B4"

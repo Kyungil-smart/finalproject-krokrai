@@ -26,7 +26,7 @@ public class UserDatas
     public Dictionary<string, ImageState> ImgList { get; set; } = new();
 
     [FirestoreProperty]
-    public Dictionary<string, bool> UserPost { get; set; } = new();
+    public Dictionary<string, UserPostState> UserPost { get; set; } = new();
 
     [FirestoreProperty]
     public Dictionary<string, ImageState> NPCPost { get; set; } = new();
