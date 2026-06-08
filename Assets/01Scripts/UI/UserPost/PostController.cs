@@ -64,6 +64,7 @@ public class PostController : MonoBehaviour
     {
         _postImgNum = postImg;
         _postId = postId;
+
         // 좋아요 여부에 따른 활성화 체크 db UserPost 참조
         
         for (int i = 0; i < _datas.scriptableObjects.Length; i++)
@@ -72,21 +73,21 @@ public class PostController : MonoBehaviour
             {
                 if (!((_datas.scriptableObjects[i] as Post_TableSO).postImage == postImg))
                     continue;
-                
+
                 var so = (_datas.scriptableObjects[i] as Post_TableSO);
 
                 // 게시물 좋아요 수
                 _postLikeCount.text = so.likeCount.ToString();
 
                 // 게시물 사진
-                Debug.Log(so.postImage);
+                Debug.Log($"{so.postImage.ToString()} / {so.postImage} / {_postId} / {_postImgUI == null}");
                 ServiceLocator.Get<IAddressableManager>().LoadImageSprite(so.postImage.ToString(), _postImgUI);
 
                 // 해쉬 태크
                 _hashTagText.text = _postListComp.GetHashTags(_postId);
 
                 //본문
-                _postContent.text = ServiceLocator.Get<IString_TableManager>().GetStringSO(_postId.ToString()).KR; // 언어 설정 어디서 함?
+                _postContent.text = ServiceLocator.Get<IString_TableManager>().GetStringSO(so.captionText).KR;
 
                 // 댓글
                 CommentManager();
@@ -96,7 +97,7 @@ public class PostController : MonoBehaviour
         }
 
         // 좋아요 여부
-        _isLiked = _user.UserPost[postImg.ToString()].isLiked;
+        _isLiked = _user.UserPost[_postId.ToString()].isLiked;
         _postLikeImg.SetActive(_isLiked);
         // 여기에 좋아요 표시한 게시물 UserPost에 접근해서 상태 전환
     }
@@ -109,7 +110,7 @@ public class PostController : MonoBehaviour
         }
         
         int count = _postListComp.GetCommentCounts();
-        List<PostComment> list = _postListComp.GetComments(_postImgNum);
+        List<PostComment> list = _postListComp.GetComments(_postId);
         GameObject obj;
 
         for (int i = 0; i < count; i++)

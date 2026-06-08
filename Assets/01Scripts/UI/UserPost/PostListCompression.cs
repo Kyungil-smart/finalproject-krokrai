@@ -119,6 +119,7 @@ public class PostListCompression : MonoBehaviour
                 }
             }
         }
+        _commentComp.Add(currentPostID, postComp);
     }
 
     private void compHashtag()
@@ -126,6 +127,7 @@ public class PostListCompression : MonoBehaviour
         int currentPostID = 0;
 
         StringBuilder sb = new StringBuilder(128);
+        int id;
 
         var stringManager = ServiceLocator.Get<IString_TableManager>();
 
@@ -145,6 +147,7 @@ public class PostListCompression : MonoBehaviour
                 sb.Append(stringManager.GetStringSO(_hashTagSTR[t.hashtagId]).KR);
             }
         }
+        _hashTagComp.Add(currentPostID, sb.ToString());
     }
 }
 
