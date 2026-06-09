@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_41
   m_EditorClassIdentifier: 
-  stringId: STR_FOLD_000004
-  KR: "\uC2E0\uADDC \uACE0\uC591\uC774"
-  EN: "\uC601\uC5B4"
+  stringId: STR_CMT_000015
+  KR: "\uC544\uD734 \uC6B0\uB9AC \uC560\uB3C4 \uB125\uCE74\uB77C \uBE7C\uB2EC\uB77C\uACE0
+    \uBD88\uC30D\uD55C \uCC99\L\uC5C4\uCCAD\uD558\uB358\uB370 \uD480\uC5B4\uC92C\uC73C\uBA74
+    \uD070\uC77C\uB0A0 \uBED4 \uD588\uB124\uC694!"
+  EN: "Aww, mine used to act all pitiful asking me to take the cone off too. Good
+    thing I didn\u2019t!"

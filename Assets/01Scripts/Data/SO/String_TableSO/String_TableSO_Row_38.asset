@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_38
   m_EditorClassIdentifier: 
-  stringId: STR_FOLD_000001
-  KR: "\uBAA8\uB4E0 \uC0AC\uC9C4"
-  EN: "\uC601\uC5B4"
+  stringId: STR_CMT_000012
+  KR: "\uD5D0 \uBC30 \uD6CC\uB801 \uAE4C\uACE0 \uC790\uB294 \uAC70 \uBD10 \u3160\u3160"
+  EN: Omg, look at them sleeping belly-up.

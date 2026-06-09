@@ -22,7 +22,6 @@ public class ProfileController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _postCount;
     [SerializeField] private TextMeshProUGUI _profileFollower;
     [SerializeField] private TextMeshProUGUI _profileFollowing;
-    [SerializeField] private Image _profileImage;
     
     [Header("게시물")]
     [SerializeField] private Transform _scrollView;
@@ -99,9 +98,6 @@ public class ProfileController : MonoBehaviour
 
         _profileFollower.text = ServiceLocator.Get<IDataManager>().ProFile.followerCount.ToString();
         _profileFollowing.text = ServiceLocator.Get<IDataManager>().ProFile.followingCount.ToString();
-        ServiceLocator.Get<IAddressableManager>().LoadImageSprite(
-            ServiceLocator.Get<IDataManager>().ProFile.profileImage.ToString(),
-            _profileImage);
     }
 
     private void Start()

@@ -10,12 +10,12 @@ using System;
 [FirestoreData, Serializable]
 public class ImageState
 {
-    private Timestamp _getTime;
+    private DateTime _getTime;
     private bool _isUploaded;
-    private Timestamp _postTime;
+    private DateTime _postTime;
 
     [FirestoreProperty]
-    public Timestamp getTime
+    public DateTime getTime
     {
         get
         {
@@ -43,7 +43,7 @@ public class ImageState
     }
 
     [FirestoreProperty]
-    public Timestamp postTime
+    public DateTime postTime
     {
         get
         {

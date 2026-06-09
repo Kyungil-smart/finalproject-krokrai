@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Notification_TableSO_Row_2
   m_EditorClassIdentifier: 
   notiTemplateId: 700003
-  notiType: 1
-  notiText: "STR_NOTI_000003\r"
+  notiType: 2
+  notiText: STR_NOTI_000003

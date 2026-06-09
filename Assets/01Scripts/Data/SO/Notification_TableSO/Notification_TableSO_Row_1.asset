@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notiTemplateId: 700002
   notiType: 1
-  notiText: "STR_NOTI_000002\r"
+  notiText: STR_NOTI_000002

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Post_Notification_ListSO_Row_8
   m_EditorClassIdentifier: 
   index: 9
-  postId: 102001
+  postId: 101002
   notiTemplate: 700005
   displayOrder: 5
-  commentText: 0
-  referencedNpcId: 400001
+  commentText: STR_CMT_000005
+  referencedNpcId: 400008
