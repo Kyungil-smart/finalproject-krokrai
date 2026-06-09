@@ -11,11 +11,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Post_TableSO", menuName = "Scriptable Objects/Post_TableSO")]
 public class Post_TableSO : ScriptableObject
 {
+    [SOInject(0)] public int postID;
     [SOInject(1)] public ProfileTypeEnum profileType;
     [SOInject(2)] public int postProFile;
     [SOInject(3)] public int postImage;
     [SOInject(4)] public int likeCount;
-    [SOInject(5)] public string captionText;
-    [SOInject(6)] public Route getRoute;
-    [SOInject(0)] public int postID;
+    [SOInject(5)] public int getFollower;
+    [SOInject(6)] public string captionText;
+    [SOInject(7)] public Route getRoute;
+    
 }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_37
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000005
-  KR: "\uB300\uD654 \uB0B4\uC6A9"
-  EN: "\uC601\uC5B4"
+  stringId: STR_CMT_000011
+  KR: "\uAF2C\uB9AC \uC2DC\uC120\uAC15\uD0C8 \u314B\u314B"
+  EN: That tail totally steals the show lol

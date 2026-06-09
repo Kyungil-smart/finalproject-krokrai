@@ -17,6 +17,6 @@ MonoBehaviour:
   hasMark: 1
   npcDisplayName: STR_NAME_000001
   npcBio: STR_BIO_000001
-  npcImage: 501001
+  npcImage: 501009
   npcFollowCount: 6000000
   npcFollowingCount: 0
