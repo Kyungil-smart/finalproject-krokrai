@@ -14,6 +14,10 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재 업데이트 마다 데이터 추가 생성은 미구현
 {
+#if UNITY_EDITOR
+    [Header("DB 연결 없는 테스트")]
+    [SerializeField] private bool _testMode;
+#endif
     public event Action OnUserDataReseted;
 
     private bool _readyToSave;
@@ -118,6 +122,9 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
 
     public async void SaveRTDBData()
     {
+#if UNITY_EDITOR
+        if (_testMode) return;
+#endif
         try
         {
             string json = JsonUtility.ToJson(_userGoods);
@@ -199,6 +206,9 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
     /// </summary>
     public void SaveData()
     {
+#if UNITY_EDITOR
+        if (_testMode) return;
+#endif
         if (!_readyToSave) return;
         if (_userID == null || _userID == "")
         {
@@ -233,6 +243,7 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
         {
             if (await ServiceLocator.Get<IBackendManager>().ReadyTask)
             {
+                Log.Message(ServiceLocator.Get<IBackendManager>().Auth.CurrentUser == null);
                 _userID = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.UserId;
                 ReadData();
                 ReadRTDBData();
@@ -244,11 +255,28 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
             Debug.Log(e.Message);
         }
     }
+#if UNITY_EDITOR
+    private void TestMod()
+    {
+        _userData = new UserDatas();
+        _userData.Event_Mission.Init();
+        _userGoods = new UserGoods();
+        ServiceLocator.Get<IDataAutoSaveManager>().SetTestMode();
+    }
+
+#endif
 
     public void Register()
     {
         ServiceLocator.Register<IDataManager>(this);
         _readyToSave = false;
+#if UNITY_EDITOR
+        if (_testMode)
+        {
+            TestMod();
+            return;
+        }
+#endif
         ReadUserID();
     }
     public void UnRegister() => ServiceLocator.UnRegister<IDataManager>(this);

@@ -18,13 +18,22 @@ public class DataAutoSaveManager : MonoBehaviour, IManagerBooter, IDataAutoSaveM
     private CancellationTokenSource _cts;
     private CancellationTokenSource _rtdbCts;
     private MainCurrencyController _mainCurrencyController;
-    
+
+#if UNITY_EDITOR
+    private bool _testMode = false;
+
+    public void SetTestMode() => _testMode = true;
+#endif
+
     public void SetMainCurrencyController(MainCurrencyController mainCurrencyController)
     {
         _mainCurrencyController = mainCurrencyController;
     }
     public void RequestSave()
     {
+#if UNITY_EDITOR
+        if (_testMode) return;
+#endif
         if (!ServiceLocator.Get<IDataManager>().CanSave) return;
         _cts?.Cancel();
         _cts = new CancellationTokenSource();
@@ -34,6 +43,9 @@ public class DataAutoSaveManager : MonoBehaviour, IManagerBooter, IDataAutoSaveM
 
     public void RequestRTDBSave()
     {
+#if UNITY_EDITOR
+        if (_testMode) return;
+#endif
         if (!ServiceLocator.Get<IDataManager>().CanSave) return;
         
         _mainCurrencyController.RefreshUI();

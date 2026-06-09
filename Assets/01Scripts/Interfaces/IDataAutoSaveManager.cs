@@ -10,4 +10,8 @@ public interface IDataAutoSaveManager
     public void RequestSave();
     public void RequestRTDBSave();
     public void SetMainCurrencyController(MainCurrencyController mainCurrencyController);
+
+#if UNITY_EDITOR
+    public void SetTestMode();
+#endif
 }
