@@ -1,7 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-05-27
- 수정일 : 26-06-02
+ 수정일 : 26-06-09
 
  역할 : Firebase Store 및 RTDB와 연동으로 데이터 읽기 및 쓰기
  방식 : Firestore에는 최상위 경로에서 User만 찾은 후 Script에 밀어 넣는 방식
