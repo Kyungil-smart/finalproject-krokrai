@@ -15,8 +15,8 @@ MonoBehaviour:
   npcId: 400003
   npcAccountName: jiwoo._.
   hasMark: 0
-  npcDisplayName: STR_NAME_000003
-  npcBio: STR_BIO_000003
-  npcImage: 501003
-  npcFollowCount: 80
+  npcDisplayName: 0
+  npcBio: 0
+  npcImage: 501001
+  npcFollowCount: 0
   npcFollowingCount: 0

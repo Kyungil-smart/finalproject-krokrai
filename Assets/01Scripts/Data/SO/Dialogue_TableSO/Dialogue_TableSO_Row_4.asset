@@ -16,6 +16,6 @@ MonoBehaviour:
   messageId: 800001
   senderType: 0
   dialogText: STR_DIA_000005
-  nextDialogId: 0
-  choiceGroupId: 1000001
+  nextDialogId: 900006
+  choiceGroupId: 0
   isEnd: 0

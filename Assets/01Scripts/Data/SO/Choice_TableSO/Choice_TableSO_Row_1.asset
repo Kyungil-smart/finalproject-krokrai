@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   choiceGroupId: 1000001
   choiceNum: 2
-  choiceText: STR_DIA_000007
-  nextDialogId: 900201
+  choiceText: STR_DIA_000015
+  nextDialogId: 900031

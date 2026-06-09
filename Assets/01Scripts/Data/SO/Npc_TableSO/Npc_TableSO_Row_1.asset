@@ -15,8 +15,8 @@ MonoBehaviour:
   npcId: 400002
   npcAccountName: myo.myo
   hasMark: 0
-  npcDisplayName: STR_NAME_000002
-  npcBio: STR_BIO_000002
-  npcImage: 501002
-  npcFollowCount: 80
+  npcDisplayName: 0
+  npcBio: 0
+  npcImage: 501001
+  npcFollowCount: 0
   npcFollowingCount: 0
