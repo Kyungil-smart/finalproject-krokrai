@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogId: 900003
   messageId: 800001
-  senderType: 0
+  senderType: 1
   dialogText: STR_DIA_000003
   nextDialogId: 900004
   choiceGroupId: 0

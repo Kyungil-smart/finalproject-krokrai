@@ -15,8 +15,8 @@ MonoBehaviour:
   npcId: 400005
   npcAccountName: i.love.cat
   hasMark: 0
-  npcDisplayName: STR_NAME_000005
-  npcBio: STR_BIO_000005
-  npcImage: 501005
-  npcFollowCount: 1000
+  npcDisplayName: 0
+  npcBio: 0
+  npcImage: 501001
+  npcFollowCount: 0
   npcFollowingCount: 0
