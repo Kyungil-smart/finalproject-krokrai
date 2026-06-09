@@ -14,6 +14,7 @@ public class UploadController : MonoBehaviour
 {
     [SerializeField] AutoSOGen_ContaineSO _image_Table;
     [SerializeField] AutoSOGen_ContaineSO _folder_Table;
+    [SerializeField] AutoSOGen_ContaineSO _post_Table;
     [SerializeField] Image _postImg;
     [SerializeField] TMP_Dropdown _folderDropDown;
 
@@ -28,20 +29,31 @@ public class UploadController : MonoBehaviour
 
     private Dictionary<int, UIAddressableImageLoader> _upLoadImgs = new();
     private Dictionary<int, GameObject> _upLoadobject = new();
-    private Dictionary<int, int> _folders = new();
+    //private Dictionary<int, int> _postIDs = new(); // TODO : 게시 가능하게 변경 필요
+    private Dictionary<int, int> _folder = new();
 
     private void Awake()
     {
-        Image_TableSO _imgTableSO;
+        //Post_TableSO _postTableSO;
+        Image_TableSO _folderSO;
 
-        foreach (var t in _image_Table.scriptableObjects)
+        //foreach (var t in _post_Table.scriptableObjects)
+        //{
+        //    if (t is Post_TableSO)
+        //    {
+        //        _postTableSO = t as Post_TableSO;
+        //        _postIDs.Add(_postTableSO.postImage, _postTableSO.postID);
+        //    }
+        //}
+
+        foreach (var t in _folder_Table.scriptableObjects)
         {
             if (t is Image_TableSO)
             {
-                _imgTableSO = t as Image_TableSO;
-                if (_imgTableSO.ImgId < 502000)
+                _folderSO = t as Image_TableSO;
+                if (_folderSO.imgFolder < 502000)
                     continue;
-                _folders.Add(_imgTableSO.ImgId, _imgTableSO.imgFolder);
+                _folder.Add(_folderSO.ImgId, _folderSO.imgFolder);
             }
         }
     }
@@ -68,7 +80,7 @@ public class UploadController : MonoBehaviour
                 obj.name = $"Post_{key}";
                 // 지정하기 위해 컴포넌트 갖고 오기 및 주입
                 temp = obj.GetComponent<UIAddressableImageLoader>();
-                temp.ChangeImageByAddress(key,this);
+                temp.ChangeImageByAddress(key, this);//_postIDs[key],this);
 
                 // 관리를 위해 등록
                 _upLoadImgs.Add(key, temp);
@@ -106,10 +118,10 @@ public class UploadController : MonoBehaviour
                     break;
                 foreach (var t in _upLoadobject) // 오브젝트를 갖고옴
                 {
-                    if (_folders.ContainsKey(t.Key))
+                    if (_folder.ContainsKey(t.Key))
                     {
                         Log.Message(i);
-                        if (_folders[t.Key] == i)
+                        if (_folder[t.Key] == i)
                         {
                             _upLoadobject[t.Key].SetActive(true);
                         }

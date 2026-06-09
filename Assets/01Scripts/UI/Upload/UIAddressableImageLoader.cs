@@ -14,6 +14,7 @@ public class UIAddressableImageLoader : MonoBehaviour
     
     private bool _isPosted;
     private int _imgIndex;
+    private int _postID;
 
     private void Awake()
     {
@@ -53,12 +54,13 @@ public class UIAddressableImageLoader : MonoBehaviour
     /// 외부에서 문자열 주소를 인자값으로 넘겨주면 이미지를 로드하여 UI에 연결
     /// </summary>
     /// <param name="imageAddress">어드레서블 그룹창에 등록한 에셋 주소 (예: "Item_Icon_01")</param>
-    public void ChangeImageByAddress(int imageAddress, UploadController ctrl)
+    public void ChangeImageByAddress(int imageAddress, UploadController ctrl)//int postId ,UploadController ctrl)
     {
         // 참고 사항 : AddressableManager가 존재합니다. 해당 Manager에 접근해서 Image를 교체하는 방식으로 진행하십시오.
         ServiceLocator.Get<IAddressableManager>().LoadImageSprite(imageAddress.ToString(), _targetImage);
         _imgIndex = imageAddress;
         _controller = ctrl;
+        //_postID = postId;
         // 새로운 이미지를 로드하기 전에, 기존에 로드했던 이미지가 있다면 메모리에서 해제
         //ReleaseCurrentSprite();
 

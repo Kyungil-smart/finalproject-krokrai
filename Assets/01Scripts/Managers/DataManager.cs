@@ -90,6 +90,10 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
     {
         _userGoods = new UserGoods();
         _userData = new UserDatas();
+        ImageState s = new ImageState();
+        s.getTime = DateTime.Now;
+        _userData.ImgList.Add("502004", s); // TODO : 빌드 후 삭제
+        _userData.UserPost.Add("102001",new());
         _userData.Event_Mission.Init();
         SaveRTDBData();
         OnUserDataReseted?.Invoke();
@@ -157,6 +161,10 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
                 Log.Message("신규 유저 감지됌. Firestore에 정보 생성");
                 _userData = new();
                 _userData.Event_Mission.Init();
+                ImageState s = new ImageState();
+                s.getTime = DateTime.Now;
+                _userData.ImgList.Add("502004", s); // TODO : 빌드 후 삭제
+                _userData.UserPost.Add("102001", new());
                 _readyToSave = true;
                 SaveData();
             }
