@@ -29,6 +29,7 @@ public class LoginUI : MonoBehaviour
 
     private void BindButtonEvents()
     {
+        _gameStart.interactable = false;
         _gameStart.onClick.AddListener(OnGameStartClicked);
         _loginButton.onClick.AddListener(OnLoginClicked);
         _logoutButton.onClick.AddListener(OnLogoutClicked);
@@ -80,6 +81,7 @@ public class LoginUI : MonoBehaviour
         string firebaseIdToken = await user.TokenAsync(false);
         await UnityAuthService.SignInWithGoogleAsync(firebaseIdToken);
         UpdateStatus($"환영합니다, {GetDisplayName(user)}님");
+        _gameStart.interactable = true;
     }
 
     private async void OnLoginClicked()
@@ -118,11 +120,13 @@ public class LoginUI : MonoBehaviour
         await UnityAuthService.SignInWithGoogleAsync(firebaseIdToken);
 
         UpdateStatus($"환영합니다, {GetDisplayName(user)}님");
+        _gameStart.interactable = true;
     }
 
     private void OnLogoutClicked()
     {
         if (_isProcessing) return;
+        _gameStart.interactable = false;
         UnityAuthService.SignOut();
         GoogleSignInService.SignOut();
         UpdateStatus("로그아웃");
