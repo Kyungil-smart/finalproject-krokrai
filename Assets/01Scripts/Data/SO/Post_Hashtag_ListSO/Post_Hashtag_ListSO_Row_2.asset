@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Post_Hashtag_ListSO_Row_2
   m_EditorClassIdentifier: 
   index: 3
-  postId: 102001
-  hashtagId: 200003
+  postId: 101002
+  hashtagId: 200001
   displayOrder: 1

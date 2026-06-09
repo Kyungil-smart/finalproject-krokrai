@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e160add114922094c8aa9b32e21564fe, type: 3}
   m_Name: Post_TableSO_Row_4
   m_EditorClassIdentifier: 
+  postID: 101005
   profileType: 1
   postProFile: 0
   postImage: 502005
-  likeCount: 3
-  getFollower: 1
+  likeCount: 30
+  getFollower: 33
   captionText: STR_CAP_000005
-  getRoute: 2
-  postID: 102002
+  getRoute: 0

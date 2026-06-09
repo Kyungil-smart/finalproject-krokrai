@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e626979217a1646b2f228232ebea1e, type: 3}
   m_Name: Image_TableSO_Row_0
   m_EditorClassIdentifier: 
-  ImgId: 501000
-  ImgPath: .../img/profile/0000
+  ImgId: 501001
+  ImgPath: PROFILE
   ImgType: 0
   imgFolder: 0

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d971da3e6a998584aba85a9538b4134c, type: 3}
-  m_Name: Folder_TableSO_Row_4
+  m_Script: {fileID: 11500000, guid: 8171320b494e742459bf04835906bad0, type: 3}
+  m_Name: Hashtag_TableSO_Row_7
   m_EditorClassIdentifier: 
-  folderId: 600005
-  folderName: STR_FOLD_000005
+  hashtagId: 200008
+  hashtagText: STR_TAG_000008

@@ -15,8 +15,8 @@ MonoBehaviour:
   npcId: 400004
   npcAccountName: meowmoew
   hasMark: 0
-  npcDisplayName: STR_NAME_000004
-  npcBio: STR_BIO_000004
-  npcImage: 501004
-  npcFollowCount: 80
+  npcDisplayName: 0
+  npcBio: 0
+  npcImage: 501001
+  npcFollowCount: 0
   npcFollowingCount: 0
