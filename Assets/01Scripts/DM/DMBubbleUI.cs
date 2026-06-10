@@ -44,7 +44,7 @@ public class DMBubbleUI : MonoBehaviour
         rowLayoutElement.preferredHeight = Mathf.Max(bubbleHeight, minRowHeight);
 
         SetProfileVisible(showProfile);
-
+        
         if (showProfile && profileSprite != null && profileImages.Length > 0)
             profileImages[0].sprite = profileSprite;
 
