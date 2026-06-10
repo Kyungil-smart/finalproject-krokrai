@@ -1,13 +1,14 @@
 /*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-02
+수정일 : 26-06-10
 
 역할 : DM 목록 UI 생성 및 DM 클릭 시 대화창 전환
-방식 : DM_TableSO의 messageId를 기준으로 Dialogue_TableSO를 찾아 미리보기 텍스트를 표시
+방식 : 읽음 처리용 DialogId, 미리보기 표시용 DialogId, 선택지 진행 정보를 분리하여 NPC 이벤트형 DM을 관리
 */
 
 using UnityEngine;
+using System.Collections.Generic;
 
 public class DMListUI : MonoBehaviour
 {
@@ -21,9 +22,29 @@ public class DMListUI : MonoBehaviour
     [Header("DM Data")]
     [SerializeField] private DM_TableSO[] dmTables;
     [SerializeField] private Dialogue_TableSO[] dialogueSOs;
+    [SerializeField] private Npc_TableSO[] npcSOs;
 
+    private IString_TableManager stringManager;
+
+    // 읽음 처리용
+    private readonly Dictionary<int, int> lastReadDialogIdTable = new();
+
+    // 목록 미리보기 및 대화 이어보기용
+    private readonly Dictionary<int, int> lastPreviewDialogIdTable = new();
+
+    // 선택지 복원용
+    private readonly Dictionary<int, int> selectedChoiceNextDialogIdTable = new();
+    private readonly Dictionary<int, string> selectedChoiceTextTable = new();
+
+    private readonly Dictionary<int, string> lastPreviewTextTable = new();
+    
     private void Start()
     {
+        stringManager = ServiceLocator.Get<IString_TableManager>();
+
+        if (stringManager == null)
+            Log.Message("String_TableManager를 찾을 수 없습니다.");
+
         if (dmChatPanel != null)
             dmChatPanel.SetActive(false);
 
@@ -59,40 +80,39 @@ public class DMListUI : MonoBehaviour
                 continue;
             }
 
-            string previewText = GetPreviewText(dm.messageId);
+            string npcAccountName = GetNpcAccountName(dm.senderName);
+
+            int lastReadDialogId = 0;
+            lastReadDialogIdTable.TryGetValue(dm.messageId, out lastReadDialogId);
+
+            int nextEndDialogId = GetNextEndDialogId(dm.messageId, lastReadDialogId);
+            bool hasUnread = nextEndDialogId != 0;
+
+            string previewText = GetListPreviewText(dm.messageId, npcAccountName, hasUnread);
 
             itemUI.SetData(
-                dm.senderName.ToString(),
+                npcAccountName,
                 previewText,
-                false,
+                hasUnread,
                 () => OnClickDM(dm)
             );
         }
     }
 
-    private string GetPreviewText(int messageId)
+    private string GetListPreviewText(int messageId, string npcAccountName, bool hasUnread)
     {
-        if (dialogueSOs == null)
-            return "";
+        if (lastPreviewTextTable.TryGetValue(messageId, out string savedPreviewText))
+            return savedPreviewText;
 
-        Dialogue_TableSO previewDialogue = null;
+        int previewDialogId = 0;
+        lastPreviewDialogIdTable.TryGetValue(messageId, out previewDialogId);
 
-        foreach (Dialogue_TableSO dialogue in dialogueSOs)
-        {
-            if (dialogue == null)
-                continue;
+        if (previewDialogId != 0)
+            return GetPreviewTextByDialogId(previewDialogId);
 
-            if (dialogue.messageId != messageId)
-                continue;
+        if (hasUnread)
+            return $"{npcAccountName}님이 메시지를 보내고 싶어합니다";
 
-            if (previewDialogue == null || dialogue.dialogId < previewDialogue.dialogId)
-                previewDialogue = dialogue;
-        }
-
-        if (previewDialogue != null)
-            return previewDialogue.dialogText;
-
-        Log.Message($"Message ID에 해당하는 Preview Dialogue를 찾을 수 없습니다 : {messageId}");
         return "";
     }
 
@@ -110,8 +130,15 @@ public class DMListUI : MonoBehaviour
         if (dmChatPanel != null)
             dmChatPanel.SetActive(true);
 
-        DMConversationRunner runner =
-            dmChatPanel.GetComponent<DMConversationRunner>();
+        int lastReadDialogId = 0;
+        lastReadDialogIdTable.TryGetValue(dmData.messageId, out lastReadDialogId);
+
+        int nextEndDialogId = GetNextEndDialogId(dmData.messageId, lastReadDialogId);
+
+        int lastPreviewDialogId = 0;
+        lastPreviewDialogIdTable.TryGetValue(dmData.messageId, out lastPreviewDialogId);
+
+        DMConversationRunner runner = dmChatPanel.GetComponent<DMConversationRunner>();
 
         if (runner == null)
         {
@@ -119,7 +146,15 @@ public class DMListUI : MonoBehaviour
             return;
         }
 
-        runner.OpenNpcDM(dmData);
+        runner.SetChoiceSaveData(
+            selectedChoiceNextDialogIdTable,
+            selectedChoiceTextTable
+        );
+
+        runner.OpenNpcDM(dmData, lastPreviewDialogId);
+
+        if (nextEndDialogId != 0)
+            lastReadDialogIdTable[dmData.messageId] = nextEndDialogId;
     }
 
     public void BackToDMList()
@@ -130,13 +165,125 @@ public class DMListUI : MonoBehaviour
             return;
         }
 
-        DMConversationRunner runner =
-            dmChatPanel.GetComponent<DMConversationRunner>();
+        DMConversationRunner runner = dmChatPanel.GetComponent<DMConversationRunner>();
 
         if (runner != null)
+        {
             runner.StopConversation();
+
+            if (runner.CurrentMessageId != 0 && runner.LastProgressDialogId != 0)
+            {
+                lastPreviewDialogIdTable[runner.CurrentMessageId] =
+                    runner.LastProgressDialogId;
+            }
+        }
+        
+        if (runner.CurrentMessageId != 0)
+        {
+            if (!string.IsNullOrEmpty(runner.LastPreviewText))
+            {
+                lastPreviewTextTable[runner.CurrentMessageId] = runner.LastPreviewText;
+            }
+
+            if (runner.LastProgressDialogId != 0)
+            {
+                lastPreviewDialogIdTable[runner.CurrentMessageId] =
+                    runner.LastProgressDialogId;
+            }
+        }
 
         dmChatPanel.SetActive(false);
         dmListPanel.SetActive(true);
+
+        RefreshDMList();
+    }
+
+    private void RefreshDMList()
+    {
+        foreach (Transform child in content)
+        {
+            Destroy(child.gameObject);
+        }
+
+        CreateDMList();
+    }
+
+    private int GetNextEndDialogId(int messageId, int lastReadDialogId)
+    {
+        int nextEndDialogId = 0;
+
+        foreach (Dialogue_TableSO dialogue in dialogueSOs)
+        {
+            if (dialogue == null)
+                continue;
+
+            if (dialogue.messageId != messageId)
+                continue;
+
+            if (dialogue.dialogId <= lastReadDialogId)
+                continue;
+
+            if (!dialogue.isEnd)
+                continue;
+
+            if (nextEndDialogId == 0 || dialogue.dialogId < nextEndDialogId)
+                nextEndDialogId = dialogue.dialogId;
+        }
+
+        return nextEndDialogId;
+    }
+
+    private string GetPreviewTextByDialogId(int dialogId)
+    {
+        foreach (Dialogue_TableSO dialogue in dialogueSOs)
+        {
+            if (dialogue == null)
+                continue;
+
+            if (dialogue.dialogId == dialogId)
+                return GetString(dialogue.dialogText);
+        }
+
+        return "";
+    }
+
+    private string GetNpcAccountName(int npcId)
+    {
+        if (npcSOs == null)
+        {
+            Log.Message("Npc_TableSO 배열이 연결되지 않았습니다.");
+            return "Unknown";
+        }
+
+        foreach (Npc_TableSO npc in npcSOs)
+        {
+            if (npc == null)
+                continue;
+
+            if (npc.npcId == npcId)
+                return npc.npcAccountName;
+        }
+
+        Log.Message($"Npc ID를 찾을 수 없습니다 : {npcId}");
+        return "Unknown";
+    }
+
+    private string GetString(string stringKey)
+    {
+        if (stringManager == null)
+        {
+            Log.Message("String_TableManager를 찾을 수 없습니다.");
+            return stringKey;
+        }
+
+        string text = stringManager.GetString(stringKey, SystemLanguage.Korean);
+
+        if (string.IsNullOrEmpty(text))
+        {
+            Log.Message($"String Key를 찾을 수 없습니다 : {stringKey}");
+            return stringKey;
+        }
+
+        return text;
     }
 }

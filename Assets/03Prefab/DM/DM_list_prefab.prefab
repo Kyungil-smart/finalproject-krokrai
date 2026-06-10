@@ -198,6 +198,7 @@ MonoBehaviour:
   nameText: {fileID: 8658441194707541564}
   previewText: {fileID: 6569906764862487310}
   button: {fileID: -3240253718208258932}
+  profileImage: {fileID: 0}
   unreadDot: {fileID: 623830603204676498}
 --- !u!1 &4538992757389067804
 GameObject:
@@ -366,8 +367,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 65
-  m_fontSizeBase: 65
+  m_fontSize: 55
+  m_fontSizeBase: 55
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

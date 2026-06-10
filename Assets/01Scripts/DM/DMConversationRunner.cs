@@ -1,7 +1,7 @@
 /*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-02
+수정일 : 26-06-10
 
 역할 : DM 대화 진행 담당
 방식 : DM_TableSO의 messageId를 기준으로 Dialogue/Choice SO를 조회하여 말풍선/선택지 출력
@@ -10,9 +10,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-// TODO: Firebase 연결 시 현재 출력된 dialogId 저장
-// currentDialogId = dialogue.dialogId;
 
 public class DMConversationRunner : MonoBehaviour
 {
@@ -30,11 +27,227 @@ public class DMConversationRunner : MonoBehaviour
     private readonly Dictionary<int, List<Dialogue_TableSO>> dialogueByMessageIdTable = new();
     private readonly Dictionary<int, List<Choice_TableSO>> choiceTable = new();
 
+    private Dictionary<int, int> selectedChoiceNextDialogIdTable = new();
+    private Dictionary<int, string> selectedChoiceTextTable = new();
+
+    private IString_TableManager stringTableManager;
+
+    public string LastPreviewText { get; private set; }
+    
+    public int LastShownDialogId { get; private set; }
+    public int LastProgressDialogId { get; private set; }
+
     private Coroutine playRoutine;
 
     private void Awake()
     {
+        stringTableManager = ServiceLocator.Get<IString_TableManager>();
         BuildRuntimeTable();
+    }
+
+    public void OpenNpcDM(DM_TableSO dmData, int lastProgressDialogId = 0)
+    {
+        if (chatUI == null)
+        {
+            Log.Message("ChatUI가 연결되지 않았습니다.");
+            return;
+        }
+
+        if (dmData == null)
+        {
+            Log.Message("DM_TableSO 데이터가 없습니다.");
+            return;
+        }
+
+        currentDM = dmData;
+        LastShownDialogId = 0;
+        LastProgressDialogId = lastProgressDialogId;
+
+        chatUI.ClearChat();
+        chatUI.HideChoices();
+
+        if (playRoutine != null)
+            StopCoroutine(playRoutine);
+
+        int startDialogId = GetStartDialogId(dmData.messageId);
+
+        if (startDialogId == 0)
+        {
+            Log.Message($"Message ID에 해당하는 Dialogue가 없습니다 : {dmData.messageId}");
+            return;
+        }
+
+        playRoutine = StartCoroutine(PlayDialogueRoutine(startDialogId, lastProgressDialogId));
+    }
+
+    private IEnumerator PlayDialogueRoutine(int startDialogId, int lastProgressDialogId)
+    {
+        int currentDialogId = startDialogId;
+
+        while (currentDialogId != 0)
+        {
+            if (!dialogueTable.TryGetValue(currentDialogId, out Dialogue_TableSO dialogue))
+            {
+                Log.Message($"Dialogue ID를 찾을 수 없습니다 : {currentDialogId}");
+                yield break;
+            }
+
+            bool isAlreadyShown = dialogue.dialogId <= lastProgressDialogId;
+
+            ShowMessage(dialogue);
+            LastShownDialogId = dialogue.dialogId;
+            LastProgressDialogId = dialogue.dialogId;
+
+            if (dialogue.choiceGroupId != 0)
+            {
+                if (selectedChoiceNextDialogIdTable.TryGetValue(dialogue.choiceGroupId, out int selectedNextDialogId))
+                {
+                    if (selectedChoiceTextTable.TryGetValue(dialogue.choiceGroupId, out string selectedChoiceText))
+                    {
+                        chatUI.AddPlayerMessage(GetText(selectedChoiceText));
+                    }
+
+                    currentDialogId = selectedNextDialogId;
+                    continue;
+                }
+
+                ShowChoices(dialogue.choiceGroupId);
+                yield break;
+            }
+
+            if (dialogue.isEnd)
+                yield break;
+
+            if (!isAlreadyShown)
+                yield return new WaitForSeconds(messageDelay);
+
+            currentDialogId = dialogue.nextDialogId;
+        }
+    }
+
+    private void ShowChoices(int choiceGroupId)
+    {
+        if (!choiceTable.TryGetValue(choiceGroupId, out List<Choice_TableSO> choices))
+        {
+            Log.Message($"ChoiceGroup ID를 찾을 수 없습니다 : {choiceGroupId}");
+            return;
+        }
+
+        string[] choiceTexts = new string[choices.Count];
+
+        for (int i = 0; i < choices.Count; i++)
+        {
+            choiceTexts[i] = GetText(choices[i].choiceText);
+        }
+
+        chatUI.ShowChoices(choiceTexts, selectedIndex =>
+        {
+            if (selectedIndex < 0 || selectedIndex >= choices.Count)
+            {
+                Log.Message($"잘못된 선택지 인덱스 : {selectedIndex}");
+                return;
+            }
+
+            Choice_TableSO selectedChoice = choices[selectedIndex];
+
+            if (playRoutine != null)
+                StopCoroutine(playRoutine);
+
+            playRoutine = StartCoroutine(ChoiceSelectedRoutine(selectedChoice));
+        });
+    }
+
+    private IEnumerator ChoiceSelectedRoutine(Choice_TableSO selectedChoice)
+    {
+        chatUI.HideChoices();
+
+        string choiceText = GetText(selectedChoice.choiceText);
+
+        chatUI.AddPlayerMessage(choiceText);
+
+        LastPreviewText = choiceText;
+
+        selectedChoiceNextDialogIdTable[selectedChoice.choiceGroupId] =
+            selectedChoice.nextDialogId;
+
+        selectedChoiceTextTable[selectedChoice.choiceGroupId] =
+            selectedChoice.choiceText;
+
+        LastProgressDialogId = selectedChoice.nextDialogId - 1;
+
+        yield return new WaitForSeconds(messageDelay);
+
+        playRoutine = StartCoroutine(
+            PlayDialogueRoutine(selectedChoice.nextDialogId, LastProgressDialogId)
+        );
+    }
+
+    private void ShowMessage(Dialogue_TableSO dialogue)
+    {
+        string senderType = dialogue.senderType.ToString();
+        string text = GetText(dialogue.dialogText);
+
+        LastPreviewText = text;
+
+        if (senderType == "NPC")
+            chatUI.AddOpponentMessage(text);
+        else if (senderType == "USER")
+            chatUI.AddPlayerMessage(text);
+        else
+            Log.Message($"알 수 없는 SenderType : {senderType}");
+    }
+
+    public void StopConversation()
+    {
+        if (playRoutine != null)
+        {
+            StopCoroutine(playRoutine);
+            playRoutine = null;
+        }
+
+        if (chatUI != null)
+            chatUI.HideChoices();
+    }
+
+    public int CurrentMessageId
+    {
+        get
+        {
+            if (currentDM == null)
+                return 0;
+
+            return currentDM.messageId;
+        }
+    }
+
+    private int GetStartDialogId(int messageId)
+    {
+        if (!dialogueByMessageIdTable.TryGetValue(messageId, out List<Dialogue_TableSO> dialogues))
+            return 0;
+
+        if (dialogues == null || dialogues.Count == 0)
+            return 0;
+
+        return dialogues[0].dialogId;
+    }
+
+    private string GetText(string stringKey)
+    {
+        if (stringTableManager == null)
+        {
+            Log.Message("String_TableManager를 찾을 수 없습니다.");
+            return stringKey;
+        }
+
+        string text = stringTableManager.GetString(stringKey, SystemLanguage.Korean);
+
+        if (string.IsNullOrEmpty(text))
+        {
+            Log.Message($"String Key를 찾을 수 없습니다 : {stringKey}");
+            return stringKey;
+        }
+
+        return text;
     }
 
     private void BuildRuntimeTable()
@@ -83,149 +296,12 @@ public class DMConversationRunner : MonoBehaviour
             pair.Value.Sort((a, b) => a.choiceNum.CompareTo(b.choiceNum));
         }
     }
-
-    public void OpenNpcDM(DM_TableSO dmData)
+    
+    public void SetChoiceSaveData(
+        Dictionary<int, int> nextDialogIdTable,
+        Dictionary<int, string> choiceTextTable)
     {
-        if (chatUI == null)
-        {
-            Log.Message("ChatUI가 연결되지 않았습니다.");
-            return;
-        }
-
-        if (dmData == null)
-        {
-            Log.Message("DM_TableSO 데이터가 없습니다.");
-            return;
-        }
-
-        chatUI.ClearChat();
-        chatUI.HideChoices();
-
-        if (playRoutine != null)
-            StopCoroutine(playRoutine);
-
-        int startDialogId = GetStartDialogId(dmData.messageId);
-
-        if (startDialogId == 0)
-        {
-            Log.Message($"Message ID에 해당하는 Dialogue가 없습니다 : {dmData.messageId}");
-            return;
-        }
-
-        playRoutine = StartCoroutine(PlayDialogueRoutine(startDialogId));
-    }
-
-    private int GetStartDialogId(int messageId)
-    {
-        if (!dialogueByMessageIdTable.TryGetValue(messageId, out List<Dialogue_TableSO> dialogues))
-            return 0;
-
-        if (dialogues == null || dialogues.Count == 0)
-            return 0;
-
-        return dialogues[0].dialogId;
-    }
-
-    private IEnumerator PlayDialogueRoutine(int startDialogId)
-    {
-        int currentDialogId = startDialogId;
-
-        while (currentDialogId != 0)
-        {
-            if (!dialogueTable.TryGetValue(currentDialogId, out Dialogue_TableSO dialogue))
-            {
-                Log.Message($"Dialogue ID를 찾을 수 없습니다 : {currentDialogId}");
-                yield break;
-            }
-
-            ShowMessage(dialogue);
-
-            if (dialogue.choiceGroupId != 0)
-            {
-                ShowChoices(dialogue.choiceGroupId);
-                yield break;
-            }
-
-            if (dialogue.isEnd)
-                yield break;
-
-            yield return new WaitForSeconds(messageDelay);
-
-            currentDialogId = dialogue.nextDialogId;
-        }
-    }
-
-    private void ShowMessage(Dialogue_TableSO dialogue)
-    {
-        string senderType = dialogue.senderType.ToString();
-
-        if (senderType == "NPC")
-        {
-            chatUI.AddOpponentMessage(dialogue.dialogText);
-        }
-        else if (senderType == "USER")
-        {
-            chatUI.AddPlayerMessage(dialogue.dialogText);
-        }
-        else
-        {
-            Log.Message($"알 수 없는 SenderType : {senderType}");
-        }
-    }
-
-    private void ShowChoices(int choiceGroupId)
-    {
-        if (!choiceTable.TryGetValue(choiceGroupId, out List<Choice_TableSO> choices))
-        {
-            Log.Message($"ChoiceGroup ID를 찾을 수 없습니다 : {choiceGroupId}");
-            return;
-        }
-
-        string[] choiceTexts = new string[choices.Count];
-
-        for (int i = 0; i < choices.Count; i++)
-        {
-            choiceTexts[i] = choices[i].choiceText;
-        }
-
-        chatUI.ShowChoices(choiceTexts, selectedIndex =>
-        {
-            if (selectedIndex < 0 || selectedIndex >= choices.Count)
-            {
-                Log.Message($"잘못된 선택지 인덱스 : {selectedIndex}");
-                return;
-            }
-
-            Choice_TableSO selectedChoice = choices[selectedIndex];
-
-            if (playRoutine != null)
-                StopCoroutine(playRoutine);
-
-            playRoutine = StartCoroutine(ChoiceSelectedRoutine(selectedChoice));
-        });
-    }
-
-    private IEnumerator ChoiceSelectedRoutine(Choice_TableSO selectedChoice)
-    {
-        chatUI.HideChoices();
-        chatUI.AddPlayerMessage(selectedChoice.choiceText);
-
-        yield return new WaitForSeconds(messageDelay);
-
-        playRoutine = StartCoroutine(PlayDialogueRoutine(selectedChoice.nextDialogId));
-    }
-
-    public void StopConversation()
-    {
-        if (playRoutine != null)
-        {
-            StopCoroutine(playRoutine);
-            playRoutine = null;
-        }
-
-        if (chatUI != null)
-        {
-            chatUI.HideChoices();
-        }
+        selectedChoiceNextDialogIdTable = nextDialogIdTable;
+        selectedChoiceTextTable = choiceTextTable;
     }
 }
