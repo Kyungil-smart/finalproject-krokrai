@@ -1,0 +1,14 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Script/DataReader/UI%20Toolkit/first.uss?fileID=7433441132597879392&amp;guid=16f96160e402db94eb559f65902ca622&amp;type=3#first"/>
+    <ui:VisualElement focusable="false" style="flex-grow: 1; flex-direction: row; width: auto; aspect-ratio: auto; max-width: none; max-height: none; min-width: 50px; min-height: auto; height: auto;">
+        <ui:TextField label="" placeholder-text="filler text" name="Path-Text-Field" enabled="true" readonly="true" style="width: 70%; max-width: none;"/>
+        <ui:Button text="경로 찾기" name="Path-Select_Button" style="width: 25%;"/>
+    </ui:VisualElement>
+    <ui:VisualElement style="flex-grow: 1; min-width: 250px;">
+        <uie:ObjectField label="TSV" name="tsv" data-source-type="UnityEngine.TextAsset, UnityEngine.CoreModule" type="UnityEngine.TextAsset, UnityEngine.CoreModule"/>
+        <uie:ObjectField label="생성할 SO" name="TargetSO" data-source-type="UnityEngine.ScriptableObject, UnityEngine.CoreModule" type="UnityEditor.MonoScript, UnityEditor.CoreModule"/>
+        <ui:TextField label="시작 줄(필수)" placeholder-text="2" name="startNum"/>
+        <ui:TextField label="마지막 줄(선택)" placeholder-text="3" name="endNum" value=""/>
+        <ui:Button text="굽기" name="bake_Button" class="first" style="width: 50%; align-self: center;"/>
+    </ui:VisualElement>
+</ui:UXML>

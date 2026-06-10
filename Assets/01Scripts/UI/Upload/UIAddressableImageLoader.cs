@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/*
+ 작성자 : cminhyeong1999
+ 작성일 : 26-06-10
+
+ 역할 : Addressable을 이용하여 이미지를 불러옴
+ 방식 : 주소를 바탕으로 불러올 이미지를 로드
+ */
+using UnityEngine;
 using UnityEngine.UI;
 //using UnityEngine.AddressableAssets;
 //using UnityEngine.ResourceManagement.AsyncOperations;

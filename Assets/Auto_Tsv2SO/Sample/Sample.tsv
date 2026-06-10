@@ -1,0 +1,4 @@
+이름	숫자	소수	enum	Boolean
+string	int	float	enum	bool
+안녕하세요	10	3.70	TYPE	TRUE
+반가워요	5	1.2	ENTER	FALSE

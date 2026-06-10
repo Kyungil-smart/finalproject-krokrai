@@ -1,0 +1,7 @@
+:root {
+}
+
+.first {
+    opacity: 1;
+    padding-left: 0;
+}
