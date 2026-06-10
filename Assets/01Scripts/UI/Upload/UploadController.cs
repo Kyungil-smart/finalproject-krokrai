@@ -1,6 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-06-08
+ 수정일 : 26-06-10
 
  역할 : Upload system 관리 및 Image 등록
  방식 : prefab화 된 객체를 생성 후 Image를 밀어 넣어 객체를 완성 및 자신을 주입하여 반환 받을 수 있음
@@ -146,6 +147,11 @@ public class UploadController : MonoBehaviour
     {
         if (_currentPost == 0 || !(100000 < _currentPost && _currentPost < 200000))
             return;
+        if (ServiceLocator.Get<IDataManager>().UserGoods.Gem_ < 1)
+        {
+            Log.Message("잼이 부족합니다.");
+            return;
+        }
 
         ServiceLocator.Get<IDataManager>().UserDatas.UserPost.Add(_currentPost.ToString(), new UserPostState());
         ServiceLocator.Get<IDataManager>().UserDatas.ImgList[_currentPostImg.ToString()].isUploaded = true;

@@ -1,7 +1,14 @@
-﻿using UnityEngine;
+﻿/*
+ 작성자 : cminhyeong1999
+ 수정자 : krokrai
+ 작성일 : 26-06-02
+ 수정일 : 26-06-10
+
+ 역할 : 게시물 정보를 등록 및 게시된 경우 더 게시 불가능하게 전환
+ 방식 : UploadController에서 정보를 주입 받은 후 자신이 선택된 경우 UploadController에 정보를 다시 보내며, 게시된 경우 상태 전환
+ */
+using UnityEngine;
 using UnityEngine.UI;
-//using UnityEngine.AddressableAssets;
-//using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class UIAddressableImageLoader : MonoBehaviour
 {
@@ -71,7 +78,7 @@ public class UIAddressableImageLoader : MonoBehaviour
     // 포스트
     public void PostImgs()
     {
-        _controller.SetPost(_imgIndex,_postID);
+        _controller.SetPost(_imgIndex,_postID); 
     }
 
     // 이미 포스트 된 경우
