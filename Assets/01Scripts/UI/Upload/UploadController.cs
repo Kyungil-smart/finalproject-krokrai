@@ -25,26 +25,31 @@ public class UploadController : MonoBehaviour
 
     int _currentPosts = 0;
     int _currentPost;
+    int _currentPostImg;
     
 
     private Dictionary<int, UIAddressableImageLoader> _upLoadImgs = new();
     private Dictionary<int, GameObject> _upLoadobject = new();
-    //private Dictionary<int, int> _postIDs = new(); // TODO : 게시 가능하게 변경 필요
+    private Dictionary<int, int> _postIDs = new();
     private Dictionary<int, int> _folder = new();
 
     private void Awake()
     {
-        //Post_TableSO _postTableSO;
+        ServiceLocator.Get<IDataManager>().UserDatas.ImgList.Add("502004", new());
+
+        Post_TableSO _postTableSO;
         Image_TableSO _folderSO;
 
-        //foreach (var t in _post_Table.scriptableObjects)
-        //{
-        //    if (t is Post_TableSO)
-        //    {
-        //        _postTableSO = t as Post_TableSO;
-        //        _postIDs.Add(_postTableSO.postImage, _postTableSO.postID);
-        //    }
-        //}
+        foreach (var t in _post_Table.scriptableObjects)
+        {
+            if (t is Post_TableSO)
+            {
+                _postTableSO = t as Post_TableSO;
+                if (_postTableSO.postImage == 0)
+                    continue;
+                _postIDs.Add(_postTableSO.postImage, _postTableSO.postID);
+            }
+        }
 
         foreach (var t in _folder_Table.scriptableObjects)
         {
@@ -78,9 +83,10 @@ public class UploadController : MonoBehaviour
                 // 이미지 저장용 한 개  생성
                 obj = Instantiate(_postPrefab, _spawnPoint);
                 obj.name = $"Post_{key}";
+                Log.Message(key);
                 // 지정하기 위해 컴포넌트 갖고 오기 및 주입
                 temp = obj.GetComponent<UIAddressableImageLoader>();
-                temp.ChangeImageByAddress(key, this);//_postIDs[key],this);
+                temp.ChangeImageByAddress(key, _postIDs[key],this);
 
                 // 관리를 위해 등록
                 _upLoadImgs.Add(key, temp);
@@ -138,22 +144,20 @@ public class UploadController : MonoBehaviour
 
     private void OnUpLoadClick()
     {
-        Log.Message(_currentPost);
         if (_currentPost == 0 || !(100000 < _currentPost && _currentPost < 200000))
             return;
 
         ServiceLocator.Get<IDataManager>().UserDatas.UserPost.Add(_currentPost.ToString(), new UserPostState());
-        ServiceLocator.Get<IDataManager>().UserDatas.ImgList[_currentPost.ToString()].isUploaded = true;
+        ServiceLocator.Get<IDataManager>().UserDatas.ImgList[_currentPostImg.ToString()].isUploaded = true;
         
-        _upLoadImgs[_currentPost].PostedImg();
+        _upLoadImgs[_currentPostImg].PostedImg();
         _postImg.sprite = null;
-
-        Log.Message($"등록 됌 : {_currentPost}");
     }
 
-    public void SetPost(int PostID)
+    public void SetPost(int imgID,int PostID)
     {
         _currentPost = PostID;
-        ServiceLocator.Get<IAddressableManager>().LoadImageSprite(_currentPost.ToString(),_postImg);
+        _currentPostImg = imgID;
+        ServiceLocator.Get<IAddressableManager>().LoadImageSprite(_currentPostImg.ToString(),_postImg);
     }
 }
