@@ -399,34 +399,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 419622144870056313, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4444688839280254448, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
-      propertyPath: _post_Table
-      value: 
-      objectReference: {fileID: 11400000, guid: a414170c9b01013468883286422d56b9, type: 2}
-    - target: {fileID: 5570136151554512736, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5570136151554512736, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5570136151554512736, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -17
-      objectReference: {fileID: 0}
-    - target: {fileID: 6453999369347480109, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6453999369347480109, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8199788632527756132, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -510,14 +482,6 @@ PrefabInstance:
     - target: {fileID: 8409302885132686647, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
       propertyPath: m_Name
       value: CanvasSemi
-      objectReference: {fileID: 0}
-    - target: {fileID: 8409302885132686647, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8865697566908122968, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 244.34
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

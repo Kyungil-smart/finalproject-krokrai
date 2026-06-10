@@ -24,6 +24,8 @@ public class UploadController : MonoBehaviour
 
     [SerializeField] Button _upLoadButton;
 
+    [SerializeField] Uploadpopup _popup;
+
     int _currentPosts = 0;
     int _currentPost;
     int _currentPostImg;
@@ -149,7 +151,7 @@ public class UploadController : MonoBehaviour
             return;
         if (ServiceLocator.Get<IDataManager>().UserGoods.Gem_ < 1)
         {
-            Log.Message("잼이 부족합니다.");
+            _popup.SetPopUp();
             return;
         }
 
