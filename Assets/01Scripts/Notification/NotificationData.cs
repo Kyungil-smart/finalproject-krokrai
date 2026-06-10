@@ -34,12 +34,21 @@ public class NotificationData : MonoBehaviour
             _textBox.text = finalText;
 
         // NPC 프로필 이미지 세팅
-        if (_profileImage != null && !string.IsNullOrEmpty(npcImageKey))
-            ServiceLocator.Get<AddressableManager>().LoadImageSprite(npcImageKey, _profileImage);
-        
+        if (_profileImage != null)
+        {
+            Log.Message($"Npc 이미지 키: {npcImageKey}");
+            // if (_profileImage != null && !string.IsNullOrEmpty(npcImageKey))
+            //     ServiceLocator.Get<AddressableManager>().LoadImageSprite(npcImageKey, _profileImage);
+        }
+
         // 포스트 이미지 세팅 (팔로우 제외)
-        if (_postImage != null && !string.IsNullOrEmpty(postImageKey))
-            ServiceLocator.Get<AddressableManager>().LoadImageSprite(postImageKey, _postImage);
+        if (_postImage != null)
+        {
+            Log.Message($"Post 이미지 키: {postImageKey}");
+            // if (_postImage != null && !string.IsNullOrEmpty(postImageKey))
+            //    ServiceLocator.Get<AddressableManager>().LoadImageSprite(postImageKey, _postImage);
+        }
+
 
         // 포스트 버튼 연결 (팔로우 제외)
         if (_postImageButton != null)
