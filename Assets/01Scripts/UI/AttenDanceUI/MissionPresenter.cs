@@ -126,8 +126,14 @@ public class MissionPresenter : MonoBehaviour
         }
         
         Mission_ListSO targetMission = _currentMissions[slotIndex];
-        string idString = targetMission.Mission_Id.ToString();
 
+        if (targetMission == null)
+        {
+            Log.Message($"null 에러 {_currentMissions.Count}개 리스트 중 {slotIndex}번째 슬롯에 SO 데이터가 없습니다.");
+            return;
+        }
+        
+        string idString = targetMission.Mission_Id.ToString();
         Dictionary<string, EventState> dailyDB = null;
         var dataManager =  ServiceLocator.Get<IDataManager>();
 
@@ -139,8 +145,18 @@ public class MissionPresenter : MonoBehaviour
                 if (dailyDB != null && dailyDB.ContainsKey(idString))
                 {
                     dailyDB[idString].Mission_State_Flag = 2;
+                    Log.Message($"[데이터 갱신] 미션 {idString} 플래그 2로 변경 성공");
                 }
             }
+        }
+        else
+        {
+            Log.Message("[주의] 유저 DB에서 Event_490 데이터를 찾을 수 없습니다");
+        }
+
+        if (rewardModel == null)
+        {
+            Log.Message("rewardModel이 null입니다. 매니저 초기 화 필요");
         }
         
         var rewardList = rewardModel.GetRewardGroup(targetMission.Reward_Daliy_Id);
@@ -148,6 +164,10 @@ public class MissionPresenter : MonoBehaviour
         if (rewardList != null && rewardPopupView != null)
         {
             rewardPopupView.OpenPopup(rewardList);
+        }
+        else
+        {
+            Log.Message("[주의] 보상 리스트가 없거나 팝업 뷰가 연결되지 않았습니다");
         }
         ServiceLocator.Get<IEventManager>().GaugeIncrease(targetMission.Festa_Point);
 

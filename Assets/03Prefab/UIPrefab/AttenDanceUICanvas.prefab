@@ -822,6 +822,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2314175301736553472}
   - {fileID: 6061720359818440640}
   - {fileID: 6017125271963258187}
   - {fileID: 2165728960035903803}
@@ -4084,8 +4085,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2314175301736553472}
   - component: {fileID: 1100025437196828200}
-  - component: {fileID: 6377821063005521979}
-  - component: {fileID: 1910497903662693694}
   - component: {fileID: 1668472479747493525}
   - component: {fileID: 4107605515750950830}
   m_Layer: 5
@@ -4114,12 +4113,12 @@ RectTransform:
   - {fileID: 375881768178475278}
   - {fileID: 8899726301242941880}
   - {fileID: 929743963460132118}
-  m_Father: {fileID: 6061720359818440640}
+  m_Father: {fileID: 5742989532981052102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: 0, y: 1650}
+  m_AnchoredPosition: {x: 0, y: 270}
+  m_SizeDelta: {x: -180, y: 1650}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1100025437196828200
 MonoBehaviour:
@@ -4147,46 +4146,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!223 &6377821063005521979
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1478172776829454847}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 1
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: -1
-  m_TargetDisplay: 0
---- !u!114 &1910497903662693694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1478172776829454847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &1668472479747493525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9126,6 +9085,7 @@ GameObject:
   - component: {fileID: 5025626905245460860}
   - component: {fileID: 5182297387825769127}
   - component: {fileID: 6353932907897086176}
+  - component: {fileID: 1096384741292929669}
   - component: {fileID: 8831504990533295159}
   m_Layer: 5
   m_Name: Story_Popup
@@ -9215,6 +9175,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_TargetDisplay: 0
+--- !u!114 &1096384741292929669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3624969468575753814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &8831504990533295159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12856,7 +12833,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2314175301736553472}
   - {fileID: 4942271765652663323}
   - {fileID: 5456401972263911427}
   - {fileID: 2598712059287831558}
@@ -19279,7 +19255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missionView: {fileID: 8358256348136463158}
-  rewardPopupView: {fileID: 0}
+  rewardPopupView: {fileID: 6106101428161612543}
   missionModel: {fileID: 6229905985154613887}
   rewardModel: {fileID: 952097552077772588}
   storyDataList:
