@@ -6,6 +6,8 @@
 역할 : 게시물 포스팅 버튼이 눌렸을때 알림 UI 오브젝트를 활성화 하고 알림창에서 프리펩을 타입별로 생성
 방식 : 프리펩화 된 알림 타입을 생성하고 알림 팝업 오브젝트를 활성화 해서 알림을 활성화함
 */
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,8 +31,10 @@ public class NotificationController : MonoBehaviour
 
     [SerializeField] private Transform _contentView;                        // 스크롤 뷰 (알림 쌓이는곳)
     
+    [SerializeField] private UploadController _uploadController;
+    
     private List<GameObject> _items = new List<GameObject>();               // 생성된 알림 축적
-
+    
     
     /// <summary>
     /// 포스팅 버튼에 온클릭으로 연결할 함수
@@ -143,6 +147,20 @@ public class NotificationController : MonoBehaviour
                 if (stringSO.stringId.Trim() == cleanId)
                     return stringSO.KR;
         return stringId;
+    }
+
+    private void OnEnable()
+    {
+        // UploadController의 OnUpload 이벤트 구독
+        if (_uploadController != null)
+            _uploadController.OnUpload += AddNotification;
+    }
+
+    private void OnDisable()
+    {
+        // 구독 해제
+        if (_uploadController != null)
+            _uploadController.OnUpload -= AddNotification;
     }
 
     private GameObject GetPrefabByType(Notification_TableEnum notiType)
