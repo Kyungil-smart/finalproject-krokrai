@@ -1,10 +1,10 @@
 /*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-10
+수정일 : 26-06-11
 
 역할 : DM 목록 UI 생성 및 DM 클릭 시 대화창 전환
-방식 : 읽음 처리용 DialogId, 미리보기 표시용 DialogId, 선택지 진행 정보를 분리하여 NPC 이벤트형 DM을 관리
+방식 : DMProgress의 ProgressState와 SelectedChoiceNum을 기준으로 NPC 이벤트형 DM 상태를 관리
 */
 
 using UnityEngine;
@@ -12,6 +12,21 @@ using System.Collections.Generic;
 
 public class DMListUI : MonoBehaviour
 {
+    private class DMProgress
+    {
+        public int DM_ID;
+        public int ProgressState;
+        public int SelectedChoiceNum;
+        public string PreviewText;
+    }
+
+    private enum DMProgressState
+    {
+        Unread = 0,
+        WaitingChoice = 1,
+        Completed = 2
+    }
+
     [SerializeField] private Transform content;
     [SerializeField] private GameObject dmListItemPrefab;
 
@@ -22,22 +37,13 @@ public class DMListUI : MonoBehaviour
     [Header("DM Data")]
     [SerializeField] private DM_TableSO[] dmTables;
     [SerializeField] private Dialogue_TableSO[] dialogueSOs;
+    [SerializeField] private Choice_TableSO[] choiceSOs;
     [SerializeField] private Npc_TableSO[] npcSOs;
 
     private IString_TableManager stringManager;
 
-    // 읽음 처리용
-    private readonly Dictionary<int, int> lastReadDialogIdTable = new();
+    private readonly Dictionary<int, DMProgress> dmProgressTable = new();
 
-    // 목록 미리보기 및 대화 이어보기용
-    private readonly Dictionary<int, int> lastPreviewDialogIdTable = new();
-
-    // 선택지 복원용
-    private readonly Dictionary<int, int> selectedChoiceNextDialogIdTable = new();
-    private readonly Dictionary<int, string> selectedChoiceTextTable = new();
-
-    private readonly Dictionary<int, string> lastPreviewTextTable = new();
-    
     private void Start()
     {
         stringManager = ServiceLocator.Get<IString_TableManager>();
@@ -48,7 +54,31 @@ public class DMListUI : MonoBehaviour
         if (dmChatPanel != null)
             dmChatPanel.SetActive(false);
 
+        InitProgressData();
         CreateDMList();
+    }
+
+    private void InitProgressData()
+    {
+        if (dmTables == null)
+            return;
+
+        foreach (DM_TableSO dm in dmTables)
+        {
+            if (dm == null)
+                continue;
+
+            if (dmProgressTable.ContainsKey(dm.messageId))
+                continue;
+
+            dmProgressTable.Add(dm.messageId, new DMProgress
+            {
+                DM_ID = dm.messageId,
+                ProgressState = (int)DMProgressState.Unread,
+                SelectedChoiceNum = -1,
+                PreviewText = ""
+            });
+        }
     }
 
     private void CreateDMList()
@@ -80,15 +110,11 @@ public class DMListUI : MonoBehaviour
                 continue;
             }
 
+            DMProgress progress = GetProgress(dm.messageId);
             string npcAccountName = GetNpcAccountName(dm.senderName);
 
-            int lastReadDialogId = 0;
-            lastReadDialogIdTable.TryGetValue(dm.messageId, out lastReadDialogId);
-
-            int nextEndDialogId = GetNextEndDialogId(dm.messageId, lastReadDialogId);
-            bool hasUnread = nextEndDialogId != 0;
-
-            string previewText = GetListPreviewText(dm.messageId, npcAccountName, hasUnread);
+            bool hasUnread = progress.ProgressState == (int)DMProgressState.Unread;
+            string previewText = GetPreviewText(dm.messageId, npcAccountName, progress);
 
             itemUI.SetData(
                 npcAccountName,
@@ -97,23 +123,6 @@ public class DMListUI : MonoBehaviour
                 () => OnClickDM(dm)
             );
         }
-    }
-
-    private string GetListPreviewText(int messageId, string npcAccountName, bool hasUnread)
-    {
-        if (lastPreviewTextTable.TryGetValue(messageId, out string savedPreviewText))
-            return savedPreviewText;
-
-        int previewDialogId = 0;
-        lastPreviewDialogIdTable.TryGetValue(messageId, out previewDialogId);
-
-        if (previewDialogId != 0)
-            return GetPreviewTextByDialogId(previewDialogId);
-
-        if (hasUnread)
-            return $"{npcAccountName}님이 메시지를 보내고 싶어합니다";
-
-        return "";
     }
 
     private void OnClickDM(DM_TableSO dmData)
@@ -130,13 +139,11 @@ public class DMListUI : MonoBehaviour
         if (dmChatPanel != null)
             dmChatPanel.SetActive(true);
 
-        int lastReadDialogId = 0;
-        lastReadDialogIdTable.TryGetValue(dmData.messageId, out lastReadDialogId);
+        DMProgress progress = GetProgress(dmData.messageId);
 
-        int nextEndDialogId = GetNextEndDialogId(dmData.messageId, lastReadDialogId);
-
-        int lastPreviewDialogId = 0;
-        lastPreviewDialogIdTable.TryGetValue(dmData.messageId, out lastPreviewDialogId);
+        // 대화창에 넘길 값은 클릭 전 상태로 보관
+        int openProgressState = progress.ProgressState;
+        int openSelectedChoiceNum = progress.SelectedChoiceNum;
 
         DMConversationRunner runner = dmChatPanel.GetComponent<DMConversationRunner>();
 
@@ -146,15 +153,39 @@ public class DMListUI : MonoBehaviour
             return;
         }
 
-        runner.SetChoiceSaveData(
-            selectedChoiceNextDialogIdTable,
-            selectedChoiceTextTable
+        runner.OnProgressChanged = OnDMProgressChanged;
+
+        // 저장 상태만 클릭 후 상태로 먼저 변경
+        // 단, OpenNpcDM에는 클릭 전 상태(openProgressState)를 넘겨 최초 연출은 유지
+        if (progress.ProgressState == (int)DMProgressState.Unread)
+        {
+            if (HasChoice(dmData.messageId))
+            {
+                progress.ProgressState = (int)DMProgressState.WaitingChoice;
+                progress.PreviewText = GetChoicePointPreviewText(dmData.messageId);
+            }
+            else
+            {
+                progress.ProgressState = (int)DMProgressState.Completed;
+                progress.PreviewText = GetCompletedPreviewText(
+                    dmData.messageId,
+                    progress.SelectedChoiceNum
+                );
+            }
+
+            SaveDMProgress(
+                dmData.messageId,
+                progress.ProgressState,
+                progress.SelectedChoiceNum
+            );
+        }
+
+        // 실제 이번 입장에서는 클릭 전 상태로 열어야 최초 연출이 유지됨
+        runner.OpenNpcDM(
+            dmData,
+            openProgressState,
+            openSelectedChoiceNum
         );
-
-        runner.OpenNpcDM(dmData, lastPreviewDialogId);
-
-        if (nextEndDialogId != 0)
-            lastReadDialogIdTable[dmData.messageId] = nextEndDialogId;
     }
 
     public void BackToDMList()
@@ -168,29 +199,7 @@ public class DMListUI : MonoBehaviour
         DMConversationRunner runner = dmChatPanel.GetComponent<DMConversationRunner>();
 
         if (runner != null)
-        {
             runner.StopConversation();
-
-            if (runner.CurrentMessageId != 0 && runner.LastProgressDialogId != 0)
-            {
-                lastPreviewDialogIdTable[runner.CurrentMessageId] =
-                    runner.LastProgressDialogId;
-            }
-        }
-        
-        if (runner.CurrentMessageId != 0)
-        {
-            if (!string.IsNullOrEmpty(runner.LastPreviewText))
-            {
-                lastPreviewTextTable[runner.CurrentMessageId] = runner.LastPreviewText;
-            }
-
-            if (runner.LastProgressDialogId != 0)
-            {
-                lastPreviewDialogIdTable[runner.CurrentMessageId] =
-                    runner.LastProgressDialogId;
-            }
-        }
 
         dmChatPanel.SetActive(false);
         dmListPanel.SetActive(true);
@@ -198,19 +207,132 @@ public class DMListUI : MonoBehaviour
         RefreshDMList();
     }
 
-    private void RefreshDMList()
+    private void OnDMProgressChanged(int messageId, int progressState, int selectedChoiceNum, string previewText)
     {
-        foreach (Transform child in content)
+        DMProgress progress = GetProgress(messageId);
+
+        progress.ProgressState = progressState;
+        progress.SelectedChoiceNum = selectedChoiceNum;
+
+        if (progressState == (int)DMProgressState.WaitingChoice)
         {
-            Destroy(child.gameObject);
+            progress.PreviewText = GetChoicePointPreviewText(messageId);
+        }
+        else if (progressState == (int)DMProgressState.Completed)
+        {
+            progress.PreviewText = GetCompletedPreviewText(messageId, selectedChoiceNum);
+        }
+        else if (!string.IsNullOrEmpty(previewText))
+        {
+            progress.PreviewText = previewText;
         }
 
-        CreateDMList();
+        SaveDMProgress(
+            messageId,
+            progress.ProgressState,
+            progress.SelectedChoiceNum
+        );
+    }
+    
+    private void SaveDMProgress(int messageId, int progressState, int selectedChoiceNum)
+    {
+        // TODO: Firebase / DataManager 연동 후 교체 예정
+        Log.Message(
+            $"DMProgress 임시 저장 - DM_ID:{messageId}, State:{progressState}, Choice:{selectedChoiceNum}"
+        );
     }
 
-    private int GetNextEndDialogId(int messageId, int lastReadDialogId)
+    private DMProgress GetProgress(int messageId)
     {
-        int nextEndDialogId = 0;
+        if (!dmProgressTable.TryGetValue(messageId, out DMProgress progress))
+        {
+            progress = new DMProgress
+            {
+                DM_ID = messageId,
+                ProgressState = (int)DMProgressState.Unread,
+                SelectedChoiceNum = -1,
+                PreviewText = ""
+            };
+
+            dmProgressTable.Add(messageId, progress);
+        }
+
+        return progress;
+    }
+
+    private string GetPreviewText(int messageId, string npcAccountName, DMProgress progress)
+    {
+        if (progress.ProgressState == (int)DMProgressState.Unread)
+            return $"{npcAccountName}님이 메시지를 보내고 싶어합니다";
+
+        if (!string.IsNullOrEmpty(progress.PreviewText))
+            return progress.PreviewText;
+
+        if (progress.ProgressState == (int)DMProgressState.WaitingChoice)
+            return GetChoicePointPreviewText(messageId);
+
+        if (progress.ProgressState == (int)DMProgressState.Completed)
+            return GetCompletedPreviewText(messageId, progress.SelectedChoiceNum);
+
+        return "";
+    }
+
+    private string GetChoicePointPreviewText(int messageId)
+    {
+        foreach (Dialogue_TableSO dialogue in dialogueSOs)
+        {
+            if (dialogue == null)
+                continue;
+
+            if (dialogue.messageId != messageId)
+                continue;
+
+            if (dialogue.choiceGroupId != 0)
+                return GetString(dialogue.dialogText);
+        }
+
+        return "";
+    }
+
+    private string GetCompletedPreviewText(int messageId, int selectedChoiceNum)
+    {
+        int currentDialogId = GetStartDialogId(messageId);
+        string lastText = "";
+
+        while (currentDialogId != 0)
+        {
+            Dialogue_TableSO dialogue = GetDialogue(currentDialogId);
+
+            if (dialogue == null)
+                break;
+
+            lastText = GetString(dialogue.dialogText);
+
+            if (dialogue.choiceGroupId != 0)
+            {
+                Choice_TableSO selectedChoice =
+                    GetChoiceByChoiceNum(dialogue.choiceGroupId, selectedChoiceNum);
+
+                if (selectedChoice == null)
+                    break;
+
+                lastText = GetString(selectedChoice.choiceText);
+                currentDialogId = selectedChoice.nextDialogId;
+                continue;
+            }
+
+            if (dialogue.isEnd)
+                break;
+
+            currentDialogId = dialogue.nextDialogId;
+        }
+
+        return lastText;
+    }
+
+    private int GetStartDialogId(int messageId)
+    {
+        int startDialogId = 0;
 
         foreach (Dialogue_TableSO dialogue in dialogueSOs)
         {
@@ -220,20 +342,14 @@ public class DMListUI : MonoBehaviour
             if (dialogue.messageId != messageId)
                 continue;
 
-            if (dialogue.dialogId <= lastReadDialogId)
-                continue;
-
-            if (!dialogue.isEnd)
-                continue;
-
-            if (nextEndDialogId == 0 || dialogue.dialogId < nextEndDialogId)
-                nextEndDialogId = dialogue.dialogId;
+            if (startDialogId == 0 || dialogue.dialogId < startDialogId)
+                startDialogId = dialogue.dialogId;
         }
 
-        return nextEndDialogId;
+        return startDialogId;
     }
 
-    private string GetPreviewTextByDialogId(int dialogId)
+    private Dialogue_TableSO GetDialogue(int dialogId)
     {
         foreach (Dialogue_TableSO dialogue in dialogueSOs)
         {
@@ -241,10 +357,27 @@ public class DMListUI : MonoBehaviour
                 continue;
 
             if (dialogue.dialogId == dialogId)
-                return GetString(dialogue.dialogText);
+                return dialogue;
         }
 
-        return "";
+        return null;
+    }
+
+    private Choice_TableSO GetChoiceByChoiceNum(int choiceGroupId, int choiceNum)
+    {
+        if (choiceSOs == null)
+            return null;
+
+        foreach (Choice_TableSO choice in choiceSOs)
+        {
+            if (choice == null)
+                continue;
+
+            if (choice.choiceGroupId == choiceGroupId && choice.choiceNum == choiceNum)
+                return choice;
+        }
+
+        return null;
     }
 
     private string GetNpcAccountName(int npcId)
@@ -285,5 +418,32 @@ public class DMListUI : MonoBehaviour
         }
 
         return text;
+    }
+
+    private void RefreshDMList()
+    {
+        foreach (Transform child in content)
+        {
+            Destroy(child.gameObject);
+        }
+
+        CreateDMList();
+    }
+    
+    private bool HasChoice(int messageId)
+    {
+        foreach (Dialogue_TableSO dialogue in dialogueSOs)
+        {
+            if (dialogue == null)
+                continue;
+
+            if (dialogue.messageId != messageId)
+                continue;
+
+            if (dialogue.choiceGroupId != 0)
+                return true;
+        }
+
+        return false;
     }
 }

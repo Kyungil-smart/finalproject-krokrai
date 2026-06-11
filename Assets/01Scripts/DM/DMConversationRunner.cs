@@ -4,16 +4,26 @@
 수정일 : 26-06-10
 
 역할 : DM 대화 진행 담당
-방식 : DM_TableSO의 messageId를 기준으로 Dialogue/Choice SO를 조회하여 말풍선/선택지 출력
+방식 : DMProgress의 ProgressState와 SelectedChoiceNum을 기준으로 대화 상태를 복원 및 진행
 */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DMConversationRunner : MonoBehaviour
 {
+    private enum DMProgressState
+    {
+        Unread = 0,
+        WaitingChoice = 1,
+        Completed = 2
+    }
+
     [SerializeField] private DMChatUI chatUI;
+    [SerializeField] private Button skipAreaButton;
 
     [Header("SO Data")]
     private DM_TableSO currentDM;
@@ -27,25 +37,47 @@ public class DMConversationRunner : MonoBehaviour
     private readonly Dictionary<int, List<Dialogue_TableSO>> dialogueByMessageIdTable = new();
     private readonly Dictionary<int, List<Choice_TableSO>> choiceTable = new();
 
-    private Dictionary<int, int> selectedChoiceNextDialogIdTable = new();
-    private Dictionary<int, string> selectedChoiceTextTable = new();
-
     private IString_TableManager stringTableManager;
 
-    public string LastPreviewText { get; private set; }
-    
-    public int LastShownDialogId { get; private set; }
-    public int LastProgressDialogId { get; private set; }
-
     private Coroutine playRoutine;
+
+    private bool isWaitingMessageDelay;
+    private bool isSkipRequested;
+
+    private int currentProgressState;
+    private int currentSelectedChoiceNum;
+
+    public string LastPreviewText { get; private set; }
+
+    public int CurrentMessageId
+    {
+        get
+        {
+            if (currentDM == null)
+                return 0;
+
+            return currentDM.messageId;
+        }
+    }
+
+    public Action<int, int, int, string> OnProgressChanged;
 
     private void Awake()
     {
         stringTableManager = ServiceLocator.Get<IString_TableManager>();
         BuildRuntimeTable();
+
+        if (skipAreaButton != null)
+            skipAreaButton.onClick.AddListener(OnClickSkipArea);
     }
 
-    public void OpenNpcDM(DM_TableSO dmData, int lastProgressDialogId = 0)
+    private void OnDestroy()
+    {
+        if (skipAreaButton != null)
+            skipAreaButton.onClick.RemoveListener(OnClickSkipArea);
+    }
+
+    public void OpenNpcDM(DM_TableSO dmData, int progressState, int selectedChoiceNum)
     {
         if (chatUI == null)
         {
@@ -60,8 +92,11 @@ public class DMConversationRunner : MonoBehaviour
         }
 
         currentDM = dmData;
-        LastShownDialogId = 0;
-        LastProgressDialogId = lastProgressDialogId;
+        currentProgressState = progressState;
+        currentSelectedChoiceNum = selectedChoiceNum;
+        LastPreviewText = "";
+        isWaitingMessageDelay = false;
+        isSkipRequested = false;
 
         chatUI.ClearChat();
         chatUI.HideChoices();
@@ -77,10 +112,14 @@ public class DMConversationRunner : MonoBehaviour
             return;
         }
 
-        playRoutine = StartCoroutine(PlayDialogueRoutine(startDialogId, lastProgressDialogId));
+        bool instantRestore = progressState != (int)DMProgressState.Unread;
+
+        playRoutine = StartCoroutine(
+            PlayDialogueRoutine(startDialogId, instantRestore)
+        );
     }
 
-    private IEnumerator PlayDialogueRoutine(int startDialogId, int lastProgressDialogId)
+    private IEnumerator PlayDialogueRoutine(int startDialogId, bool instantRestore)
     {
         int currentDialogId = startDialogId;
 
@@ -92,34 +131,45 @@ public class DMConversationRunner : MonoBehaviour
                 yield break;
             }
 
-            bool isAlreadyShown = dialogue.dialogId <= lastProgressDialogId;
-
             ShowMessage(dialogue);
-            LastShownDialogId = dialogue.dialogId;
-            LastProgressDialogId = dialogue.dialogId;
 
             if (dialogue.choiceGroupId != 0)
             {
-                if (selectedChoiceNextDialogIdTable.TryGetValue(dialogue.choiceGroupId, out int selectedNextDialogId))
+                if (currentProgressState == (int)DMProgressState.Completed)
                 {
-                    if (selectedChoiceTextTable.TryGetValue(dialogue.choiceGroupId, out string selectedChoiceText))
+                    Choice_TableSO selectedChoice =
+                        GetChoiceByChoiceNum(dialogue.choiceGroupId, currentSelectedChoiceNum);
+
+                    if (selectedChoice == null)
                     {
-                        chatUI.AddPlayerMessage(GetText(selectedChoiceText));
+                        Log.Message($"선택한 Choice를 찾을 수 없습니다. Group : {dialogue.choiceGroupId}, Num : {currentSelectedChoiceNum}");
+                        yield break;
                     }
 
-                    currentDialogId = selectedNextDialogId;
+                    string choiceText = GetText(selectedChoice.choiceText);
+                    chatUI.AddPlayerMessage(choiceText);
+                    LastPreviewText = choiceText;
+
+                    currentDialogId = selectedChoice.nextDialogId;
                     continue;
                 }
+
+                currentProgressState = (int)DMProgressState.WaitingChoice;
+                NotifyProgressChanged();
 
                 ShowChoices(dialogue.choiceGroupId);
                 yield break;
             }
 
             if (dialogue.isEnd)
+            {
+                currentProgressState = (int)DMProgressState.Completed;
+                NotifyProgressChanged();
                 yield break;
+            }
 
-            if (!isAlreadyShown)
-                yield return new WaitForSeconds(messageDelay);
+            if (!instantRestore)
+                yield return WaitMessageDelayRoutine();
 
             currentDialogId = dialogue.nextDialogId;
         }
@@ -165,21 +215,19 @@ public class DMConversationRunner : MonoBehaviour
 
         chatUI.AddPlayerMessage(choiceText);
 
-        LastPreviewText = choiceText;
+        currentSelectedChoiceNum = selectedChoice.choiceNum;
+        currentProgressState = (int)DMProgressState.Completed;
 
-        selectedChoiceNextDialogIdTable[selectedChoice.choiceGroupId] =
-            selectedChoice.nextDialogId;
-
-        selectedChoiceTextTable[selectedChoice.choiceGroupId] =
-            selectedChoice.choiceText;
-
-        LastProgressDialogId = selectedChoice.nextDialogId - 1;
-
-        yield return new WaitForSeconds(messageDelay);
-
-        playRoutine = StartCoroutine(
-            PlayDialogueRoutine(selectedChoice.nextDialogId, LastProgressDialogId)
+        OnProgressChanged?.Invoke(
+            currentDM.messageId,
+            currentProgressState,
+            currentSelectedChoiceNum,
+            ""
         );
+
+        yield return WaitMessageDelayRoutine();
+
+        yield return PlayDialogueRoutine(selectedChoice.nextDialogId, false);
     }
 
     private void ShowMessage(Dialogue_TableSO dialogue)
@@ -197,6 +245,47 @@ public class DMConversationRunner : MonoBehaviour
             Log.Message($"알 수 없는 SenderType : {senderType}");
     }
 
+    public void OnClickSkipArea()
+    {
+        if (!isWaitingMessageDelay)
+            return;
+
+        isSkipRequested = true;
+    }
+
+    private IEnumerator WaitMessageDelayRoutine()
+    {
+        isWaitingMessageDelay = true;
+        isSkipRequested = false;
+
+        float timer = 0f;
+
+        while (timer < messageDelay)
+        {
+            if (isSkipRequested)
+                break;
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        isWaitingMessageDelay = false;
+        isSkipRequested = false;
+    }
+
+    private void NotifyProgressChanged()
+    {
+        if (currentDM == null)
+            return;
+
+        OnProgressChanged?.Invoke(
+            currentDM.messageId,
+            currentProgressState,
+            currentSelectedChoiceNum,
+            LastPreviewText
+        );
+    }
+
     public void StopConversation()
     {
         if (playRoutine != null)
@@ -205,19 +294,28 @@ public class DMConversationRunner : MonoBehaviour
             playRoutine = null;
         }
 
+        isWaitingMessageDelay = false;
+        isSkipRequested = false;
+
         if (chatUI != null)
             chatUI.HideChoices();
     }
 
-    public int CurrentMessageId
+    private Choice_TableSO GetChoiceByChoiceNum(int choiceGroupId, int choiceNum)
     {
-        get
-        {
-            if (currentDM == null)
-                return 0;
+        if (!choiceTable.TryGetValue(choiceGroupId, out List<Choice_TableSO> choices))
+            return null;
 
-            return currentDM.messageId;
+        foreach (Choice_TableSO choice in choices)
+        {
+            if (choice == null)
+                continue;
+
+            if (choice.choiceNum == choiceNum)
+                return choice;
         }
+
+        return null;
     }
 
     private int GetStartDialogId(int messageId)
@@ -295,13 +393,5 @@ public class DMConversationRunner : MonoBehaviour
         {
             pair.Value.Sort((a, b) => a.choiceNum.CompareTo(b.choiceNum));
         }
-    }
-    
-    public void SetChoiceSaveData(
-        Dictionary<int, int> nextDialogIdTable,
-        Dictionary<int, string> choiceTextTable)
-    {
-        selectedChoiceNextDialogIdTable = nextDialogIdTable;
-        selectedChoiceTextTable = choiceTextTable;
     }
 }
