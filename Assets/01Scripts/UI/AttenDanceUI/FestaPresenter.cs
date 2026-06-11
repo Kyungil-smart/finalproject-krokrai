@@ -19,12 +19,12 @@ public class FestaPresenter : MonoBehaviour
     private int _recentGaugeStep;
     private bool _finalRewardReceived;
 
-    [SerializeField] private GaugeDataModel gaugeModel;
-    [SerializeField] private FestaView view;
-    [SerializeField] private RewardDataModel rewardModel;
-    [SerializeField] private RewardPopupView rewardPopupView;
+    [SerializeField] private GaugeDataModel _gaugeModel;
+    [SerializeField] private FestaView _view;
+    [SerializeField] private RewardDataModel _rewardModel;
+    [SerializeField] private RewardPopupView _rewardPopupView;
     
-    private void Start()
+    private void OnEnable() // Start -> OnEnable
     {
         var eventManager = ServiceLocator.Get<IEventManager>();
 
@@ -33,9 +33,9 @@ public class FestaPresenter : MonoBehaviour
             eventManager.OnGaugeIncrease += HandleGaugeIncrease;
         }
 
-        if (view != null)
+        if (_view != null)
         {
-            view.OnChestClicked += HandleChestClick;
+            _view.OnChestClicked += HandleChestClick;
         }
         
         SetPoint();
@@ -51,9 +51,9 @@ public class FestaPresenter : MonoBehaviour
             eventManager.OnGaugeIncrease -= HandleGaugeIncrease;
         }
 
-        if (view != null)
+        if (_view != null)
         {
-            view.OnChestClicked -= HandleChestClick;
+            _view.OnChestClicked -= HandleChestClick;
         }
     }
 
@@ -68,17 +68,16 @@ public class FestaPresenter : MonoBehaviour
 
     private void HandleChestClick(int chestIndex)
     {
-        var gaugeSO = gaugeModel.GetGaugeSetting(chestIndex + 1); // 
+        var gaugeSO = _gaugeModel.GetGaugeSetting(chestIndex + 1); // 
 
         if (gaugeSO == null) return;
 
         int rewardGroupId = gaugeSO.Reward_Accrue_Id;
+        var rewardList = _rewardModel.GetRewardGroup(rewardGroupId);
 
-        var rewardList = rewardModel.GetRewardGroup(rewardGroupId);
-
-        if (rewardList != null && rewardPopupView != null)
+        if (rewardList != null && _rewardPopupView != null)
         {
-            rewardPopupView.OpenPopup(rewardList);
+            _rewardPopupView.OpenRewardPopup(rewardList);
         }
     }
 
@@ -87,14 +86,10 @@ public class FestaPresenter : MonoBehaviour
         _totalFestaPoint = ServiceLocator.Get<IDataManager>().Attendance.Total_Festa_Point;
         _recentGaugeStep = ServiceLocator.Get<IDataManager>().Attendance.Recent_Gauge_Step;
         _finalRewardReceived = ServiceLocator.Get<IDataManager>().Attendance.Final_Reward_Received;
-        
-        // _totalFestaPoint = 0;
-        // _recentGaugeStep = 0;
-        // _finalRewardReceived = false;
     }
 
     private void ReFreshUI()
     {
-        view.UpdateFestaUI(_totalFestaPoint); 
+        _view.UpdateFestaUI(_totalFestaPoint, _recentGaugeStep); 
     }
 }

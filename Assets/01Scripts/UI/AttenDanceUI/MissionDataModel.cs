@@ -20,6 +20,13 @@ public class MissionDataModel : MonoBehaviour
 
     private void Awake()
     {
+        if (missionListSO == null || missionListSO.scriptableObjects == null)
+        {
+            Log.Message($"<color=green> MissionListSO 자체가 비어있습니다</color>");
+            return;
+        }
+
+        int addCount = 0;
         for (int i = 0; i < missionListSO.scriptableObjects.Length; i++)
         {
             // is as 문법 최적화
@@ -28,9 +35,16 @@ public class MissionDataModel : MonoBehaviour
                 if (!_missionLists.ContainsKey(m.Mission_Id))
                 {
                     _missionLists.Add(m.Mission_Id , m);
+                    addCount++;
+                }
+                else
+                {
+                    Log.Message($"<color=cyan> 중복된 미션 ID가 있음 : {m.Mission_Id}</color>");
                 }
             }
         }
+        
+        Log.Message($"<color=yellow> 딕셔너리 세팅 완료 (총 {missionListSO.scriptableObjects.Length}개 중 {addCount}개 추가됨</color>");
     }
 
     /// <summary>
@@ -42,9 +56,11 @@ public class MissionDataModel : MonoBehaviour
     {
         if (_missionLists.ContainsKey(missionId))
         {
+            Log.Message($"<color=blue>missionId: {missionId}에 맞게 MissionList가 반환됨</color>");
             return _missionLists[missionId];
         }
 
+        Log.Message($"<color=red><b>missionId: {missionId}와 일치하는 값이 없어서 null 반환함</b></color>");
         return null;
     }
 }

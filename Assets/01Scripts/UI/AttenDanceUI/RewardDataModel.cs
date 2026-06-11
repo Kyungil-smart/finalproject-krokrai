@@ -20,6 +20,15 @@ public class RewardDataModel : MonoBehaviour
 
     private void Awake()
     {
+        if (rewardGroupSO == null || rewardGroupSO.scriptableObjects == null)
+        {
+            Log.Message($"<color=green> rewardGroupSO 자체가 비어있습니다</color>");
+            return;
+        }
+
+        int groupCount = 0; // 만들어진 그룹의 개수
+        int totalItemCount = 0; // 들어간 보상 아이템의 총 개수
+        
         for (int i = 0; i < rewardGroupSO.scriptableObjects.Length; i++)
         {
             if (rewardGroupSO.scriptableObjects[i] is Reward_Group_TableSO r)
@@ -27,11 +36,15 @@ public class RewardDataModel : MonoBehaviour
                 if (!_rewardGroups.ContainsKey(r.Reward_Group_Id))
                 {
                     _rewardGroups[r.Reward_Group_Id] = new List<Reward_Group_TableSO>();
+                    groupCount++;
                 }
-
+                
                 _rewardGroups[r.Reward_Group_Id].Add(r);
+                totalItemCount++;
             }
         }
+        
+        Log.Message($"<color=yellow>보상 세팅 완료 (총 {groupCount}개 그룹, {totalItemCount}개 아이템)</color>");
     }
 
     /// <summary>
@@ -43,9 +56,11 @@ public class RewardDataModel : MonoBehaviour
     {
         if (_rewardGroups.ContainsKey(index))
         {
+            Log.Message($"<color=blue>Reward_Group_Id: {index}에 맞게 Reward_Group이 반환됨</color>");
             return _rewardGroups[index];
         }
-
+        
+        Log.Message($"<color=red><b>Reward_Group_Id: {index}와 일치하는 값이 없어서 null 반환함</b></color>");
         return null;
     }
 }

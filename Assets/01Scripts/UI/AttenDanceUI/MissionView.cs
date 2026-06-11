@@ -3,7 +3,7 @@
 수정자 : 
  
 작성일 : 26-06-08
-수정일 : 
+수정일 : 26-06-10
 
 역할 : 미션 UI의 전체 목록을 관리하고 갱신하는 View 스크립트
 방식 : Presenter로부터 데이터를 받아 각각의 MissionSlotView에 데이터를 분배함
@@ -12,6 +12,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using TMPro;
 
 public class MissionView : MonoBehaviour
 {
@@ -19,12 +20,15 @@ public class MissionView : MonoBehaviour
 
     [SerializeField] private MissionSlotView[] missionSlots;
 
-    private void Awake()
+    [Header("메인 화면 스토리 UI 연결")] 
+    [SerializeField] private GameObject _mainStoryGroup; 
+
+private void Awake()
     {
         for (int i = 0; i < missionSlots.Length; i++)
         {
             missionSlots[i].InitSlot(i);
-
+            
             missionSlots[i].OnRewardClicked += (idx) =>
             {
                 OnSlotRewardRequested?.Invoke(idx);
@@ -40,20 +44,24 @@ public class MissionView : MonoBehaviour
     /// <param name="rewardDataList">각 미션별 보상 리스트</param>
     public void UpdateAllMissions(List<Mission_ListSO> missionSoData, List<EventState> dbStates, List<List<Reward_Group_TableSO>> rewardDataList)
     {
+        if (missionSoData == null || dbStates == null)
+        {
+            return;
+        }
+        
         for (int i = 0; i < missionSlots.Length; i++)
         {
-            if (i >= missionSoData.Count || i >= dbStates.Count) return;
+            if (i >= missionSoData.Count || i >= dbStates.Count)
+            {
+                
+                continue;
+            }
 
             // 슬롯이 받아야 할 보상 리스트 하나만 넘김
-            List<Reward_Group_TableSO> slotReward;
-
+            List<Reward_Group_TableSO> slotReward = null;
             if (rewardDataList != null && i < rewardDataList.Count)
             {
                 slotReward = rewardDataList[i];
-            }
-            else
-            {
-                slotReward = null;
             }
             
             UpdateSingleSlot(i, missionSoData[i], dbStates[i], slotReward);
@@ -73,7 +81,12 @@ public class MissionView : MonoBehaviour
         int goal = soData.Goal_Value;   
         int currentState = (int)dbState.Mission_State;
         int flag = (int)dbState.Mission_State_Flag;
+
+        if (!soData.Check_Desc)
+        {
+            currentState = goal;
+        }
         
-        missionSlots[index].UpdateSlotUI(missionDesc, currentState, goal, flag/*, rewardData*/);
+        missionSlots[index].UpdateSlotUI(missionDesc, currentState, goal, flag, rewardData);
     }
 }

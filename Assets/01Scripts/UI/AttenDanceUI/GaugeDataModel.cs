@@ -20,6 +20,13 @@ public class GaugeDataModel : MonoBehaviour
 
     private void Awake()
     {
+        if (gaugeGroupSO == null || gaugeGroupSO.scriptableObjects == null)
+        {
+            Log.Message($"<color=green> gaugeGroupSO 자체가 비어있습니다</color>");
+            return;
+        }
+
+        int addCount = 0;
         for (int i = 0; i < gaugeGroupSO.scriptableObjects.Length; i++)
         {
             if (gaugeGroupSO.scriptableObjects[i] is Mission_Gauge_SettingSO g)
@@ -27,23 +34,32 @@ public class GaugeDataModel : MonoBehaviour
                 if (!_gaugeData.ContainsKey(g.Gauge_Step))
                 {
                     _gaugeData.Add(g.Gauge_Step, g);
+                    addCount++;
+                }
+                else
+                {
+                    Log.Message($"<color=cyan> 중복된 Gauge_Step가 있음 : {g.Gauge_Step}</color>");
                 }
             }
         }
+        
+        Log.Message($"<color=yellow>페스타 게이지 세팅 완료 (총 {addCount}단계)</color>");
     }
 
     /// <summary>
     /// Festa 게이지에 따른 보상의 SO 데이터를 반환
     /// </summary>
-    /// <param name="gaugeRewardId">검색할 게이지의 고유 ID (ex: 5201)</param>
-    /// <returns>해당 Id와 일치하는 게이지 SO데이터, 존재하지 않으면 null</returns>
-    public Mission_Gauge_SettingSO GetGaugeSetting(int gaugeRewardId)
+    /// <param name="gaugeStep">검색할 게이지의 단계 (ex: 1, 2, 3..)</param>
+    /// <returns>해당 단계와 일치하는 게이지 SO데이터, 존재하지 않으면 null</returns>
+    public Mission_Gauge_SettingSO GetGaugeSetting(int gaugeStep)
     {
-        if (_gaugeData.ContainsKey(gaugeRewardId))
+        if (_gaugeData.ContainsKey(gaugeStep))
         {
-            return _gaugeData[gaugeRewardId];
+            Log.Message($"<color=blue>gaugeRewardId: {gaugeStep}에 맞게 Mission_Gauge_Setting이 반환됨</color>");
+            return _gaugeData[gaugeStep];
         }
 
-        return null; // 여기가 문제일수도 << 확인
+        Log.Message($"<color=red><b>gaugeRewardId: {gaugeStep}와 일치하는 값이 없어서 null 반환함</b></color>");
+        return null;
     }
 }

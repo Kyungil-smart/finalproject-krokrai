@@ -46,7 +46,7 @@ public class RewardPopupView : MonoBehaviour
     /// 획득한 보상 리스트를 받아와서 팝업창의 슬롯 아이콘과 수량을 갱신하고 팝업을 띄우는 메서드
     /// </summary>
     /// <param name="rewardDatas">획득한 아이템 데이터 리스트</param>
-    public void OpenPopup(List<Reward_Group_TableSO> rewardDatas)
+    public void OpenRewardPopup(List<Reward_Group_TableSO> rewardDatas)
     {
         gameObject.SetActive(true);
 

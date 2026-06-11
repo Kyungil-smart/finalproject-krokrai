@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,8 +24,11 @@ public class TestController : MonoBehaviour
         {
             btnAddGauge.onClick.AddListener(() =>
             {
-                _gauge += 100;
-                if (festaView != null) festaView.UpdateFestaUI(_gauge);
+                var eventManager = ServiceLocator.Get<IEventManager>();
+                if (eventManager != null)
+                {
+                    eventManager.GaugeIncrease(100); 
+                }
             });
         }
 
@@ -32,11 +36,28 @@ public class TestController : MonoBehaviour
         {
             btnClearMission.onClick.AddListener(() =>
             {
-                if (missionSlots == null) return;
-
-                foreach (var slot in missionSlots)
+                var dataManager = ServiceLocator.Get<IDataManager>();
+                if (dataManager != null && dataManager.UserDatas.Event_Mission?.Event_490 != null)
                 {
-                    slot.UpdateSlotUI("122", 100, 100, 1);
+                    string dayKey = $"Day_{_day}";
+                    if (dataManager.UserDatas.Event_Mission.Event_490.ContainsKey(dayKey))
+                    {
+                        var dailyDB = dataManager.UserDatas.Event_Mission.Event_490[dayKey];
+                        var keys = new List<string>(dailyDB.Keys);
+                        
+                        foreach (var key in keys)
+                        {
+                            var state = dailyDB[key];
+                            state.Mission_State_Flag = 1;
+                            dailyDB[key] = state;
+                        }
+          
+                        var eventManager = ServiceLocator.Get<IEventManager>();
+                        if (eventManager != null)
+                        {
+                            eventManager.ClickDay(_day); 
+                        }
+                    }
                 }
             });
         }
@@ -45,15 +66,32 @@ public class TestController : MonoBehaviour
         {
             btnNextDay.onClick.AddListener(() =>
             {
+                
                 if (dayListView == null) return;
 
                 _day++;
                 if (_day > 7) _day = 1;
 
+                // 1. 진짜 DB의 '현재 출석 일수'를 갱신
+                var dataManager = ServiceLocator.Get<IDataManager>();
+                if (dataManager != null)
+                {
+                    dataManager.Attendance.User_Active_Day = (ulong)_day;
+                }
+
+                // 2. DayListView(출석부 1~7일차) 껍데기 강제 갱신 -> 자물쇠 까맣게 풀리게 만들기!
                 for (int i = 0; i < 7; i++)
                 {
-                    bool isUnlocked = (1 < _day);
+                    // 인덱스 i가 현재 일차(_day)보다 작으면 자물쇠 해제!
+                    bool isUnlocked = (i < _day); 
                     dayListView.DayListUI(i, isUnlocked);
+                }
+
+                // 3. 미션 프레젠터한테 "야! 날짜 바꼈으니까 N일차 DB 다시 불러와!" 라고 이벤트 쏘기
+                var eventManager = ServiceLocator.Get<IEventManager>();
+                if (eventManager != null)
+                {
+                    eventManager.ClickDay(_day); 
                 }
             });
         }

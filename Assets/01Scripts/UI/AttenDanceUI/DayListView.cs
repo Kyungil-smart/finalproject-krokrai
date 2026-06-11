@@ -16,24 +16,22 @@ using UnityEngine.UI;
 
 public class DayListView : MonoBehaviour
 {
-    // public event Action<int> OnDayClicked;
-    
-    [SerializeField] private GameObject[] lockObjects;
-    [SerializeField] private Button[] dayBtns;
-    [SerializeField] private Outline[] outlines;
+    [SerializeField] private GameObject[] _lockObjects;
+    [SerializeField] private Button[] _dayBtns;
+    [SerializeField] private Outline[] _outlines;
 
-    private Outline _lastOutline = null;
+    private Outline _lastOutline = null; // 마지막으로 "눌린" Outline
     
     private void Awake()
     {
-        for (int i = 0; i < dayBtns.Length; i++)
+        for (int i = 0; i < _dayBtns.Length; i++)
         {
             int index = i;
             
-            dayBtns[i].onClick.AddListener(() =>
+            _dayBtns[i].onClick.AddListener(() =>
             {
                 ToggleOutline(index);
-
+                Log.Message($"일 차 눌림 (눌린 일차 {index + 1})");
                 ServiceLocator.Get<IEventManager>().ClickDay(index + 1);
             });
         }
@@ -47,25 +45,29 @@ public class DayListView : MonoBehaviour
     /// <summary>
     /// 특정 일차 슬롯의 자물쇠 및 버튼 상호작용 상태를 갱신
     /// </summary>
-    /// <param name="a">일 차</param>
-    /// <param name="active">자물쇠, 상호작용 활성화 변수</param>
-    public void DayListUI(int a, bool active)
+    /// <param name="dayIndex">갱신할 일차의 인덱스 (0~6)</param>
+    /// <param name="isUnlocked">해금 여부 (true 활성화 / false 비활성화)</param>
+    public void DayListUI(int dayIndex, bool isUnlocked)
     {
-        lockObjects[a].SetActive(!active);
-        dayBtns[a].interactable = active;
+        _lockObjects[dayIndex].SetActive(!isUnlocked);
+        _dayBtns[dayIndex].interactable = isUnlocked;
+        
     }
 
     // Outline 활성화/비활성화 해주는 메서드
-    private void ToggleOutline(int index)
+    private void ToggleOutline(int index) 
     {
-        if (index < 0 || index >= outlines.Length) return;
+        if (index < 0 || index >= _outlines.Length)
+        {
+            return;
+        }
 
         if (_lastOutline != null) _lastOutline.enabled = false;
 
-        if (outlines[index] != null)
+        if (_outlines[index] != null)
         {
-            outlines[index].enabled = true;
-            _lastOutline = outlines[index];
+            _outlines[index].enabled = true;
+            _lastOutline = _outlines[index];
         }
     }
 }

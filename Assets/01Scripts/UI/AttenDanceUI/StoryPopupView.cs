@@ -14,7 +14,6 @@ public class StoryPopupView : MonoBehaviour
     [SerializeField] private Button closeButton;            // Btn_Popup_Close
 
     [Header("팝업 창 꺼진 뒤 남는 글자")] 
-    [SerializeField] private GameObject mainStoryPanel;     // Story_Main
     [SerializeField] private TextMeshProUGUI mainTitle;     // Story_Main_Title
     [SerializeField] private TextMeshProUGUI mainText;      // Story_Main_Text
 
@@ -26,10 +25,8 @@ public class StoryPopupView : MonoBehaviour
         }
     }
 
-    public void OpenPopup(string title, string content)
+    public void OpenStoryPopup(string title, string content)
     {
-        Log.Message("OpenPopup 메서드 실행됨");
-        
         string realContent = content.Replace("\\n", "\n");
 
         titleText.text = title;
@@ -38,12 +35,12 @@ public class StoryPopupView : MonoBehaviour
         mainText.text = realContent;
         
         storyPopupPanel.SetActive(true);
-        mainStoryPanel.SetActive(false);
+        mainText.gameObject.SetActive(false);
     }
 
     private void OnCloseButtonClicked()
     {
         storyPopupPanel.SetActive(false);
-        mainStoryPanel.SetActive(true);
+        mainText.gameObject.SetActive(true);
     }
 }
