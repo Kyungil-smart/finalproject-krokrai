@@ -1,7 +1,7 @@
 /*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-04
+수정일 : 26-06-12
 
 역할 : 채팅 말풍선 UI 담당
 방식 : 텍스트 길이에 따라 말풍선 크기를 조절하고 프로필 표시 여부를 처리
@@ -18,6 +18,8 @@ public class DMBubbleUI : MonoBehaviour
 
     [Header("Profile Images")]
     [SerializeField] private Image[] profileImages;
+    
+    [SerializeField] private CanvasGroup profileCanvasGroup;
 
     [Header("Layout")]
     [SerializeField] private LayoutElement rowLayoutElement;     // DM_Op 또는 DM_me 루트
@@ -54,15 +56,39 @@ public class DMBubbleUI : MonoBehaviour
 
     private void SetProfileVisible(bool visible)
     {
-        float alpha = visible ? 1f : 0f;
+        if (profileCanvasGroup == null)
+            return;
 
-        foreach (Image image in profileImages)
+        profileCanvasGroup.alpha = visible ? 1f : 0f;
+        profileCanvasGroup.interactable = false;
+        profileCanvasGroup.blocksRaycasts = false;
+    }
+    
+    public void LoadProfileImage(string profileImageKey)
+    {
+        if (profileImages == null || profileImages.Length < 2)
         {
-            if (image == null) continue;
-
-            Color color = image.color;
-            color.a = alpha;
-            image.color = color;
+            Log.Message("프로필 이미지 배열이 부족합니다.");
+            return;
         }
+
+        if (string.IsNullOrEmpty(profileImageKey))
+            return;
+
+        IAddressableManager addressableManager =
+            ServiceLocator.Get<IAddressableManager>();
+
+        if (addressableManager == null)
+        {
+            Log.Message("AddressableManager를 찾을 수 없습니다.");
+            return;
+        }
+
+        Image profileImage = profileImages[1];
+
+        if (profileImage == null)
+            return;
+
+        addressableManager.LoadImageSprite(profileImageKey, profileImage);
     }
 }

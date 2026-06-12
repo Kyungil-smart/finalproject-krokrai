@@ -1,18 +1,19 @@
 /*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-11
+수정일 : 26-06-12
 
 역할 : DM 목록 UI 생성 및 DM 클릭 시 대화창 전환
 방식 : DMProgress의 ProgressState와 SelectedChoiceNum을 기준으로 NPC 이벤트형 DM 상태를 관리
 */
 
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
 public class DMListUI : MonoBehaviour
 {
-    private class DMProgress
+    private class DMLocalProgress
     {
         public int DM_ID;
         public int ProgressState;
@@ -42,7 +43,7 @@ public class DMListUI : MonoBehaviour
 
     private IString_TableManager stringManager;
 
-    private readonly Dictionary<int, DMProgress> dmProgressTable = new();
+    private readonly Dictionary<int, DMLocalProgress> dmProgressTable = new();
 
     private void Start()
     {
@@ -71,11 +72,22 @@ public class DMListUI : MonoBehaviour
             if (dmProgressTable.ContainsKey(dm.messageId))
                 continue;
 
-            dmProgressTable.Add(dm.messageId, new DMProgress
+            int progressState = (int)DMProgressState.Unread;
+            int selectedChoiceNum = -1;
+
+            global::DMProgress savedProgress = GetSavedDMProgress(dm.messageId);
+
+            if (savedProgress != null)
+            {
+                progressState = savedProgress.ProgressState;
+                selectedChoiceNum = savedProgress.SelectedChoiceNum;
+            }
+
+            dmProgressTable.Add(dm.messageId, new DMLocalProgress
             {
                 DM_ID = dm.messageId,
-                ProgressState = (int)DMProgressState.Unread,
-                SelectedChoiceNum = -1,
+                ProgressState = progressState,
+                SelectedChoiceNum = selectedChoiceNum,
                 PreviewText = ""
             });
         }
@@ -95,7 +107,36 @@ public class DMListUI : MonoBehaviour
             return;
         }
 
-        foreach (DM_TableSO dm in dmTables)
+        List<DM_TableSO> sortedDMs = new(dmTables);
+
+        IDataManager dataManager = ServiceLocator.Get<IDataManager>();
+
+        sortedDMs.Sort((a, b) =>
+        {
+            DateTime aTime = DateTime.MinValue;
+            DateTime bTime = DateTime.MinValue;
+
+            string aKey = a.messageId.ToString();
+            string bKey = b.messageId.ToString();
+
+            if (dataManager != null &&
+                dataManager.UserDatas != null &&
+                dataManager.UserDatas.DMProgress.ContainsKey(aKey))
+            {
+                aTime = dataManager.UserDatas.DMProgress[aKey].SentTime;
+            }
+
+            if (dataManager != null &&
+                dataManager.UserDatas != null &&
+                dataManager.UserDatas.DMProgress.ContainsKey(bKey))
+            {
+                bTime = dataManager.UserDatas.DMProgress[bKey].SentTime;
+            }
+
+            return bTime.CompareTo(aTime);
+        });
+
+        foreach (DM_TableSO dm in sortedDMs)
         {
             if (dm == null)
                 continue;
@@ -110,16 +151,19 @@ public class DMListUI : MonoBehaviour
                 continue;
             }
 
-            DMProgress progress = GetProgress(dm.messageId);
+            DMLocalProgress progress = GetProgress(dm.messageId);
             string npcAccountName = GetNpcAccountName(dm.senderName);
 
             bool hasUnread = progress.ProgressState == (int)DMProgressState.Unread;
             string previewText = GetPreviewText(dm.messageId, npcAccountName, progress);
 
+            string profileImageKey = GetNpcProfileImageKey(dm.senderName);
+
             itemUI.SetData(
                 npcAccountName,
                 previewText,
                 hasUnread,
+                profileImageKey,
                 () => OnClickDM(dm)
             );
         }
@@ -132,6 +176,12 @@ public class DMListUI : MonoBehaviour
             Log.Message("선택된 DM 데이터가 없습니다.");
             return;
         }
+        
+        string profileImageKey = GetNpcProfileImageKey(dmData.senderName);
+
+        DMChatUI chatUI = dmChatPanel.GetComponentInChildren<DMChatUI>();
+        if (chatUI != null)
+            chatUI.SetOpponentProfileImageKey(profileImageKey);
 
         if (dmListPanel != null)
             dmListPanel.SetActive(false);
@@ -139,7 +189,7 @@ public class DMListUI : MonoBehaviour
         if (dmChatPanel != null)
             dmChatPanel.SetActive(true);
 
-        DMProgress progress = GetProgress(dmData.messageId);
+        DMLocalProgress progress = GetProgress(dmData.messageId);
 
         // 대화창에 넘길 값은 클릭 전 상태로 보관
         int openProgressState = progress.ProgressState;
@@ -209,7 +259,7 @@ public class DMListUI : MonoBehaviour
 
     private void OnDMProgressChanged(int messageId, int progressState, int selectedChoiceNum, string previewText)
     {
-        DMProgress progress = GetProgress(messageId);
+        DMLocalProgress progress = GetProgress(messageId);
 
         progress.ProgressState = progressState;
         progress.SelectedChoiceNum = selectedChoiceNum;
@@ -236,17 +286,65 @@ public class DMListUI : MonoBehaviour
     
     private void SaveDMProgress(int messageId, int progressState, int selectedChoiceNum)
     {
-        // TODO: Firebase / DataManager 연동 후 교체 예정
         Log.Message(
-            $"DMProgress 임시 저장 - DM_ID:{messageId}, State:{progressState}, Choice:{selectedChoiceNum}"
+            $"[DMProgress 저장 요청] DM_ID:{messageId}, State:{progressState}, Choice:{selectedChoiceNum}"
+        );
+        
+        IDataManager dataManager = ServiceLocator.Get<IDataManager>();
+
+        if (dataManager == null)
+        {
+            Log.Message("DataManager를 찾을 수 없습니다.");
+            return;
+        }
+
+        if (dataManager.UserDatas == null)
+        {
+            Log.Message("UserDatas가 없습니다.");
+            return;
+        }
+
+        string dmKey = messageId.ToString();
+
+        if (!dataManager.UserDatas.DMProgress.ContainsKey(dmKey))
+        {
+            dataManager.UserDatas.DMProgress.Add(dmKey, new global::DMProgress());
+            Log.Message($"[DMProgress 신규 생성] {dmKey}");
+        }
+
+        global::DMProgress progress = dataManager.UserDatas.DMProgress[dmKey];
+
+        progress.ProgressState = progressState;
+        progress.SelectedChoiceNum = selectedChoiceNum;
+
+        Log.Message(
+            $"[DMProgress 저장 확인] Key:{dmKey}, State:{progress.ProgressState}, Choice:{progress.SelectedChoiceNum}"
         );
     }
 
-    private DMProgress GetProgress(int messageId)
+    private global::DMProgress GetSavedDMProgress(int messageId)
     {
-        if (!dmProgressTable.TryGetValue(messageId, out DMProgress progress))
+        IDataManager dataManager = ServiceLocator.Get<IDataManager>();
+
+        if (dataManager == null)
+            return null;
+
+        if (dataManager.UserDatas == null)
+            return null;
+
+        string dmKey = messageId.ToString();
+
+        if (!dataManager.UserDatas.DMProgress.TryGetValue(dmKey, out global::DMProgress progress))
+            return null;
+
+        return progress;
+    }
+
+    private DMLocalProgress GetProgress(int messageId)
+    {
+        if (!dmProgressTable.TryGetValue(messageId, out DMLocalProgress progress))
         {
-            progress = new DMProgress
+            progress = new DMLocalProgress
             {
                 DM_ID = messageId,
                 ProgressState = (int)DMProgressState.Unread,
@@ -260,7 +358,7 @@ public class DMListUI : MonoBehaviour
         return progress;
     }
 
-    private string GetPreviewText(int messageId, string npcAccountName, DMProgress progress)
+    private string GetPreviewText(int messageId, string npcAccountName, DMLocalProgress progress)
     {
         if (progress.ProgressState == (int)DMProgressState.Unread)
             return $"{npcAccountName}님이 메시지를 보내고 싶어합니다";
@@ -445,5 +543,26 @@ public class DMListUI : MonoBehaviour
         }
 
         return false;
+    }
+    
+    private string GetNpcProfileImageKey(int npcId)
+    {
+        if (npcSOs == null)
+        {
+            Log.Message("Npc_TableSO 배열이 연결되지 않았습니다.");
+            return "";
+        }
+
+        foreach (Npc_TableSO npc in npcSOs)
+        {
+            if (npc == null)
+                continue;
+
+            if (npc.npcId == npcId)
+                return npc.npcImage.ToString();
+        }
+
+        Log.Message($"Npc Profile Image를 찾을 수 없습니다 : {npcId}");
+        return "";
     }
 }
