@@ -20,7 +20,7 @@ public class NotificationData : MonoBehaviour
     [SerializeField] private Image _postImage;
     [SerializeField] private Button _postImageButton;
 
-    [SerializeField] private PostController _postController;
+    private PostController _postController;
     
     private int _notiTemplateID;
     private int _postId;            // 포스트 ID
@@ -44,16 +44,16 @@ public class NotificationData : MonoBehaviour
         if (_profileImage != null)
         {
             Log.Message($"Npc 이미지 키: {npcImageKey}");
-            // if (_profileImage != null && !string.IsNullOrEmpty(npcImageKey))
-            //     ServiceLocator.Get<AddressableManager>().LoadImageSprite(npcImageKey, _profileImage);
+            if (_profileImage != null && !string.IsNullOrEmpty(npcImageKey))
+                ServiceLocator.Get<AddressableManager>().LoadImageSprite(npcImageKey, _profileImage);
         }
 
         // 포스트 이미지 세팅 (팔로우 제외)
         if (_postImage != null)
         {
             Log.Message($"Post 이미지 키: {postImageKey}");
-            // if (_postImage != null && !string.IsNullOrEmpty(postImageKey))
-            //    ServiceLocator.Get<AddressableManager>().LoadImageSprite(postImageKey, _postImage);
+            if (_postImage != null && !string.IsNullOrEmpty(postImageKey))
+               ServiceLocator.Get<AddressableManager>().LoadImageSprite(postImageKey, _postImage);
         }
 
 
@@ -77,5 +77,10 @@ public class NotificationData : MonoBehaviour
         _postController.SetPost(_postImgId, _postId);
         Log.Message($" 포스트 이동: postImg : {_postImgId}, postId : {_postId} ");
         
+    }
+
+    public void SetPostController(PostController controller)
+    {
+        _postController = controller;
     }
 }

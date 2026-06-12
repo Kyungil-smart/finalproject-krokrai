@@ -176,8 +176,8 @@ public class NotificationController : MonoBehaviour
     }
 
     // 프리펩 1개 생성하고 SO 데이터를 채워주는 내부 함수
-    private void SpawnNotification(GameObject prefab, Notification_TableSO so, string finalText,
-        int postId, int npcId)
+    private void SpawnNotification(GameObject prefab, Notification_TableSO so,
+        string finalText, int postId, int npcId)
     {
         // 프리펩 연결 확인
         if (prefab == null) { Log.Message("프리펩이 연결 안됨"); return;}
@@ -205,7 +205,10 @@ public class NotificationController : MonoBehaviour
         // NotificationData.SetUp()이 텍스트와 이미지를 채워줌
         var notificationData = item.GetComponent<NotificationData>();
         if (notificationData != null)
+        {
+            notificationData.SetPostController(_postController);
             notificationData.Setup(so, finalText, npcImageKey, postImageKey, postId, postImgId);
+        }
         else
             Log.Message("NotificationData 컴포넌트가 없습니다.");
        
