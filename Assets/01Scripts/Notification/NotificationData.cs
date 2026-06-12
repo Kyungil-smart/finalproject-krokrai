@@ -20,15 +20,22 @@ public class NotificationData : MonoBehaviour
     [SerializeField] private Image _postImage;
     [SerializeField] private Button _postImageButton;
 
-    private int _notiTempladteID;
+    [SerializeField] private PostController _postController;
+    
+    private int _notiTemplateID;
+    private int _postId;            // 포스트 ID
+    private int _postImgId;         // 포스트 이미지 ID
 
     /// <summary>
     /// SO 데이터를 받아서 프리펩 UI 채우기
     /// </summary>
-    public void Setup(Notification_TableSO so, string finalText, string npcImageKey, string postImageKey)
+    public void Setup(Notification_TableSO so, string finalText,
+        string npcImageKey, string postImageKey, int postId, int postImgId)
     {
-        _notiTempladteID = so.notiTemplateId;
-
+        _notiTemplateID = so.notiTemplateId;
+        _postId = postId; 
+        _postImgId = postImgId;
+        
         // 텍스트 세팅
         if (_textBox != null)
             _textBox.text = finalText;
@@ -61,8 +68,14 @@ public class NotificationData : MonoBehaviour
     // TODO: 포스팅 시스템 끝나면 연결 - 포스트 이미지 눌렀을때 해당 게시물로 이동하기 위함
     private void OnPostButtonClicked()
     {
-        // TODO: 게시물 포스팅 시스템 끝나면 연결해서 포스팅 고유번호 생성 후 버튼에 넘겨주기
-        // PostManger.Instance.OpenPost(_notiTemplateId);
-        Log.Message($" 게시물 클릭: {_notiTempladteID}");
+        if (_postController == null)
+        {
+            Log.Message(" PostController 연결 안됨");
+            return;
+        }
+
+        _postController.SetPost(_postImgId, _postId);
+        Log.Message($" 포스트 이동: postImg : {_postImgId}, postId : {_postId} ");
+        
     }
 }
