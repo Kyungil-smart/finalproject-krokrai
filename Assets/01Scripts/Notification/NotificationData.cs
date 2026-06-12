@@ -44,8 +44,8 @@ public class NotificationData : MonoBehaviour
         if (_profileImage != null)
         {
             Log.Message($"Npc 이미지 키: {npcImageKey}");
-            if (_profileImage != null && !string.IsNullOrEmpty(npcImageKey))
-                ServiceLocator.Get<AddressableManager>().LoadImageSprite(npcImageKey, _profileImage);
+            // if (_profileImage != null && !string.IsNullOrEmpty(npcImageKey))
+            //     ServiceLocator.Get<AddressableManager>().LoadImageSprite(npcImageKey, _profileImage);
         }
 
         // 포스트 이미지 세팅 (팔로우 제외)
