@@ -20,9 +20,6 @@ public class DMChatUI : MonoBehaviour
     [SerializeField] private GameObject opponentBubblePrefab;
     [SerializeField] private GameObject playerBubblePrefab;
 
-    [Header("Test Profile")]
-    [SerializeField] private Sprite testProfileSprite;
-
     [Header("Choice")]
     [SerializeField] private GameObject choiceArea;
     [SerializeField] private Transform choiceContent;
