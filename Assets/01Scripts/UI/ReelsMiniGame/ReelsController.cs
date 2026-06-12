@@ -16,6 +16,7 @@ public class ReelsController : MonoBehaviour
     {
         //TODO : DB에 적용된 사항 추가
         //_currentGameIndex = ServiceLocator.Get<IDataManager>().UserDatas.;
+        _currentGameIndex = 0;
 
         for (int i = 0; i < _gameTable.scriptableObjects.Length; i++)
         {
@@ -44,15 +45,17 @@ public class ReelsController : MonoBehaviour
         //string[] 
         int nextIndex;
         int previousIndex;
-        if (_imgs.Count < _currentGameIndex + 1)
+        if (_imgs.Count <= _currentGameIndex + 1)
             nextIndex = 0;
         else
             nextIndex = _currentGameIndex + 1;
         if (_currentGameIndex - 1 < 0)
-            previousIndex = _imgs.Count;
+            previousIndex = _imgs.Count - 1;
         else
             previousIndex = _currentGameIndex - 1;
 
-        _view.SetImgs(new string[] { _imgs[previousIndex].Image_ID, _imgs[_currentGameIndex].Image_ID, _imgs[nextIndex].Image_ID });
+        Log.Message($"{previousIndex} / {_currentGameIndex} / {nextIndex}");
+
+        _view.SetImgs(new string[] { _imgs[previousIndex].Image_ID, _imgs[_currentGameIndex].Image_ID, _imgs[nextIndex].Image_ID});
     }
 }

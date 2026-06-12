@@ -7,6 +7,7 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 {
     [SerializeField] private float _lerpSpeed;
     [SerializeField] private float _snapSpeed;
+    [SerializeField] private ReelsController _reelsCtrl;
 
     Coroutine _aniCoroutine;
 
@@ -99,6 +100,7 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
         Log.Message("백터 조정 완료");
         transform.localPosition = new Vector3(0, 1660, 0);
         // 객체 위치 재조정 및 비활성화
+        _reelsCtrl.ChangeGame(isUp);
     }
 
     IEnumerator RestoreAni()

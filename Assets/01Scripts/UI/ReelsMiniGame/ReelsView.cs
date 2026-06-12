@@ -21,6 +21,7 @@ public class ReelsView : MonoBehaviour
         
         for (int i = 0; i < num.Length; i++)
         {
+            Log.Message($"{_gameImgs[i]} / {num[i]}");
             t.LoadImageSprite(num[i], _gameImgs[i]);
         }
     }
