@@ -53,7 +53,7 @@ public class ProfileController : MonoBehaviour
 
     private void OnEnable()
     {
-        _postedCount = ServiceLocator.Get<IDataManager>().UserDatas.UserPost.Count;
+        _postedCount = ServiceLocator.Get<IDataManager>().UserDatas.UserPost != null ? ServiceLocator.Get<IDataManager>().UserDatas.UserPost.Count : 0;
 
         if (_currentPostNum < _postedCount)
         {

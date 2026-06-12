@@ -6,6 +6,7 @@
  역할 : Upload system 관리 및 Image 등록
  방식 : prefab화 된 객체를 생성 후 Image를 밀어 넣어 객체를 완성 및 자신을 주입하여 반환 받을 수 있음
  */
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -24,6 +25,7 @@ public class UploadController : MonoBehaviour
 
     [SerializeField] Button _upLoadButton;
 
+    public event Action<int> OnUpload;
     [SerializeField] Uploadpopup _popup;
 
     int _currentPosts = 0;
@@ -38,8 +40,6 @@ public class UploadController : MonoBehaviour
 
     private void Awake()
     {
-        ServiceLocator.Get<IDataManager>().UserDatas.ImgList.Add("502004", new());
-
         Post_TableSO _postTableSO;
         Image_TableSO _folderSO;
 
@@ -160,6 +160,10 @@ public class UploadController : MonoBehaviour
         
         _upLoadImgs[_currentPostImg].PostedImg();
         _postImg.sprite = null;
+
+        OnUpload?.Invoke(_currentPost);
+
+        Log.Message($"등록 됌 : {_currentPost}");
     }
 
     public void SetPost(int imgID,int PostID)
