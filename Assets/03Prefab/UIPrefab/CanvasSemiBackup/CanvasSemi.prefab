@@ -10091,6 +10091,8 @@ MonoBehaviour:
   _redExclamationmark: {fileID: 0}
   _removeRedNoticeButton: {fileID: 8410820016009218593}
   _contentView: {fileID: 7814770256423225560}
+  _uploadController: {fileID: 2945395197554047338}
+  _postController: {fileID: 3052747714783511791}
 --- !u!1 &6230193647014061298
 GameObject:
   m_ObjectHideFlags: 0
