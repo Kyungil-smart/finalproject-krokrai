@@ -45,7 +45,7 @@ public class NotificationData : MonoBehaviour
         {
             Log.Message($"Npc 이미지 키: {npcImageKey}");
             // if (_profileImage != null && !string.IsNullOrEmpty(npcImageKey))
-            //     ServiceLocator.Get<AddressableManager>().LoadImageSprite(npcImageKey, _profileImage);
+            //     ServiceLocator.Get<IAddressableManager>().LoadImageSprite(npcImageKey, _profileImage);
         }
 
         // 포스트 이미지 세팅 (팔로우 제외)
@@ -53,7 +53,7 @@ public class NotificationData : MonoBehaviour
         {
             Log.Message($"Post 이미지 키: {postImageKey}");
             if (_postImage != null && !string.IsNullOrEmpty(postImageKey))
-               ServiceLocator.Get<AddressableManager>().LoadImageSprite(postImageKey, _postImage);
+               ServiceLocator.Get<IAddressableManager>().LoadImageSprite(postImageKey, _postImage);
         }
 
 
