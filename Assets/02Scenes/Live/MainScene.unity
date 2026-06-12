@@ -7860,6 +7860,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 187565128752123293, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 187565128752123293, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 187565128752123293, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 724918583451317066, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -7980,9 +7992,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2290442113654891386, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290442113654891386, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2514833374804782163, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2517889518752103580, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
       propertyPath: m_AnchorMax.y
@@ -8040,6 +8060,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2945395197554047338, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
+      propertyPath: _popup
+      value: 
+      objectReference: {fileID: 2705227487078151431}
+    - target: {fileID: 3887089911973839236, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5469250700573549687, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
       propertyPath: m_Name
       value: CanvasSemi
@@ -8080,6 +8108,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: -2
       objectReference: {fileID: 0}
+    - target: {fileID: 8064892360319545668, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8326514964892952898, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -8111,8 +8143,35 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3887089911973839236, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2705227487078151431}
   m_SourcePrefab: {fileID: 100100000, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
+--- !u!1 &2705227487078151429 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3887089911973839236, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
+  m_PrefabInstance: {fileID: 2705227487078151428}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2705227487078151430 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6024351819402016504, guid: b5d91d6a77f03f64eafc665ac4c1d7bf, type: 3}
+  m_PrefabInstance: {fileID: 2705227487078151428}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2705227487078151431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2705227487078151429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a33adf1d1563ff4f89f00a3994e59f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseWaitTime: 1.5
+  _popUp: {fileID: 2705227487078151430}
 --- !u!114 &2712973871312118917
 MonoBehaviour:
   m_ObjectHideFlags: 0

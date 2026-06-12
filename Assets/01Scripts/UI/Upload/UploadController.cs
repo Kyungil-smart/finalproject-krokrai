@@ -1,4 +1,4 @@
-/*
+﻿/*
  작성자 : krokrai
  작성일 : 26-06-08
  수정일 : 26-06-10
@@ -40,8 +40,6 @@ public class UploadController : MonoBehaviour
 
     private void Awake()
     {
-        ServiceLocator.Get<IDataManager>().UserDatas.ImgList.Add("502004", new());
-
         Post_TableSO _postTableSO;
         Image_TableSO _folderSO;
 
