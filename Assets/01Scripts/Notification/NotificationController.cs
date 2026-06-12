@@ -32,6 +32,7 @@ public class NotificationController : MonoBehaviour
     [SerializeField] private Transform _contentView;                        // 스크롤 뷰 (알림 쌓이는곳)
     
     [SerializeField] private UploadController _uploadController;
+    [SerializeField] private PostController _postController;
     
     private List<GameObject> _items = new List<GameObject>();               // 생성된 알림 축적
     
@@ -184,6 +185,10 @@ public class NotificationController : MonoBehaviour
         // Post_TableSO 찾기
         Post_TableSO postSO = FindPostSO(postId);
         
+        string npcImageKey = FindNpcImageKey(npcId);
+        string postImageKey = postSO != null ? postSO.postImage.ToString() : "";
+        int postImgId = postSO != null ? postSO.postImage : 0;
+        
         // extraNumber 타입별로 분류
         string extraNumber = "";
         if (so.notiType == Notification_TableEnum.LIKE && postSO != null)
@@ -193,9 +198,6 @@ public class NotificationController : MonoBehaviour
         
         finalText = finalText.Replace("{extraNumber}", extraNumber);
         
-        string npcImageKey = FindNpcImageKey(npcId);
-        string postImageKey = postSO != null ? postSO.postImage.ToString() : "";
-        
         // 프리펩을 Content 하위에 생성
         GameObject item = Instantiate(prefab, _contentView);
         
@@ -203,7 +205,7 @@ public class NotificationController : MonoBehaviour
         // NotificationData.SetUp()이 텍스트와 이미지를 채워줌
         var notificationData = item.GetComponent<NotificationData>();
         if (notificationData != null)
-            notificationData.Setup(so, finalText, npcImageKey, postImageKey);
+            notificationData.Setup(so, finalText, npcImageKey, postImageKey, postId, postImgId);
         else
             Log.Message("NotificationData 컴포넌트가 없습니다.");
        
