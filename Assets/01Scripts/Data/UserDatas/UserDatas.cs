@@ -29,5 +29,8 @@ public class UserDatas
     public Dictionary<string, UserPostState> UserPost { get; set; } = new();
 
     [FirestoreProperty]
+    public Dictionary<string, DMProgress> DMProgress { get; set; } = new();
+    
+    [FirestoreProperty]
     public Dictionary<string, ImageState> NPCPost { get; set; } = new();
 }
