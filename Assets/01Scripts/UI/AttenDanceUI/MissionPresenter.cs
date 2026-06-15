@@ -34,9 +34,8 @@ public class MissionPresenter : MonoBehaviour
         var eventManager = ServiceLocator.Get<IEventManager>();
 
         if (eventManager != null)
-        {
+        { 
             eventManager.OnCurrencyAdded += HandleCurrecyAdded;
-            Log.Message("22");
         }
     }
 
@@ -47,12 +46,14 @@ public class MissionPresenter : MonoBehaviour
         if (eventManager != null)
         {
             eventManager.OnCurrencyAdded -= HandleCurrecyAdded;
+            
         }
     }
 
     private void OnEnable()
     {
         var eventManager = ServiceLocator.Get<IEventManager>();
+        
         if (eventManager != null)
         {
             eventManager.OnDayClicked += OnDayTabChangedMission;
@@ -380,8 +381,6 @@ public class MissionPresenter : MonoBehaviour
             {
                 if (IsTargetMatch(mission.Target_Id, type))
                 {
-                    Log.Message("Target_Id와 매치되는 아이템이 있음");
-                    
                     string dayKey = $"Day_{day}";
                     string idStr = mission.Mission_Id.ToString();
 
@@ -404,14 +403,11 @@ public class MissionPresenter : MonoBehaviour
                         getEventDB[dayKey][idStr] = currentState;
                     }
                 }
-                else
-                {
-                    Log.Message("타겟 아이디와 매치되는 타입이 없음");
-                }
             }
             // TODO : UpdateAllMissions 추가하기
         }
     }
+    
     private bool IsTargetMatch(int targetId, CurrencyType currencyType)
     {
         switch (currencyType)
@@ -424,7 +420,6 @@ public class MissionPresenter : MonoBehaviour
             case CurrencyType.Energy: return targetId == 10006;
             default:
             {
-                Log.Message("1");
                 return false;
             }
         }

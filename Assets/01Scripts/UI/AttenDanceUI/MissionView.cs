@@ -16,7 +16,7 @@ using TMPro;
 
 public class MissionView : MonoBehaviour
 {
-    public event Action<int> OnSlotRewardRequested; // 보상 버튼 클릭 Action // < 오류 원인
+    public event Action<int> OnSlotRewardRequested; // 보상 버튼 클릭 Action
 
     [SerializeField] private MissionSlotView[] _missionSlots;
     [Header("메인 화면 스토리 UI 연결")] [SerializeField] private GameObject _mainStoryGroup;
