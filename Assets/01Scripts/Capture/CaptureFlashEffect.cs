@@ -5,47 +5,42 @@ using UnityEngine.UI;
 
 public class CaptureFlashEffect : MonoBehaviour
 {
-    [SerializeField] private Image _flashPanel;     // 흰색 전체화면 패널
+    [SerializeField] private Image _bgImage;     // 메인 백그라운드 이미지
 
+    private Color _originalColor;
+    
     private void Start()
     {
-        // 시작 시 완전 투명
-        SetAlpha(0f);
-        _flashPanel.gameObject.SetActive(false);
+        _originalColor = _bgImage.color;
     }
     
-    // 반짝 연출 실행
-    // 0.5초 = 밝아지기 0.25초 + 복구 0.25초
+    /// <summary>
+    /// 반짝 연출 실행
+    /// 0.5초 = 밝아지기 0.25초 + 복구 0.25초
+    /// </summary>
     public IEnumerator PlayFlash()
     {
-        _flashPanel.gameObject.SetActive(true);
-        
         // 0.25초 동안 밝아지기
-        yield return StartCoroutine(FadeAlpha(0f, 1f, 0.25f));
+        yield return StartCoroutine(FadeBrightness(1f, 0.25f));
         
         // 0.25초 동안 복구
-        yield return StartCoroutine(FadeAlpha(1f, 0f, 0.25f));
-        
-        _flashPanel.gameObject.SetActive(false);
+        yield return StartCoroutine(FadeBrightness(0f, 0.25f));
     }
 
-    private IEnumerator FadeAlpha(float from, float to, float duration)
+    // brightness: 0f = 원래 색상, 1f = 흰색
+    private IEnumerator FadeBrightness(float targetBrightness, float duration)
     {
+        Color startColor = _bgImage.color;
+        Color targetColor = Color.Lerp(_originalColor, Color.white, targetBrightness);
         float elapsed = 0f;
+        
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            SetAlpha(Mathf.Lerp(from, to, elapsed / duration));
+            _bgImage.color = Color.Lerp(startColor, targetColor, elapsed / duration);
             yield return null;
         }
 
-        SetAlpha(to);
-    }
-
-    private void SetAlpha(float alpha)
-    {
-        Color color = _flashPanel.color;
-        color.a = alpha;
-        _flashPanel.color = color;
+        _bgImage.color = targetColor;
     }
 }
