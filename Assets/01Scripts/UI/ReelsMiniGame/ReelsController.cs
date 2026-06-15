@@ -29,9 +29,21 @@ public class ReelsController : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        _currentGameIndex = 0;//ServiceLocator.Get<IDataManager>().UserData
+
+        int maxGameIndex = _gameTable.scriptableObjects.Length - 1;
+
+        int nextIndex = maxGameIndex < _currentGameIndex + 1 ? 0 : _currentGameIndex + 1;
+        int previousIndex = _currentGameIndex - 1 < 0 ? maxGameIndex : _currentGameIndex - 1;
+
+        SetView(nextIndex, _currentGameIndex, previousIndex);
+    }
+
     public void ChangeGame(bool isUp)
     {
-        int gameCount = _gameTable.scriptableObjects.Length;
+        int gameCount = _gameTable.scriptableObjects.Length - 1;
 
         if (isUp)
         {
@@ -42,7 +54,6 @@ public class ReelsController : MonoBehaviour
             _currentGameIndex = _currentGameIndex - 1 < 0 ? gameCount : _currentGameIndex - 1;
         }
 
-        //string[] 
         int nextIndex;
         int previousIndex;
         if (_imgs.Count <= _currentGameIndex + 1)
@@ -54,8 +65,31 @@ public class ReelsController : MonoBehaviour
         else
             previousIndex = _currentGameIndex - 1;
 
-        Log.Message($"{previousIndex} / {_currentGameIndex} / {nextIndex}");
+        SetView(nextIndex, _currentGameIndex, previousIndex);
+    }
 
-        _view.SetImgs(new string[] { _imgs[previousIndex].Image_ID, _imgs[_currentGameIndex].Image_ID, _imgs[nextIndex].Image_ID});
+    private void SetView(int nextIndex, int currentIndex, int previousIndex)
+    {
+        if (nextIndex < 0 || currentIndex < 0 || previousIndex < 0)
+        {
+            Log.Message($"숫자가 0보다 작을 수 없습니다. {nextIndex} {currentIndex} {previousIndex}");
+            return;
+        }
+        _view.SetImgs(new string[] { _imgs[nextIndex].Image_ID, _imgs[currentIndex].Image_ID, _imgs[previousIndex].Image_ID });
+    }
+
+    public void OnPlayButtonClick()
+    {
+        //_currentGameIndex 기반으로 게임 시작 불러오기
+        var data = ServiceLocator.Get<IDataManager>();
+        //if (10 < data.UserDatas. ) // Play 횟수
+
+        if (data.UserGoods.Claw_ < 1)
+        {
+            // 광고 팝업 팝업 띄우기
+            return;
+        }
+
+        // 게임 화면 출력
     }
 }

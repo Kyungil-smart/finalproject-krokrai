@@ -14,12 +14,6 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
     float _moveYPos;
     bool _isFirst;
 
-    private void OnEnable()
-    {
-        // TODO : 나중에 여기서 마지막 접근한 게임에 코드 받아오기
-        //_currentGameNum = ServiceLocator.Get<IDataManager>().UserDatas
-    }
-
     public void OnPointerDown(PointerEventData eventData)
     {
         _moveYPos = eventData.pressPosition.y;
@@ -33,6 +27,7 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
     public void OnPointerMove(PointerEventData eventData)
     {
+        // TODO  : 여기서 Play button 비활성화
         if(!_isFirst)
         {
             _isFirst = true;
@@ -47,12 +42,12 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
     public void OnPointerUp(PointerEventData eventData)
     {
         _isFirst = false;
+        CheckPos();
     }
 
     private void CheckPos()
     {
         float y = transform.localPosition.y;
-        Log.Message(y);
 
         if (_aniCoroutine != null)
         {
@@ -61,17 +56,14 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
         }
         if (2490 > y && y > 830) // 830 
         {
-            Log.Message($"enter restore");
             _aniCoroutine = StartCoroutine(RestoreAni());
         }
         else if (y < 830)
         {
-            Log.Message($"up");
             _aniCoroutine = StartCoroutine(SnapAni(true));
         }
         else
         {
-            Log.Message($"down");
             _aniCoroutine = StartCoroutine(SnapAni(false));
         }
     }
@@ -95,10 +87,10 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
             }
         }
 
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
 
-        Log.Message("백터 조정 완료");
         transform.localPosition = new Vector3(0, 1660, 0);
+        
         // 객체 위치 재조정 및 비활성화
         _reelsCtrl.ChangeGame(isUp);
     }
@@ -111,9 +103,6 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
             yield return null;
         }
 
-        Log.Message("백터 조정 완료");
         transform.localPosition = new Vector3(0,1660,0);
-
-        // play 버튼 활성화
     }
 }
