@@ -43,8 +43,6 @@ public class DayListPresent : MonoBehaviour
         _lastLoginTime = ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp;
         
         Log.Message($"<color=cyan> 데이터 로드 완료 -> 가입일: {_joinTimeStamp}, 마지막 출석인정일: {_lastLoginTime}</color>");
-        // _joinTimeStamp = new DateTime(2026, 06, 01, 0,0,0);
-        // _lastLoginTime = new DateTime(2026, 06, 03, 0,0,0);;
     }
 
     /// <summary>
@@ -77,7 +75,7 @@ public class DayListPresent : MonoBehaviour
             currentActiveDay = 1;
         }
         
-        int displayActiveDay = (int)Math.Min(currentActiveDay, 7); 
+        int displayActiveDay = Math.Min(currentActiveDay, 7); 
         
         Log.Message($"<color=blue>1~7일차 슬롯 갱신 시작 -> 실제 누적: {currentActiveDay}일 / UI 표기 기준: {displayActiveDay}일</color>");
         
