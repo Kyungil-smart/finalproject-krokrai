@@ -2950,6 +2950,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1624364877}
+  - component: {fileID: 1624364880}
   - component: {fileID: 1624364879}
   - component: {fileID: 1624364878}
   m_Layer: 0
@@ -3071,6 +3072,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1624364880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624364876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ce04ec4d5a2cf4380da8e1e39f4362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sr: {fileID: 1624364879}
 --- !u!1 &1716798028
 GameObject:
   m_ObjectHideFlags: 0
