@@ -3,7 +3,7 @@
 수정자 : 
  
 작성일 : 26-06-04
-수정일 : 26-06-08
+수정일 : 26-06-15
 
 역할 : 출석체크 UI의 1~7일차 UI에 MVP 패턴을 적용해 DayListPresenter와 통신
 방식 : DayListPresenter에서 호출받아 UI를 갱신학고, 버튼 클릭시 EventManger를 통해 이벤트를 발생시킴
@@ -30,7 +30,6 @@ public class DayListView : MonoBehaviour
             
             _dayBtns[i].onClick.AddListener(() =>
             {
-                ToggleOutline(index);
                 Log.Message($"일 차 눌림 (눌린 일차 {index + 1})");
                 ServiceLocator.Get<IEventManager>().ClickDay(index + 1);
             });
@@ -39,7 +38,22 @@ public class DayListView : MonoBehaviour
 
     private void OnEnable()
     {
+        var eventManager = ServiceLocator.Get<IEventManager>();
+        if (eventManager != null)
+        {
+            eventManager.OnDayClicked += OnDayChangedExternally;
+        }
+        
         ToggleOutline(0);
+    }
+    
+    private void OnDisable()
+    {
+        var eventManager = ServiceLocator.Get<IEventManager>();
+        if (eventManager != null)
+        {
+            eventManager.OnDayClicked -= OnDayChangedExternally;
+        }
     }
 
     /// <summary>
@@ -69,5 +83,11 @@ public class DayListView : MonoBehaviour
             _outlines[index].enabled = true;
             _lastOutline = _outlines[index];
         }
+    }
+    
+    private void OnDayChangedExternally(int day)
+    {
+        int index = day - 1;
+        ToggleOutline(index);
     }
 }

@@ -3,7 +3,7 @@
 수정자 : NekioEmilia
  
 작성일 : 26-06-04
-수정일 : 26-06-07
+수정일 : 26-06-15
 
 역할 : 출석체크 UI의 1~7일차 UI에 MVP 패턴을 적용해 db에서 값을 받아와서 DayListView와 통신
 방식 : AttendanceUICanvas 하위에 Day_List에 DayListView와 함께 부착

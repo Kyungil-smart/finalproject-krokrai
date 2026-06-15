@@ -3,7 +3,7 @@
 수정자 : NekioEmilia
  
 작성일 : 26-06-05
-수정일 : 26-06-10
+수정일 : 26-06-15
 
 역할 : 출석체크 UI의 Festa Slider와 보물상자에 접근한 View 스크립트 FestaPresenter와 통신
 방식 : Presenter에서 UpdateFestaUI를 불러와서 Festa (보물상자 UI)를 갱신
@@ -74,6 +74,7 @@ public class FestaView : MonoBehaviour
 
             if (isClaimed)
             {
+                Log.Message($"수령 완료함, 버튼 터치 불가, 아이콘 바꿈");
                 // 수령 완료 : 배경  노란색 / 열린 상자 / 터치 불가
                 _chestBackGroundImages[i].color = _unlockedColor;
                 _chestIconImages[i].sprite = _openChestSprite;
