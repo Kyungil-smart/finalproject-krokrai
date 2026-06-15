@@ -86,4 +86,7 @@ public class DayListPresent : MonoBehaviour
             _view.DayListUI(i, isUnlocked);
         }
     }
+    
+    //TODO: 언젠간 매일 접속하더라도 전체 이벤트가 7일차에 종료되므로, 이 유저는 개인 5일차까지만 오픈 및 플레이 할 수 있으며 이벤트 종료와 함께 시스템이 완전히 닫힘.
+    // 해당 기획 내용 구현 해야함
 }
