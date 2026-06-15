@@ -19,18 +19,18 @@ public class MissionSlotView : MonoBehaviour
 {
     public event Action<int> OnRewardClicked;
 
-    [Header("UI연결")] [SerializeField] private Slider missionProgressSlider;
-    // [SerializeField] private TextMeshProUGUI missionNameText;
-    // [SerializeField] private TextMeshProUGUI missionProgressText;
-    [SerializeField] private Button rewardButton;
-    [SerializeField] private GameObject clearBackGround;
+    [Header("UI연결")] [SerializeField] private Slider _missionProgressSlider;
+    [SerializeField] private TextMeshProUGUI _missionNameText;
+    [SerializeField] private TextMeshProUGUI _missionProgressText;
+    [SerializeField] private Button _rewardButton;
+    [SerializeField] private GameObject _clearBackGround;
 
-    [Header("Item 연결")] [SerializeField] private ItemSlotView[] rewardItemSlots;
+    [Header("Item 연결")] [SerializeField] private ItemSlotView[] _rewardItemSlots;
 
     [Header("Ui 소스 이미지 세팅")] 
-    [SerializeField] private Image targetImage;
-    [SerializeField] private Sprite defaultSprite;
-    [SerializeField] private Sprite changeSprite;
+    [SerializeField] private Image _targetImage;
+    [SerializeField] private Sprite _defaultSprite;
+    [SerializeField] private Sprite _changeSprite;
     
     private int _slotIndex;
 
@@ -40,56 +40,61 @@ public class MissionSlotView : MonoBehaviour
     public void InitSlot(int index)
     {
         _slotIndex = index;
-        rewardButton.onClick.AddListener(() => OnRewardClicked?.Invoke(_slotIndex));
+        _rewardButton.onClick.AddListener(() =>
+        {
+            Log.Message($"<color=blue> {_slotIndex + 1}번 미션 버튼 터치됨");
+            OnRewardClicked?.Invoke(_slotIndex);
+        });
     }
 
     /// <summary>
     /// 전달받은 데이터로 미션 슬롯의 텍스트, 슬라이더, 버튼 상태, 보상 아이콘을 갱신하는 메서드
     /// </summary>
-    public void UpdateSlotUI(string missionName, int currentState, int goalValue, int flag/*List<Reward_Group_TableSO> rewardData*/)
+    public void UpdateSlotUI(string missionName, int currentState, int goalValue, int flag, List<Reward_Group_TableSO> rewardData)
     {
-        // missionNameText.text = missionName;
-        
         // 현재 진행도가 목표치 못뚫게 막음
-        // int displayState = Mathf.Min(currentState, goalValue);
-        // missionProgressText.text = $"{displayState} / {goalValue}"; 
+        _missionNameText.text = missionName;
+        int displayState = Mathf.Min(currentState, goalValue);
+        _missionProgressText.text = $"{displayState} / {goalValue}"; 
         
-        missionProgressSlider.value = goalValue > 0 ? (float)currentState / goalValue : 0f; // 정규화
+        float progress = goalValue > 0 ? (float)currentState / goalValue : 0f;
+        _missionProgressSlider.value = Mathf.Clamp01(progress);
 
         if (flag == 0) // 클리어 X
         {
-            rewardButton.interactable = false;
-            if (targetImage != null && defaultSprite != null) targetImage.sprite = defaultSprite;
-            if (clearBackGround != null) clearBackGround.SetActive(false);
+            _rewardButton.interactable = false;
+            if (_targetImage != null && _defaultSprite != null) _targetImage.sprite = _defaultSprite;
+            if (_clearBackGround != null) _clearBackGround.SetActive(false);
         }
         else if (flag == 1) // 수령 가능
         {
-            rewardButton.interactable = true;
-            if (targetImage != null && changeSprite != null) targetImage.sprite = changeSprite;
-            if (clearBackGround != null) clearBackGround.SetActive(false);
+            _rewardButton.interactable = true;
+            if (_targetImage != null && _changeSprite != null) _targetImage.sprite = _changeSprite;
+            if (_clearBackGround != null) _clearBackGround.SetActive(false);
         }
         else if (flag == 2) // 이미 수령함
         {
-            rewardButton.interactable = false;
-            if (targetImage != null && defaultSprite != null) targetImage.sprite = defaultSprite;
-            if (clearBackGround != null) clearBackGround.SetActive(true);
+            _rewardButton.interactable = false;
+            if (_targetImage != null && _defaultSprite != null) _targetImage.sprite = _defaultSprite;
+            if (_clearBackGround != null) _clearBackGround.SetActive(true);
         }
-
-        /*
-        for (int i = 0; i < rewardItemSlots.Length; i++)
+        
+        
+        for (int i = 0; i < _rewardItemSlots.Length; i++)
         {
             if (rewardData != null && i < rewardData.Count)
             {
-                rewardItemSlots[i].gameObject.SetActive(true);
+                _rewardItemSlots[i].gameObject.SetActive(true);
                 
                 // 일단 아이콘이 없어서 null 넘겨주는데, 스프라이트 생기는 즉시 교체
-                rewardItemSlots[i].SetItem(null, rewardData[i].Amount);
+                _rewardItemSlots[i].SetItem(null, rewardData[i].Amount);
             }
             else
             {
-                rewardItemSlots[i].gameObject.SetActive(false);
+                _rewardItemSlots[i].gameObject.SetActive(false);
             }
         }
-        */
+        
+        
     }
 }
