@@ -79,7 +79,6 @@ public class MissionSlotView : MonoBehaviour
             if (_clearBackGround != null) _clearBackGround.SetActive(true);
         }
         
-        
         for (int i = 0; i < _rewardItemSlots.Length; i++)
         {
             if (rewardData != null && i < rewardData.Count)

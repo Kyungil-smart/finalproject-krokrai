@@ -17,6 +17,7 @@ public class EventManager : MonoBehaviour, IEventManager, IManagerBooter
     
     public event Action<int> OnDayClicked; // Day 탭이 클릭되었을 때 발생하는 이벤트
     public event Action<int> OnGaugeIncrease; // Festa 게이지 점수를 획득했을 때 발생하는 이벤트
+    public event Action<CurrencyType, int> OnCurrencyAdded;
 
     /// <summary>
     /// 특정 Day 탭을 클릭했을 때 호출되어 OnDayClicked를 Invoke 시킴
@@ -34,6 +35,16 @@ public class EventManager : MonoBehaviour, IEventManager, IManagerBooter
     public void GaugeIncrease(int amount)
     {
         OnGaugeIncrease?.Invoke(amount);
+    }
+
+    /// <summary>
+    /// 자원이 추가되면 OnCurrencyAdded를 Invoke 시킴
+    /// </summary>
+    /// <param name="type">추가된 아이템 타입</param>
+    /// <param name="amount">추가된 아이템 수량</param>
+    public void CurrencyAdded(CurrencyType type, int amount)
+    {
+        OnCurrencyAdded?.Invoke(type, amount);
     }
 
     public void Register() => ServiceLocator.Register<IEventManager>(this);

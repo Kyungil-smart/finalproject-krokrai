@@ -19,7 +19,7 @@ public class FestaPresenter : MonoBehaviour
     
     private int _totalFestaPoint;
     private int _recentGaugeStep;
-    private bool _finalRewardReceived;
+    private int _finalRewardReceived;
 
     [SerializeField] private GaugeDataModel _gaugeModel;
     [SerializeField] private FestaView _view;
@@ -104,8 +104,8 @@ public class FestaPresenter : MonoBehaviour
         
         if (_recentGaugeStep >= MAX_FESTA_CHEST_COUNT)
         {
-            _finalRewardReceived = true;
-            ServiceLocator.Get<IDataManager>().Attendance.Final_Reward_Received = true;
+            _finalRewardReceived = 1;
+            ServiceLocator.Get<IDataManager>().Attendance.Final_Reward_Received = 1;
         }
         
         ReFreshUI();
