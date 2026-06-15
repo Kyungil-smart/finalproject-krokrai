@@ -1,4 +1,14 @@
-using System;
+/*
+작성자 : NekioEmilia
+수정자 : NekioEmilia
+ 
+작성일 : 26-06-15
+수정일 : 
+
+역할 : 테스트를 위한 테스트 스크립트
+방식 : AddGauge 버튼 => 게이지 점수 + 100, ClearMission 버튼 => 일차 별 미션 하나씩 완료, NextDay 버튼 => 클릭 시 다음 일차로 넘어감
+*/
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
