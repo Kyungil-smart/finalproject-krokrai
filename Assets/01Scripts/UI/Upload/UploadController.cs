@@ -149,7 +149,7 @@ public class UploadController : MonoBehaviour
     {
         if (_currentPost == 0 || !(100000 < _currentPost && _currentPost < 200000))
             return;
-        if (ServiceLocator.Get<IDataManager>().UserGoods.Gem_ < 1)
+        if (ServiceLocator.Get<IDataManager>().UserGoods.Stone_ < 1)
         {
             _popup.SetPopUp();
             return;
