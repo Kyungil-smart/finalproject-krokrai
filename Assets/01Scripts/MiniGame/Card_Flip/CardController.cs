@@ -19,26 +19,34 @@ public class CardController : MonoBehaviour, IPointerClickHandler
     {
         if (_isFlip) return;
         _root.ClickedCard(_index,_cardNum);
+        //Log.Message();
         FlipCard();
     }
 
     public void SetCard(int index, int cardNum, CardGameController cgc)
     {
+        _sr.color = Color.yellow;
+
         _index = index;
+        _cardNum = cardNum;
         _root = cgc;
     }
 
-    private void FlipCard()
+    public void FlipCard()
     {
         if(_isFlip)
         {
+            _sr.color = Color.yellow;
 
+            _isFlip = false;
         }
         else // 기본 상태
         {
+            _sr.color = Color.green;
             // 카드 뒤집기
 
             //
+            _isFlip = true;
         }
     }
 }
