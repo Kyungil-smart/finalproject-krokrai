@@ -9,14 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e160add114922094c8aa9b32e21564fe, type: 3}
-  m_Name: Post_TableSO_Row_8
+  m_Script: {fileID: 11500000, guid: 51c15d5dfbabf244ba87c7cf71760924, type: 3}
+  m_Name: Reward_Group_TableSO_Row_58
   m_EditorClassIdentifier: 
-  postID: 102001
-  profileType: 0
-  postProFile: 400001
-  postImage: 0
-  likeCount: 340512
-  getFollower: 0
-  captionText: STR_CAP_000006
-  getRoute: 0
+  Index: 102
+  Reward_Group_Id: 5107
+  Reward_Order: 2
+  Reward_Name: "\uBCF4\uC11D"
+  Reward_Id: 100002
+  Amount: 150

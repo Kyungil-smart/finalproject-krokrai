@@ -20,3 +20,4 @@ MonoBehaviour:
   getFollower: 30
   captionText: STR_CAP_000002
   getRoute: 0
+  objectid: 0

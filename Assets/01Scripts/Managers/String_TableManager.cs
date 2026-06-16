@@ -38,7 +38,6 @@ public class String_TableManager : MonoBehaviour, IString_TableManager, IManager
         {
             return _strings[s];
         }
-        Log.Message($"{s} 를 찾을 수 없습니다.");
         return null;
     }
 

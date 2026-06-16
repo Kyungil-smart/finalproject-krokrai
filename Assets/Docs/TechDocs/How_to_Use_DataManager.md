@@ -3,6 +3,7 @@
   - ServiceLocator (실제로는 Bootstraper가 Service Locator에 대신 등록 사유 : 초기화 순서가 중요해서)
     - ㄴBackendManager
     - ㄴDataManager
+      - 테스트만 진행하는 경우 DataManager의 inspector에 Test Mode 체크
 
 - 자동으로 처리해주는 곳 (참고만)
   - GoogleSignInService

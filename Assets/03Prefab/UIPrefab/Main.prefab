@@ -2928,10 +2928,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Credits-Energy
       objectReference: {fileID: 0}
-    - target: {fileID: 5146732639143658372, guid: 2b400ae857bd74d58a1872d3a94cd81d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6110580918221215048, guid: 2b400ae857bd74d58a1872d3a94cd81d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1

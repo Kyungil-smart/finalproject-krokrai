@@ -19,5 +19,6 @@ public class Post_TableSO : ScriptableObject
     [SOInject(5)] public int getFollower;
     [SOInject(6)] public string captionText;
     [SOInject(7)] public Route getRoute;
-    
+    [SOInject(8)] public int objectid;
+
 }

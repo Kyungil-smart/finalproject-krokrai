@@ -1,7 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-05-27
- 수정일 : 26-06-02
+ 수정일 : 26-06-09
 
  역할 : Firebase Store 및 RTDB와 연동으로 데이터 읽기 및 쓰기
  방식 : Firestore에는 최상위 경로에서 User만 찾은 후 Script에 밀어 넣는 방식
@@ -14,6 +14,10 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재 업데이트 마다 데이터 추가 생성은 미구현
 {
+#if UNITY_EDITOR
+    [Header("DB 연결 없는 테스트")]
+    [SerializeField] private bool _testMode;
+#endif
     public event Action OnUserDataReseted;
 
     private bool _readyToSave;
@@ -92,8 +96,6 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
         _userData = new UserDatas();
         ImageState s = new ImageState();
         s.getTime = DateTime.Now;
-        _userData.ImgList.Add("502004", s); // TODO : 빌드 후 삭제
-        _userData.UserPost.Add("102001",new());
         _userData.Event_Mission.Init();
         SaveRTDBData();
         OnUserDataReseted?.Invoke();
@@ -118,6 +120,9 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
 
     public async void SaveRTDBData()
     {
+#if UNITY_EDITOR
+        if (_testMode) return;
+#endif
         try
         {
             string json = JsonUtility.ToJson(_userGoods);
@@ -163,8 +168,6 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
                 _userData.Event_Mission.Init();
                 ImageState s = new ImageState();
                 s.getTime = DateTime.Now;
-                _userData.ImgList.Add("502004", s); // TODO : 빌드 후 삭제
-                _userData.UserPost.Add("102001", new());
                 _readyToSave = true;
                 SaveData();
             }
@@ -199,6 +202,9 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
     /// </summary>
     public void SaveData()
     {
+#if UNITY_EDITOR
+        if (_testMode) return;
+#endif
         if (!_readyToSave) return;
         if (_userID == null || _userID == "")
         {
@@ -233,6 +239,7 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
         {
             if (await ServiceLocator.Get<IBackendManager>().ReadyTask)
             {
+                Log.Message(ServiceLocator.Get<IBackendManager>().Auth.CurrentUser == null);
                 _userID = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.UserId;
                 ReadData();
                 ReadRTDBData();
@@ -244,11 +251,28 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
             Debug.Log(e.Message);
         }
     }
+#if UNITY_EDITOR
+    private void TestMod()
+    {
+        _userData = new UserDatas();
+        _userData.Event_Mission.Init();
+        _userGoods = new UserGoods();
+        ServiceLocator.Get<IDataAutoSaveManager>().SetTestMode();
+    }
+
+#endif
 
     public void Register()
     {
         ServiceLocator.Register<IDataManager>(this);
         _readyToSave = false;
+#if UNITY_EDITOR
+        if (_testMode)
+        {
+            TestMod();
+            return;
+        }
+#endif
         ReadUserID();
     }
     public void UnRegister() => ServiceLocator.UnRegister<IDataManager>(this);
