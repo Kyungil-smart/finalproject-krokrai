@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,7 +7,7 @@ using UnityEngine.EventSystems;
 public class CardController : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private SpriteRenderer _sr;
-    //[SerializeField] private Ctrl;
+    [SerializeField] private Sprite _defaultCard;
 
     private CardGameController _root;
 
@@ -14,6 +15,8 @@ public class CardController : MonoBehaviour, IPointerClickHandler
 
     private int _index = -1;
     private int _cardNum = -1;
+
+    private Sprite _cardImg;
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -23,30 +26,33 @@ public class CardController : MonoBehaviour, IPointerClickHandler
         FlipCard();
     }
 
-    public void SetCard(int index, int cardNum, CardGameController cgc)
+    public void SetCard(int index, int cardNum, Sprite cardImg,CardGameController cgc)
     {
-        _sr.color = Color.yellow;
-
         _index = index;
         _cardNum = cardNum;
         _root = cgc;
+        _cardImg = cardImg;
     }
 
     public void FlipCard()
     {
-        if(_isFlip)
+        if (_isFlip)
         {
-            _sr.color = Color.yellow;
-
+            _sr.sprite = _defaultCard;
             _isFlip = false;
         }
         else // 기본 상태
         {
-            _sr.color = Color.green;
             // 카드 뒤집기
+            _sr.sprite = _cardImg;
 
-            //
             _isFlip = true;
         }
+    }
+
+    public void ResetFlip()
+    {
+        _sr.sprite = _defaultCard;
+        _isFlip = false;
     }
 }

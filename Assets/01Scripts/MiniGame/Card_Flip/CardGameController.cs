@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class CardGameController : MonoBehaviour
@@ -6,9 +8,21 @@ public class CardGameController : MonoBehaviour
     [SerializeField] byte _row; // 4 열
     [SerializeField] byte _col; // 4 행
 
+    [SerializeField] Vector2 _startPos;
+    [SerializeField] Vector2 _offset;
+
+    [SerializeField] AutoSOGen_ContaineSO _cardData;
     [SerializeField] GameObject _cardPrefab;
 
+    [SerializeField] TextMeshProUGUI _count;
+    [SerializeField] Sprite[] _cardImgs;
+
     CardController[] _cardCtrl;
+    Transform[] _cardPoss;
+
+    Vector2[] _presetCardPoss;
+
+    Coroutine _coroutine;
 
     private bool _isOpenedCard;
 
@@ -16,49 +30,94 @@ public class CardGameController : MonoBehaviour
     private int _currentCardIndex;
 
     private int _hitCard;
+    private int _maxOpenCardCount;
 
     private int[] _rndNums;
 
     private void Awake()
     {
         _cardCtrl = new CardController[_row * _col];
-        _rndNums = new int[] // new int[_row * _col];
-        {
-            101,101,102,102
-        }; // TODO : Table에서 이미지 번호 받아오기
+        _cardPoss = new Transform[_row * _col];
+        _rndNums = new int[_row * _col];
+        _presetCardPoss = new Vector2[_row * _col];
+        _maxOpenCardCount = 8; // TODO : 나중에 SO로 교체
+        _count.text = $"남은 횟수 : {_maxOpenCardCount}회";
 
-        Shuffle();
+        int t = _rndNums.Length / 2;
+
+        MiniGame_CardFlip_CardTable_TableSO so;
+
+        for (int i = 0; i < t; i++)
+        {
+            if (!(_cardData.scriptableObjects[i] is MiniGame_CardFlip_CardTable_TableSO))
+                return;
+            so = _cardData.scriptableObjects[i] as MiniGame_CardFlip_CardTable_TableSO;
+
+            _rndNums[i * 2] = so.card_ID;
+            _rndNums[(i * 2) + 1] = so.card_ID;
+        }
+
+        _rndNums = Shuffle(_rndNums);
+
+        t = 0;
 
         GameObject obj;
 
-        for (int i = 0; i < _cardCtrl.Length; i++)
+        for (int i = 0; i < _row; i++)
         {
-            obj = Instantiate(_cardPrefab, transform);
-            obj.name = $"Card_{i}";
+            for (int j = 0; j < _col; j++)
+            {
+                obj = Instantiate(_cardPrefab, transform);
+                _cardPoss[t] = obj.transform;
+                _presetCardPoss[t] = new Vector2(_startPos.x + (_offset.x * j), _startPos.y - (_offset.y * i));
+                _cardPoss[t].localPosition = _presetCardPoss[t];
+                
+                obj.name = $"Card_{t}";
 
-            _cardCtrl[i] = obj.GetComponent<CardController>();
-            _cardCtrl[i].SetCard(_rndNums[i],i,this);
+                _cardCtrl[t] = obj.GetComponent<CardController>();
+
+                _cardCtrl[t].SetCard(_rndNums[t], t, _cardImgs[_rndNums[t] - 1001], this);
+
+
+                t++;
+            }
         }
     }
 
-    private void Shuffle()
+    private T[] Shuffle<T>(T[] num) where T : struct
     {
-        int c = _rndNums.Length;
-        int temp = 0;
+        int c = num.Length;
+        T temp;
         int index = 0;
         for (int i = c - 1; 0 < i; i--)
         {
-            index = Random.Range(0, c);
+            index = UnityEngine.Random.Range(0, c);
 
-            temp = _rndNums[i];
-            _rndNums[i] = _rndNums[index];
-            _rndNums[index] = temp;
+            temp = num[i];
+            num[i] = num[index];
+            num[index] = temp;
         }
+        return num;
     }
 
     public void ResetData()
     {
+        int t = 0;
 
+        for (int i = 0; i < _cardCtrl.Length; i++)
+        {
+            _cardCtrl[i].ResetFlip();
+            _presetCardPoss = Shuffle(_presetCardPoss);
+        }
+        
+        for (int i = 0; i < _row; i++)
+        {
+            for (int j = 0; j < _col; j++)
+            {
+                _cardPoss[t].localPosition = _presetCardPoss[t];
+                t++;
+            }
+        }
     }
 
     public void ClickedCard(int index, int cardNum)
@@ -74,11 +133,13 @@ public class CardGameController : MonoBehaviour
             else
             {
                 Log.Message("맞추기 실패");
-                _cardCtrl[cardNum].FlipCard(); // 카드 다시 뒤집기
-                _cardCtrl[_currentCardNum].FlipCard();
+                _coroutine = StartCoroutine(Waiter(cardNum));
             }
-
+            _maxOpenCardCount--;
+            _count.text = $"남은 횟수 : {_maxOpenCardCount}회";
             _isOpenedCard = false;
+            if (_maxOpenCardCount < 1)
+                EndGame();// 게임 오버
         }
         else
         {
@@ -86,5 +147,22 @@ public class CardGameController : MonoBehaviour
             _currentCardNum = cardNum;
             _isOpenedCard = true;
         }
+    }
+
+    private void EndGame()
+    {
+        StopCoroutine(_coroutine);
+        Log.Message($"게임 종료 / {_hitCard}");
+        // 점수 판
+
+        // 게임 재시작 여부
+        ResetData();
+    }
+
+    IEnumerator Waiter(int num)
+    {
+        yield return new WaitForSeconds(0.5f);
+        _cardCtrl[num].FlipCard(); // 카드 다시 뒤집기
+        _cardCtrl[_currentCardNum].FlipCard();
     }
 }
