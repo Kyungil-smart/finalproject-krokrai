@@ -10,10 +10,12 @@ public class CapturePreviewPopup : MonoBehaviour
     [SerializeField] private Image _captureImg;                 // 획득 이미지
     [SerializeField] private Button _postBtn;                   // 게시 버튼
     [SerializeField] private Button _outsideBtn;                // 투명 전체화면 버튼(외부 클릭시 나가지게)
+    [SerializeField] private UploadController _uploadController;
     
     private ObjectEditMode _currentEditMode;                    // 현재 활성화 된 편집모드 저장
 
-    private int _currentPostImgId;  // 현재 표시 중인 이미지 ID
+    private int _currentGetImg;  // 현재 표시 중인 이미지 ID
+    private int _currentPostId;  // 포스트 ID
 
     private void Start()
     {
@@ -23,16 +25,17 @@ public class CapturePreviewPopup : MonoBehaviour
     }
     
     // 미리보기 팝업 표시
-    public void Show(int postImgId, ObjectEditMode editMode)
+    public void Show(int getImg, int postId, ObjectEditMode editMode)
     {
-        _currentPostImgId = postImgId;
+        _currentGetImg = getImg;
+        _currentPostId = postId;
         _currentEditMode = editMode;  // 호출한 가구의 편집모드 저장
         
         // 이미지 로드
-        ServiceLocator.Get<IAddressableManager>().LoadImageSprite(postImgId.ToString(), _captureImg);
+        ServiceLocator.Get<IAddressableManager>().LoadImageSprite(getImg.ToString(), _captureImg);
         
         gameObject.SetActive(true);
-        Log.Message($"미리보기 표시: {postImgId}");
+        Log.Message($"미리보기 표시: {getImg}");
     }
     
     // 게시 버튼 클릭
@@ -45,9 +48,8 @@ public class CapturePreviewPopup : MonoBehaviour
             _currentEditMode?.ExitEditMode();
 
             // 업로드 화면으로 이동 (UploadController에 해당 이미지 선택 상태로)
-            // TODO: 업로드 화면 열기 방식 확인 후 연결
-            // UploadController.Instance.OpenWithImage(_currentPostImgId);
-            Log.Message($"업로드 화면으로 이동:  {_currentPostImgId}");
+             _uploadController.SetPost(_currentGetImg, _currentPostId);
+            Log.Message($"업로드 화면으로 이동:  {_currentGetImg} / {_currentPostId}");
         }));
     }
     
