@@ -4,6 +4,8 @@
  수정일 : 26-06-15
 
  역할 : Reward 팝업창의 Inspector를 접근하고 관리하기 위한 매니저
+ 
+ 방식 : 메인 UI 7시 방향 버튼 클릭 시 나타나는 팝업창의 전반적인 Text Inspector를 접근 및 수정
 */
 using System;
 using TMPro;
@@ -12,17 +14,28 @@ using UnityEngine.UI;
 
 public class RewardPopupManager : MonoBehaviour
 {
+    // 현재 레벨 칭호
     [SerializeField] private TMP_Text _tierNameText;
+    // 최대 시간 도달까지 남은 시간을 표시
     [SerializeField] private TMP_Text _timeText;
+    // 현재 팔로워 수를 표시
     [SerializeField] private TMP_Text _followText;
+    // 수령 가능한 에너지 보상 표시
     [SerializeField] private TMP_Text _rewardEnergyText;
+    // 수령 가능한 코인 보상 표시
     [SerializeField] private TMP_Text _rewardCoinText;
 
+    // 현재 레벨 칭호와 다음 레벨업 까지 필요한 팔로워 수를 표시하는 팝업창
     [SerializeField] private GameObject _nextTierPopup;
+    // 보상 받기 버튼
     [SerializeField] private Button _rewardButton;
     
+    // 최대 보상 누적 가능 시간 , 12시간
     private double _maxRewardSeconds = 43200;
     
+    /// <summary>
+    /// 보상 받기 버튼 클릭시 전달하는 액션
+    /// </summary>
     public event Action OnButtonClicked;
     
     private void Awake()
@@ -32,6 +45,10 @@ public class RewardPopupManager : MonoBehaviour
         _nextTierPopup.SetActive(false);
     }
 
+    /// <summary>
+    /// 현재 레벨에 해당하는 칭호를 표시하는 메서드
+    /// </summary>
+    /// <param name="tierName">현재 레벨 칭호 텍스트</param>
     public void SetTierName(string tierName) => _tierNameText.SetText(tierName);
     
     /// <summary>
@@ -64,7 +81,10 @@ public class RewardPopupManager : MonoBehaviour
     /// <param name="follow">팔로워 숫자</param>
     public void SetFollowText(int follow) => _followText.SetText("{0}", follow);
     
-    
+    /// <summary>
+    /// 보상 받기 버튼의 활성화 여부를 설정하는 메서드
+    /// </summary>
+    /// <param name="_isCanGetReward">받을 보상이 있으면 true, 아니면  false</param>
     public void SetRewardButton(bool _isCanGetReward) => _rewardButton.interactable = _isCanGetReward;
 
     /// <summary>
@@ -75,6 +95,9 @@ public class RewardPopupManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 현재 레벨 칭호 쪽 클릭 시 나타나는 팝업창
+    /// </summary>
     public void OnNextTierPopupButtonClicked()
     {
         _nextTierPopup.SetActive(true);
