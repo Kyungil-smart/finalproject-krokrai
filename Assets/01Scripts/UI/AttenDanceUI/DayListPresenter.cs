@@ -3,7 +3,7 @@
 수정자 : NekioEmilia
  
 작성일 : 26-06-04
-수정일 : 26-06-07
+수정일 : 26-06-15
 
 역할 : 출석체크 UI의 1~7일차 UI에 MVP 패턴을 적용해 db에서 값을 받아와서 DayListView와 통신
 방식 : AttendanceUICanvas 하위에 Day_List에 DayListView와 함께 부착
@@ -22,11 +22,13 @@ public class DayListPresent : MonoBehaviour
     private DateTime _lastLoginTime;
     private DateTime _currentTime;
 
-    private int _activeDay = 3; // 테스트용 하드코딩 변수
+    // private int _activeDay = 3; // 테스트용 하드코딩 변수
 
     private void OnEnable()
     {
         _currentTime = DateTime.Now;
+        Log.Message($"<color=white><b>[DayListPresent] 출석 UI 팝업 열림! 현재 접속 시간: {_currentTime}</b></color>");
+        
         SetTimestamp();
         SetUserActiveDay();
         RefreshUI();
@@ -38,8 +40,10 @@ public class DayListPresent : MonoBehaviour
     void SetTimestamp()
     {
         _joinTimeStamp = ServiceLocator.Get<IDataManager>().Attendance.Join_TimeStamp;
+        _lastLoginTime = ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp;
+        
+        Log.Message($"<color=cyan> 데이터 로드 완료 -> 가입일: {_joinTimeStamp}, 마지막 출석인정일: {_lastLoginTime}</color>");
         // _joinTimeStamp = new DateTime(2026, 06, 01, 0,0,0);
-        _lastLoginTime = ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp; 
         // _lastLoginTime = new DateTime(2026, 06, 03, 0,0,0);;
     }
 
@@ -50,11 +54,14 @@ public class DayListPresent : MonoBehaviour
     {
         if (_lastLoginTime.Date != _currentTime.Date)
         {
-            _activeDay += 1;
+            int previousDay = (int)ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day; // 로그용 변수
 
             // 연-월-일만 비교해서 다르면 +1
             ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day += 1;
             ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp = _currentTime.Date; // Last_Login 업데이트
+            
+            int updatedDay = (int)ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day; // 로그용 변수
+            Log.Message($"<color=yellow><b>날짜 변경 감지 출석 일수 갱신 ({previousDay} -> {updatedDay}일차)</b></color>");
         }
     }
 
@@ -63,12 +70,20 @@ public class DayListPresent : MonoBehaviour
     /// </summary>
     private void RefreshUI()
     {
-        int activeDay = (int)Math.Min(ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day, 7); 
-        // int activeDay = (int)Math.Min(_activeDay, 7);
+        int currentActiveDay = (int)ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day;
+
+        if (currentActiveDay <= 0)
+        {
+            currentActiveDay = 1;
+        }
+        
+        int displayActiveDay = (int)Math.Min(currentActiveDay, 7); 
+        
+        Log.Message($"<color=blue>1~7일차 슬롯 갱신 시작 -> 실제 누적: {currentActiveDay}일 / UI 표기 기준: {displayActiveDay}일</color>");
         
         for (int i = 0; i < 7; i++)
         {
-            bool isUnlocked = (i < activeDay);
+            bool isUnlocked = (i < displayActiveDay);
             
             _view.DayListUI(i, isUnlocked);
         }
