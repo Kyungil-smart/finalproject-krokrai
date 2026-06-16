@@ -168,8 +168,6 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
                 _userData.Event_Mission.Init();
                 ImageState s = new ImageState();
                 s.getTime = DateTime.Now;
-                _userData.ImgList.Add("502004", s); // TODO : 빌드 후 삭제
-                _userData.UserPost.Add("102001", new());
                 _readyToSave = true;
                 SaveData();
             }
