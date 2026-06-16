@@ -1,3 +1,11 @@
+/*
+ 작성자 : 23M-RFT68
+ 작성일 : 26-06-16
+ 수정일 : 26-06-16
+
+ 역할 : 캡처 버튼이 눌렸을때 뒷배경인 메인 화면이 반짝하고 캡처가 되는 이펙트
+ 방식 : 코루틴과 유니티의 Color를 이용하여 뒷배경의 이미지에 흰색을 넣었다가 원래대로 돌아오는 방식
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

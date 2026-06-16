@@ -1,3 +1,11 @@
+/*
+ 작성자 : 23M-RFT68
+ 작성일 : 26-06-16
+ 수정일 : 26-06-16
+
+ 역할 : 캡처 버튼 눌렀을때 초회 획득 이미지라면 팝업을 띄우는 시스템
+ 방식 : 캡처 시스템을 통해서 초회인지 확인하고 확인후 맞다면 팝업을 띄우고 팝업에 해당 획득 사진을 넣고 업로드 버튼까지 연결
+ */
 using System;
 using System.Collections;
 using System.Collections.Generic;
