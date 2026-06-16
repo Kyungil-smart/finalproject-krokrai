@@ -1,9 +1,9 @@
 /*
 작성자 : NekioEmilia
-수정자 : 
+수정자 : NekioEmilia
  
 작성일 : 26-06-08
-수정일 : 
+수정일 : 26-06-15
 
 역할 : 이벤트 관련 전역 이벤트를 관리하는 매니저
 방식 : ServiceLocator를 통해 전역에서 접근 가능하고, 특장 상황 발생 시 Action을 통해서 Presenter에게 발송함

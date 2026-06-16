@@ -1,4 +1,13 @@
-﻿
+﻿/*
+작성자 : NekioEmilia
+수정자 :
+작성일 : 26-06-15
+수정일 : 26-06-15
+
+역할 : ItemTable SO 데이터를 캐싱하고 반환하는 Model 스크립트
+방식 : Item_Id를 기준으로 Presenter에서 값을 넘겨주면 올바른 값일 경우 Item_Id에 맞는 ItemTable을 반환
+*/
+
 using System;
 using UnityEngine;
 using System.Collections.Generic;
