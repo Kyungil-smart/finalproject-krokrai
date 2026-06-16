@@ -1,14 +1,14 @@
 ﻿/*
  작성자 : cminhyeong1999
- 작성일 : 26-06-10
+ 수정자 : krokrai
+ 작성일 : 26-06-02
+ 수정일 : 26-06-10
 
- 역할 : Addressable을 이용하여 이미지를 불러옴
- 방식 : 주소를 바탕으로 불러올 이미지를 로드
+ 역할 : 게시물 정보를 등록 및 게시된 경우 더 게시 불가능하게 전환
+ 방식 : UploadController에서 정보를 주입 받은 후 자신이 선택된 경우 UploadController에 정보를 다시 보내며, 게시된 경우 상태 전환
  */
 using UnityEngine;
 using UnityEngine.UI;
-//using UnityEngine.AddressableAssets;
-//using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class UIAddressableImageLoader : MonoBehaviour
 {
@@ -61,13 +61,13 @@ public class UIAddressableImageLoader : MonoBehaviour
     /// 외부에서 문자열 주소를 인자값으로 넘겨주면 이미지를 로드하여 UI에 연결
     /// </summary>
     /// <param name="imageAddress">어드레서블 그룹창에 등록한 에셋 주소 (예: "Item_Icon_01")</param>
-    public void ChangeImageByAddress(int imageAddress, UploadController ctrl)//int postId ,UploadController ctrl)
+    public void ChangeImageByAddress(int imageAddress, int postId ,UploadController ctrl)
     {
         // 참고 사항 : AddressableManager가 존재합니다. 해당 Manager에 접근해서 Image를 교체하는 방식으로 진행하십시오.
         ServiceLocator.Get<IAddressableManager>().LoadImageSprite(imageAddress.ToString(), _targetImage);
         _imgIndex = imageAddress;
         _controller = ctrl;
-        //_postID = postId;
+        _postID = postId;
         // 새로운 이미지를 로드하기 전에, 기존에 로드했던 이미지가 있다면 메모리에서 해제
         //ReleaseCurrentSprite();
 
@@ -78,7 +78,7 @@ public class UIAddressableImageLoader : MonoBehaviour
     // 포스트
     public void PostImgs()
     {
-        _controller.SetPost(_imgIndex);
+        _controller.SetPost(_imgIndex,_postID); 
     }
 
     // 이미 포스트 된 경우

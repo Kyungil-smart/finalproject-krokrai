@@ -1,7 +1,7 @@
 /*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-04
+수정일 : 26-06-12
 
 역할 : DM 채팅 UI 출력 담당
 방식 : 말풍선 생성, 선택지 생성, 스크롤 처리 및 채팅 레이아웃 갱신
@@ -20,9 +20,6 @@ public class DMChatUI : MonoBehaviour
     [SerializeField] private GameObject opponentBubblePrefab;
     [SerializeField] private GameObject playerBubblePrefab;
 
-    [Header("Test Profile")]
-    [SerializeField] private Sprite testProfileSprite;
-
     [Header("Choice")]
     [SerializeField] private GameObject choiceArea;
     [SerializeField] private Transform choiceContent;
@@ -36,6 +33,8 @@ public class DMChatUI : MonoBehaviour
     [SerializeField] private float choicePaddingOffset = 10f;
 
     private string previousSpeakerType = "";
+    
+    private string opponentProfileImageKey;
 
     public void AddOpponentMessage(string message)
     {
@@ -51,12 +50,22 @@ public class DMChatUI : MonoBehaviour
 
         bool showProfile = previousSpeakerType != "NPC";
 
-        bubbleUI.SetData(message, testProfileSprite, showProfile);
+        bubbleUI.SetData(message, null, showProfile);
+
+        if (showProfile)
+        {
+            bubbleUI.LoadProfileImage(opponentProfileImageKey);
+        }
 
         previousSpeakerType = "NPC";
 
         RebuildChatLayout();
         ScrollToBottom();
+    }
+    
+    public void SetOpponentProfileImageKey(string profileImageKey)
+    {
+        opponentProfileImageKey = profileImageKey;
     }
 
     public void AddPlayerMessage(string message)
