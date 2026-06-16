@@ -12,19 +12,6 @@ using UnityEngine;
 
 public class TimeRewardsManager : MonoBehaviour
 {
-    
-    // 테스트용 인스펙터 ----- 시작
-    
-    [Header("테스트용/에너지나 코인을 얼마나 얻을 것인지")] 
-    [SerializeField] private float _testEnergyValue;
-    [SerializeField] private float _testCoinValue;
-    
-    [Header("테스트용/변경, 증가시킬 팔로워 수")] 
-    [SerializeField] private int _testSetValue;
-    [SerializeField] private int _testIncreaseValue;
-    
-    // 테스트용 인스펙터 ----- 끝
-    
     [Header("RBM = RewardButtonManager / RPM = RewardPopupManager / FLM = FollowLevelSOManager")]
     [SerializeField] private RewardButtonManager _rBM;
     [SerializeField] private RewardPopupManager _rPM;
@@ -82,12 +69,9 @@ public class TimeRewardsManager : MonoBehaviour
 
     private void GetLastLoginTime()
     {
-        // Todo : 마지막 로그인 시간과 팔로워 수를 Firestore에서 불러오기
-        //_lastLoginTime = ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp;
-        //_follow = (int)ServiceLocator.Get<IDataManager>().ProFile.followerCount;
-        // 테스트를 위해 임시로 마지막 로그인 시간을 (현재시간 -2)시간으로, 팔로워 수를 0으로 설정, 추후 삭제 예정
-        _follow = 0;
-        _lastLoginTime = DateTime.Now.AddHours(-2);
+        _lastLoginTime = ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp;
+        _follow = (int)ServiceLocator.Get<IDataManager>().ProFile.followerCount;
+        
         _offlineTotalTime = DateTime.Now - _lastLoginTime;
         
         // 오프라인으로 유지된 시간을 계산 후에 그만큼 보상을 추가
@@ -168,10 +152,9 @@ public class TimeRewardsManager : MonoBehaviour
     // RewardPopupManager에 있는 보상받기 버튼 클릭시 실제로 실행되는 메서드
     private void OnRewardButtonClicked()
     {
-        Log.MessageColor($"누적된 재화 : {_rewardEnergyIntValue}, {_rewardCoinIntValue}",Color.green);
         // Todo : 이 부분에서 정수 부분 보상만큼을 RealtimeDatabase에 전달
-        //ServiceLocator.Get<IDataManager>().UserGoods.Energy_ += _rewardEnergyIntValue;
-        //ServiceLocator.Get<IDataManager>().UserGoods.Coin_ += _rewardCoinIntValue;
+        ServiceLocator.Get<IDataManager>().UserGoods.Energy_ += _rewardEnergyIntValue;
+        ServiceLocator.Get<IDataManager>().UserGoods.Coin_ += _rewardCoinIntValue;
         // 소수 부분만 남김
         _rewardEnergyFloatValue -= _rewardEnergyIntValue;
         _rewardCoinFloatValue -= _rewardCoinIntValue;
@@ -182,8 +165,6 @@ public class TimeRewardsManager : MonoBehaviour
         _onlineTotalTime = TimeSpan.Zero;
         // 텍스트 갱신
         _rPM.SetRewardText(_rewardEnergyIntValue, _rewardCoinIntValue);
-        Log.MessageColor($"수령 후 Int 재화 : {_rewardEnergyIntValue}, {_rewardCoinIntValue}",Color.green);
-        Log.MessageColor($"수령 후 Float 재화 : {_rewardEnergyFloatValue}, {_rewardCoinFloatValue}",Color.green);
     }
 
     private void SetRewardIconUpdate()
@@ -231,48 +212,4 @@ public class TimeRewardsManager : MonoBehaviour
         _nTPM.SetNextTierFollowValueText(_fLM.GetNextTierFollowValue(_follow).ToString());
     }
     
-    // 테스트용 메서드 ----- 시작
-    [ContextMenu("보상최대로!")]
-    private void Test_SetTimeMax()
-    {
-        _rewardEnergyFloatValue = _maxRewardEnergyFloatValue;
-        _rewardCoinFloatValue = _maxRewardCoinFloatValue;
-        _rewardEnergyIntValue = Mathf.FloorToInt(_rewardEnergyFloatValue);
-        _rewardCoinIntValue = Mathf.FloorToInt(_rewardCoinFloatValue);
-    }
-    
-    [ContextMenu("에너지 증가")]
-    private void Test_SetEnergy()
-    {
-        _rewardEnergyFloatValue = _testEnergyValue;
-        _rewardEnergyIntValue = Mathf.FloorToInt(_rewardEnergyFloatValue);
-    }
-    
-    [ContextMenu("코인 증가")]
-    private void Test_SetCoin()
-    {
-        _rewardCoinFloatValue = _testCoinValue;
-        _rewardCoinIntValue = Mathf.FloorToInt(_rewardCoinFloatValue);
-    }
-
-    [ContextMenu("팔로워 변경")]
-    private void Test_SetFollow()
-    {
-        _follow = _testSetValue;
-    }
-    
-    [ContextMenu("팔로워 증가")]
-    private void Test_AddFollow()
-    {
-        _follow += _testIncreaseValue;
-    }
-
-    [ContextMenu("현재 팔로워 레벨 및 보상 최대치")]
-    private void ShowNowLevels()
-    {
-        Log.MessageColor($"현재 팔로워 :  {_follow}", Color.blue);
-        Log.MessageColor($"현재 최대 에너지 :  {_maxRewardEnergyFloatValue}", Color.blue);
-        Log.MessageColor($"현재 코인 최대치 : {_maxRewardCoinFloatValue}", Color.blue);
-    }
-    // 테스트용 메서드 ----- 끝
 }
