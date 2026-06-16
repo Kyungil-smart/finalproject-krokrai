@@ -18,5 +18,6 @@ MonoBehaviour:
   postImage: 502006
   likeCount: 28
   getFollower: 13
-  captionText: STR_CAP_000009
+  captionText: STR_CAP_000006
   getRoute: 2
+  objectid: 300001

@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e160add114922094c8aa9b32e21564fe, type: 3}
-  m_Name: Post_TableSO_Row_8
+  m_Script: {fileID: 11500000, guid: 67d0aa5db61a75a4383733da9a04b0d8, type: 3}
+  m_Name: Post_NPC_TableSO_Row_2
   m_EditorClassIdentifier: 
-  postID: 102001
+  postID: 102003
   profileType: 0
-  postProFile: 400001
+  postProFile: 400014
   postImage: 0
-  likeCount: 340512
+  likeCount: 200
   getFollower: 0
-  captionText: STR_CAP_000006
-  getRoute: 0
+  captionText: STR_CAP_001003
+  displayOrder: 3
