@@ -36,7 +36,13 @@ public class MissionPresenter : MonoBehaviour
         if (eventManager != null)
         { 
             eventManager.OnCurrencyAdded += HandleCurrecyAdded;
+            eventManager.OnDayClicked += OnDayTabChangedMission;
         }
+    }
+
+    private void Start()
+    {
+        ServiceLocator.Get<IEventManager>().ClickDay(1);
     }
 
     private void OnDestroy()
@@ -46,7 +52,7 @@ public class MissionPresenter : MonoBehaviour
         if (eventManager != null)
         {
             eventManager.OnCurrencyAdded -= HandleCurrecyAdded;
-            
+            eventManager.OnDayClicked -= OnDayTabChangedMission;
         }
     }
 
