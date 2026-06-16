@@ -15,8 +15,11 @@ public interface IEventManager
 {
     public event Action<int> OnDayClicked;
     public event Action<int> OnGaugeIncrease;
+    public event Action<CurrencyType, int> OnCurrencyAdded;
 
     public void ClickDay(int day);
     
     public void GaugeIncrease(int amount);
+
+    public void CurrencyAdded(CurrencyType type, int amount);
 }

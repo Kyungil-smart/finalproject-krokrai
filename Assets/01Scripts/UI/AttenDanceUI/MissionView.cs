@@ -16,10 +16,9 @@ using TMPro;
 
 public class MissionView : MonoBehaviour
 {
-    public event Action<int> OnSlotRewardRequested; // 보상 버튼 클릭 Action // < 오류 원인
+    public event Action<int> OnSlotRewardRequested; // 보상 버튼 클릭 Action
 
     [SerializeField] private MissionSlotView[] _missionSlots;
-
     [Header("메인 화면 스토리 UI 연결")] [SerializeField] private GameObject _mainStoryGroup;
 
     private void Awake()
@@ -27,7 +26,6 @@ public class MissionView : MonoBehaviour
         for (int i = 0; i < _missionSlots.Length; i++)
         {
             _missionSlots[i].InitSlot(i);
-
             _missionSlots[i].OnRewardClicked += (idx) => { OnSlotRewardRequested?.Invoke(idx); };
         }
     }
@@ -79,18 +77,21 @@ public class MissionView : MonoBehaviour
     /// <param name="rewardData"></param>
     public void UpdateSingleSlot(int index, Mission_ListSO soData, EventState dbState, List<Reward_Group_TableSO> rewardData)
     {
-        string missionDesc = soData.Mission_Desc;
+        string finalDesc = "";
+
+        if (soData.Check_Desc == false)
+        {
+            finalDesc = soData.Mission_Desc;
+        }
+        else
+        {
+            finalDesc = soData.Mission_Desc.Replace("n", soData.Goal_Value.ToString());
+        }
+        
         int goal = soData.Goal_Value;
         int currentState = (int)dbState.Mission_State;
         int flag = (int)dbState.Mission_State_Flag;
 
-        /*
-        if (!soData.Check_Desc)
-        {
-            currentState = goal;
-        }
-        */
-
-        _missionSlots[index].UpdateSlotUI(missionDesc, currentState, goal, flag, rewardData);
+        _missionSlots[index].UpdateSlotUI(finalDesc, currentState, goal, flag, rewardData);
     }
 }
