@@ -8,8 +8,8 @@
  */
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Post_TableSO", menuName = "Scriptable Objects/Post_TableSO")]
-public class Post_TableSO : ScriptableObject
+[CreateAssetMenu(fileName = "Post_NPC_TableSO", menuName = "Scriptable Objects/Post_NPC_TableSO")]
+public class Post_NPC_TableSO : ScriptableObject
 {
     [SOInject(0)] public int postID;
     [SOInject(1)] public ProfileTypeEnum profileType;
@@ -18,7 +18,6 @@ public class Post_TableSO : ScriptableObject
     [SOInject(4)] public int likeCount;
     [SOInject(5)] public int getFollower;
     [SOInject(6)] public string captionText;
-    [SOInject(7)] public Route getRoute;
-    [SOInject(8)] public int objectid;
+    [SOInject(7)] public int displayOrder;
 
 }

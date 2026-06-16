@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e160add114922094c8aa9b32e21564fe, type: 3}
-  m_Name: Post_TableSO_Row_9
+  m_Script: {fileID: 11500000, guid: 67d0aa5db61a75a4383733da9a04b0d8, type: 3}
+  m_Name: Post_NPC_TableSO_Row_1
   m_EditorClassIdentifier: 
   postID: 102002
   profileType: 0
@@ -18,5 +18,5 @@ MonoBehaviour:
   postImage: 0
   likeCount: 453421
   getFollower: 0
-  captionText: STR_CAP_000007
-  getRoute: 0
+  captionText: STR_CAP_001002
+  displayOrder: 2
