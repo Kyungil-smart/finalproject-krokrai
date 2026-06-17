@@ -1,7 +1,7 @@
 /*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-16
+수정일 : 26-06-17
 
 역할 : DM 대화 진행 담당
 방식 : 로컬 진행 상태의 ProgressState와 SelectedChoiceNum을 기준으로 대화 상태를 복원 및 진행
@@ -46,6 +46,8 @@ public class DMConversationRunner : MonoBehaviour
 
     private int currentProgressState;
     private int currentSelectedChoiceNum;
+    
+    [SerializeField] private int rewardFollower = 50;
 
     public string LastPreviewText { get; private set; }
 
@@ -167,6 +169,13 @@ public class DMConversationRunner : MonoBehaviour
 
             if (dialogue.isEnd)
             {
+                if (ShouldPrintRewardMessage())
+                {
+                    string rewardText = GetRewardMessage();
+                    chatUI.AddRewardMessage(rewardText);
+                    LastPreviewText = rewardText;
+                }
+
                 currentProgressState = (int)DMProgressState.Completed;
                 NotifyProgressChanged();
                 NotifyQuestCompleted();
@@ -178,6 +187,28 @@ public class DMConversationRunner : MonoBehaviour
 
             currentDialogId = dialogue.nextDialogId;
         }
+    }
+    
+    private bool ShouldPrintRewardMessage()
+    {
+        if (currentDM == null)
+            return false;
+
+        if (currentDM.dmQuestType == DMQuestTypeEnum.Info)
+            return true;
+
+        if (currentDM.dmQuestType == DMQuestTypeEnum.Question ||
+            currentDM.dmQuestType == DMQuestTypeEnum.Request)
+        {
+            Choice_TableSO selectedChoice = GetCurrentSelectedChoice();
+
+            if (selectedChoice == null)
+                return false;
+
+            return selectedChoice.isCorrect;
+        }
+
+        return false;
     }
 
     private void ShowChoices(int choiceGroupId)
@@ -415,5 +446,32 @@ public class DMConversationRunner : MonoBehaviour
         {
             pair.Value.Sort((a, b) => a.choiceNum.CompareTo(b.choiceNum));
         }
+    }
+    
+    private string GetRewardMessage()
+    {
+        return $"팔로워 +{rewardFollower}";
+    }
+    
+    private Choice_TableSO GetCurrentSelectedChoice()
+    {
+        foreach (Dialogue_TableSO dialogue in dialogueSOs)
+        {
+            if (dialogue == null)
+                continue;
+
+            if (dialogue.messageId != currentDM.messageId)
+                continue;
+
+            if (dialogue.choiceGroupId == 0)
+                continue;
+
+            return GetChoiceByChoiceNum(
+                dialogue.choiceGroupId,
+                currentSelectedChoiceNum
+            );
+        }
+
+        return null;
     }
 }

@@ -1,7 +1,7 @@
 /*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-16
+수정일 : 26-06-17
 
 역할 : DM 목록 UI 생성 및 DM 클릭 시 대화창 전환
 방식 : DB 저장 없이 로컬 Dictionary 기준으로 Dummy DM과 Quest DM을 생성, 진행, 완료, 삭제 처리
@@ -22,6 +22,7 @@ public class DMListUI : MonoBehaviour
         public int SelectedChoiceNum;
         public int QuestRewardState;
         public string PreviewText;
+        public bool IsDeleteReserved;
     }
 
     private enum DMProgressState
@@ -54,9 +55,15 @@ public class DMListUI : MonoBehaviour
     private readonly Dictionary<int, DMLocalProgress> dmProgressTable = new();
 
     private DateTime dmGenerationTimestamp;
+    
+    private float _questGenerateCheckTimer;
+    
+    public bool IsDeleteReserved;
 
     private void Start()
     {
+        IsDeleteReserved = false;
+        
         stringManager = ServiceLocator.Get<IString_TableManager>();
 
         if (stringManager == null)
@@ -68,6 +75,17 @@ public class DMListUI : MonoBehaviour
         InitLocalProgressData();
 
         FillQuestDMsForTest(); 
+    }
+    
+    private void Update()
+    {
+        _questGenerateCheckTimer += Time.deltaTime;
+
+        if (_questGenerateCheckTimer < 1f)
+            return;
+
+        _questGenerateCheckTimer = 0f;
+        CheckQuestGenerateDelay();
     }
 
     private void InitLocalProgressData()
@@ -360,9 +378,6 @@ public class DMListUI : MonoBehaviour
         RefreshDMList();
     }
 
-    ///<summary>
-    /// 대화창에서 DM 목록으로 돌아갑니다.
-    ///</summary>
     public void BackToDMList()
     {
         if (dmChatPanel == null || dmListPanel == null)
@@ -373,13 +388,39 @@ public class DMListUI : MonoBehaviour
 
         DMConversationRunner runner = dmChatPanel.GetComponent<DMConversationRunner>();
 
+        int currentMessageId = 0;
+
         if (runner != null)
+        {
+            currentMessageId = runner.CurrentMessageId;
             runner.StopConversation();
+        }
 
         dmChatPanel.SetActive(false);
         dmListPanel.SetActive(true);
 
+        DeleteReservedQuestDM(currentMessageId);
+
         RefreshDMList();
+    }
+    
+    private void DeleteReservedQuestDM(int messageId)
+    {
+        if (messageId == 0)
+            return;
+
+        if (!dmProgressTable.TryGetValue(messageId, out DMLocalProgress progress))
+            return;
+
+        if (!progress.IsDeleteReserved)
+            return;
+
+        dmProgressTable.Remove(messageId);
+
+        dmGenerationTimestamp = DateTime.Now;
+
+        Log.Message($"대화창 이탈 후 Quest DM 삭제 : {messageId}");
+        Log.Message("Quest DM 생성 대기 타이머 시작");
     }
 
     ///<summary>
@@ -441,24 +482,32 @@ public class DMListUI : MonoBehaviour
         GiveQuestReward(messageId);
 
         progress.QuestRewardState = (int)QuestRewardStateEnum.RewardMessagePrinted;
+        progress.IsDeleteReserved = true;
 
-        Log.Message($"Quest DM 로컬 완료 처리 : {messageId}");
+        Log.Message($"Quest DM 완료 / 나갈 때 삭제 예약 : {messageId}");
+    }
+    
+    ///<summary>
+    /// Quest DM 생성 딜레이가 끝났는지 확인하고 가능하면 Quest DM을 생성합니다.
+    ///</summary>
+    public void CheckQuestGenerateDelay()
+    {
+        if (GetCurrentQuestDMCount() >= maxQuestDMCount)
+            return;
 
-        if (dmChatPanel != null)
-            dmChatPanel.SetActive(false);
+        if (dmGenerationTimestamp == default)
+            return;
 
-        if (dmListPanel != null)
-            dmListPanel.SetActive(true);
+        TimeSpan elapsedTime = DateTime.Now - dmGenerationTimestamp;
 
-        if (dmProgressTable.ContainsKey(messageId))
-        {
-            dmProgressTable.Remove(messageId);
-            Log.Message($"완료된 Quest DM 삭제 : {messageId}");
-        }
+        if (elapsedTime.TotalHours < questGenerateHour)
+            return;
 
-        CreateDummyDMProgress();
         TryGenerateQuestDMLocal();
-        RefreshDMList();
+
+        dmGenerationTimestamp = default;
+
+        Log.Message("Quest DM 딜레이 종료 후 새 Quest DM 생성 완료");
     }
 
     private void SaveLocalDMProgress(int messageId, int progressState, int selectedChoiceNum)
