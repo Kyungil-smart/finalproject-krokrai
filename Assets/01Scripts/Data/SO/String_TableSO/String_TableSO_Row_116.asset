@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
+  m_Name: String_TableSO_Row_116
+  m_EditorClassIdentifier: 
+  stringId: STR_DIA_000072
+  KR: "\uB098\uC911\uC5D0 \uC560\uAE30\uB4E4 \uC218\uC220\uD558\uAC8C \uB420 \uC77C
+    \uC0DD\uAE30\uBA74 \uB531 \uB9DE\uB294 \uAC78\uB85C \uC900\uBE44\uD574 \uBCF4\uC138\uC694!"
+  EN: '"If your cats ever need surgery later, make sure you get one that fits them
+    properly!"'

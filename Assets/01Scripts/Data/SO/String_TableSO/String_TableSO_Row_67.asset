@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_67
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000003
-  KR: "\uB530\uB85C \uC54C\uC544\uBCF8\uAC74 \uC544\uB2C8\uACE0 \uADFC\uCC98 \uB9C8\uD2B8\uC5D0
-    \uC804\uC2DC\uB418\uC5B4 \uC788\uB294 \uC81C\uD488 \uAD6C\uB9E4\uD574\uC11C \uC870\uB9BD\uD588\uC2B5\uB2C8\uB2E4!"
-  EN: "I didn\u2019t really look it up\u2014I bought the one on display at a nearby
-    store and assembled it myself!"
+  stringId: STR_CMT_001008
+  KR: "DM\uC73C\uB85C \uC8FC\uC2E0 \uC88B\uC740 \uC815\uBCF4 \uACE0\uB9D9\uC2B5\uB2C8\uB2E4!"
+  EN: Thanks for the helpful info you sent by DM!

@@ -66,13 +66,84 @@ public class DMListUI : MonoBehaviour
             dmChatPanel.SetActive(false);
 
         InitLocalProgressData();
-        CreateDMList();
+
+        FillQuestDMsForTest(); 
     }
 
     private void InitLocalProgressData()
     {
         dmProgressTable.Clear();
         CreateDummyDMProgress();
+    }
+    
+    ///<summary>
+    /// 테스트용 Quest DM을 최대 개수까지 랜덤 생성합니다.
+    ///</summary>
+    public void FillQuestDMsForTest()
+    {
+        while (GetCurrentQuestDMCount() < maxQuestDMCount)
+        {
+            DM_TableSO targetDM = GetRandomGenerateTargetQuestDM();
+
+            if (targetDM == null)
+            {
+                Log.Message("생성 가능한 Quest DM이 없습니다.");
+                break;
+            }
+
+            CreateQuestProgress(targetDM);
+        }
+
+        RefreshDMList();
+    }
+    
+    private void CreateQuestProgress(DM_TableSO targetDM)
+    {
+        if (targetDM == null)
+            return;
+
+        if (TryConnectSameNpcDM(targetDM))
+            return;
+
+        DMLocalProgress progress = new DMLocalProgress
+        {
+            DM_ID = targetDM.messageId,
+            DMType = (int)DMTypeEnum.Quest,
+            SentTime = DateTime.Now,
+            ProgressState = (int)DMProgressState.Unread,
+            SelectedChoiceNum = -1,
+            QuestRewardState = (int)QuestRewardStateEnum.None,
+            PreviewText = ""
+        };
+
+        dmProgressTable.Add(targetDM.messageId, progress);
+
+        Log.Message($"Quest DM 로컬 생성 : {targetDM.messageId}");
+    }
+    
+    private DM_TableSO GetRandomGenerateTargetQuestDM()
+    {
+        List<DM_TableSO> candidates = new List<DM_TableSO>();
+
+        foreach (DM_TableSO dm in dmTables)
+        {
+            if (dm == null)
+                continue;
+
+            if (dm.dmQuestType == DMQuestTypeEnum.Dummy)
+                continue;
+
+            if (dmProgressTable.ContainsKey(dm.messageId))
+                continue;
+
+            candidates.Add(dm);
+        }
+
+        if (candidates.Count == 0)
+            return null;
+
+        int randomIndex = UnityEngine.Random.Range(0, candidates.Count);
+        return candidates[randomIndex];
     }
 
     private void CreateDummyDMProgress()
@@ -112,6 +183,8 @@ public class DMListUI : MonoBehaviour
 
     private void CreateDMList()
     {
+        Log.Message($"CreateDMList 실행 / progress count : {dmProgressTable.Count}");
+
         if (content == null || dmListItemPrefab == null)
         {
             Log.Message("Content 또는 DMListItemPrefab이 연결되지 않았습니다.");
@@ -122,8 +195,10 @@ public class DMListUI : MonoBehaviour
 
         progressList.Sort((a, b) => CompareDMListOrder(a, b));
 
-        foreach (DMLocalProgress progress in progressList)
-        {
+       foreach (DMLocalProgress progress in progressList)
+       {
+            Log.Message($"DM 아이템 생성 시도 : {progress.DM_ID}");
+    
             if (progress == null)
                 continue;
 
@@ -136,6 +211,7 @@ public class DMListUI : MonoBehaviour
             }
 
             GameObject item = Instantiate(dmListItemPrefab, content);
+            Log.Message($"DM 아이템 생성 완료 : {item.name}");
 
             DMListItemUI itemUI = item.GetComponentInChildren<DMListItemUI>();
 
@@ -260,7 +336,7 @@ public class DMListUI : MonoBehaviour
     }
 
     ///<summary>
-    /// Quest DM 생성 조건을 확인한 뒤 로컬 목록에 Quest DM을 추가합니다.
+    /// Quest DM 생성 조건을 확인한 뒤 로컬 목록에 Quest DM을 1개 추가합니다.
     ///</summary>
     public void TryGenerateQuestDMLocal()
     {
@@ -272,27 +348,7 @@ public class DMListUI : MonoBehaviour
             return;
         }
 
-        DateTime now = DateTime.Now;
-
-        if (!ignoreQuestGenerateTimeForTest)
-        {
-            if (dmGenerationTimestamp == default)
-            {
-                dmGenerationTimestamp = now;
-                Log.Message("DM 퀘스트 생성 타이머 시작");
-                return;
-            }
-
-            TimeSpan elapsedTime = now - dmGenerationTimestamp;
-
-            if (elapsedTime.TotalHours < questGenerateHour)
-            {
-                Log.Message("DM 퀘스트 생성 시간이 부족합니다.");
-                return;
-            }
-        }
-
-        DM_TableSO targetDM = GetGenerateTargetQuestDM();
+        DM_TableSO targetDM = GetRandomGenerateTargetQuestDM();
 
         if (targetDM == null)
         {
@@ -300,29 +356,7 @@ public class DMListUI : MonoBehaviour
             return;
         }
 
-        if (TryConnectSameNpcDM(targetDM))
-        {
-            dmGenerationTimestamp = default;
-            RefreshDMList();
-            return;
-        }
-
-        DMLocalProgress progress = new DMLocalProgress
-        {
-            DM_ID = targetDM.messageId,
-            DMType = (int)DMTypeEnum.Quest,
-            SentTime = now,
-            ProgressState = (int)DMProgressState.Unread,
-            SelectedChoiceNum = -1,
-            QuestRewardState = (int)QuestRewardStateEnum.None,
-            PreviewText = ""
-        };
-
-        dmProgressTable.Add(targetDM.messageId, progress);
-        dmGenerationTimestamp = default;
-
-        Log.Message($"Quest DM 로컬 생성 : {targetDM.messageId}");
-
+        CreateQuestProgress(targetDM);
         RefreshDMList();
     }
 
@@ -416,7 +450,15 @@ public class DMListUI : MonoBehaviour
         if (dmListPanel != null)
             dmListPanel.SetActive(true);
 
-        RemoveDMProgress(messageId);
+        if (dmProgressTable.ContainsKey(messageId))
+        {
+            dmProgressTable.Remove(messageId);
+            Log.Message($"완료된 Quest DM 삭제 : {messageId}");
+        }
+
+        CreateDummyDMProgress();
+        TryGenerateQuestDMLocal();
+        RefreshDMList();
     }
 
     private void SaveLocalDMProgress(int messageId, int progressState, int selectedChoiceNum)

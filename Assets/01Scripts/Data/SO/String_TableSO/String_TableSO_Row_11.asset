@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_11
   m_EditorClassIdentifier: 
-  stringId: STR_TAG_000001
-  KR: "\uB0E5\uC9D1\uC0AC"
-  EN: Cat parent
+  stringId: STR_CAP_001004
+  KR: "\uC774\uBC88\uC5D0 \uC7A5\uB9C8\uB77C\uC11C \uACE0\uC591\uC774 \uD138 \uC9C0\uC625\uC77C
+    \uBED4 \uD588\uB294\uB370 \uC815\uB9D0 \uB2E4\uD589\uC785\uB2C8\uB2E4."
+  EN: '"With the rainy season here, this could have turned into a cat-hair nightmare.
+    What a relief."'

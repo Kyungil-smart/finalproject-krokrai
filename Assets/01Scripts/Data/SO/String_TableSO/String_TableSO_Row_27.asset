@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_27
   m_EditorClassIdentifier: 
-  stringId: STR_CMT_000001
-  KR: "\uD5C9 \uBCFC\uB530\uAD6C \uD130\uC9C8 \uAC83 \uAC19\uC544 \u3160\u3160"
-  EN: "Omg, those cheeks look like they\u2019re about to burst."
+  stringId: STR_TAG_000012
+  KR: "\uB2E4\uC774\uBE59"
+  EN: Diving

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
+  m_Name: String_TableSO_Row_107
+  m_EditorClassIdentifier: 
+  stringId: STR_DIA_000047
+  KR: "\"\uADF8\uB798\uC11C \uCC98\uC74C\uC5D0 \uC785\uD788\uBA74 \uBAB8\uC774 \uAD73\uAC70\uB098,
+    \uB125\uCE74\uB77C\uC640\uB294 \uB610 \uB2E4\uB978 \uC2A4\uD2B8\uB808\uC2A4\uAC00
+    \uC788\uC744 \uC218 \uC788\uC5B4\uC694!\""
+  EN: '"So when you first put it on, they might freeze up or feel a different kind
+    of stress than with a cone!"'

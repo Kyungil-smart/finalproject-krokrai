@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_33
   m_EditorClassIdentifier: 
-  stringId: STR_CMT_000007
-  KR: "\uC2EC\uC7A5 \uC544\uD30C\uC11C \uAE30\uC808..."
-  EN: "My heart can\u2019t take this..."
+  stringId: STR_TAG_000018
+  KR: "\uBE57\uC9C8"
+  EN: Brushing

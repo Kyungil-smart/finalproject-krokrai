@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_42
   m_EditorClassIdentifier: 
-  stringId: STR_CMT_000016
-  KR: "\uC911\uC131\uD654 \uB54C \uBC25 \uC548 \uBA39\uB294\uB2E4\uACE0 \uAC04\uC2DD
-    \uB108\uBB34 \uC8FC\uC2DC\uBA74 \uB6B1\uB0E5\uC774 \uB418\uB2C8\uAE4C \uC870\uC2EC\uD558\uC138\uC694!!"
-  EN: "Be careful not to give too many treats if they won\u2019t eat after spay or
-    neuter surgery, or they\u2019ll turn into a chunky cat!!"
+  stringId: STR_CMT_000004
+  KR: "\uD30C\uBB3B\uD78C \uAC70 \uB108\uBB34 \uC0AC\uB791\uC2A4\uB7EC\uC6B4 \uAC70
+    \uC544\uB2C8\uB0D0\uACE0 \u314B\u314B"
+  EN: "Buried like that? That\u2019s way too cute lol"
