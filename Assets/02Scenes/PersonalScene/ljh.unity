@@ -395,6 +395,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5630065043130961673, guid: 275ec6d5ed7453148a369b8088a7e325, type: 3}
+      propertyPath: _testMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1837,12 +1841,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 485010184}
     - target: {fileID: 3057977886572525065, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
+      propertyPath: requestCardPrefab
+      value: 
+      objectReference: {fileID: 6198872769017990488, guid: 86bc67c4adc71e34a859ea313d42bf57, type: 3}
+    - target: {fileID: 3057977886572525065, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
       propertyPath: rewardMessagePrefab
       value: 
-      objectReference: {fileID: 2015320581825620590, guid: e95c0c17c7600594d8b1a008362ad1b1, type: 3}
+      objectReference: {fileID: 7503142591013163426, guid: 9c454391836680c4b94695917151a538, type: 3}
+    - target: {fileID: 3057977886572525065, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
+      propertyPath: defaultBottomPadding
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 5972692745898468539, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
       propertyPath: choiceSOs.Array.size
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972692745898468539, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
+      propertyPath: requestSOs.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5972692745898468539, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
       propertyPath: dialogueSOs.Array.size
@@ -1880,6 +1896,10 @@ PrefabInstance:
       propertyPath: choiceSOs.Array.data[7]
       value: 
       objectReference: {fileID: 11400000, guid: d5ee21bb6f4d57f4fa5a5e2a97013eb3, type: 2}
+    - target: {fileID: 5972692745898468539, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
+      propertyPath: requestSOs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 95d60a0582d52c341ab685fcc5124f1f, type: 2}
     - target: {fileID: 5972692745898468539, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
       propertyPath: dialogueSOs.Array.data[0]
       value: 
@@ -6877,7 +6897,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &8699317205369155127
 GameObject:
   m_ObjectHideFlags: 0

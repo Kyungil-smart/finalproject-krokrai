@@ -34,6 +34,8 @@ public class DMChatUI : MonoBehaviour
     
     [SerializeField] private GameObject rewardMessagePrefab;
     [SerializeField] private Transform messageParent;
+    
+    [SerializeField] private GameObject requestCardPrefab;
 
     private string previousSpeakerType = "";
     
@@ -64,6 +66,27 @@ public class DMChatUI : MonoBehaviour
 
         RebuildChatLayout();
         ScrollToBottom();
+    }
+    
+    ///<summary>
+    /// 요청 카드 UI를 생성합니다.
+    ///</summary>
+    public void AddRequestCard(Request_TableSO requestData, string npcName)
+    {
+        GameObject item = Instantiate(requestCardPrefab, messageParent);
+
+        DMRequestCardUI cardUI = item.GetComponentInChildren<DMRequestCardUI>();
+
+        if (cardUI == null)
+        {
+            Log.Message("RequestCardPrefab에 DMRequestCardUI가 없습니다.");
+            return;
+        }
+
+        cardUI.SetData(requestData, npcName);
+
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(item.transform as RectTransform);
     }
     
     ///<summary>

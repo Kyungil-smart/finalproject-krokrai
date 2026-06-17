@@ -6,6 +6,10 @@ public class DMProgress
     private DateTime _sendTime = DateTime.Now;
     private int _progressState = 0;
     private int _selectedChoiceNum = 0;
+    
+    [FirestoreProperty] public int DM_ID { get; set; }
+    [FirestoreProperty] public int DMType { get; set; }
+    [FirestoreProperty] public int QuestRewardState { get; set; }
 
     [FirestoreProperty]
     public DateTime SentTime

@@ -29,6 +29,7 @@ public class DMConversationRunner : MonoBehaviour
     private DM_TableSO currentDM;
     [SerializeField] private Dialogue_TableSO[] dialogueSOs;
     [SerializeField] private Choice_TableSO[] choiceSOs;
+    [SerializeField] private Npc_TableSO[] npcSOs;
 
     [Header("Setting")]
     [SerializeField] private float messageDelay = 1f;
@@ -48,6 +49,8 @@ public class DMConversationRunner : MonoBehaviour
     private int currentSelectedChoiceNum;
     
     [SerializeField] private int rewardFollower = 50;
+    
+    [SerializeField] private Request_TableSO[] requestSOs;
 
     public string LastPreviewText { get; private set; }
 
@@ -78,6 +81,23 @@ public class DMConversationRunner : MonoBehaviour
     {
         if (skipAreaButton != null)
             skipAreaButton.onClick.RemoveListener(OnClickSkipArea);
+    }
+    
+    private string GetNpcAccountName(int npcId)
+    {
+        if (npcSOs == null)
+            return npcId.ToString();
+
+        foreach (Npc_TableSO npc in npcSOs)
+        {
+            if (npc == null)
+                continue;
+
+            if (npc.npcId == npcId)
+                return npc.npcAccountName;
+        }
+
+        return npcId.ToString();
     }
 
     ///<summary>
@@ -163,6 +183,17 @@ public class DMConversationRunner : MonoBehaviour
                 currentProgressState = (int)DMProgressState.WaitingChoice;
                 NotifyProgressChanged();
 
+                if (ShouldShowRequestCard(dialogue))
+                {
+                    Request_TableSO requestData = GetRequestData(dialogue.requestId);
+
+                    if (requestData != null)
+                        chatUI.AddRequestCard(
+                            requestData,
+                            GetNpcAccountName(currentDM.senderName)
+                        );
+                }
+
                 ShowChoices(dialogue.choiceGroupId);
                 yield break;
             }
@@ -187,6 +218,41 @@ public class DMConversationRunner : MonoBehaviour
 
             currentDialogId = dialogue.nextDialogId;
         }
+    }
+    
+    private bool ShouldShowRequestCard(Dialogue_TableSO dialogue)
+    {
+        if (dialogue == null)
+            return false;
+
+        if (currentDM == null)
+            return false;
+
+        if (currentDM.dmQuestType == DMQuestTypeEnum.Request)
+            return true;
+
+        if (dialogue.isRequest)
+            return true;
+
+        return false;
+    }
+    
+    private Request_TableSO GetRequestData(int requestId)
+    {
+        if (requestSOs == null)
+            return null;
+
+        foreach (Request_TableSO request in requestSOs)
+        {
+            if (request == null)
+                continue;
+
+            if (request.requestId == requestId)
+                return request;
+        }
+
+        Log.Message($"Request_TableSO를 찾을 수 없습니다 : {requestId}");
+        return null;
     }
     
     private bool ShouldPrintRewardMessage()

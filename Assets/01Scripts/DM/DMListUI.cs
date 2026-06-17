@@ -59,11 +59,16 @@ public class DMListUI : MonoBehaviour
     private float _questGenerateCheckTimer;
     
     public bool IsDeleteReserved;
+    
+    IDataManager dataManager;
+    UserDatas userDatas;
 
     private void Start()
     {
         IsDeleteReserved = false;
         
+        dataManager = ServiceLocator.Get<IDataManager>();
+        userDatas = dataManager.UserDatas;
         stringManager = ServiceLocator.Get<IString_TableManager>();
 
         if (stringManager == null)
@@ -135,8 +140,6 @@ public class DMListUI : MonoBehaviour
         };
 
         dmProgressTable.Add(targetDM.messageId, progress);
-
-        Log.Message($"Quest DM 로컬 생성 : {targetDM.messageId}");
     }
     
     private DM_TableSO GetRandomGenerateTargetQuestDM()
@@ -195,14 +198,11 @@ public class DMListUI : MonoBehaviour
             };
 
             dmProgressTable.Add(dm.messageId, progress);
-            Log.Message($"Dummy DM 로컬 생성 : {dm.messageId}");
         }
     }
 
     private void CreateDMList()
     {
-        Log.Message($"CreateDMList 실행 / progress count : {dmProgressTable.Count}");
-
         if (content == null || dmListItemPrefab == null)
         {
             Log.Message("Content 또는 DMListItemPrefab이 연결되지 않았습니다.");
@@ -215,9 +215,7 @@ public class DMListUI : MonoBehaviour
 
        foreach (DMLocalProgress progress in progressList)
        {
-            Log.Message($"DM 아이템 생성 시도 : {progress.DM_ID}");
-    
-            if (progress == null)
+           if (progress == null)
                 continue;
 
             DM_TableSO dm = GetDMTable(progress.DM_ID);
@@ -229,7 +227,6 @@ public class DMListUI : MonoBehaviour
             }
 
             GameObject item = Instantiate(dmListItemPrefab, content);
-            Log.Message($"DM 아이템 생성 완료 : {item.name}");
 
             DMListItemUI itemUI = item.GetComponentInChildren<DMListItemUI>();
 
@@ -416,11 +413,7 @@ public class DMListUI : MonoBehaviour
             return;
 
         dmProgressTable.Remove(messageId);
-
-        dmGenerationTimestamp = DateTime.Now;
-
         Log.Message($"대화창 이탈 후 Quest DM 삭제 : {messageId}");
-        Log.Message("Quest DM 생성 대기 타이머 시작");
     }
 
     ///<summary>
@@ -488,26 +481,54 @@ public class DMListUI : MonoBehaviour
     }
     
     ///<summary>
-    /// Quest DM 생성 딜레이가 끝났는지 확인하고 가능하면 Quest DM을 생성합니다.
+    /// 오프라인 시간을 포함하여 Quest DM 생성 가능 횟수를 계산하고 생성합니다.
     ///</summary>
     public void CheckQuestGenerateDelay()
     {
-        if (GetCurrentQuestDMCount() >= maxQuestDMCount)
+        int currentQuestCount = GetCurrentQuestDMCount();
+
+        if (currentQuestCount >= maxQuestDMCount)
+        {
+            dmGenerationTimestamp = default;
             return;
+        }
+
+        DateTime now = DateTime.Now;
 
         if (dmGenerationTimestamp == default)
+        {
+            dmGenerationTimestamp = now;
+            Log.Message("Quest DM 생성 대기 타이머 시작");
+            return;
+        }
+
+        TimeSpan elapsedTime = now - dmGenerationTimestamp;
+
+        int generateCount = Mathf.FloorToInt(
+            (float)(elapsedTime.TotalHours / questGenerateHour)
+        );
+
+        if (generateCount <= 0)
             return;
 
-        TimeSpan elapsedTime = DateTime.Now - dmGenerationTimestamp;
+        for (int i = 0; i < generateCount; i++)
+        {
+            if (GetCurrentQuestDMCount() >= maxQuestDMCount)
+                break;
 
-        if (elapsedTime.TotalHours < questGenerateHour)
+            TryGenerateQuestDMLocal();
+        }
+
+        if (GetCurrentQuestDMCount() >= maxQuestDMCount)
+        {
+            dmGenerationTimestamp = default;
             return;
+        }
 
-        TryGenerateQuestDMLocal();
+        double remainHours = elapsedTime.TotalHours % questGenerateHour;
+        dmGenerationTimestamp = now.AddHours(-remainHours);
 
-        dmGenerationTimestamp = default;
-
-        Log.Message("Quest DM 딜레이 종료 후 새 Quest DM 생성 완료");
+        Log.Message("오프라인 시간 반영 후 Quest DM 생성 체크 완료");
     }
 
     private void SaveLocalDMProgress(int messageId, int progressState, int selectedChoiceNum)
@@ -527,6 +548,21 @@ public class DMListUI : MonoBehaviour
         Log.Message(
             $"[로컬 DMProgress 저장] DM_ID:{messageId}, Type:{progress.DMType}, State:{progress.ProgressState}, Choice:{progress.SelectedChoiceNum}"
         );
+        
+        DMProgress saveData = new DMProgress();
+
+        saveData.DM_ID = progress.DM_ID;
+        saveData.DMType = progress.DMType;
+        saveData.ProgressState = progress.ProgressState;
+        saveData.SelectedChoiceNum = progress.SelectedChoiceNum;
+        saveData.QuestRewardState = progress.QuestRewardState;
+        saveData.SentTime = progress.SentTime;
+
+        userDatas.DMProgress[messageId.ToString()] = saveData;
+
+        dataManager.SaveData();
+
+        Log.Message($"DMProgress 저장 완료 : {messageId}");
     }
 
     private DMLocalProgress GetProgress(int messageId)
@@ -629,6 +665,12 @@ public class DMListUI : MonoBehaviour
             return false;
 
         dmProgressTable.Remove(removeMessageId);
+        
+        userDatas.DMProgress.Remove(removeMessageId.ToString());
+
+        dataManager.SaveData();
+
+        Log.Message($"DMProgress 삭제 저장 완료 : {removeMessageId}");
 
         connectProgress.DM_ID = targetDM.messageId;
         connectProgress.DMType = (int)DMTypeEnum.Quest;
@@ -646,12 +688,9 @@ public class DMListUI : MonoBehaviour
 
     private void GiveQuestReward(int messageId)
     {
-        Log.Message($"Quest 보상 지급 준비 : {messageId}");
-
         // TODO:
         // Request_TableSO 조회
         // reqItemId / reqItemCount 검사
-        // rewardFollower 지급
     }
 
     private DM_TableSO GetDMTable(int dmId)
