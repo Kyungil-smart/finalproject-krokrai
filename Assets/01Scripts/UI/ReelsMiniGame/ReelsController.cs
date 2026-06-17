@@ -8,6 +8,7 @@ public class ReelsController : MonoBehaviour
     [SerializeField] private ReelsView _view;
     [SerializeField] private ReelsDrag _drag;
 
+    [SerializeField] private GameObject _whiteBG;
     private List<Minigame_ID_ListSO> _imgs = new List<Minigame_ID_ListSO>(4);
 
     private int _currentGameIndex;
@@ -82,13 +83,15 @@ public class ReelsController : MonoBehaviour
     {
         //_currentGameIndex 기반으로 게임 시작 불러오기
         var data = ServiceLocator.Get<IDataManager>();
-        //if (10 < data.UserDatas. ) // Play 횟수
+        //if (10 < data.UserDatas. ) return // Play 횟수
 
         if (data.UserGoods.Claw_ < 1)
         {
             // 광고 팝업 팝업 띄우기
             return;
         }
+
+        _whiteBG.SetActive(false);
 
         // 게임 화면 출력
     }

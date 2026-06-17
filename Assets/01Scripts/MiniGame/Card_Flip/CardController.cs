@@ -55,4 +55,9 @@ public class CardController : MonoBehaviour, IPointerClickHandler
         _sr.sprite = _defaultCard;
         _isFlip = false;
     }
+
+    public void SelfDestroy()
+    {
+        Destroy(gameObject);
+    }
 }
