@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 
 public class CardGameController : MonoBehaviour
 {
+    [SerializeField] int _playCount;
     [SerializeField] byte _row; // 4 열
     [SerializeField] byte _col; // 4 행
 
@@ -49,7 +50,8 @@ public class CardGameController : MonoBehaviour
         _cardPoss = new Transform[_row * _col];
         _rndNums = new int[_row * _col];
         _presetCardPoss = new Vector2[_row * _col];
-        _maxOpenCardCount = 8; // TODO : 나중에 SO로 교체
+        _maxOpenCardCount = _playCount; // TODO : 나중에 SO로 교체
+        _hitCard = 0;
         _count.text = $"남은 횟수 : {_maxOpenCardCount}회";
 
         int t = _rndNums.Length / 2;
@@ -123,6 +125,9 @@ public class CardGameController : MonoBehaviour
 
     public void ResetData()
     {
+        ServiceLocator.Get<IDataManager>().UserDatas.Minigame.Daily_Play_Count++;
+        ServiceLocator.Get<IDataManager>().UserGoods.Claw_--;
+        
         int t = 0;
 
         for (int i = 0; i < _cardCtrl.Length; i++)
@@ -143,7 +148,8 @@ public class CardGameController : MonoBehaviour
         _currentCardIndex = 0;
         _currentCardNum = 0;
         _isOpenedCard = false;
-        _maxOpenCardCount = 8;
+        _maxOpenCardCount = _playCount;
+        _hitCard = 0;
         _count.text = $"남은 횟수 : {_maxOpenCardCount}회";
     }
 
@@ -208,9 +214,11 @@ public class CardGameController : MonoBehaviour
             Log.Message("잘 못된 값이 입력되었습니다.");
             reward = 0;
         }
+        ServiceLocator.Get<IDataManager>().UserDatas.Minigame.Token_Owned += reward;
+        
 
         // 점수 판
-        _uiCtrl.GameEnd(reward);
+        _uiCtrl.GameResult(reward);
 
         // 게임 재시작 여부
         //ResetData();

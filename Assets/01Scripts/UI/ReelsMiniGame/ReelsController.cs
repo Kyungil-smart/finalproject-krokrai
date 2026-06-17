@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ReelsController : MonoBehaviour
@@ -10,14 +12,27 @@ public class ReelsController : MonoBehaviour
 
     [SerializeField] private GameObject _whiteBG;
     [SerializeField] private CardGameUIController _cardGame;
+
+    [SerializeField] private ReelsNotReadyGame _notReadyGame;
+
+    [SerializeField] private GameObject _networkErrorPopup;
+    [SerializeField] private GameObject _adPopups;
+
     private List<Minigame_ID_ListSO> _imgs = new List<Minigame_ID_ListSO>(4);
 
     private int _currentGameIndex;
 
     private void Awake()
     {
+        var data = ServiceLocator.Get<IDataManager>();
+        if (true)//data.Attendance.Last_Login_TimeStamp.Day != DateTime.Now.Day)
+        {
+            data.UserDatas.Minigame.Daily_Play_Count = 0;
+            data.UserGoods.Claw_ += 3;
+        }
+            
         //TODO : DB에 적용된 사항 추가
-        //_currentGameIndex = ServiceLocator.Get<IDataManager>().UserDatas.;
+        _currentGameIndex = data.UserDatas.Minigame.ID_Play_Last;
         _currentGameIndex = 0;
 
         for (int i = 0; i < _gameTable.scriptableObjects.Length; i++)
@@ -77,30 +92,49 @@ public class ReelsController : MonoBehaviour
             Log.Message($"숫자가 0보다 작을 수 없습니다. {nextIndex} {currentIndex} {previousIndex}");
             return;
         }
-        Log.Message($"숫자가 0보다 작을 수 없습니다. {nextIndex} {currentIndex} {previousIndex}");
         _view.SetImgs(new int[] {nextIndex, currentIndex, previousIndex});
     }
 
     public void OnPlayButtonClick()
     {
+        var data = ServiceLocator.Get<IDataManager>();
+        if (!CheckCanPlay()) return;
+
+        Log.Message($"{data.UserDatas.Minigame.Daily_Play_Count} / {data.UserGoods.Claw_}");
+
+        // TODO : 임시코드 제거 필요
+        if (_imgs[_currentGameIndex].Game_ID == 101)
+        {
+            data.UserDatas.Minigame.Daily_Play_Count++;
+            data.UserGoods.Claw_--;
+            data.UserDatas.Minigame.ID_Play_Last = _currentGameIndex;
+            _whiteBG.SetActive(false);
+            _cardGame.GameStart();
+        }
+        else
+        {
+            _notReadyGame.SetPopUp();
+        }
+        // 게임 화면 출력
+    }
+
+    public bool CheckCanPlay()
+    {
         //_currentGameIndex 기반으로 게임 시작 불러오기
-        //var data = ServiceLocator.Get<IDataManager>();
-        //if (10 < data.UserDatas. ) return // Play 횟수
-        /*
+        var data = ServiceLocator.Get<IDataManager>();
+        if (10 < data.UserDatas.Minigame.Daily_Play_Count) return false; // Play 횟수
+
         if (data.UserGoods.Claw_ < 1)
         {
             // 광고 팝업 팝업 띄우기
-            return;
-        }*/
-
-        _whiteBG.SetActive(false);
-
-        if (_imgs[_currentGameIndex].Game_ID == 101) // TODO : 임시코드 제거 필요
-            _cardGame.GameStart();
-        else
-        {
-            Log.Message("준비되지 않은 게임~");
+            if (Application.internetReachability == NetworkReachability.NotReachable)// || ADMob server에 ping)
+            {
+                _networkErrorPopup.SetActive(true);
+                return false;
+            }
+            _adPopups.SetActive(true);
+            return false;
         }
-        // 게임 화면 출력
+        return true;
     }
 }
