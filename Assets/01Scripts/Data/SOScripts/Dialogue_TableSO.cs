@@ -1,7 +1,8 @@
 /*
  작성자 : NekioEmilia
+ 수정자 : 이종현
  작성일 : 26-06-01
- 수정일 : 26-06-02
+ 수정일 : 26-06-16
 
  역할 : Dialogue 테이블의 정보를 가지고 있는 SO
 */
@@ -18,4 +19,7 @@ public class Dialogue_TableSO : ScriptableObject
     [SOInject(4)] public int nextDialogId;
     [SOInject(5)] public int choiceGroupId;
     [SOInject(6)] public bool isEnd;
+    [SOInject(7)] public bool isRequest;
+    [SOInject(8)] public int feedPostId;
+    [SOInject(9)] public int requestId;
 }

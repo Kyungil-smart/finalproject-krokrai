@@ -1,7 +1,8 @@
 /*
  작성자 : NekioEmilia
+ 수정자 : 이종현
  작성일 : 26-06-01
- 수정일 : 26-06-02
+ 수정일 : 26-06-16
 
  역할 : Choice 테이블의 정보를 가지고 있는 SO
 */
@@ -15,4 +16,5 @@ public class Choice_TableSO : ScriptableObject
     [SOInject(1)] public int choiceNum;
     [SOInject(2)] public string choiceText;
     [SOInject(3)] public int nextDialogId;
+    [SOInject(4)] public bool isCorrect;
 }

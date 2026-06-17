@@ -1,10 +1,10 @@
 /*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-10
+수정일 : 26-06-16
 
 역할 : DM 대화 진행 담당
-방식 : DMProgress의 ProgressState와 SelectedChoiceNum을 기준으로 대화 상태를 복원 및 진행
+방식 : 로컬 진행 상태의 ProgressState와 SelectedChoiceNum을 기준으로 대화 상태를 복원 및 진행
 */
 
 using System;
@@ -61,6 +61,7 @@ public class DMConversationRunner : MonoBehaviour
     }
 
     public Action<int, int, int, string> OnProgressChanged;
+    public Action<int> OnQuestDMCompleted;
 
     private void Awake()
     {
@@ -77,6 +78,9 @@ public class DMConversationRunner : MonoBehaviour
             skipAreaButton.onClick.RemoveListener(OnClickSkipArea);
     }
 
+    ///<summary>
+    /// NPC DM 대화를 로컬 진행 상태 기준으로 엽니다.
+    ///</summary>
     public void OpenNpcDM(DM_TableSO dmData, int progressState, int selectedChoiceNum)
     {
         if (chatUI == null)
@@ -165,6 +169,7 @@ public class DMConversationRunner : MonoBehaviour
             {
                 currentProgressState = (int)DMProgressState.Completed;
                 NotifyProgressChanged();
+                NotifyQuestCompleted();
                 yield break;
             }
 
@@ -245,6 +250,9 @@ public class DMConversationRunner : MonoBehaviour
             Log.Message($"알 수 없는 SenderType : {senderType}");
     }
 
+    ///<summary>
+    /// 메시지 딜레이 중일 때 대기 시간을 스킵합니다.
+    ///</summary>
     public void OnClickSkipArea()
     {
         if (!isWaitingMessageDelay)
@@ -286,6 +294,20 @@ public class DMConversationRunner : MonoBehaviour
         );
     }
 
+    private void NotifyQuestCompleted()
+    {
+        if (currentDM == null)
+            return;
+
+        if (currentDM.dmQuestType == DMQuestTypeEnum.Dummy)
+            return;
+
+        OnQuestDMCompleted?.Invoke(currentDM.messageId);
+    }
+
+    ///<summary>
+    /// 진행 중인 DM 대화를 중단합니다.
+    ///</summary>
     public void StopConversation()
     {
         if (playRoutine != null)

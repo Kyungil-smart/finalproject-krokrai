@@ -19,3 +19,6 @@ MonoBehaviour:
   nextDialogId: 900005
   choiceGroupId: 0
   isEnd: 0
+  isRequest: 0
+  feedPostId: 0
+  requestId: 0
