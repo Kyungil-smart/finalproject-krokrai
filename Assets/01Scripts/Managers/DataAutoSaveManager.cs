@@ -47,9 +47,9 @@ public class DataAutoSaveManager : MonoBehaviour, IManagerBooter, IDataAutoSaveM
         if (_testMode) return;
 #endif
         if (!ServiceLocator.Get<IDataManager>().CanSave) return;
-        
+
         _mainCurrencyController.RefreshUI();
-        
+
         _rtdbCts?.Cancel();
         _rtdbCts = new CancellationTokenSource();
 

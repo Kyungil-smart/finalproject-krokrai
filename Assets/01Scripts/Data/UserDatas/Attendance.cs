@@ -1,7 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-05-28
- 수정일 : 26-05-29
+ 수정일 : 26-06-15
 
  역할 : FireStore 내부에 Attendance 하위에 있는 데이터를 script에 저장
  방식 : FireStore에서 정보를 불러온 후 ConvertTo<Attendance>()를 해주면, Google 쪽에서 자동으로 scrip에 저장
@@ -12,7 +12,7 @@ using System;
 [Serializable, FirestoreData]
 public class Attendance
 {
-    private bool _final_Reward_Received = false;
+    private int _final_Reward_Received = 0;
     private DateTime _join_TimeStamp = DateTime.Now;
     private DateTime _last_Login_TimeStamp = DateTime.Now;
     private int _recent_Gauge_Step = 0;
@@ -20,7 +20,7 @@ public class Attendance
     private ulong _user_Active_Day = 0;
 
     [FirestoreProperty]
-    public bool Final_Reward_Received
+    public int Final_Reward_Received
     {
         get
         {

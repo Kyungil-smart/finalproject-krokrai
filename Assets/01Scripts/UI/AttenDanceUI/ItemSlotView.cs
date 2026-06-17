@@ -25,14 +25,16 @@ public class ItemSlotView : MonoBehaviour
     /// <param name="amount">표시할 아이템의 수량</param>
     public void SetItem(Sprite icon, int amount)
     {
-        if (itemIcon != null && icon != null)
+        if (itemIcon == null || amountText == null)
+        {
+            return; 
+        }
+        
+        if (icon != null)
         {
             itemIcon.sprite = icon;
         }
-
-        if (amountText != null)
-        {
-            amountText.text = amount.ToString();
-        }
+        
+        amountText.text = amount.ToString();
     }
 }
