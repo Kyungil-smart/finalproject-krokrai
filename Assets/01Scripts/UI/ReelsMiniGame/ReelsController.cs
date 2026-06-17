@@ -9,6 +9,7 @@ public class ReelsController : MonoBehaviour
     [SerializeField] private ReelsDrag _drag;
 
     [SerializeField] private GameObject _whiteBG;
+    [SerializeField] private CardGameUIController _cardGame;
     private List<Minigame_ID_ListSO> _imgs = new List<Minigame_ID_ListSO>(4);
 
     private int _currentGameIndex;
@@ -34,7 +35,7 @@ public class ReelsController : MonoBehaviour
     {
         _currentGameIndex = 0;//ServiceLocator.Get<IDataManager>().UserData
 
-        int maxGameIndex = _gameTable.scriptableObjects.Length - 1;
+        int maxGameIndex = _imgs.Count - 1;
 
         int nextIndex = maxGameIndex < _currentGameIndex + 1 ? 0 : _currentGameIndex + 1;
         int previousIndex = _currentGameIndex - 1 < 0 ? maxGameIndex : _currentGameIndex - 1;
@@ -76,23 +77,30 @@ public class ReelsController : MonoBehaviour
             Log.Message($"숫자가 0보다 작을 수 없습니다. {nextIndex} {currentIndex} {previousIndex}");
             return;
         }
-        _view.SetImgs(new string[] { _imgs[nextIndex].Image_ID, _imgs[currentIndex].Image_ID, _imgs[previousIndex].Image_ID });
+        Log.Message($"숫자가 0보다 작을 수 없습니다. {nextIndex} {currentIndex} {previousIndex}");
+        _view.SetImgs(new int[] {nextIndex, currentIndex, previousIndex});
     }
 
     public void OnPlayButtonClick()
     {
         //_currentGameIndex 기반으로 게임 시작 불러오기
-        var data = ServiceLocator.Get<IDataManager>();
+        //var data = ServiceLocator.Get<IDataManager>();
         //if (10 < data.UserDatas. ) return // Play 횟수
-
+        /*
         if (data.UserGoods.Claw_ < 1)
         {
             // 광고 팝업 팝업 띄우기
             return;
-        }
+        }*/
 
         _whiteBG.SetActive(false);
 
+        if (_imgs[_currentGameIndex].Game_ID == 101) // TODO : 임시코드 제거 필요
+            _cardGame.GameStart();
+        else
+        {
+            Log.Message("준비되지 않은 게임~");
+        }
         // 게임 화면 출력
     }
 }
