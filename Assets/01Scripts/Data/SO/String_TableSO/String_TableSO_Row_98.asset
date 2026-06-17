@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: String_TableSO_Row_98
   m_EditorClassIdentifier: 
   stringId: STR_DIA_000031
-  KR: "\"\uC557, \uC544\uC27D\uB124\uC694... \uC5B4\uCA54 \uC218 \uC5C6\uC8E0\""
+  KR: "\uC557, \uC544\uC27D\uB124\uC694... \uC5B4\uCA54 \uC218 \uC5C6\uC8E0"
   EN: '"Oh, that''s too bad... I guess it can''t be helped."'

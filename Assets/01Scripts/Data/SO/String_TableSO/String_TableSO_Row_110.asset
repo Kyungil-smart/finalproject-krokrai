@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: String_TableSO_Row_110
   m_EditorClassIdentifier: 
   stringId: STR_DIA_000050
-  KR: "\"\uC624, \uC54C\uACE0 \uC788\uC5C8\uC5B4\uC694!\""
+  KR: "\uC624, \uC54C\uACE0 \uC788\uC5C8\uC5B4\uC694!"
   EN: '"Oh, I knew that!"'

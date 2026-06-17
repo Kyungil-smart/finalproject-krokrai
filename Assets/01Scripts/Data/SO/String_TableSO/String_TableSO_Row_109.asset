@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: String_TableSO_Row_109
   m_EditorClassIdentifier: 
   stringId: STR_DIA_000049
-  KR: "\"\uC0C1\uCC98\uAC00 \uC798 \uC544\uBB3C\uB824\uBA74 \uD1B5\uD48D\uB3C4 \uC911\uC694\uD574\uC11C
+  KR: "\uC0C1\uCC98\uAC00 \uC798 \uC544\uBB3C\uB824\uBA74 \uD1B5\uD48D\uB3C4 \uC911\uC694\uD574\uC11C
     \uAC00\uB054\uC740 \uC637\uC744 \uBC97\uACA8\uC11C \uC18C\uB3C5\uB3C4 \uD574\uC918\uC57C
     \uD558\uACE0, \uC7A5\uC810\uC774 \uC788\uB294 \uB9CC\uD07C \uC190\uB3C4 \uB9CE\uC774
-    \uAC00\uC694\""
+    \uAC00\uC694"
   EN: '"Airflow is important for the wound to heal well, so you also have to take
     it off sometimes to disinfect the area. It has benefits, but it takes a lot of
     care."'
