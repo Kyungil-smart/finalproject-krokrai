@@ -22,4 +22,5 @@ public class Dialogue_TableSO : ScriptableObject
     [SOInject(7)] public bool isRequest;
     [SOInject(8)] public int feedPostId;
     [SOInject(9)] public int requestId;
+    [SOInject(10)] public int rewardFollower;
 }
