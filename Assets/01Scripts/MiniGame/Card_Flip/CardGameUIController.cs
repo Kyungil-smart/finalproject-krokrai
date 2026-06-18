@@ -1,5 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-06-18
+
+ 역할 : 카드 뒤집기 게임에 필요한 UI 제어
+ 방식 : 화면 구성을 위해 GameObject의 활성화를 변경하여, 화면 구성
+ */
 using TMPro;
 using UnityEngine;
 

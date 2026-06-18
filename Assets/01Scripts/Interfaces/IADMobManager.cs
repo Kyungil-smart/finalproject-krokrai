@@ -1,7 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-06-18
+
+ 역할 : 구글 광고 접근을 위한 관리자 interface
+ */
 using System.Threading.Tasks;
-using UnityEngine;
 
 public interface  IADMobManager
 {

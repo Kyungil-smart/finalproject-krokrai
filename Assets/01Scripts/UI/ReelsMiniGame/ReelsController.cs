@@ -1,7 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-06-18
+
+ 역할 : Reels 관리자
+ 방식 : 무한 스크롤을 위한 논리 계산 및 Game에 접근 상태 제어
+ */
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ReelsController : MonoBehaviour

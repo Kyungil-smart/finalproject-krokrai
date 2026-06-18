@@ -1,6 +1,12 @@
-﻿using System;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-06-18
+
+ 역할 : 카드 게임 관리자
+ 방식 : 간격 설정으로 카드 위치 정렬 및 보상 UI 표기
+ */
+
 using System.Collections;
-using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;

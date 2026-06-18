@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-06-18
+
+ 역할 : 드래그하여 게임을 전환하기 위한 제어자
+ 방식 : IPointer를 사용해 EventSystem 기반으로 제어 및 마지막에 놓인 위치에 따라 위 또는 아래를 전달 및 위치 변경
+ */
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;

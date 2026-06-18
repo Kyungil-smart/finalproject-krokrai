@@ -1,7 +1,12 @@
-﻿using GoogleMobileAds.Api;
-using System;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-06-18
+
+ 역할 : 구글 광고 접근을 위한 관리자
+ 방식 : AdMob sdk를 받아서 형식에 맞춰 접근, AutoMated 함수로 자동 생성 및 광고 팝업
+ */
+using GoogleMobileAds.Api;
 using System.Threading.Tasks;
-using UnityEditor.Build.Pipeline;
 using UnityEngine;
 
 public class ADMobManager : MonoBehaviour, IADMobManager, IManagerBooter
@@ -30,8 +35,16 @@ public class ADMobManager : MonoBehaviour, IADMobManager, IManagerBooter
         });
     }
 
+    /// <summary>
+    /// 현재 광고가 시청 가능하게 준비되어 있는 지 확인용
+    /// </summary>
+    /// <returns></returns>
     public bool CanShowAd() => _rewardedAd != null && _rewardedAd.CanShowAd();
 
+    /// <summary>
+    /// 자동으로 광고 준비 및 시청 및 비동기 방식으로 시청 완료 후 상태 전환 가능
+    /// </summary>
+    /// <returns></returns>
     public async Task<bool> AutomatedAd()
     {
         if (_rewardedAd == null)
@@ -50,8 +63,16 @@ public class ADMobManager : MonoBehaviour, IADMobManager, IManagerBooter
         return await _canAdReward.Task;
     }
 
+    /// <summary>
+    /// 광고를 불러옵니다. 만약 첫 호출이 아닌 경우 DestoryAd를 먼저 호출하세요.
+    /// </summary>
     public void LoadAd()
     {
+        if (_rewardedAd.CanShowAd() || _rewardedAd != null)
+        {
+            Log.Message("광고가 시청 가능하거나 초기화 되어 있지 않습니다.");
+            return;
+        }
         var adRequest = new AdRequest(); // load 됌
 
         // TODO : AD_Unit_ID를 Test ID로 교체
@@ -70,6 +91,9 @@ public class ADMobManager : MonoBehaviour, IADMobManager, IManagerBooter
         });
     }
 
+    /// <summary>
+    /// 준비된 광고를 시청합니다. 시청 완료 후 DestoryAd()를 호출하세요.
+    /// </summary>
     public void ShowAd()
     {
         if(_rewardedAd != null && _rewardedAd.CanShowAd())
@@ -83,7 +107,7 @@ public class ADMobManager : MonoBehaviour, IADMobManager, IManagerBooter
         }
     }
 
-    public void RewardAd(Reward reward)
+    private void RewardAd(Reward reward)
     {
         ServiceLocator.Get<IDataManager>().UserGoods.Claw_ += 1;
         _hasReward = true;
@@ -117,6 +141,9 @@ public class ADMobManager : MonoBehaviour, IADMobManager, IManagerBooter
     }
 
     // 광고는 1 회성, 반드시 파괴 후 다시 생성 해야 됌.
+    /// <summary>
+    /// 시청이 완료된 광고는 재활용이 불가 하기 때문에 파괴후 LoadAd()를 통해 다시 불러오세요.
+    /// </summary>
     public void DestoryAd()
     {
         if(_rewardedAd != null)

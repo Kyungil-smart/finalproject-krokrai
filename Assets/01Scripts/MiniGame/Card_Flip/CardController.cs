@@ -1,6 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-06-18
+
+ 역할 : 생성된 카드에 정보 및 입력 제어용
+ 방식 : IPointerClickHandler로 EventSystem 기반으로 제어 및 카드 별 고유 정보를 갖음
+ */
 using UnityEngine;
 using UnityEngine.EventSystems;
 

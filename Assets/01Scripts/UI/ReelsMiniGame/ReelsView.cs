@@ -1,5 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-06-18
+
+ 역할 : 릴스의 표시된 게임 이미지를 바꾸기 위한 제어자
+ 방식 : MVP 패턴에서의 V에 해당 되며, int 배열로 받아 내부에서 직접 처리
+ */
 using UnityEngine;
 using UnityEngine.UI;
 
