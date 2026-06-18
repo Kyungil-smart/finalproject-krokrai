@@ -1,0 +1,138 @@
+﻿using GoogleMobileAds.Api;
+using System;
+using System.Threading.Tasks;
+using UnityEditor.Build.Pipeline;
+using UnityEngine;
+
+public class ADMobManager : MonoBehaviour, IADMobManager, IManagerBooter
+{
+    // 실제 수익을 발생하지 않을 예정이므로 공개되어 있는 테스트 코드 기입
+    private const string AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917";
+
+    TaskCompletionSource<bool> _canAdReward;
+    bool _hasReward;
+
+    RewardedAd _rewardedAd;
+
+    void Start()
+    {
+        if (_rewardedAd != null)
+            DestoryAd();
+        MobileAds.Initialize((InitializationStatus initstatus) =>
+        {
+            if (initstatus == null)
+            {
+                Log.Message("Google Mobile Ads 초기화 실패.");
+                return;
+            }
+
+            Log.Message("Google Mobile Ads 초기화 완료");
+        });
+    }
+
+    public bool CanShowAd() => _rewardedAd != null && _rewardedAd.CanShowAd();
+
+    public async Task<bool> AutomatedAd()
+    {
+        if (_rewardedAd == null)
+            LoadAd();
+        else if (!_rewardedAd.CanShowAd())
+        {
+            DestoryAd();
+            LoadAd();
+        }
+
+        _canAdReward?.TrySetCanceled();
+        _canAdReward = new TaskCompletionSource<bool>(false);
+
+        ShowAd();
+        Log.Message("광고 보기 성공!");
+        return await _canAdReward.Task;
+    }
+
+    public void LoadAd()
+    {
+        var adRequest = new AdRequest(); // load 됌
+
+        // TODO : AD_Unit_ID를 Test ID로 교체
+        RewardedAd.Load(AD_UNIT_ID, adRequest, (RewardedAd ad, LoadAdError error) =>
+        {
+            if (error != null)
+            {
+                Log.Message("광고 수신 실패");
+                return;
+            }
+            Log.Message($"광고 수신을 위한 응답 상태 :{ad.GetResponseInfo()}");
+            
+            _rewardedAd = ad;
+
+            RegisterEventHandler(ad);
+        });
+    }
+
+    public void ShowAd()
+    {
+        if(_rewardedAd != null && _rewardedAd.CanShowAd())
+        {
+            Log.Message("광고 시청.");
+            _rewardedAd.Show(RewardAd);
+        }
+        else
+        {
+            Log.Message("광고를 초기화 해주세요.");
+        }
+    }
+
+    public void RewardAd(Reward reward)
+    {
+        ServiceLocator.Get<IDataManager>().UserGoods.Claw_ += 1;
+        _hasReward = true;
+    }
+
+    private void RegisterEventHandler(RewardedAd ad)
+    {
+        ad.OnAdFullScreenContentFailed += OnAdFailed;
+        ad.OnAdFullScreenContentClosed += OnAdClosed;
+    }
+
+    private void UnRegisterEventHandler(RewardedAd ad)
+    {
+        ad.OnAdFullScreenContentFailed -= OnAdFailed;
+        ad.OnAdFullScreenContentClosed -= OnAdClosed;
+    }
+
+    private void OnAdClosed()
+    {
+        if (_hasReward)
+            _canAdReward.TrySetResult(true);
+        else
+            _canAdReward.TrySetResult(false);
+    }
+
+    private void OnAdFailed(AdError error)
+    {
+        // 광고 열기 중 실패한 경우
+        Debug.LogError("광고 열기를 실패 했습니다. 사유 : "
+                + error);
+    }
+
+    // 광고는 1 회성, 반드시 파괴 후 다시 생성 해야 됌.
+    public void DestoryAd()
+    {
+        if(_rewardedAd != null)
+        {
+            Log.Message("광고 제거됌");
+            UnRegisterEventHandler(_rewardedAd);
+            _rewardedAd.Destroy();
+            _rewardedAd = null;
+        }
+        else
+        {
+            Log.Message("이미 참조가 제거된 상태입니다.");
+        }
+    }
+
+    public void Register() => ServiceLocator.Register<IADMobManager>(this);
+
+    public void UnRegister() => ServiceLocator.UnRegister<IADMobManager>(this);
+}

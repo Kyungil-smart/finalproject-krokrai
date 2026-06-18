@@ -28,7 +28,7 @@ public class ReelsController : MonoBehaviour
         if (true)//data.Attendance.Last_Login_TimeStamp.Day != DateTime.Now.Day)
         {
             data.UserDatas.Minigame.Daily_Play_Count = 0;
-            data.UserGoods.Claw_ += 3;
+            //data.UserGoods.Claw_ += 3;
         }
             
         //TODO : DB에 적용된 사항 추가
@@ -136,5 +136,14 @@ public class ReelsController : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    public async void SeeAd()
+    {
+        if (await ServiceLocator.Get<IADMobManager>().AutomatedAd())
+        {
+            _adPopups.SetActive(false);
+            OnPlayButtonClick();
+        }
     }
 }
