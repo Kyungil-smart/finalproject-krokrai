@@ -1,15 +1,25 @@
+/*
+작성자 : NekioEmilia
+수정자 : 
+작성일 : 26-06-18
+수정일 : 
+
+역할 : 냥냥 베이커리 이벤트 UI와 데이터를 연결하고 제어하는 Presenter
+방식 : View에 직접 데이터를 그리지 않고, DB의 상태를 확인해 View에게 UI를 갱신함
+*/
+
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BakeryEventPresenter : MonoBehaviour
 {
     [SerializeField] private BakeryEventView _bakeryView;
+    [SerializeField] private BakeryAccTimeDataModel _accTimeModel;
 
-    private readonly int[] _targetTimes = { 15, 30, 45, 60 };
+    private Bakery_accTime_TableSO[] _rewardTables;
     
-    void Start()
+    private void Start()
     {
         var eventManager = ServiceLocator.Get<IEventManager>();
 
@@ -23,6 +33,16 @@ public class BakeryEventPresenter : MonoBehaviour
         if (_bakeryView != null)
         {
             _bakeryView.OnClaimButtonClicked += HandleClaimReward;
+        }
+
+        if (_accTimeModel != null)
+        {
+            _rewardTables = _accTimeModel.GetAllTableData();
+        }
+        else
+        {
+            Log.Message($"<color=red><b>BakeryAccTimeDataModel이 인스펙터에 연결되지 않았습니다.</b></color>");
+            return;
         }
 
         InitUI();
@@ -45,75 +65,115 @@ public class BakeryEventPresenter : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 처음 팝업이 켜질 때 DB에서 데이터 받아와서 UI를 초기 세팅하는 메서드
+    /// </summary>
     private void InitUI()
     {
         var dataManager = ServiceLocator.Get<IDataManager>();
         if (dataManager == null || dataManager.UserDatas == null) return;
 
         var bakeryDB = dataManager.UserDatas.NyangBakery;
-        int currentMinutes = bakeryDB.accTime.Minute;
+        
+        // 시간이 1시간을 넘어갈 경우 총 누적 분으로 계산 보정
+        int currentMinutes = (bakeryDB.accTime.Hour * 60) + bakeryDB.accTime.Minute;
         
         _bakeryView.UpdatePlayTimeUI(currentMinutes);
         _bakeryView.UpdateCoinUI(bakeryDB.bakerycoin);
-
+        
         RefreshButtonState(currentMinutes);
     }
     
-    
+    /// <summary>
+    /// PlayTimeTracker에서 분 단위가 변동될 때 수신하여, 플레이 타임 게이지를 조절해주는 메서드
+    /// </summary>
+    /// <param name="currentMinutes">현재 갱신된 누적 접속 시간</param>
     private void HandlePlayTimeUpdated(int currentMinutes)
     {
         _bakeryView.UpdatePlayTimeUI(currentMinutes);
         RefreshButtonState(currentMinutes);
     }
     
+    /// <summary>
+    /// PlayTimeTracker에서 자정이 지났을 때 수신하여, 시간과 버튼을 초기화해주는 메서드
+    /// </summary>
     private void HandleMidnightReset()
     {
         _bakeryView.UpdatePlayTimeUI(0);
         RefreshButtonState(0);
     }
     
+    /// <summary>
+    /// 코인 개수가 변경되면 호출되어 코인을 갱신해주는 메서드 
+    /// </summary>
+    /// <param name="currentCoin">현재 보유한 식빵 코인 총 개수</param>
     private void HandleCoinChanged(int currentCoin)
     {
         _bakeryView.UpdateCoinUI(currentCoin);
     }
     
+    /// <summary>
+    /// 4개의 버튼을 DB 정보와 비교해서 한 번에 상태(잠금/수령가능/완료)를 변화시켜주는 메서드
+    /// </summary>
+    /// <param name="currentMinutes">달성한 플레이 시간</param>
     private void RefreshButtonState(int currentMinutes)
     {
         var bakeryDB = ServiceLocator.Get<IDataManager>().UserDatas.NyangBakery;
 
-        for (int i = 0; i < _targetTimes.Length; i++)
+        if (bakeryDB == null)
         {
-            int target = _targetTimes[i];
-            string key = $"rewards_{target}min";
-            var rewardState = bakeryDB.rewardHistory[key];
+            Log.Message($"<color><b>DB의 bakeryDB가 null입니다.</b></color>");
+            return;
+        }
+
+        bakeryDB.Init();
+
+        for (int i = 0; i < _rewardTables.Length; i++)
+        {
+            var targetData = _rewardTables[i];
+            if (targetData == null) continue;
             
-            if (rewardState.RewardTime)
+            string key = targetData.Reward_ID;
+            int target = targetData.Target_Time;
+            
+            var rewardState = bakeryDB.rewardHistory[key]; // 오류
+            
+            if (rewardState.RewardTime) // 이미 획득함
             {
                 _bakeryView.SetButtonState(i, "Claimed");
             }
-            else if (currentMinutes >= target)
+            else if (currentMinutes >= target) // 수령 가능함
             {
                 _bakeryView.SetButtonState(i, "Ready");
             }
-            else
+            else // 아직 시간이 안됨
             {
                 _bakeryView.SetButtonState(i, "Locked");
             }
         }
     }
     
+    /// <summary>
+    /// 유저가 N번째 버튼을 눌렀을 때 실행되는 수령 로직, 실패 시 롤백하는 트랜잭션 방어가 포함되어 있는 메서드
+    /// </summary>
+    /// <param name="index">유저가 클릭한 버튼의 배열 인덱스 (0~3)</param>
     private void HandleClaimReward(int index)
     {
-        if (index < 0 || index >= _targetTimes.Length) return;
+        if (index < 0 || index >= _rewardTables.Length) return;
         
         var dataManager = ServiceLocator.Get<IDataManager>();
         var bakeryDB = dataManager.UserDatas.NyangBakery;
         
-        int target = _targetTimes[index];
-        string key = $"rewards_{target}min";
+        var targetData = _rewardTables[index];
+        int target = targetData.Target_Time;
+        string key = targetData.Reward_ID;
+        int rewardCoin = targetData.Reward_Count;
+        
         var rewardState = bakeryDB.rewardHistory[key];
 
-        if (rewardState.RewardTime || bakeryDB.accTime.Minute < target) return;
+        // 보상을 받았거나, 시간이 안됐다면 return
+        int currentMinutes = (bakeryDB.accTime.Hour * 60) + bakeryDB.accTime.Minute;
+        if (rewardState.RewardTime || currentMinutes < target) return;
 
         // 롤백용 데이터 백업
         int originalCoin = bakeryDB.bakerycoin;
@@ -122,10 +182,12 @@ public class BakeryEventPresenter : MonoBehaviour
 
         try
         {
+            // 수령 처리 및 시간 기록, 코인 추가
             rewardState.RewardTime = true;
             rewardState.claimedAt = DateTime.Now;
-            bakeryDB.bakerycoin += 10;
+            bakeryDB.bakerycoin += rewardCoin;
 
+            // UI 갱신
             _bakeryView.UpdateCoinUI(bakeryDB.bakerycoin);
             _bakeryView.SetButtonState(index, "Claimed");
 

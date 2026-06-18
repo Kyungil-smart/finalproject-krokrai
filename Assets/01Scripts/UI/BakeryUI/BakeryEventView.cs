@@ -1,3 +1,14 @@
+/*
+작성자 : NekioEmilia
+수정자 : 
+작성일 : 26-06-17
+수정일 : 
+
+역할 : 냥냥 베이커리 이벤트 UI와 유저 입력을 담당하는 View
+방식 : Presenter의 명령을 받아 UI를 갱신하며, 유저의 버튼 클릭 시 Presenter에 이벤트를 전달함
+*/
+
+
 using System;
 using TMPro;
 using UnityEngine;
@@ -9,6 +20,8 @@ public class BakeryEventView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _bakeryTime; // 시간 TMP
     [SerializeField] private Slider _timeGauge; // 게이지 슬라이더
     [SerializeField] private Button[] _nyangCoinButtons; // 냥냥코인 버튼
+    [SerializeField] private GameObject[] _backGrounds;
+    [SerializeField] private GameObject[] _claimedBackGrounds;
 
     public event Action<int> OnClaimButtonClicked;
 
@@ -36,7 +49,7 @@ public class BakeryEventView : MonoBehaviour
         int hours = currentMinutes / 60;
         int mins = currentMinutes % 60;
 
-        _bakeryTime.tag = $"{hours:D2}:{mins:D2}";
+        _bakeryTime.text = $"{hours:D2}:{mins:D2}"; // ?? 
     }
 
     /// <summary>
@@ -48,32 +61,42 @@ public class BakeryEventView : MonoBehaviour
         _nyangCoin.text = coinCount.ToString();
     }
 
+    /// <summary>
+    /// UI 버튼 갱신해주는 메서드
+    /// </summary>
+    /// <param name="index">유저가 클릭한 버튼 인덱스</param>
+    /// <param name="state">버튼의 상태</param>
     public void SetButtonState(int index, string state)
     {
+        // 이상한 인덱스 들어오면 컷
         if (index < 0 || index >= _nyangCoinButtons.Length) return;
 
         var targetBtn = _nyangCoinButtons[index];
-        var image = targetBtn.GetComponent<Image>();
-        var text = targetBtn.GetComponentInChildren<TextMeshProUGUI>();
 
         switch (state)
         {
-            case "Locked": // 목표 미달성
+            case "Locked": // 목표 미달성 (기본 상태)
                 targetBtn.interactable = false;
-                if (image != null) image.color = new Color(0.7f, 0.7f, 0.7f, 1f);
-                if (text != null) text.text = "보상 받기";
+                
+                // 둘 다 끄면 기본 버튼 이미지만 남음 (이게 Locked 연출!)
+                _backGrounds[index].SetActive(false);
+                _claimedBackGrounds[index].SetActive(false);
                 break;
 
-            case "Ready": // 목표 달성, 수령 완료
+            case "Ready": // 목표 달성, 수령 가능
                 targetBtn.interactable = true;
-                if (image != null) image.color = Color.white; // 색깔 다시 확인
-                if (text != null) text.text = "수령 가능";
+                
+                // Ready 배경만 켬!
+                _backGrounds[index].SetActive(true);
+                _claimedBackGrounds[index].SetActive(false);
                 break;
 
             case "Claimed": // 수령 완료
                 targetBtn.interactable = false;
-                if (image != null) image.color = new Color(0.3f, 0.3f, 0.3f, 1f);
-                if (text != null) text.text = "수령 완료";
+                
+                // Claimed 배경만 켬!
+                _backGrounds[index].SetActive(false);
+                _claimedBackGrounds[index].SetActive(true);
                 break;
         }
     }

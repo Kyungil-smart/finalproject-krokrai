@@ -1,3 +1,12 @@
+/*
+작성자 : NekioEmilia
+수정자 : 
+작성일 : 26-06-16
+수정일 : 
+
+역할 : 베이커리 accTime의 테이블 값을 가지고 있는 SO 스크립트
+*/
+
 
 using System;
 using UnityEngine;
@@ -15,8 +24,19 @@ public class PlayTimeTracker : MonoBehaviour
 
     private void Start()
     {
+        _lastCheckedTime = DateTime.Now;
+        
         var dataManager = ServiceLocator.Get<IDataManager>();
-        _lastCheckedTime = dataManager.UserDatas.Attendance.Last_Login_TimeStamp;
+
+        if (dataManager != null && dataManager.UserDatas != null)
+        {
+            var bakeryDB = dataManager.UserDatas.NyangBakery;
+            if (bakeryDB != null)
+            {
+                // DateTime.Today => 00H:00M:00S로 초기화
+                bakeryDB.accTime = DateTime.Today;
+            }
+        }
     }
 
     private void Update()
@@ -41,46 +61,54 @@ public class PlayTimeTracker : MonoBehaviour
     }
     
     /// <summary>
-    /// Last_Login_TimeStamp를 받아 TimeSpan으로 계산해 자정이 지났는지 여부를 체크하는 메서드
+    /// 실제 시간(DateTime.Now)와 비교하여 시간이 크게 튀었거나 1분 이상 경과했는지 체크하는 메서드
     /// </summary>
     private void CheckSimulatorJump()
     {
-        var dataManager = ServiceLocator.Get<IDataManager>();
-        DateTime currentDbTime = dataManager.UserDatas.Attendance.Last_Login_TimeStamp;
-        
-        // TimeSpan timeDiff = 현재시간 - 예전시간
-        TimeSpan timeDiff = currentDbTime - _lastCheckedTime;
+        DateTime currentRealTime = DateTime.Now; 
+        // TimeSpan = 현재 컴퓨터 시간 - 마지막으로 검사했던 컴퓨터 시간
+        TimeSpan timeDiff = currentRealTime - _lastCheckedTime;
 
-        // TotalMinutes를 쓰면 시간의 총길이를 전부 분으로 환산
+        // 실제 현실 시간이 1분 이상 흘렀다면
         if (timeDiff.TotalMinutes >= 1)
         {
-            AddMinuteToDB((int)timeDiff.TotalMinutes);
-
-            // 자정이 지났으면 초기화
-            if (currentDbTime.Day != _lastCheckedTime.Day)
+            int minutesToAdd = (int)timeDiff.TotalMinutes;
+            AddMinuteToDB(minutesToAdd);
+            
+            if (currentRealTime.Day != _lastCheckedTime.Day)
             {
-                ServiceLocator.Get<IEventManager>().MidnightReset();
+                var eventManager = ServiceLocator.Get<IEventManager>();
+                if (eventManager != null)
+                {
+                    eventManager.MidnightReset();
+                }
             }
             
-            _lastCheckedTime = currentDbTime;
+            // 자정이 지나면 0으로 초기화
+            var bakeryDB = ServiceLocator.Get<IDataManager>().UserDatas.NyangBakery;
+            if (bakeryDB != null) bakeryDB.accTime = DateTime.Today;
+            
+            _lastCheckedTime = currentRealTime; 
         }
     }
 
-    /// <summary>
-    /// accTime에 시간을 더하고 PlayTimeUpdated까지 Invoke 시키는 메서드
-    /// </summary>
-    /// <param name="minutesToAdd"></param>
     private void AddMinuteToDB(int minutesToAdd)
     {
         var dataManager = ServiceLocator.Get<IDataManager>();
         if (dataManager == null || dataManager.UserDatas == null) return;
 
         var bakeryDB = dataManager.UserDatas.NyangBakery;
-        
-        // accTime에 딱 minutesToAdd만큼 더해줌 (AddMinutes(더할 분))
+        if (bakeryDB == null) return;
+
         bakeryDB.accTime = bakeryDB.accTime.AddMinutes(minutesToAdd);
-        
-        int currentMinutes = bakeryDB.accTime.Minute;
-        ServiceLocator.Get<IEventManager>().PlayTimeUpdated(currentMinutes);
+
+        // 시간 보정 (Hour * 60) + Minute
+        int totalAccumulatedMinutes = (bakeryDB.accTime.Hour * 60) + bakeryDB.accTime.Minute;
+
+        var eventManager = ServiceLocator.Get<IEventManager>();
+        if (eventManager != null)
+        {
+            eventManager.PlayTimeUpdated(totalAccumulatedMinutes);
+        }
     }
 }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7284cf8343435e04a8c1b02a7dcfa3f7, type: 3}
   m_Name: Bakery_accTime_TableSO_Row_1
   m_EditorClassIdentifier: 
-  Reward_ID: Reward_30min
+  Reward_ID: rewards_30min
   Target_Time: 30
   Reward_Count: 2
