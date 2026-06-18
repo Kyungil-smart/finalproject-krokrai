@@ -1,7 +1,7 @@
 /*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-17
+수정일 : 26-06-18
 
 역할 : DM 대화 진행 담당
 방식 : 로컬 진행 상태의 ProgressState와 SelectedChoiceNum을 기준으로 대화 상태를 복원 및 진행
@@ -47,8 +47,6 @@ public class DMConversationRunner : MonoBehaviour
 
     private int currentProgressState;
     private int currentSelectedChoiceNum;
-    
-    [SerializeField] private int rewardFollower = 50;
     
     [SerializeField] private Request_TableSO[] requestSOs;
 
@@ -202,9 +200,11 @@ public class DMConversationRunner : MonoBehaviour
             {
                 if (ShouldPrintRewardMessage())
                 {
-                    string rewardText = GetRewardMessage();
-                    chatUI.AddRewardMessage(rewardText);
-                    LastPreviewText = rewardText;
+                    int rewardFollower = GetRewardFollower(currentDM.messageId);
+
+                    chatUI.AddRewardMessage(
+                        $"팔로워 +{rewardFollower}"
+                    );
                 }
 
                 currentProgressState = (int)DMProgressState.Completed;
@@ -218,6 +218,38 @@ public class DMConversationRunner : MonoBehaviour
 
             currentDialogId = dialogue.nextDialogId;
         }
+    }
+    
+    private void GiveQuestReward(int messageId)
+    {
+        int rewardFollower = GetRewardFollower(messageId);
+
+        if (rewardFollower <= 0)
+            return;
+
+        // TODO:
+        // 팔로워 증가 처리
+
+        Log.Message($"팔로워 지급 : +{rewardFollower}");
+    }
+    
+    private int GetRewardFollower(int messageId)
+    {
+        foreach (Dialogue_TableSO dialogue in dialogueSOs)
+        {
+            if (dialogue == null)
+                continue;
+
+            if (dialogue.messageId != messageId)
+                continue;
+
+            if (!dialogue.isEnd)
+                continue;
+
+            return dialogue.rewardFollower;
+        }
+
+        return 0;
     }
     
     private bool ShouldShowRequestCard(Dialogue_TableSO dialogue)
@@ -512,11 +544,6 @@ public class DMConversationRunner : MonoBehaviour
         {
             pair.Value.Sort((a, b) => a.choiceNum.CompareTo(b.choiceNum));
         }
-    }
-    
-    private string GetRewardMessage()
-    {
-        return $"팔로워 +{rewardFollower}";
     }
     
     private Choice_TableSO GetCurrentSelectedChoice()
