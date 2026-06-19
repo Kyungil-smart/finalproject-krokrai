@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27a598050e98e9b45bd1155c79025fbb, type: 3}
+  m_Name: Bakery_ShopTableSO_Row_5
+  m_EditorClassIdentifier: 
+  Shop_Index: Shop_nor_005
+  Shop_Type: 1
+  Shot_number: 5
+  Shop_buyCost: 50
+  Shop_buyLimit: 1
