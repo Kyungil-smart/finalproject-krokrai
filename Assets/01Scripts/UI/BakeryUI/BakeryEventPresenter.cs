@@ -1,8 +1,9 @@
 /*
 작성자 : NekioEmilia
-수정자 : 
+수정자 : NekioEmilia
+
 작성일 : 26-06-18
-수정일 : 
+수정일 : 26-06-19
 
 역할 : 냥냥 베이커리 이벤트 UI와 데이터를 연결하고 제어하는 Presenter
 방식 : View에 직접 데이터를 그리지 않고, DB의 상태를 확인해 View에게 UI를 갱신함
@@ -80,8 +81,12 @@ public class BakeryEventPresenter : MonoBehaviour
         
         _bakeryView.UpdatePlayTimeUI(currentMinutes);
         _bakeryView.UpdateCoinUI(bakeryDB.bakerycoin);
+
+        if (bakeryDB.rewardHistory == null)
+        {
+            bakeryDB.Init();
+        }
         
-        bakeryDB.Init();
         RefreshButtonState(currentMinutes);
     }
     
@@ -139,7 +144,7 @@ public class BakeryEventPresenter : MonoBehaviour
             bakeryDB.bakerycoin += autoClaimedCoins;
             _bakeryView.UpdateCoinUI(bakeryDB.bakerycoin);
             
-            Debug.Log($"<color=magenta><b>[자정 정산 완료] 총 {autoClaimedCoins} 코인이 자동 지급되었습니다 (현재: {bakeryDB.bakerycoin})</b></color>");
+            Debug.Log($"<color=magenta><b>[자정 정산 완료] 총 {autoClaimedCoins} 코인이 자동 지급되었습니다. (현재: {bakeryDB.bakerycoin})</b></color>");
         }
         
         _bakeryView.UpdatePlayTimeUI(0);
@@ -231,8 +236,9 @@ public class BakeryEventPresenter : MonoBehaviour
             // 수령 처리 및 시간 기록, 코인 추가
             rewardState.RewardTime = true;
             rewardState.claimedAt = DateTime.Now;
-            bakeryDB.bakerycoin += rewardCoin;  
-
+            bakeryDB.rewardHistory[key] = rewardState;
+            bakeryDB.bakerycoin += rewardCoin;
+            
             // UI 갱신
             _bakeryView.UpdateCoinUI(bakeryDB.bakerycoin);
             _bakeryView.SetButtonState(index, "Claimed");
@@ -244,6 +250,7 @@ public class BakeryEventPresenter : MonoBehaviour
             // 롤백
             rewardState.RewardTime = originalClaimed;
             rewardState.claimedAt = originalTime;
+            bakeryDB.rewardHistory[key] = rewardState;
             bakeryDB.bakerycoin = originalCoin;
             
             Debug.LogError($"저장 실패함. 에러: {e.Message}");

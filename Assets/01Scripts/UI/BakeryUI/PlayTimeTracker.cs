@@ -1,10 +1,12 @@
 /*
 작성자 : NekioEmilia
-수정자 :
-작성일 : 26-06-16
-수정일 :
+수정자 : NekioEmilia
 
-역할 : 베이커리 accTime의 테이블 값을 가지고 있는 SO 스크립트
+작성일 : 26-06-16
+수정일 : 26-06-19
+
+역할 : 냥냥 베이커리 이벤트의 누적 플레이 타임을 전역적으로 관리, 추적하는 스크립트
+방식 : 싱글턴 패턴과 DontDestroyOnLoad를 이용해 냥냥베이커리 화면을 끄고 있어도 자동적으로 시간 업데이트
 */
 
 
@@ -14,10 +16,10 @@ using UnityEngine;
 public class PlayTimeTracker : MonoBehaviour
 {
     public static PlayTimeTracker Instance { get; private set; }
-    
+
     private DateTime _lastCheckedTime;
     private float _realTimer = 0f;
-    
+
     private void Awake()
     {
         if (Instance != null)
@@ -34,24 +36,23 @@ public class PlayTimeTracker : MonoBehaviour
     {
         var dataManager = ServiceLocator.Get<IDataManager>();
 
-        if (dataManager != null)
+        if (dataManager != null && dataManager.UserDatas != null)
         {
-            _lastCheckedTime = dataManager.Attendance.Last_Login_TimeStamp;
+            var bakeryDB = dataManager.UserDatas.NyangBakery;
+            DateTime lastLoginTime = dataManager.Attendance.Last_Login_TimeStamp;
 
-            if (dataManager.UserDatas != null)
+            bool isFirstTimeEver = (lastLoginTime == default(DateTime));
+
+            if (isFirstTimeEver)
             {
-                var bakerDB = dataManager.UserDatas.NyangBakery;
-                if (bakerDB != null)
+                if (bakeryDB != null && bakeryDB.accTime == default(DateTime))
                 {
-                    // 게임 켜질 때 00:00으로 초기화
-                    bakerDB.accTime = DateTime.Today;
+                    bakeryDB.accTime = DateTime.Today;
                 }
             }
         }
-        else
-        {
-            _lastCheckedTime = DateTime.Now;
-        }
+        
+        _lastCheckedTime = DateTime.Now;
     }
 
     private void Update()
@@ -62,7 +63,7 @@ public class PlayTimeTracker : MonoBehaviour
         {
             _realTimer -= 60f;
             AddMinuteToDB(1);
-            
+
             _lastCheckedTime = _lastCheckedTime.AddMinutes(1);
         }
     }
@@ -79,7 +80,7 @@ public class PlayTimeTracker : MonoBehaviour
             int minutesToAdd = (int)timeDiff.TotalMinutes;
             AddMinuteToDB(minutesToAdd);
 
-            // 저장이 지났을 때
+            // 자정이 지났을 때
             if (advancedTime.Day != _lastCheckedTime.Day)
             {
                 var eventManager = ServiceLocator.Get<IEventManager>();
@@ -88,7 +89,7 @@ public class PlayTimeTracker : MonoBehaviour
                 {
                     eventManager.MidnightReset();
                 }
-                
+
                 var bakeryDB = ServiceLocator.Get<IDataManager>().UserDatas.NyangBakery;
 
                 if (bakeryDB != null)
@@ -96,7 +97,7 @@ public class PlayTimeTracker : MonoBehaviour
                     bakeryDB.accTime = DateTime.Today;
                 }
             }
-            
+
             _lastCheckedTime = advancedTime;
         }
     }

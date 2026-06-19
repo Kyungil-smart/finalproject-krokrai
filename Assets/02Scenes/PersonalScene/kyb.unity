@@ -275,13 +275,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: nyangbakery 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5119927605969093715, guid: 29f3c5e4ca88181449677ab9b99de9e8, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 5059682700955918930, guid: 29f3c5e4ca88181449677ab9b99de9e8, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5119927605969093715, guid: 29f3c5e4ca88181449677ab9b99de9e8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5119927605969093715, guid: 29f3c5e4ca88181449677ab9b99de9e8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
