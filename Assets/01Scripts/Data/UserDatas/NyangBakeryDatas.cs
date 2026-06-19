@@ -92,6 +92,9 @@ public class NyangBakeryDatas
             {"Shop_nor_001",new()},
             {"Shop_nor_002",new()},
             {"Shop_nor_003",new()},
+            {"Shop_nor_004",new()},
+            {"Shop_nor_005",new()},
+            {"Shop_nor_006",new()},
         };
     }
 }
