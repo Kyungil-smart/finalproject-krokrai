@@ -1,5 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-06-18
+
+ 역할 : 냥베이커리 상점 SO
+ */
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Bakery_ShopTableSO", menuName = "Scriptable Objects/Bakery_ShopTableSO")]

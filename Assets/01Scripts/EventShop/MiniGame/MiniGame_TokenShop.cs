@@ -1,5 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ 작성자 : krokrai
+ 작성일 : 26-06-19
+
+ 역할 : 미니게임 상점 관리자
+ 방식 : 정해진 비용내에서 빠른 처리
+ */
 using TMPro;
 using UnityEngine;
 

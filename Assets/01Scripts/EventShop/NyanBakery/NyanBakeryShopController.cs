@@ -3,7 +3,7 @@
  작성일 : 26-06-19
 
  역할 : 냥베이커리 상점 관리자
- 방식 : Dictionary로 SO에 데이터를 사용
+ 방식 : Dictionary로 SO에 데이터를 사용하여 상점 최신화
  */
 using System.Collections.Generic;
 using TMPro;
