@@ -271,79 +271,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3760094084437762654, guid: 29f3c5e4ca88181449677ab9b99de9e8, type: 3}
-      propertyPath: m_Value
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3760094084437762654, guid: 29f3c5e4ca88181449677ab9b99de9e8, type: 3}
-      propertyPath: m_MinValue
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5059682700955918930, guid: 29f3c5e4ca88181449677ab9b99de9e8, type: 3}
       propertyPath: m_Name
       value: nyangbakery
       objectReference: {fileID: 0}
     - target: {fileID: 5059682700955918930, guid: 29f3c5e4ca88181449677ab9b99de9e8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5119927605969093715, guid: 29f3c5e4ca88181449677ab9b99de9e8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5119927605969093715, guid: 29f3c5e4ca88181449677ab9b99de9e8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29f3c5e4ca88181449677ab9b99de9e8, type: 3}
---- !u!1 &336008581
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 336008583}
-  - component: {fileID: 336008582}
-  m_Layer: 0
-  m_Name: PlayTimeTracker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &336008582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 336008581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 304482f5aa24667449f25baaea6cf79a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &336008583
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 336008581}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &982410148
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,10 +560,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5630065043130961673, guid: 275ec6d5ed7453148a369b8088a7e325, type: 3}
-      propertyPath: _testMode
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -628,6 +572,5 @@ SceneRoots:
   - {fileID: 1757288294}
   - {fileID: 982410151}
   - {fileID: 1995607080554230613}
-  - {fileID: 336008583}
   - {fileID: 101229422}
   - {fileID: 293074924}
