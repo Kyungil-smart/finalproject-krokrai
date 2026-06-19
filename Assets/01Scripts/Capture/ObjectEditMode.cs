@@ -46,6 +46,8 @@ public class ObjectEditMode : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     private const float _drag_ThresHold = 10f;      // 드래그 판별 임계값 (픽셀)
     private const float _hold_Time = 0.5f;          // 홀드 타임
 
+    private static ObjectEditMode _currentActiveEditMode = null;
+    
     private void Start()
     {
         // 버튼 이벤트 연결
@@ -65,6 +67,9 @@ public class ObjectEditMode : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     /// </summary>
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (_currentActiveEditMode != null && _currentActiveEditMode != this)
+            return;
+        
         if (_isEditMode) return;  // 편집 모드 중엔 홀딩 감지 안함
         
         _isHolding = true;
@@ -150,6 +155,7 @@ public class ObjectEditMode : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         
         // 편집 모드 UI 활성화
         _isEditMode = true;
+        _currentActiveEditMode = this;
         _editMenu.SetActive(true);
         _progressBarUI.ResetBar();
         
@@ -213,6 +219,7 @@ public class ObjectEditMode : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public void ExitEditMode()
     {
         _isEditMode = false;
+        _currentActiveEditMode = null;
         _editMenu.SetActive(false);
         Log.Message("편집 모드 종료");
     }
