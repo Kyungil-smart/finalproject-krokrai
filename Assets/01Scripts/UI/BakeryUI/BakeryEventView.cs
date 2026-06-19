@@ -49,7 +49,7 @@ public class BakeryEventView : MonoBehaviour
         int hours = currentMinutes / 60;
         int mins = currentMinutes % 60;
 
-        _bakeryTime.text = $"{hours:D2}:{mins:D2}"; // ?? 
+        _bakeryTime.text = $"{hours:D2}:{mins:D2}";
     }
 
     /// <summary>

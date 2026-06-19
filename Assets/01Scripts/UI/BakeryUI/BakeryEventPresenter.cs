@@ -81,6 +81,7 @@ public class BakeryEventPresenter : MonoBehaviour
         _bakeryView.UpdatePlayTimeUI(currentMinutes);
         _bakeryView.UpdateCoinUI(bakeryDB.bakerycoin);
         
+        bakeryDB.Init();
         RefreshButtonState(currentMinutes);
     }
     
@@ -90,6 +91,8 @@ public class BakeryEventPresenter : MonoBehaviour
     /// <param name="currentMinutes">현재 갱신된 누적 접속 시간</param>
     private void HandlePlayTimeUpdated(int currentMinutes)
     {
+        Debug.Log($"<color=yellow><b>이벤트 수신 완료 UI 갱신 요청 들어옴 (현재: {currentMinutes}분)</b></color>");
+        
         _bakeryView.UpdatePlayTimeUI(currentMinutes);
         RefreshButtonState(currentMinutes);
     }
@@ -99,6 +102,46 @@ public class BakeryEventPresenter : MonoBehaviour
     /// </summary>
     private void HandleMidnightReset()
     {
+        var dataManager = ServiceLocator.Get<IDataManager>();
+        if (dataManager == null || dataManager.UserDatas == null) return;
+        
+        var bakeryDB = dataManager.UserDatas.NyangBakery;
+
+        int currentMinutes = (bakeryDB.accTime.Hour * 60) + bakeryDB.accTime.Minute;
+        int autoClaimedCoins = 0;
+
+        for (int i = 0; i < _rewardTables.Length; i++)
+        {
+            var targetData = _rewardTables[i];
+
+            if (targetData == null) continue;
+
+            int target = targetData.Target_Time;
+            string key = targetData.Reward_ID;
+
+            if (bakeryDB.rewardHistory.TryGetValue(key, out var rewardState))
+            {
+                if (currentMinutes >= target && !rewardState.RewardTime)
+                {
+                    autoClaimedCoins += targetData.Reward_Count;
+                    Log.Message($"자정 자동 수령 {key} 보상 획득 + {targetData.Reward_Count} 코인");
+                }
+
+                rewardState.RewardTime = false;
+                rewardState.claimedAt = default;
+                
+                bakeryDB.rewardHistory[key] = rewardState;
+            }
+        }
+
+        if (autoClaimedCoins > 0)
+        {
+            bakeryDB.bakerycoin += autoClaimedCoins;
+            _bakeryView.UpdateCoinUI(bakeryDB.bakerycoin);
+            
+            Debug.Log($"<color=magenta><b>[자정 정산 완료] 총 {autoClaimedCoins} 코인이 자동 지급되었습니다 (현재: {bakeryDB.bakerycoin})</b></color>");
+        }
+        
         _bakeryView.UpdatePlayTimeUI(0);
         RefreshButtonState(0);
     }
@@ -126,8 +169,6 @@ public class BakeryEventPresenter : MonoBehaviour
             return;
         }
 
-        bakeryDB.Init();
-
         for (int i = 0; i < _rewardTables.Length; i++)
         {
             var targetData = _rewardTables[i];
@@ -135,10 +176,14 @@ public class BakeryEventPresenter : MonoBehaviour
             
             string key = targetData.Reward_ID;
             int target = targetData.Target_Time;
+
+            bool isClaimed = false;
+            if (bakeryDB.rewardHistory.TryGetValue(key, out var rewardState))
+            {
+                isClaimed = rewardState.RewardTime;
+            }
             
-            var rewardState = bakeryDB.rewardHistory[key]; // 오류
-            
-            if (rewardState.RewardTime) // 이미 획득함
+            if (isClaimed) // 이미 획득함
             {
                 _bakeryView.SetButtonState(i, "Claimed");
             }
@@ -173,6 +218,7 @@ public class BakeryEventPresenter : MonoBehaviour
 
         // 보상을 받았거나, 시간이 안됐다면 return
         int currentMinutes = (bakeryDB.accTime.Hour * 60) + bakeryDB.accTime.Minute;
+        
         if (rewardState.RewardTime || currentMinutes < target) return;
 
         // 롤백용 데이터 백업
@@ -185,7 +231,7 @@ public class BakeryEventPresenter : MonoBehaviour
             // 수령 처리 및 시간 기록, 코인 추가
             rewardState.RewardTime = true;
             rewardState.claimedAt = DateTime.Now;
-            bakeryDB.bakerycoin += rewardCoin;
+            bakeryDB.bakerycoin += rewardCoin;  
 
             // UI 갱신
             _bakeryView.UpdateCoinUI(bakeryDB.bakerycoin);

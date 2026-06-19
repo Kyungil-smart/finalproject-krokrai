@@ -24,6 +24,8 @@ public class TimeSimulator : MonoBehaviour
     // 드롭다운에 들어갈 추가 시간(분), 추가 할 시간이 더있다면 배열에 추가하시면 됩니당
     private readonly DateTime[] _timeOptions =
     {
+        DateTime.MinValue.AddMinutes(1),
+        DateTime.MinValue.AddMinutes(5),
         DateTime.MinValue.AddMinutes(10),
         DateTime.MinValue.AddHours(1),
         DateTime.MinValue.AddDays(1),
@@ -73,6 +75,11 @@ public class TimeSimulator : MonoBehaviour
         UpdateTimeText();
 
         ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp = _currentGameTime;
+
+        if (PlayTimeTracker.Instance != null)
+        {
+            PlayTimeTracker.Instance.OnTimeAdvanced(_currentGameTime);
+        }
 
         Log.Message($" 적용 완료! -> {_currentGameTime}");
     }

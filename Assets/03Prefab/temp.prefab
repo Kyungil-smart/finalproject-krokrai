@@ -15005,6 +15005,10 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: "1\uBD84"
+      m_Image: {fileID: 0}
+    - m_Text: "5\uBD84"
+      m_Image: {fileID: 0}
     - m_Text: "10\uBD84"
       m_Image: {fileID: 0}
     - m_Text: "1\uC2DC\uAC04"
@@ -19736,7 +19740,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "10\uBD84"
+  m_text: "1\uBD84"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
   m_sharedMaterial: {fileID: 3618246716595754706, guid: aa10a5341b5317144a76297aa51bb314, type: 2}

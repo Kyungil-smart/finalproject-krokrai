@@ -33,8 +33,6 @@ public class BakeryAccTimeDataModel : MonoBehaviour
                 _bakeryAccTimes.Add(a);
             }
         }
-        
-        Debug.Log($"<color=green><b>[BakeryAccTimeDataModel] SO 데이터 {_bakeryAccTimes.Count}개 로드 및 정렬 완료!</b></color>");
     }
 
     public Bakery_accTime_TableSO[] GetAllTableData()

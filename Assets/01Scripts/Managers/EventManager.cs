@@ -52,7 +52,7 @@ public class EventManager : MonoBehaviour, IEventManager, IManagerBooter
     /// <summary>
     /// 1분이 지날 때 마다 OnPlayTimeUpdated를 Invoke 시킴
     /// </summary>
-    /// <param name="currentMinutes">현재ㅐ 누적 플레이 시간(분)</param>
+    /// <param name="currentMinutes">현재 누적 플레이 시간(분)</param>
     public void PlayTimeUpdated(int currentMinutes)
     {
         OnPlayTimeUpdated?.Invoke(currentMinutes);
