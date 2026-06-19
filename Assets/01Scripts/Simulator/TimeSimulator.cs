@@ -1,7 +1,9 @@
 /*
 작성자 : 23M-RFT68
+수정자 : NekioEmilia
+
 작성일 : 26-05-27
-수정일 : 26-05-27
+수정일 : 26-06-19
 
 역할 : 인게임 시간을 실제 디바이스의 시간으로 설정 및 변경
 방식 : DateTime을 이용하여 실제 디바이스의 시간 반영
@@ -18,6 +20,8 @@ public class TimeSimulator : MonoBehaviour
     [Header("UI연결")] [SerializeField] private TMP_Dropdown _timeDropdown;
     [SerializeField] private Button _advanceButton;
     [SerializeField] private TextMeshProUGUI _currentTimeText;
+    
+    [SerializeField] private PlayTimeTracker _playTimeTracker;
 
     private DateTime _currentGameTime;
 
@@ -76,9 +80,9 @@ public class TimeSimulator : MonoBehaviour
 
         ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp = _currentGameTime;
 
-        if (PlayTimeTracker.Instance != null)
+        if (_playTimeTracker != null)
         {
-            PlayTimeTracker.Instance.OnTimeAdvanced(_currentGameTime);
+            _playTimeTracker.OnTimeAdvanced(_currentGameTime);
         }
 
         Log.Message($" 적용 완료! -> {_currentGameTime}");

@@ -1645,6 +1645,7 @@ MonoBehaviour:
   _timeDropdown: {fileID: 6557767553178649972}
   _advanceButton: {fileID: 1049874425273813347}
   _currentTimeText: {fileID: 508437995246879129}
+  _playTimeTracker: {fileID: 3759175001241826664, guid: 93d7703e187be3f4388301ccf20fb366, type: 3}
 --- !u!114 &4209994790691766974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22327,8 +22328,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1024489959390169956}
   - {fileID: 4075132273638209868}
+  - {fileID: 1024489959390169956}
   m_Father: {fileID: 7782969650747491579}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

@@ -15,20 +15,11 @@ using UnityEngine;
 
 public class PlayTimeTracker : MonoBehaviour
 {
-    public static PlayTimeTracker Instance { get; private set; }
-
     private DateTime _lastCheckedTime;
     private float _realTimer = 0f;
 
     private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-
-        Instance = this;
+    { 
         DontDestroyOnLoad(this.gameObject);
     }
 
