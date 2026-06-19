@@ -34,20 +34,23 @@ public class CapturePreviewPopup : MonoBehaviour
         _outsideBtn.onClick.AddListener(OnOutsideClicked);
     }
     
-    // 미리보기 팝업 표시
+    
+    /// <summary>
+    /// 미리보기 팝업 표시
+    /// </summary>
     public void Show(int getImg, int postId, ObjectEditMode editMode)
     {
         _currentGetImg = getImg;
         _currentPostId = postId;
         _currentEditMode = editMode;  // 호출한 가구의 편집모드 저장
         
-        // 이미지 로드
-        ServiceLocator.Get<IAddressableManager>().LoadImageSprite(getImg.ToString(), _captureImg);
-        
         gameObject.SetActive(true);
-        Log.Message($"미리보기 표시: {getImg}");
+        // 이전 이미지 잔상 지우기
+        _captureImg.sprite = null;
+
+        ServiceLocator.Get<IAddressableManager>().LoadImageSprite(getImg.ToString(), _captureImg);
     }
-    
+
     // 게시 버튼 클릭
     // -> 팝업 닫기 -> 편집 모드 종료 -> 업로드 화면으로 이동
     private void OnPostButtonClicked()
