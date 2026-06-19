@@ -7,6 +7,8 @@
  방식 : SO 데이터를 연결해서 데이터 조회 후, 초회 획득 여부를 판단하고 맞다면 캡처 후 미리보기 스크립트에게 전달하고,
        아니라면 토스트 메시지 스크립트에 전달 후 토스트 메시지 뜨게 하는 방식
  */
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -106,34 +108,50 @@ public class CaptureSystem : MonoBehaviour
     // result: true = 최초 획득, false = 중복
     private IEnumerator CheckImgListRoutine(int getImg, System.Action<bool> result)
     {
-        var dataManager = ServiceLocator.Get<IDataManager>();
-        if (dataManager == null)
+        try
         {
-            Log.Message("데이터 매니저 초기화 안됨");
-            result(false);
-            yield break;
+            var dataManager = ServiceLocator.Get<IDataManager>();
+            var imgList = dataManager.UserDatas.ImgList;
+            result(!imgList.ContainsKey(getImg.ToString()));
+        }
+        catch (Exception e)
+        {
+                Log.Message($"DB 조회 오류: {e.Message}");
+                result(false);
         }
 
-        var imgList = dataManager.UserDatas.ImgList;
-        result(!imgList.ContainsKey(getImg.ToString()));
         yield return null;
     }
 
     // 최초 획득 처리
     private IEnumerator FirstCaptureRoutine(int getImg)
     {
-        // ImgList에 추가
-        var imgList = ServiceLocator.Get<IDataManager>().UserDatas.ImgList;
-        imgList[getImg.ToString()] = new ImageState();
-        Log.Message($"이미지 획득! key: {getImg}");
+        // 데이터 매니저와 리스트 미리 확보
+        var dataManager = ServiceLocator.Get<IDataManager>();
+        string imgKey = getImg.ToString();
+        
         
         // getImg로 Post_TableSO에서 postId 찾기
         int postId = FindPostIdByGetImg(getImg);
-        Log.Message($"postId: {postId}");
-        
+        if (postId == 0)
+        {
+            Log.Message("포스트 ID가 없음");
+            yield break ;
+        }
+
         // 미리보기 팝업 표시
-        _previewPopup.Show(getImg, postId, _editMode);
+        
+        _previewPopup.gameObject.SetActive(true);
+
         yield return null;
+        
+        _previewPopup.Show(getImg, postId, _editMode);
+        
+        
+                
+        // ImgList에 추가
+        dataManager.UserDatas.ImgList[imgKey] = new ImageState();
+        Log.Message($"이미지 획득! key: {getImg}");
     }
 
     // objectImg로 Object_TableSO찾기
