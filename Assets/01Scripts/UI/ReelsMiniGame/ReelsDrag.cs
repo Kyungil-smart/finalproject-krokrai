@@ -1,6 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-06-18
+ 수정일 : 26-06-19
 
  역할 : 드래그하여 게임을 전환하기 위한 제어자
  방식 : IPointer를 사용해 EventSystem 기반으로 제어 및 마지막에 놓인 위치에 따라 위 또는 아래를 전달 및 위치 변경
@@ -20,6 +21,8 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
     float _moveYPos;
     bool _isFirst;
 
+    bool _isPlayAni = false;
+
     public void OnPointerDown(PointerEventData eventData)
     {
         _moveYPos = eventData.pressPosition.y;
@@ -27,13 +30,15 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (_isPlayAni) return;
         _isFirst = false;
         CheckPos();
     }
 
     public void OnPointerMove(PointerEventData eventData)
     {
-        // TODO  : 여기서 Play button 비활성화
+        if (_isPlayAni) return;
+
         if(!_isFirst)
         {
             _isFirst = true;
@@ -47,6 +52,7 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (_isPlayAni) return;
         _isFirst = false;
         CheckPos();
     }
@@ -76,6 +82,7 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
     IEnumerator SnapAni(bool isUp)
     {
+        _isPlayAni = true;
         if (isUp)
         {
             while (5 < transform.localPosition.y)
@@ -99,16 +106,20 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
         
         // 객체 위치 재조정 및 비활성화
         _reelsCtrl.ChangeGame(isUp);
+        _isPlayAni = false;
     }
 
     IEnumerator RestoreAni()
     {
-        while (1640 < transform.localPosition.y && transform.localPosition.y < 1680)
+        _isPlayAni = true;
+
+        while (transform.localPosition.y < 1650 || 1670 < transform.localPosition.y)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0,1660,0), _lerpSpeed);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, 1660, 0), _lerpSpeed);
             yield return null;
         }
 
         transform.localPosition = new Vector3(0,1660,0);
+        _isPlayAni = false;
     }
 }
