@@ -11,17 +11,13 @@
 
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayTimeTracker : MonoBehaviour
+public class PlayTimeTracker : MonoBehaviour, IManagerBooter
 {
     private DateTime _lastCheckedTime;
     private float _realTimer = 0f;
-
-    private void Awake()
-    { 
-        DontDestroyOnLoad(this.gameObject);
-    }
 
     private void Start()
     {
@@ -114,4 +110,8 @@ public class PlayTimeTracker : MonoBehaviour
             eventManager.PlayTimeUpdated(totalAccumulatedMinutes);
         }
     }
+    
+    public void Register() => ServiceLocator.Register<PlayTimeTracker>(this);
+
+    public void UnRegister() => ServiceLocator.UnRegister<PlayTimeTracker>(this);
 }

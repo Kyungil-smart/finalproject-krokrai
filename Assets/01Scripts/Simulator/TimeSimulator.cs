@@ -9,8 +9,6 @@
 방식 : DateTime을 이용하여 실제 디바이스의 시간 반영
 */
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,8 +18,6 @@ public class TimeSimulator : MonoBehaviour
     [Header("UI연결")] [SerializeField] private TMP_Dropdown _timeDropdown;
     [SerializeField] private Button _advanceButton;
     [SerializeField] private TextMeshProUGUI _currentTimeText;
-    
-    [SerializeField] private PlayTimeTracker _playTimeTracker;
 
     private DateTime _currentGameTime;
 
@@ -79,11 +75,7 @@ public class TimeSimulator : MonoBehaviour
         UpdateTimeText();
 
         ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp = _currentGameTime;
-
-        if (_playTimeTracker != null)
-        {
-            _playTimeTracker.OnTimeAdvanced(_currentGameTime);
-        }
+        ServiceLocator.Get<PlayTimeTracker>().OnTimeAdvanced(_currentGameTime);
 
         Log.Message($" 적용 완료! -> {_currentGameTime}");
     }
