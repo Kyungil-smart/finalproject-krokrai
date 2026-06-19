@@ -14,6 +14,8 @@ using UnityEngine.UI;
 
 public class CapturePreviewPopup : MonoBehaviour
 {
+    [SerializeField] private GameObject _semiCanvas;            // 스마트폰의 캔버스
+    
     [Header("팝업 UI")]
     [SerializeField] private Image _captureImg;                 // 획득 이미지
     [SerializeField] private Button _postBtn;                   // 게시 버튼
@@ -54,6 +56,10 @@ public class CapturePreviewPopup : MonoBehaviour
         {
             // 호출한 가구의 편집 모드 종료
             _currentEditMode?.ExitEditMode();
+            
+            // 스마트폰 캔버스 활성화\
+            if (_semiCanvas != null)
+                _semiCanvas.SetActive(true);
 
             // 업로드 화면으로 이동 (UploadController에 해당 이미지 선택 상태로)
              _uploadController.SetPost(_currentGetImg, _currentPostId);
