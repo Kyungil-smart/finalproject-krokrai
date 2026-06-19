@@ -58,6 +58,7 @@ public class NyanBakeryShopController : MonoBehaviour
     private void OnEnable()
     {
         RefreshToken();
+        RefreshUI();
     }
 
     public void Buy(string Shop_Index)
