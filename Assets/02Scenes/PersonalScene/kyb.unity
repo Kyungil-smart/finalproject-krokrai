@@ -273,7 +273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5059682700955918930, guid: 29f3c5e4ca88181449677ab9b99de9e8, type: 3}
       propertyPath: m_Name
-      value: nyangbakery 1
+      value: nyangbakery
       objectReference: {fileID: 0}
     - target: {fileID: 5059682700955918930, guid: 29f3c5e4ca88181449677ab9b99de9e8, type: 3}
       propertyPath: m_IsActive
