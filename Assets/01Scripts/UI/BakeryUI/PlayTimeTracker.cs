@@ -11,10 +11,9 @@
 
 
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayTimeTracker : MonoBehaviour, IManagerBooter
+public class PlayTimeTracker : MonoBehaviour, IPlayTimeTracker, IManagerBooter
 {
     private DateTime _lastCheckedTime;
     private float _realTimer = 0f;
@@ -38,7 +37,7 @@ public class PlayTimeTracker : MonoBehaviour, IManagerBooter
                 }
             }
         }
-        
+
         _lastCheckedTime = DateTime.Now;
     }
 
@@ -110,8 +109,8 @@ public class PlayTimeTracker : MonoBehaviour, IManagerBooter
             eventManager.PlayTimeUpdated(totalAccumulatedMinutes);
         }
     }
-    
-    public void Register() => ServiceLocator.Register<PlayTimeTracker>(this);
 
-    public void UnRegister() => ServiceLocator.UnRegister<PlayTimeTracker>(this);
+    public void Register() => ServiceLocator.Register<IPlayTimeTracker>(this);
+
+    public void UnRegister() => ServiceLocator.UnRegister<IPlayTimeTracker>(this);
 }
