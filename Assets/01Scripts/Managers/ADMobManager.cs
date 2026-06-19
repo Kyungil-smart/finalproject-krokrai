@@ -68,7 +68,7 @@ public class ADMobManager : MonoBehaviour, IADMobManager, IManagerBooter
     /// </summary>
     public void LoadAd()
     {
-        if (_rewardedAd.CanShowAd() || _rewardedAd != null)
+        if (_rewardedAd != null && !_rewardedAd.CanShowAd())
         {
             Log.Message("광고가 시청 가능하거나 초기화 되어 있지 않습니다.");
             return;
@@ -110,6 +110,7 @@ public class ADMobManager : MonoBehaviour, IADMobManager, IManagerBooter
     private void RewardAd(Reward reward)
     {
         ServiceLocator.Get<IDataManager>().UserGoods.Claw_ += 1;
+        Log.Message($"보상 추가! {ServiceLocator.Get<IDataManager>().UserGoods.Claw_}");
         _hasReward = true;
     }
 
@@ -131,6 +132,7 @@ public class ADMobManager : MonoBehaviour, IADMobManager, IManagerBooter
             _canAdReward.TrySetResult(true);
         else
             _canAdReward.TrySetResult(false);
+        _hasReward = false;
     }
 
     private void OnAdFailed(AdError error)

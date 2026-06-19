@@ -25,13 +25,13 @@ public class CardGameUIController : MonoBehaviour
         _reels.SetActive(false);
         _endUI.SetActive(false);
         _cardFlipGame.SetActive(true);
+        _cardFlipGame.GetComponent<CardGameController>().ResetData();
     }
 
     public void GameResult(int hitedCards)
     {
         _endUI.SetActive(true);
         _rewardText.text = $"x{hitedCards.ToString()}";
-        //ServiceLocator.Get<IDataManager>().UserDatas. // TODO : need develop merge Into this
     }
 
     public void GameEnd() // 리플레이 조건 검사 확인
@@ -46,6 +46,8 @@ public class CardGameUIController : MonoBehaviour
         if (!_reelsCtrl.CheckCanPlay())
         {
             _reels.SetActive(true);
+            _cardFlipGame.SetActive(false);
+            _endUI.SetActive(false);
             return;
         }
         _cardFlipGame.GetComponent<CardGameController>().ResetData();

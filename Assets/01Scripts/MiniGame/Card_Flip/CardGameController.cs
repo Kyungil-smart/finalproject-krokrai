@@ -131,8 +131,8 @@ public class CardGameController : MonoBehaviour
 
     public void ResetData()
     {
+        if (_isFirst) return;
         ServiceLocator.Get<IDataManager>().UserDatas.Minigame.Daily_Play_Count++;
-        ServiceLocator.Get<IDataManager>().UserGoods.Claw_--;
         
         int t = 0;
 

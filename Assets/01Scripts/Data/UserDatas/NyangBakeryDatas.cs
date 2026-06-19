@@ -1,6 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-06-15
+수정일 : 26-06-19
 
  역할 : FireStore 내부에 NyangBakeryDatas 하위에 있는 데이터를 script에 저장
  방식 : FireStore에서 정보를 불러온 후 ConvertTo<NyangBakeryDatas>()를 해주면, Google 쪽에서 자동으로 scrip에 저장
@@ -91,6 +92,9 @@ public class NyangBakeryDatas
             {"Shop_nor_001",new()},
             {"Shop_nor_002",new()},
             {"Shop_nor_003",new()},
+            {"Shop_nor_004",new()},
+            {"Shop_nor_005",new()},
+            {"Shop_nor_006",new()},
         };
     }
 }

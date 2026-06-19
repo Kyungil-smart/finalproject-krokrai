@@ -6,6 +6,6 @@ using UnityEngine;
 public class MiniGame_CardFlip_RewardTableSO : ScriptableObject
 {
     [SOInject(0)] public int matchedPairs;
-    [SOInject(1)] public MiniGame_Reward_Type rewardType;
+    [SOInject(1)] public MiniGame_Reward_TypeEnum rewardType;
     [SOInject(2)] public int rewardAmount;
 }

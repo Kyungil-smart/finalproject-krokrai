@@ -5,6 +5,7 @@
  역할 : Reels 관리자
  방식 : 무한 스크롤을 위한 논리 계산 및 Game에 접근 상태 제어
  */
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,12 +30,12 @@ public class ReelsController : MonoBehaviour
     private void Awake()
     {
         var data = ServiceLocator.Get<IDataManager>();
-        if (true)//data.Attendance.Last_Login_TimeStamp.Day != DateTime.Now.Day)
+        if (data.Attendance.Join_TimeStamp.Day == DateTime.Now.Day || data.Attendance.Last_Login_TimeStamp.Day != DateTime.Now.Day)
         {
             data.UserDatas.Minigame.Daily_Play_Count = 0;
-            //data.UserGoods.Claw_ += 3;
+            data.UserGoods.Claw_ += 3;
         }
-            
+
         //TODO : DB에 적용된 사항 추가
         _currentGameIndex = data.UserDatas.Minigame.ID_Play_Last;
         _currentGameIndex = 0;
@@ -101,10 +102,8 @@ public class ReelsController : MonoBehaviour
 
     public void OnPlayButtonClick()
     {
-        var data = ServiceLocator.Get<IDataManager>();
         if (!CheckCanPlay()) return;
-
-        Log.Message($"{data.UserDatas.Minigame.Daily_Play_Count} / {data.UserGoods.Claw_}");
+        var data = ServiceLocator.Get<IDataManager>();
 
         // TODO : 임시코드 제거 필요
         if (_imgs[_currentGameIndex].Game_ID == 101)
@@ -117,7 +116,7 @@ public class ReelsController : MonoBehaviour
         }
         else
         {
-            _notReadyGame.SetPopUp();
+            _notReadyGame.SetPopUp(objectType.NOTREADY);
         }
         // 게임 화면 출력
     }
@@ -126,7 +125,11 @@ public class ReelsController : MonoBehaviour
     {
         //_currentGameIndex 기반으로 게임 시작 불러오기
         var data = ServiceLocator.Get<IDataManager>();
-        if (10 < data.UserDatas.Minigame.Daily_Play_Count) return false; // Play 횟수
+        if (9 < data.UserDatas.Minigame.Daily_Play_Count)
+        {
+            _notReadyGame.SetPopUp(objectType.OVERPLAY);
+            return false; // Play 횟수
+        }
 
         if (data.UserGoods.Claw_ < 1)
         {
