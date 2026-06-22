@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67d0aa5db61a75a4383733da9a04b0d8, type: 3}
-  m_Name: Post_NPC_TableSO_Row_0
+  m_Name: Post_NPC_TableSO_Row_New_2
   m_EditorClassIdentifier: 
-  postID: 102001
+  postID: 103002
   profileType: 0
-  postProFile: 400001
-  postImage: 502009
-  likeCount: 340512
+  postProFile: 400016
+  postImage: 502013
+  likeCount: 456
   getFollower: 0
-  captionText: STR_CAP_001001
-  displayOrder: 1
+  captionText: STR_CAP_001005
+  displayOrder: 800002
