@@ -5,7 +5,6 @@
 
  역할 : DM 퀘스트 진행 중 홈피드에 포스트 게시 요청시 해당 게시글을 홈피드에 게시
  방식 : GetPost에 게시해야할 포스트 ID를 전달하면 해당 포스트를 홈피드에 게시
- 특이사항 : 이미지 스프라이트는 아직 코드로 제어하지 않았음, 관련 작업 추후 예정
  */
 using System.Collections;
 using System.Collections.Generic;
