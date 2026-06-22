@@ -28,8 +28,11 @@ public class CaptureSystem : MonoBehaviour
     
     private bool _isCapturing = false;  // 캡처 중 중복 클릭 방지
     
-    // 캡처 버튼 직접 프리팹 버튼에서 Onclick()연결
-    // Inspector에서 int 값 지정 예정
+    /// <summary>
+    /// 캡처 버튼 눌렀을때 실행되게 하기
+    /// 캡처 버튼 직접 프리팹 버튼에서 Onclick()연결
+    /// Inspector에서 int 값 지정 예정
+    /// </summary>
     public void OnCaptureClick(int objectImg)
     {
         if (_isCapturing) return;  // 중복 클릭 방지

@@ -128,14 +128,6 @@ public class ObjectEditMode : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     //  드래그 판별
     private bool IsDragging()
     {
-#if Unity_Editor
-        // 에디터는 마우스로 테스트
-        if (Mouse.current != null)
-        {
-            Vector2 currentPos = Mouse.current.position.ReadValue();
-            returnn Vector2.Distance(_pressPosition, currentPos) > _drag_ThresHold;
-        }
-#endif
         // 실제 기기에서 터치
         if (Touchscreen.current != null)
         {

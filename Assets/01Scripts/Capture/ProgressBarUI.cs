@@ -42,7 +42,9 @@ public class ProgressBarUI : MonoBehaviour
         }
     }
     
-    // 프로그래스바 초기화 (숨기기)
+    /// <summary>
+    /// 프로그래스바 초기화 (숨기기)
+    /// </summary>
     public void ResetBar()
     {
         _progressBarPanel.SetActive(false);
