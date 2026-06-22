@@ -127,6 +127,7 @@ Transform:
   - {fileID: 7825323422094267126}
   - {fileID: 6104313003287540661}
   - {fileID: 4595001215680974665}
+  - {fileID: 9213760178973897967}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4966252613747238052
@@ -149,6 +150,7 @@ MonoBehaviour:
   - {fileID: 1773361464113163390}
   - {fileID: 8750935735468071038}
   - {fileID: 5151302018583268973}
+  - {fileID: 303222015933140038}
 --- !u!1 &3360657718720082198
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,6 +526,50 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &6333284396301879768
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9213760178973897967}
+  - component: {fileID: 303222015933140038}
+  m_Layer: 0
+  m_Name: PlayTimeTracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9213760178973897967
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6333284396301879768}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2645528157958487817}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &303222015933140038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6333284396301879768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 304482f5aa24667449f25baaea6cf79a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6522408483756104763
 GameObject:
   m_ObjectHideFlags: 0
