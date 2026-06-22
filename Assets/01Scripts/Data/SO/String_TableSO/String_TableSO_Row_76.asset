@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_76
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000012
-  KR: "\uC800\uB3C4 \uCD5C\uADFC\uC5D0 \uACE0\uC591\uC774\uC5D0 \uAD00\uC2EC\uC774
-    \uC0DD\uACBC\uB294\uB370"
-  EN: "I\u2019ve been getting interested in cats lately,"
+  stringId: STR_BIO_000002
+  KR: "\uACE0\uC591\uC2DC \uC0AC\uB294 \uACE0\uC591\uC774"
+  EN: "A cat living in Goyang\r"

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_77
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000013
-  KR: "\uBB49\uCE58 \uB108\uBB34 \uADC0\uC5FD\uAC8C \uC0DD\uACA8\uC11C \uC5EC\uCB64\uBD24\uC2B5\uB2C8\uB2E4"
-  EN: and Mungchi looked so cute that I wanted to ask.
+  stringId: STR_NOTI_000001
+  KR: "{npcAccountName}\uB2D8\uC774 \uD68C\uC6D0\uB2D8\uC758 \uC0AC\uC9C4\uC744 \uC88B\uC544\uD569\uB2C8\uB2E4."
+  EN: "{npcAccountName} liked your photo.\r"

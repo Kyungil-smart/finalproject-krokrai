@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_56
   m_EditorClassIdentifier: 
-  stringId: STR_NAME_000002
-  KR: "\uC6B0\uC785\uB2C8\uB2E4"
-  EN: "It\u2019s Woo"
+  stringId: STR_CMT_000018
+  KR: "\uC27F! \uB2E4\uB4E4 \uC870\uC6A9\uD788 \uD558\uC138\uC694 \uACE0\uC601\uD76C\uB2D8
+    \uC8FC\uBB34\uC2ED\uB2C8\uB2E4 \u314B\u314B "
+  EN: "Shh! Everybody quiet, Ms. Kitty is sleeping lol\r"

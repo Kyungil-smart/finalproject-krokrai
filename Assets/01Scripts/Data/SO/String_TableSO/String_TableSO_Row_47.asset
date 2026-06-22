@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_47
   m_EditorClassIdentifier: 
-  stringId: STR_CMT_000021
-  KR: "\uC557 \uACE0\uC591\uC774 \uB0A0\uC544\uAC04\uB2E4! \u314B\u314B"
-  EN: Oh no, the cat is flying! lol
+  stringId: STR_CMT_000009
+  KR: "\uC720\uB9AC\uBCFC\uC5D0 \uCC0C\uBD80\uB41C \uBCFC\uB530\uAD6C \uB108\uBB34
+    \uADC0\uC5FD\uB2E4"
+  EN: "Those cheeks squished against the glass bowl are so cute\r"

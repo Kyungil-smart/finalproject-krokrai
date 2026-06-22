@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
+  m_Name: String_TableSO_Row_115
+  m_EditorClassIdentifier: 
+  stringId: STR_DIA_000071
+  KR: "\uC800\uB3C4 \uBB34\uC870\uAC74 \uC88B\uC740 \uC904\uB9CC \uC54C\uC558\uB294\uB370
+    \uC740\uADFC \uC8FC\uC758\uD560 \uAC8C \uB9CE\uB354\uB77C\uACE0\uC694 \u314B\u314B\u314B"
+  EN: "I thought it was just a good thing too, but there are actually quite a few
+    things to watch out for lol\r"

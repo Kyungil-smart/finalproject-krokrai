@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_54
   m_EditorClassIdentifier: 
-  stringId: STR_NAME_000000
-  KR: "\uC6B0\uB9AC"
-  EN: Woori
+  stringId: STR_CMT_000016
+  KR: "\uC544\uAD6C \uC2E0\uB098\uC368\uC694\u315C\u315C \uC644\uC804 \uB0A0\uC544\uB2E4\uB2C8\uB124"
+  EN: "Aww, they\u2019re so excited. Practically flying.\r"

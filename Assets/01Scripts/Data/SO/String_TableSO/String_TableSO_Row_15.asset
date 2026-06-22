@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_15
   m_EditorClassIdentifier: 
-  stringId: STR_TAG_000005
-  KR: "\uC561\uCCB4\uB0E5"
-  EN: Liquid cat
+  stringId: STR_CAP_001008
+  KR: "\uAC70\uC2E4 \uAD6C\uC11D\uC5D0 \uAD74\uB7EC\uB2E4\uB2C8\uB358 \uD138 \uBB49\uCE58\uB4E4\uC744
+    \uC2F9 \uBAA8\uC544\uC11C \uC57C\uC2EC\uCC28\uAC8C \uC950\uB3CC\uC774\uB97C \uB9CC\uB4E4\uC5B4
+    \uBD24\uB294\uB370\uC694... \uACB0\uACFC\uB294 \uB300\uCC38\uC0AC\uC785\uB2C8\uB2E4"
+  EN: "I gathered up all the fur balls rolling around the living room and ambitiously
+    tried to make a little mouse toy... The result was a total disaster.\r"

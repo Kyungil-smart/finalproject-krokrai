@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_81
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000017
-  KR: "\uC557 \uAC10\uC0AC\uD569\uB2C8\uB2E4"
-  EN: Oh, thank you.
+  stringId: STR_NOTI_000005
+  KR: "{npcAccountName}\uB2D8\uC774 \uB313\uAE00\uC744 \uB0A8\uACBC\uC2B5\uB2C8\uB2E4:
+    {commentText}"
+  EN: "{npcAccountName} commented: {commentText}\r"

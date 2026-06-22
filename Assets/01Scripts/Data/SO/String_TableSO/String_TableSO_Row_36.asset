@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_36
   m_EditorClassIdentifier: 
-  stringId: STR_CMT_000010
-  KR: "\u3160\u3160 \uB108\uBB34 \uD558\uCC2E\uACE0 \uADC0\uC5EC\uC6CC"
-  EN: So tiny and ridiculously cute.
+  stringId: STR_TAG_000021
+  KR: "\uB728\uAC8C\uC9C8"
+  EN: "Knitting\r"

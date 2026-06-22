@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_64
   m_EditorClassIdentifier: 
-  stringId: STR_NOTI_000005
-  KR: "{npcAccountName}\uB2D8\uC774 \uB313\uAE00\uC744 \uB0A8\uACBC\uC2B5\uB2C8\uB2E4:
-    {commentText}"
-  EN: '{npcAccountName} commented: {commentText}'
+  stringId: STR_CMT_001005
+  KR: "\uD5C9.. \uCD08\uBCF4 \uC9D1\uC0AC\uC77C \uB54C \uBB63 \uBAA8\uB974\uACE0
+    \uC774\uB7AC\uB294\uB370 \u315C\u315C\L\uC560\uAE30 \uD45C\uC815 \uBCF4\uB2C8\uAE4C
+    \uB108\uBB34 \uBBF8\uC548\uD574\uC9C0\uB124\uC694"
+  EN: "Oof... I did this back when I was a new cat owner and didn\u2019t know any
+    better. Seeing that little face makes me feel so bad.\r"

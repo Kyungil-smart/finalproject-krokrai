@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_34
   m_EditorClassIdentifier: 
-  stringId: STR_CMT_000008
-  KR: "\uBC1C\uC0AC 1\uCD08 \uC804 \u315C\u315C\u315C"
-  EN: Launch in one second...
+  stringId: STR_TAG_000019
+  KR: "\uD658\uBB18\uBCF5"
+  EN: "Recovery suit\r"
