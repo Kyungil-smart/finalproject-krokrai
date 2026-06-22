@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_9
   m_EditorClassIdentifier: 
-  stringId: STR_CAP_000010
-  KR: "\uC18C\uD30C \uBE8F\uACBC\uB2E4..."
-  EN: There goes my sofa...
+  stringId: STR_CAP_001002
+  KR: "\"\uACE0\uC591\uC774\uB3C4 \uC9D1\uC0AC\uC640\uC758 \uC720\uB300\uAC10\uC744
+    \uC544\uC8FC \uC911\uC694\uD558\uAC8C \uC0DD\uAC01\uD574\uC694. \uD63C\uC790
+    \uC788\uB294 \uC2DC\uAC04\uC774 \uAE38\uC5B4\uC9C0\uBA74 \uBD88\uC548\uAC10\uC5D0
+    \uACC4\uC18D \uC6B8\uAC70\uB098, \uC624\uBC84 \uADF8\uB8E8\uBC0D \uB4F1 \uC2A4\uD2B8\uB808\uC2A4
+    \uC99D\uC138\uB97C \uBCF4\uC77C \uC218\uB3C4 \uC788\uC5B4\uC694.\""
+  EN: "\"Cats really value their bond with their owners. If they\u2019re alone for
+    too long, they may show signs of stress, like crying from anxiety or overgrooming.\""

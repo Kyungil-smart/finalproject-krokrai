@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_70
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000006
-  KR: "\uB124, \uC88B\uC740 \uD558\uB8E8 \uB418\uC138\uC694!"
-  EN: You too, have a great day!
+  stringId: STR_CMT_001011
+  KR: "\uC557... \uC81C\uAC00 \uB2E8\uB2E8\uD788 \uCC29\uAC01\uD558\uACE0 \uC798\uBABB
+    \uC54C\uB824\uB4DC\uB838\uB124\uC694... \uC8C4\uC1A1\uD569\uB2C8\uB2E4..."
+  EN: Ah... I completely misunderstood and gave you the wrong info... I'm sorry...

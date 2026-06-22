@@ -1,5 +1,6 @@
 ﻿/*
  작성자 : krokrai
+ 수정자 : 이종현
  작성일 : 26-05-28
  수정일 : 26-06-15
 
@@ -32,10 +33,10 @@ public class UserDatas
     public Dictionary<string, DMProgress> DMProgress { get; set; } = new();
     
     [FirestoreProperty]
-    public Dictionary<string, ImageState> NPCPost { get; set; } = new();
-
+    public DMQuestData DMQuest { get; set; } = new();
+    
     [FirestoreProperty]
-    public DMQuest DMQuest { get; set; } = new();
+    public Dictionary<string, ImageState> NPCPost { get; set; } = new();
 
     [FirestoreProperty]
     public FollowerData Follower { get; set; } = new();

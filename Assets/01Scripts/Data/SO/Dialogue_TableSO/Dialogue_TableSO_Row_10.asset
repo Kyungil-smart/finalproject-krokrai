@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90369beec98bb0643a4f4ec30ff8eaea, type: 3}
   m_Name: Dialogue_TableSO_Row_10
   m_EditorClassIdentifier: 
-  dialogId: 900014
-  messageId: 800002
+  dialogId: 900011
+  messageId: 800001
   senderType: 0
   dialogText: STR_DIA_000011
-  nextDialogId: 900015
-  choiceGroupId: 0
+  nextDialogId: 0
+  choiceGroupId: 1000001
   isEnd: 0
+  isRequest: 1
+  feedPostId: 0
+  requestId: 1100001
+  rewardFollower: 0

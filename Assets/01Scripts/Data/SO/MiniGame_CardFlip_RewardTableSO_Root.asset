@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58aced0d5befe5040b8e2b4f6ee5208f, type: 3}
+  m_Name: MiniGame_CardFlip_RewardTableSO_Root
+  m_EditorClassIdentifier: 
+  scriptableObjects:
+  - {fileID: 11400000, guid: d994cd60b41d82346935d3a881797b4f, type: 2}
+  - {fileID: 11400000, guid: 9cf97b45cdb8ded4d84f031dd3def1fe, type: 2}
+  - {fileID: 11400000, guid: 32620bb747ea0b2428b42add90063e16, type: 2}
+  - {fileID: 11400000, guid: d31aa3fd2ed33c347994b78557548053, type: 2}
+  - {fileID: 11400000, guid: 32ea248b6147177489188a7d6ae2af51, type: 2}
+  - {fileID: 11400000, guid: 06cb4c663f7d1f74482047f7c9b7f983, type: 2}
+  - {fileID: 11400000, guid: 2a0b2a1a59cdf974fb27d96e9bb9c807, type: 2}
+  - {fileID: 11400000, guid: 0c972118a09950b47b3568e1b96323d6, type: 2}
+  - {fileID: 11400000, guid: 7d856567d26eb7849961476f4fafc5a9, type: 2}

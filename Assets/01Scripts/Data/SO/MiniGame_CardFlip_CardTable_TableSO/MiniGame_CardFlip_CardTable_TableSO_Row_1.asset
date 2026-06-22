@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85cc00e0ed66e5c4b9796998905895ef, type: 3}
+  m_Name: MiniGame_CardFlip_CardTable_TableSO_Row_1
+  m_EditorClassIdentifier: 
+  card_ID: 1002
+  car_Name: "\uD30C\uB780\uC0C9 \uCE74\uB4DC"

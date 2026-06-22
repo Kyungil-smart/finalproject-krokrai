@@ -635,11 +635,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _image_Table: {fileID: 11400000, guid: 2e9f07e64c4dc3c48ba261d198e639ef, type: 2}
   _folder_Table: {fileID: 11400000, guid: 1395bff96891e294ab3f084ff15c3d0a, type: 2}
+  _post_Table: {fileID: 0}
   _postImg: {fileID: 3317267802405083382}
   _folderDropDown: {fileID: 4515459208412703181}
   _spawnPoint: {fileID: 68774294149986892}
   _postPrefab: {fileID: 4751031125862557184, guid: 490efd990e922d64d8d30b83ea0f7b56, type: 3}
   _upLoadButton: {fileID: 7923721677317853304}
+  _popup: {fileID: 0}
 --- !u!1 &2861095458344033051
 GameObject:
   m_ObjectHideFlags: 0

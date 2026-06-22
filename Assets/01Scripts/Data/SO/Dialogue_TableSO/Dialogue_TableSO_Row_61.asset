@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90369beec98bb0643a4f4ec30ff8eaea, type: 3}
+  m_Name: Dialogue_TableSO_Row_61
+  m_EditorClassIdentifier: 
+  dialogId: 900152
+  messageId: 800006
+  senderType: 0
+  dialogText: STR_DIA_000152
+  nextDialogId: 900153
+  choiceGroupId: 0
+  isEnd: 0
+  isRequest: 0
+  feedPostId: 0
+  requestId: 0
+  rewardFollower: 0

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_59
   m_EditorClassIdentifier: 
-  stringId: STR_BIO_000002
-  KR: "\uACE0\uC591\uC2DC \uC0AC\uB294 \uACE0\uC591\uC774"
-  EN: A cat living in Goyang
+  stringId: STR_CMT_000021
+  KR: "\uBE7C\uACF0 \uB098\uC628 \uC55E\uBC1C \uC2EC\uCFF5 \u315C\u315C "
+  EN: That little paw peeking out is adorable.

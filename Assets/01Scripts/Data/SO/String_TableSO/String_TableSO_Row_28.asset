@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_28
   m_EditorClassIdentifier: 
-  stringId: STR_CMT_000002
-  KR: "\uC0DD\uC120 \uC57C\uBB34\uC9C0\uAC8C \uBB3C\uACE0 \uC788\uB294 \uAC83 \uBD10
-    \u314B\u314B\u314B"
-  EN: Look at them holding that fish like a pro lol
+  stringId: STR_TAG_000013
+  KR: "\uB0E5\uC2A4\uD0C0"
+  EN: Catstagram

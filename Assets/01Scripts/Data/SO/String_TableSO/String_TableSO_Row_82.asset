@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_82
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000018
-  KR: "\uCC3E\uC544\uBD24\uB294\uB370 \uCF54\uB9AC\uC548 \uC20F\uD5E4\uC5B4\uB77C\uB294
-    \uD754\uD55C \uC885\uC774\uB77C\uACE0 \uD558\uB124\uC694!"
-  EN: "I looked it up, and apparently they\u2019re a common breed called Korean Shorthair!"
+  stringId: STR_DIA_000001
+  KR: "\uC8C4\uC1A1\uD569\uB2C8\uB2E4! \uD639\uC2DC \uC9C0\uAE08 \uC2DC\uAC04 \uAD1C\uCC2E\uC73C\uC2E0\uAC00\uC694?
+    \u3160\u3160"
+  EN: Sorry! Do you have a moment right now?

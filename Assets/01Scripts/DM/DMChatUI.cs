@@ -1,7 +1,7 @@
 /*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-12
+수정일 : 26-06-17
 
 역할 : DM 채팅 UI 출력 담당
 방식 : 말풍선 생성, 선택지 생성, 스크롤 처리 및 채팅 레이아웃 갱신
@@ -31,6 +31,11 @@ public class DMChatUI : MonoBehaviour
     [SerializeField] private RectTransform choiceAreaRect;
     [SerializeField] private int defaultBottomPadding = 50;
     [SerializeField] private float choicePaddingOffset = 10f;
+    
+    [SerializeField] private GameObject rewardMessagePrefab;
+    [SerializeField] private Transform messageParent;
+    
+    [SerializeField] private GameObject requestCardPrefab;
 
     private string previousSpeakerType = "";
     
@@ -61,6 +66,55 @@ public class DMChatUI : MonoBehaviour
 
         RebuildChatLayout();
         ScrollToBottom();
+    }
+    
+    ///<summary>
+    /// 요청 카드 UI를 생성합니다.
+    ///</summary>
+    public void AddRequestCard(Request_TableSO requestData, string npcName)
+    {
+        GameObject item = Instantiate(requestCardPrefab, messageParent);
+
+        DMRequestCardUI cardUI = item.GetComponentInChildren<DMRequestCardUI>();
+
+        if (cardUI == null)
+        {
+            Log.Message("RequestCardPrefab에 DMRequestCardUI가 없습니다.");
+            return;
+        }
+
+        cardUI.SetData(requestData, npcName);
+
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(item.transform as RectTransform);
+    }
+    
+    ///<summary>
+    /// 팔로워 보상 메시지를 전용 프리팹으로 생성합니다.
+    ///</summary>
+    public void AddRewardMessage(string rewardText)
+    {
+        if (rewardMessagePrefab == null || messageParent == null)
+        {
+            Log.Message("RewardMessagePrefab 또는 MessageParent가 연결되지 않았습니다.");
+            return;
+        }
+
+        GameObject item = Instantiate(rewardMessagePrefab, messageParent);
+
+        DMBubbleUI bubbleUI = item.GetComponent<DMBubbleUI>();
+
+        if (bubbleUI == null)
+        {
+            Log.Message("RewardMessagePrefab에 DMBubbleUI가 없습니다.");
+            return;
+        }
+
+        bubbleUI.SetData(
+            rewardText,
+            null,
+            false
+        );
     }
     
     public void SetOpponentProfileImageKey(string profileImageKey)

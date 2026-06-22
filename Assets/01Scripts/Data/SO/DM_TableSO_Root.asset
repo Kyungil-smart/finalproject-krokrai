@@ -15,3 +15,7 @@ MonoBehaviour:
   scriptableObjects:
   - {fileID: 11400000, guid: f2e24188d3cef1e45815d3317565a85f, type: 2}
   - {fileID: 11400000, guid: e5780fbd5b563d34db7ec369b9c91b7c, type: 2}
+  - {fileID: 11400000, guid: 2f7b61ce5febe7340af8669eb4d713fc, type: 2}
+  - {fileID: 11400000, guid: 12756a007a20b1d4595a8bb9cfcaedb1, type: 2}
+  - {fileID: 11400000, guid: d9aa936c292c8b44baedd24a9e00259c, type: 2}
+  - {fileID: 11400000, guid: f3cf0b54abf37bf4ca5dc9c91ff67817, type: 2}

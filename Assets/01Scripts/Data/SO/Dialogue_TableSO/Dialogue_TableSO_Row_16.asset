@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Dialogue_TableSO_Row_16
   m_EditorClassIdentifier: 
   dialogId: 900033
-  messageId: 800002
+  messageId: 800001
   senderType: 0
-  dialogText: STR_DIA_000019
-  nextDialogId: 900034
+  dialogText: STR_DIA_000033
+  nextDialogId: 0
   choiceGroupId: 0
-  isEnd: 0
+  isEnd: 1
+  isRequest: 0
+  feedPostId: 103001
+  requestId: 0
+  rewardFollower: 50
