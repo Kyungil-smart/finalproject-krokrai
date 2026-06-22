@@ -1,4 +1,4 @@
-/*
+﻿/*
 작성자 : 이종현
 작성일 : 26-06-01
 수정일 : 26-06-22
@@ -51,6 +51,9 @@ public class DMListUI : MonoBehaviour
     [Header("Unread Badge")]
     [SerializeField] private GameObject[] unreadBadgeObjects;
     [SerializeField] private TMPro.TMP_Text[] unreadCountTexts;
+
+    [SerializeField] private DMQuestHomeFeedPostLoad _post;
+
 
     private IString_TableManager stringManager;
 
@@ -442,7 +445,7 @@ public class DMListUI : MonoBehaviour
     
     private void SendAfterStoryFeedToHome(int feedPostId)
     {
-        // TODO : 홈피드 클래스 호출
+        _post.GetPost(feedPostId);
     }
     
     ///<summary>
