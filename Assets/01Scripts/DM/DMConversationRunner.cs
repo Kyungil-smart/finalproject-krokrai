@@ -1,7 +1,7 @@
 /*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-18
+수정일 : 26-06-22
 
 역할 : DM 대화 진행 담당
 방식 : 로컬 진행 상태의 ProgressState와 SelectedChoiceNum을 기준으로 대화 상태를 복원 및 진행
@@ -64,7 +64,7 @@ public class DMConversationRunner : MonoBehaviour
     }
 
     public Action<int, int, int, string> OnProgressChanged;
-    public Action<int> OnQuestDMCompleted;
+    public Action<int, int> OnQuestDMCompleted;
 
     private void Awake()
     {
@@ -209,7 +209,7 @@ public class DMConversationRunner : MonoBehaviour
 
                 currentProgressState = (int)DMProgressState.Completed;
                 NotifyProgressChanged();
-                NotifyQuestCompleted();
+                NotifyQuestCompleted(dialogue.feedPostId);
                 yield break;
             }
 
@@ -423,7 +423,7 @@ public class DMConversationRunner : MonoBehaviour
         );
     }
 
-    private void NotifyQuestCompleted()
+    private void NotifyQuestCompleted(int feedPostId)
     {
         if (currentDM == null)
             return;
@@ -431,7 +431,7 @@ public class DMConversationRunner : MonoBehaviour
         if (currentDM.dmQuestType == DMQuestTypeEnum.Dummy)
             return;
 
-        OnQuestDMCompleted?.Invoke(currentDM.messageId);
+        OnQuestDMCompleted?.Invoke(currentDM.messageId, feedPostId);
     }
 
     ///<summary>
