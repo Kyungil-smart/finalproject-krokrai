@@ -6,6 +6,7 @@ public class DMProgress
     private DateTime _sendTime = DateTime.Now;
     private int _progressState = 0;
     private int _selectedChoiceNum = 0;
+    private int _dm_ID = 0;
     private int _dmType = 0;
     private int _questRewardState = 0;
 
@@ -19,6 +20,20 @@ public class DMProgress
         set
         {
             _sendTime = value;
+            ServiceLocator.Get<IDataAutoSaveManager>().RequestSave();
+        }
+    }
+
+    [FirestoreProperty]
+    public int DM_ID
+    {
+        get
+        {
+            return _dm_ID;
+        }
+        set
+        {
+            _dm_ID = value;
             ServiceLocator.Get<IDataAutoSaveManager>().RequestSave();
         }
     }

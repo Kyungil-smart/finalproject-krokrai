@@ -39,9 +39,6 @@ public class UserDatas
     public Dictionary<string, ImageState> NPCPost { get; set; } = new();
 
     [FirestoreProperty]
-    public DMQuest DMQuest { get; set; } = new();
-
-    [FirestoreProperty]
     public FollowerData Follower { get; set; } = new();
 
     [FirestoreProperty]
