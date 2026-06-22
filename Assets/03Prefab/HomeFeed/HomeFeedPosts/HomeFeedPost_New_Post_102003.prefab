@@ -996,7 +996,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1061,7 +1061,7 @@ MonoBehaviour:
   m_verticalMapping: 0
   m_uvLineOffset: 0
   m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 1
+  m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
@@ -1643,7 +1643,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1706,7 +1706,7 @@ MonoBehaviour:
   m_verticalMapping: 0
   m_uvLineOffset: 0
   m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 1
+  m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
@@ -2114,7 +2114,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2179,11 +2179,11 @@ MonoBehaviour:
   m_verticalMapping: 0
   m_uvLineOffset: 0
   m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 1
+  m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 284.6538, w: -4.0532227}
+  m_margin: {x: 1.3295898, y: 0, z: 307.58643, w: 1373}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2250,7 +2250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3893074715277507395}
   - component: {fileID: 1655818138863199724}
-  - component: {fileID: -3874062678383504008}
+  - component: {fileID: 8603722645421242326}
   m_Layer: 5
   m_Name: HomeFeedPost_New_Post_102003
   m_TagString: Untagged
@@ -2300,32 +2300,19 @@ MonoBehaviour:
   _hashTag: {fileID: 11400000, guid: dd81ca779902205428d868444ec061c5, type: 2}
   _hashTag_Table: {fileID: 11400000, guid: 7936aed67575a1446b133d277158ef7c, type: 2}
   _npc_Table: {fileID: 11400000, guid: 48efc221b62b6c440a1d182f65614cd1, type: 2}
---- !u!114 &-3874062678383504008
+--- !u!114 &8603722645421242326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7893499260340199434}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d96685f1567d224fb5a9f4a13b3e2c3, type: 3}
+  m_Script: {fileID: 11500000, guid: a3876eb206f2b364db9ea3900968781e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _npcTableRoot: {fileID: 11400000, guid: fa4d804c96b4ad146b4b45f228264c5d, type: 2}
-  _postListComp: {fileID: 1655818138863199724}
-  _postID: 102001
-  _postImgID: 502009
-  _postImg: {fileID: 7677621346140281614}
-  _poster: {fileID: 345981430017214792}
-  _postLike: {fileID: 3434783868692571329}
-  _postLikeImg: {fileID: 5645234354678661120}
-  _postShare: {fileID: 8980914893766710783}
-  _postLikeCount: {fileID: 5840293245465919196}
-  _hashTagText: {fileID: 1403009740051188401}
-  _postContent: {fileID: 995057192020716846}
-  _postComment: {fileID: 895976101489086188, guid: 215753572c32fa44d8979d5a9892747c, type: 3}
-  _intantiateTarget: {fileID: 4137092192104894053}
+  _postImage: {fileID: 7677621346140281614}
 --- !u!1 &8359977451819281636
 GameObject:
   m_ObjectHideFlags: 0
@@ -2388,7 +2375,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2451,7 +2438,7 @@ MonoBehaviour:
   m_verticalMapping: 0
   m_uvLineOffset: 0
   m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 1
+  m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
@@ -2537,7 +2524,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2600,7 +2587,7 @@ MonoBehaviour:
   m_verticalMapping: 0
   m_uvLineOffset: 0
   m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 1
+  m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
