@@ -47,6 +47,10 @@ public class DMListUI : MonoBehaviour
     [Header("Local Quest Setting")]
     [SerializeField] private int maxQuestDMCount = 3;
     [SerializeField] private double questGenerateHour = 8;
+    
+    [Header("Unread Badge")]
+    [SerializeField] private GameObject unreadBadgeObject;
+    [SerializeField] private TMPro.TMP_Text unreadCountText;
 
     private IString_TableManager stringManager;
 
@@ -68,7 +72,11 @@ public class DMListUI : MonoBehaviour
 
         LoadDMProgressFromDB();
 
+        CheckQuestGenerateDelay();
+
         RefreshDMList();
+
+        UpdateUnreadBadge();
     }
     
     private void Update()
@@ -132,6 +140,8 @@ public class DMListUI : MonoBehaviour
             progress.ProgressState,
             progress.SelectedChoiceNum
         );
+        
+        UpdateUnreadBadge();
     }
     
     private DM_TableSO GetRandomGenerateTargetQuestDM()
@@ -455,6 +465,8 @@ public class DMListUI : MonoBehaviour
         dataManager.SaveData();
 
         Log.Message($"DMProgress 삭제 저장 완료 : {messageId}");
+        
+        UpdateUnreadBadge();
     }
     
     private void SaveDMGenerationTimestamp()
@@ -556,6 +568,8 @@ public class DMListUI : MonoBehaviour
         dataManager.SaveData();
 
         Log.Message($"DMProgress 저장 완료 : {messageId}");
+        
+        UpdateUnreadBadge();
     }
 
     private DMLocalProgress GetProgress(int messageId)
@@ -956,6 +970,8 @@ public class DMListUI : MonoBehaviour
         }
 
         Log.Message($"DMProgress 복원 완료 : {userDatas.DMProgress.Count}");
+        
+        UpdateUnreadBadge();
     }
     
     private DateTime GetDMGenerationTimestamp()
@@ -993,5 +1009,32 @@ public class DMListUI : MonoBehaviour
         dataManager.SaveData();
 
         Log.Message("DMGenerationTimestamp 저장 완료");
+    }
+    
+    private int GetUnreadDMCount()
+    {
+        int count = 0;
+
+        foreach (DMLocalProgress progress in dmProgressTable.Values)
+        {
+            if (progress == null)
+                continue;
+
+            if (progress.ProgressState == (int)DMProgressState.Unread)
+                count++;
+        }
+
+        return count;
+    }
+    
+    private void UpdateUnreadBadge()
+    {
+        int unreadCount = GetUnreadDMCount();
+
+        if (unreadBadgeObject != null)
+            unreadBadgeObject.SetActive(unreadCount > 0);
+
+        if (unreadCountText != null)
+            unreadCountText.text = unreadCount.ToString();
     }
 }

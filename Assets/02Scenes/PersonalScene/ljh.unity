@@ -555,6 +555,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cb7bbe09169906a42a0092ed666ba946, type: 2}
   maxQuestDMCount: 3
   questGenerateHour: 0.001
+  unreadBadgeObject: {fileID: 0}
+  unreadCountText: {fileID: 0}
 --- !u!4 &1465839302
 Transform:
   m_ObjectHideFlags: 0
@@ -5279,6 +5281,10 @@ PrefabInstance:
     - target: {fileID: 425469320777860927, guid: ff134b2559b384c4cb509c8197d2c580, type: 3}
       propertyPath: m_Name
       value: DM_list
+      objectReference: {fileID: 0}
+    - target: {fileID: 425469320777860927, guid: ff134b2559b384c4cb509c8197d2c580, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4391503841509471551, guid: ff134b2559b384c4cb509c8197d2c580, type: 3}
       propertyPath: m_Pivot.x
