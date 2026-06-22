@@ -8,6 +8,7 @@
 */
 
 using System;
+using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -31,45 +32,45 @@ public class DMListUI : MonoBehaviour
         Completed = 2
     }
 
-    [SerializeField] private Transform content;
-    [SerializeField] private GameObject dmListItemPrefab;
+    [SerializeField] private Transform _content;
+    [SerializeField] private GameObject _dmListItemPrefab;
 
     [Header("Panels")]
-    [SerializeField] private GameObject dmListPanel;
-    [SerializeField] private GameObject dmChatPanel;
+    [SerializeField] private GameObject _dmListPanel;
+    [SerializeField] private GameObject _dmChatPanel;
 
     [Header("DM Data")]
-    [SerializeField] private DM_TableSO[] dmTables;
-    [SerializeField] private Dialogue_TableSO[] dialogueSOs;
-    [SerializeField] private Choice_TableSO[] choiceSOs;
-    [SerializeField] private Npc_TableSO[] npcSOs;
+    [SerializeField] private DM_TableSO[] _dmTables;
+    [SerializeField] private Dialogue_TableSO[] _dialogueSOs;
+    [SerializeField] private Choice_TableSO[] _choiceSOs;
+    [SerializeField] private Npc_TableSO[] _npcSOs;
 
     [Header("Local Quest Setting")]
-    [SerializeField] private int maxQuestDMCount = 3;
-    [SerializeField] private double questGenerateHour = 8;
+    [SerializeField] private int _maxQuestDMCount = 3;
+    [SerializeField] private double _questGenerateHour = 8;
     
     [Header("Unread Badge")]
-    [SerializeField] private GameObject[] unreadBadgeObjects;
-    [SerializeField] private TMPro.TMP_Text[] unreadCountTexts;
+    [SerializeField] private GameObject[] _unreadBadgeObjects;
+    [SerializeField] private TMP_Text[] _unreadCountTexts;
 
     [SerializeField] private DMQuestHomeFeedPostLoad _post;
 
 
-    private IString_TableManager stringManager;
+    private IString_TableManager _stringManager;
 
-    private readonly Dictionary<int, DMLocalProgress> dmProgressTable = new();
+    private readonly Dictionary<int, DMLocalProgress> _dmProgressTable = new();
     
     private float _questGenerateCheckTimer;
     
     private void Start()
     {
-        stringManager = ServiceLocator.Get<IString_TableManager>();
+        _stringManager = ServiceLocator.Get<IString_TableManager>();
 
-        if (stringManager == null)
+        if (_stringManager == null)
             Log.Message("String_TableManager를 찾을 수 없습니다.");
 
-        if (dmChatPanel != null)
-            dmChatPanel.SetActive(false);
+        if (_dmChatPanel != null)
+            _dmChatPanel.SetActive(false);
 
         InitLocalProgressData();
 
@@ -95,7 +96,7 @@ public class DMListUI : MonoBehaviour
 
     private void InitLocalProgressData()
     {
-        dmProgressTable.Clear();
+        _dmProgressTable.Clear();
         CreateDummyDMProgress();
     }
     
@@ -104,7 +105,7 @@ public class DMListUI : MonoBehaviour
     ///</summary>
     public void FillQuestDMsForTest()
     {
-        while (GetCurrentQuestDMCount() < maxQuestDMCount)
+        while (GetCurrentQuestDMCount() < _maxQuestDMCount)
         {
             DM_TableSO targetDM = GetRandomGenerateTargetQuestDM();
 
@@ -136,7 +137,7 @@ public class DMListUI : MonoBehaviour
             PreviewText = ""
         };
         
-        dmProgressTable.Add(targetDM.messageId, progress);
+        _dmProgressTable.Add(targetDM.messageId, progress);
 
         SaveLocalDMProgress(
             targetDM.messageId,
@@ -151,7 +152,7 @@ public class DMListUI : MonoBehaviour
     {
         List<DM_TableSO> candidates = new List<DM_TableSO>();
 
-        foreach (DM_TableSO dm in dmTables)
+        foreach (DM_TableSO dm in _dmTables)
         {
             if (dm == null)
                 continue;
@@ -159,7 +160,7 @@ public class DMListUI : MonoBehaviour
             if (dm.dmQuestType == DMQuestTypeEnum.Dummy)
                 continue;
 
-            if (dmProgressTable.ContainsKey(dm.messageId))
+            if (_dmProgressTable.ContainsKey(dm.messageId))
                 continue;
 
             candidates.Add(dm);
@@ -174,13 +175,13 @@ public class DMListUI : MonoBehaviour
 
     private void CreateDummyDMProgress()
     {
-        if (dmTables == null)
+        if (_dmTables == null)
         {
             Log.Message("DM_TableSO 배열이 연결되지 않았습니다.");
             return;
         }
 
-        foreach (DM_TableSO dm in dmTables)
+        foreach (DM_TableSO dm in _dmTables)
         {
             if (dm == null)
                 continue;
@@ -188,7 +189,7 @@ public class DMListUI : MonoBehaviour
             if (dm.dmQuestType != DMQuestTypeEnum.Dummy)
                 continue;
 
-            if (dmProgressTable.ContainsKey(dm.messageId))
+            if (_dmProgressTable.ContainsKey(dm.messageId))
                 continue;
 
             DMLocalProgress progress = new DMLocalProgress
@@ -202,19 +203,19 @@ public class DMListUI : MonoBehaviour
                 PreviewText = ""
             };
 
-            dmProgressTable.Add(dm.messageId, progress);
+            _dmProgressTable.Add(dm.messageId, progress);
         }
     }
 
     private void CreateDMList()
     {
-        if (content == null || dmListItemPrefab == null)
+        if (_content == null || _dmListItemPrefab == null)
         {
             Log.Message("Content 또는 DMListItemPrefab이 연결되지 않았습니다.");
             return;
         }
 
-        List<DMLocalProgress> progressList = new List<DMLocalProgress>(dmProgressTable.Values);
+        List<DMLocalProgress> progressList = new List<DMLocalProgress>(_dmProgressTable.Values);
 
         progressList.Sort((a, b) => CompareDMListOrder(a, b));
 
@@ -231,7 +232,7 @@ public class DMListUI : MonoBehaviour
                 continue;
             }
 
-            GameObject item = Instantiate(dmListItemPrefab, content);
+            GameObject item = Instantiate(_dmListItemPrefab, _content);
 
             DMListItemUI itemUI = item.GetComponentInChildren<DMListItemUI>();
 
@@ -291,22 +292,22 @@ public class DMListUI : MonoBehaviour
 
         string profileImageKey = GetNpcProfileImageKey(dmData.senderName);
 
-        DMChatUI chatUI = dmChatPanel.GetComponentInChildren<DMChatUI>();
+        DMChatUI chatUI = _dmChatPanel.GetComponentInChildren<DMChatUI>();
         if (chatUI != null)
             chatUI.SetOpponentProfileImageKey(profileImageKey);
 
-        if (dmListPanel != null)
-            dmListPanel.SetActive(false);
+        if (_dmListPanel != null)
+            _dmListPanel.SetActive(false);
 
-        if (dmChatPanel != null)
-            dmChatPanel.SetActive(true);
+        if (_dmChatPanel != null)
+            _dmChatPanel.SetActive(true);
 
         DMLocalProgress progress = GetProgress(dmData.messageId);
 
         int openProgressState = progress.ProgressState;
         int openSelectedChoiceNum = progress.SelectedChoiceNum;
 
-        DMConversationRunner runner = dmChatPanel.GetComponent<DMConversationRunner>();
+        DMConversationRunner runner = _dmChatPanel.GetComponent<DMConversationRunner>();
 
         if (runner == null)
         {
@@ -354,7 +355,7 @@ public class DMListUI : MonoBehaviour
     {
         int currentQuestCount = GetCurrentQuestDMCount();
 
-        if (currentQuestCount >= maxQuestDMCount)
+        if (currentQuestCount >= _maxQuestDMCount)
         {
             Log.Message("Quest DM 개수가 최대치입니다.");
             return;
@@ -374,19 +375,19 @@ public class DMListUI : MonoBehaviour
 
     public void BackToDMList()
     {
-        if (dmChatPanel == null || dmListPanel == null)
+        if (_dmChatPanel == null || _dmListPanel == null)
         {
             Log.Message("DM 패널이 연결되지 않았습니다.");
             return;
         }
 
-        DMConversationRunner runner = dmChatPanel.GetComponent<DMConversationRunner>();
+        DMConversationRunner runner = _dmChatPanel.GetComponent<DMConversationRunner>();
 
         if (runner != null)
             runner.StopConversation();
 
-        dmChatPanel.SetActive(false);
-        dmListPanel.SetActive(true);
+        _dmChatPanel.SetActive(false);
+        _dmListPanel.SetActive(true);
 
         RefreshDMList();
     }
@@ -453,7 +454,7 @@ public class DMListUI : MonoBehaviour
     ///</summary>
     private void RemoveQuestDMFromListAndDB(int messageId)
     {
-        dmProgressTable.Remove(messageId);
+        _dmProgressTable.Remove(messageId);
 
         IDataManager dataManager = ServiceLocator.Get<IDataManager>();
 
@@ -489,7 +490,7 @@ public class DMListUI : MonoBehaviour
     {
         int currentQuestCount = GetCurrentQuestDMCount();
 
-        if (currentQuestCount >= maxQuestDMCount)
+        if (currentQuestCount >= _maxQuestDMCount)
         {
             SetDMGenerationTimestamp(default);
             return;
@@ -507,7 +508,7 @@ public class DMListUI : MonoBehaviour
         TimeSpan elapsedTime = now - savedTimestamp;
 
         int generateCount = Mathf.FloorToInt(
-            (float)(elapsedTime.TotalHours / questGenerateHour)
+            (float)(elapsedTime.TotalHours / _questGenerateHour)
         );
 
         if (generateCount <= 0)
@@ -515,19 +516,19 @@ public class DMListUI : MonoBehaviour
 
         for (int i = 0; i < generateCount; i++)
         {
-            if (GetCurrentQuestDMCount() >= maxQuestDMCount)
+            if (GetCurrentQuestDMCount() >= _maxQuestDMCount)
                 break;
 
             TryGenerateQuestDMLocal();
         }
 
-        if (GetCurrentQuestDMCount() >= maxQuestDMCount)
+        if (GetCurrentQuestDMCount() >= _maxQuestDMCount)
         {
             SetDMGenerationTimestamp(default);
             return;
         }
 
-        double remainHours = elapsedTime.TotalHours % questGenerateHour;
+        double remainHours = elapsedTime.TotalHours % _questGenerateHour;
         DateTime nextTimestamp = now.AddHours(-remainHours);
 
         SetDMGenerationTimestamp(nextTimestamp);
@@ -580,7 +581,7 @@ public class DMListUI : MonoBehaviour
 
     private DMLocalProgress GetProgress(int messageId)
     {
-        if (!dmProgressTable.TryGetValue(messageId, out DMLocalProgress progress))
+        if (!_dmProgressTable.TryGetValue(messageId, out DMLocalProgress progress))
         {
             DM_TableSO dmData = GetDMTable(messageId);
 
@@ -599,7 +600,7 @@ public class DMListUI : MonoBehaviour
                 PreviewText = ""
             };
 
-            dmProgressTable.Add(messageId, progress);
+            _dmProgressTable.Add(messageId, progress);
         }
 
         return progress;
@@ -609,7 +610,7 @@ public class DMListUI : MonoBehaviour
     {
         int count = 0;
 
-        foreach (DMLocalProgress progress in dmProgressTable.Values)
+        foreach (DMLocalProgress progress in _dmProgressTable.Values)
         {
             if (progress == null)
                 continue;
@@ -655,7 +656,7 @@ public class DMListUI : MonoBehaviour
     
     private int GetRewardFollower(int messageId)
     {
-        foreach (Dialogue_TableSO dialogue in dialogueSOs)
+        foreach (Dialogue_TableSO dialogue in _dialogueSOs)
         {
             if (dialogue == null)
                 continue;
@@ -674,10 +675,10 @@ public class DMListUI : MonoBehaviour
 
     private DM_TableSO GetDMTable(int dmId)
     {
-        if (dmTables == null)
+        if (_dmTables == null)
             return null;
 
-        foreach (DM_TableSO dm in dmTables)
+        foreach (DM_TableSO dm in _dmTables)
         {
             if (dm == null)
                 continue;
@@ -691,15 +692,15 @@ public class DMListUI : MonoBehaviour
 
     private int GetDMTableIndex(int messageId)
     {
-        if (dmTables == null)
+        if (_dmTables == null)
             return int.MaxValue;
 
-        for (int i = 0; i < dmTables.Length; i++)
+        for (int i = 0; i < _dmTables.Length; i++)
         {
-            if (dmTables[i] == null)
+            if (_dmTables[i] == null)
                 continue;
 
-            if (dmTables[i].messageId == messageId)
+            if (_dmTables[i].messageId == messageId)
                 return i;
         }
 
@@ -725,7 +726,7 @@ public class DMListUI : MonoBehaviour
 
     private string GetChoicePointPreviewText(int messageId)
     {
-        foreach (Dialogue_TableSO dialogue in dialogueSOs)
+        foreach (Dialogue_TableSO dialogue in _dialogueSOs)
         {
             if (dialogue == null)
                 continue;
@@ -780,7 +781,7 @@ public class DMListUI : MonoBehaviour
     {
         int startDialogId = 0;
 
-        foreach (Dialogue_TableSO dialogue in dialogueSOs)
+        foreach (Dialogue_TableSO dialogue in _dialogueSOs)
         {
             if (dialogue == null)
                 continue;
@@ -797,7 +798,7 @@ public class DMListUI : MonoBehaviour
 
     private Dialogue_TableSO GetDialogue(int dialogId)
     {
-        foreach (Dialogue_TableSO dialogue in dialogueSOs)
+        foreach (Dialogue_TableSO dialogue in _dialogueSOs)
         {
             if (dialogue == null)
                 continue;
@@ -811,10 +812,10 @@ public class DMListUI : MonoBehaviour
 
     private Choice_TableSO GetChoiceByChoiceNum(int choiceGroupId, int choiceNum)
     {
-        if (choiceSOs == null)
+        if (_choiceSOs == null)
             return null;
 
-        foreach (Choice_TableSO choice in choiceSOs)
+        foreach (Choice_TableSO choice in _choiceSOs)
         {
             if (choice == null)
                 continue;
@@ -828,13 +829,13 @@ public class DMListUI : MonoBehaviour
 
     private string GetNpcAccountName(int npcId)
     {
-        if (npcSOs == null)
+        if (_npcSOs == null)
         {
             Log.Message("Npc_TableSO 배열이 연결되지 않았습니다.");
             return "Unknown";
         }
 
-        foreach (Npc_TableSO npc in npcSOs)
+        foreach (Npc_TableSO npc in _npcSOs)
         {
             if (npc == null)
                 continue;
@@ -849,13 +850,13 @@ public class DMListUI : MonoBehaviour
 
     private string GetString(string stringKey)
     {
-        if (stringManager == null)
+        if (_stringManager == null)
         {
             Log.Message("String_TableManager를 찾을 수 없습니다.");
             return stringKey;
         }
 
-        string text = stringManager.GetString(stringKey, SystemLanguage.Korean);
+        string text = _stringManager.GetString(stringKey, SystemLanguage.Korean);
 
         if (string.IsNullOrEmpty(text))
         {
@@ -868,7 +869,7 @@ public class DMListUI : MonoBehaviour
 
     private void RefreshDMList()
     {
-        foreach (Transform child in content)
+        foreach (Transform child in _content)
         {
             Destroy(child.gameObject);
         }
@@ -878,7 +879,7 @@ public class DMListUI : MonoBehaviour
 
     private bool HasChoice(int messageId)
     {
-        foreach (Dialogue_TableSO dialogue in dialogueSOs)
+        foreach (Dialogue_TableSO dialogue in _dialogueSOs)
         {
             if (dialogue == null)
                 continue;
@@ -895,13 +896,13 @@ public class DMListUI : MonoBehaviour
 
     private string GetNpcProfileImageKey(int npcId)
     {
-        if (npcSOs == null)
+        if (_npcSOs == null)
         {
             Log.Message("Npc_TableSO 배열이 연결되지 않았습니다.");
             return "";
         }
 
-        foreach (Npc_TableSO npc in npcSOs)
+        foreach (Npc_TableSO npc in _npcSOs)
         {
             if (npc == null)
                 continue;
@@ -961,7 +962,7 @@ public class DMListUI : MonoBehaviour
                 PreviewText = ""
             };
 
-            dmProgressTable[progress.DM_ID] = progress;
+            _dmProgressTable[progress.DM_ID] = progress;
         }
 
         foreach (string key in deleteKeys)
@@ -1021,7 +1022,7 @@ public class DMListUI : MonoBehaviour
     {
         int count = 0;
 
-        foreach (DMLocalProgress progress in dmProgressTable.Values)
+        foreach (DMLocalProgress progress in _dmProgressTable.Values)
         {
             if (progress == null)
                 continue;
@@ -1038,9 +1039,9 @@ public class DMListUI : MonoBehaviour
         int unreadCount = GetUnreadDMCount();
         bool hasUnread = unreadCount > 0;
 
-        if (unreadBadgeObjects != null)
+        if (_unreadBadgeObjects != null)
         {
-            foreach (GameObject badgeObject in unreadBadgeObjects)
+            foreach (GameObject badgeObject in _unreadBadgeObjects)
             {
                 if (badgeObject == null)
                     continue;
@@ -1049,9 +1050,9 @@ public class DMListUI : MonoBehaviour
             }
         }
 
-        if (unreadCountTexts != null)
+        if (_unreadCountTexts != null)
         {
-            foreach (TMPro.TMP_Text countText in unreadCountTexts)
+            foreach (TMPro.TMP_Text countText in _unreadCountTexts)
             {
                 if (countText == null)
                     continue;
