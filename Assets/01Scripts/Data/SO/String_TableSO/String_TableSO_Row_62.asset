@@ -12,10 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_62
   m_EditorClassIdentifier: 
-  stringId: STR_CMT_001003
-  KR: "\uACE0\uC591\uC774\uAC00 \uC678\uB85C\uC6C0\uC744 \uC548 \uD0C4\uB2E4\uB294
-    \uAC70 \uB2E4 \uC61B\uB9D0..\L\uD648\uCEA0\uC73C\uB85C \uBCF4\uBA74 \uC800 \uB098\uAC08
-    \uB54C\uBD80\uD130 \uBB38 \uC55E\uC5D0\uC11C\L\uD558\uC5FC\uC5C6\uC774 \uAE30\uB2E4\uB9AC\uACE0\uC788\uB354\uB77C\uAD6C\uC694
-    \uB9F4\uCC22 \u315C\u315C"
-  EN: "People saying cats don\u2019t get lonely is so outdated... I checked the home
-    cam and saw mine waiting by the door the whole time after I left. That was heartbreaking.\r"
+  stringId: STR_NOTI_000003
+  KR: "{npcAccountName}\uB2D8\uC774 \uD68C\uC6D0\uB2D8\uC744 \uD314\uB85C\uC6B0\uD558\uAE30
+    \uC2DC\uC791\uD588\uC2B5\uB2C8\uB2E4."
+  EN: '{npcAccountName} started following you.'

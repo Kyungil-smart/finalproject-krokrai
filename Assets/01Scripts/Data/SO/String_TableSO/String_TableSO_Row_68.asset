@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_68
   m_EditorClassIdentifier: 
-  stringId: STR_CMT_001009
-  KR: "\uB180\uC544\uC8FC\uB294 \uAC8C \uC27D\uC9C0 \uC54A\uC544\uB3C4 \uAF2D \uC9C1\uC811
-    \uB180\uC544\uC8FC\uB294 \uAC8C \uC88B\uC8E0!"
-  EN: "Even if playing with them isn't always easy, it's best to do it yourself!\r"
+  stringId: STR_DIA_000004
+  KR: "\uC544\uD558 \uACF5\uC720\uD574\uC8FC\uC2DC\uAE34 \uC5B4\uB835\uACA0\uAD70\uC694... "
+  EN: "Ah, I guess it\u2019d be hard to share the exact product..."

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stringId: STR_CAP_000004
   KR: "\uACE0\uC591\uC774\uB294 \uC561\uCCB4\uB2E4"
-  EN: "Cats are liquid\r"
+  EN: Cats are liquid

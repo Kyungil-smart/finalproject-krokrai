@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_14
   m_EditorClassIdentifier: 
-  stringId: STR_CAP_001007
-  KR: "\uC54C\uB824\uC8FC\uC2E0 \uB300\uB85C \uB0A8\uB294 \uD138\uC2E4 \uBB49\uCE58\uB4E4
-    \uC5EE\uC5B4\uC11C \uC950\uB3CC\uC774 \uC778\uD615 \uC644\uC131!"
-  EN: "I tied together the leftover yarn balls like you suggested and finished a
-    little mouse toy!\r"
+  stringId: STR_TAG_000004
+  KR: "\uC0AC\uB0E5\uB180\uC774"
+  EN: Hunting play

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_26
   m_EditorClassIdentifier: 
-  stringId: STR_TAG_000011
-  KR: "\uC548\uB294 \uBC29\uBC95"
-  EN: "How to hold a cat\r"
+  stringId: STR_TAG_000016
+  KR: "\uAFB9\uAFB9\uC774"
+  EN: Kneading

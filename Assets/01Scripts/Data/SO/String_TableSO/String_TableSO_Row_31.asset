@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_31
   m_EditorClassIdentifier: 
-  stringId: STR_TAG_000016
-  KR: "\uAFB9\uAFB9\uC774"
-  EN: "Kneading\r"
+  stringId: STR_CMT_000005
+  KR: "\uC73C\uC544\uC544 \u315C\u315C\u315C \uCF54 \uC798\uC790\uB124"
+  EN: "Aaaah, they\u2019re sleeping so peacefully."

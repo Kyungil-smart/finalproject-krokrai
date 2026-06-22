@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_84
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000003
-  KR: "\uC774\uC81C \uC7A5\uB9C8\uCCA0\uC774 \uCF54\uC55E\uC774\uB77C \uADF8\uB7F0\uC9C0
-    \uACF5\uAE30\uB3C4 \uAFC9\uAFC9\uD558\uACE0 \uC2B5\uB3C4\uB3C4 \uB108\uBB34 \uB192\uC544\uC694"
-  EN: "Maybe it's because the rainy season is almost here, but the air feels damp
-    and the humidity is really high.\r"
+  stringId: STR_DIA_000020
+  KR: "\uC800\uB3C4 \uB098\uC911\uC5D0 \uC785\uC591\uD558\uAC8C \uB418\uBA74 \uC790\uB791\uD558\uACA0\uC2B5\uB2C8\uB2E4"
+  EN: "If I adopt one someday, I\u2019ll show them off too."

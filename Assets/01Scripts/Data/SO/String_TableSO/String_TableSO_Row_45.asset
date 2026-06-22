@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_45
   m_EditorClassIdentifier: 
-  stringId: STR_CMT_000007
-  KR: "\uC2EC\uC7A5 \uC544\uD30C\uC11C \uAE30\uC808..."
-  EN: "My heart can\u2019t take this...\r"
+  stringId: STR_CMT_000019
+  KR: "\uD5C9.. \uCD08\uBCF4 \uC9D1\uC0AC\uC77C \uB54C \uBB63 \uBAA8\uB974\uACE0
+    \uC774\uB7AC\uB294\uB370 \u315C\u315C\L\uC560\uAE30 \uD45C\uC815 \uBCF4\uB2C8\uAE4C
+    \uB108\uBB34 \uBBF8\uC548\uD574\uC9C0\uB124\uC694"
+  EN: "Oof... I did this back when I was a new cat owner and didn\u2019t know any
+    better. Seeing that little face makes me feel so bad."

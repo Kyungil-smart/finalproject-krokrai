@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_87
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000006
-  KR: "\uADF8\uB7EC\uC2DC\uAD70\uC694..."
-  EN: "I see...\r"
+  stringId: STR_FOLD_000002
+  KR: "\uBB49\uCE58"
+  EN: Mungchi
