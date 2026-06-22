@@ -49,8 +49,8 @@ public class DMListUI : MonoBehaviour
     [SerializeField] private double questGenerateHour = 8;
     
     [Header("Unread Badge")]
-    [SerializeField] private GameObject unreadBadgeObject;
-    [SerializeField] private TMPro.TMP_Text unreadCountText;
+    [SerializeField] private GameObject[] unreadBadgeObjects;
+    [SerializeField] private TMPro.TMP_Text[] unreadCountTexts;
 
     private IString_TableManager stringManager;
 
@@ -1030,11 +1030,28 @@ public class DMListUI : MonoBehaviour
     private void UpdateUnreadBadge()
     {
         int unreadCount = GetUnreadDMCount();
+        bool hasUnread = unreadCount > 0;
 
-        if (unreadBadgeObject != null)
-            unreadBadgeObject.SetActive(unreadCount > 0);
+        if (unreadBadgeObjects != null)
+        {
+            foreach (GameObject badgeObject in unreadBadgeObjects)
+            {
+                if (badgeObject == null)
+                    continue;
 
-        if (unreadCountText != null)
-            unreadCountText.text = unreadCount.ToString();
+                badgeObject.SetActive(hasUnread);
+            }
+        }
+
+        if (unreadCountTexts != null)
+        {
+            foreach (TMPro.TMP_Text countText in unreadCountTexts)
+            {
+                if (countText == null)
+                    continue;
+
+                countText.text = unreadCount.ToString();
+            }
+        }
     }
 }
