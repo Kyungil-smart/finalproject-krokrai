@@ -1,7 +1,7 @@
 /*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-18
+수정일 : 26-06-22
 
 역할 : DM 목록 UI 생성 및 DM 클릭 시 대화창 전환
 방식 : DB 저장과 로컬 Dictionary 기준으로 Dummy DM과 Quest DM을 생성, 진행, 완료, 삭제 처리
@@ -415,17 +415,17 @@ public class DMListUI : MonoBehaviour
         );
     }
 
-    private void OnQuestDMCompleted(int messageId)
+    private void OnQuestDMCompleted(int messageId, int feedPostId)
     {
         DMLocalProgress progress = GetProgress(messageId);
 
         if (progress.QuestRewardState == (int)QuestRewardStateEnum.RewardMessagePrinted)
-        {
-            Log.Message($"이미 완료 처리된 Quest DM입니다 : {messageId}");
             return;
-        }
 
         GiveQuestReward(messageId);
+
+        if (feedPostId != 0)
+            SendAfterStoryFeedToHome(feedPostId);
 
         progress.QuestRewardState = (int)QuestRewardStateEnum.RewardMessagePrinted;
 
@@ -438,8 +438,11 @@ public class DMListUI : MonoBehaviour
         SaveDMGenerationTimestamp();
 
         RemoveQuestDMFromListAndDB(messageId);
-
-        Log.Message($"Quest DM 완료 후 목록 제거 완료 : {messageId}");
+    }
+    
+    private void SendAfterStoryFeedToHome(int feedPostId)
+    {
+        // TODO : 홈피드 클래스 호출
     }
     
     ///<summary>
