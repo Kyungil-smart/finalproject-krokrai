@@ -2,7 +2,7 @@
  작성자 : krokrai
  수정자 : 이종현
  작성일 : 26-05-28
- 수정일 : 26-06-17
+ 수정일 : 26-06-15
 
  역할 : FireStore 내부에 UserDatas 하위에 있는 데이터를 script에 저장
  방식 : FireStore에서 정보를 불러온 후 ConvertTo<UserDatas>()를 해주면, Google 쪽에서 자동으로 scrip에 저장
@@ -37,4 +37,16 @@ public class UserDatas
     
     [FirestoreProperty]
     public Dictionary<string, ImageState> NPCPost { get; set; } = new();
+
+    [FirestoreProperty]
+    public DMQuest DMQuest { get; set; } = new();
+
+    [FirestoreProperty]
+    public FollowerData Follower { get; set; } = new();
+
+    [FirestoreProperty]
+    public NyangBakeryDatas NyangBakery { get; set; } = new();
+
+    [FirestoreProperty]
+    public MiniGameDatas Minigame { get; set; } = new();
 }
