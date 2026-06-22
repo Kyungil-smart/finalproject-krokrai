@@ -707,6 +707,9 @@ MonoBehaviour:
   choiceAreaRect: {fileID: 2490377346898258734}
   defaultBottomPadding: 50
   choicePaddingOffset: 10
+  rewardMessagePrefab: {fileID: 7503142591013163426, guid: 9c454391836680c4b94695917151a538, type: 3}
+  messageParent: {fileID: 0}
+  requestCardPrefab: {fileID: 6198872769017990488, guid: 86bc67c4adc71e34a859ea313d42bf57, type: 3}
 --- !u!114 &5972692745898468539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -744,4 +747,6 @@ MonoBehaviour:
   choiceSOs:
   - {fileID: 11400000, guid: 9388200c8bc34d4458f8c1692b91a108, type: 2}
   - {fileID: 11400000, guid: 6b65d3bf58ec8ab418fa01283bfb7bc0, type: 2}
+  npcSOs: []
   messageDelay: 1
+  requestSOs: []

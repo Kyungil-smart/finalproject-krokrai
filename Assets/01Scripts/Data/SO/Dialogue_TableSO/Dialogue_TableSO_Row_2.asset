@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogId: 900003
   messageId: 800001
-  senderType: 1
+  senderType: 0
   dialogText: STR_DIA_000003
   nextDialogId: 900004
   choiceGroupId: 0
   isEnd: 0
+  isRequest: 0
+  feedPostId: 0
+  requestId: 0
+  rewardFollower: 0

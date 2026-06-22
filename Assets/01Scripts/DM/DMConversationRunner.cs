@@ -1,10 +1,10 @@
 /*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-10
+수정일 : 26-06-18
 
 역할 : DM 대화 진행 담당
-방식 : DMProgress의 ProgressState와 SelectedChoiceNum을 기준으로 대화 상태를 복원 및 진행
+방식 : 로컬 진행 상태의 ProgressState와 SelectedChoiceNum을 기준으로 대화 상태를 복원 및 진행
 */
 
 using System;
@@ -29,6 +29,7 @@ public class DMConversationRunner : MonoBehaviour
     private DM_TableSO currentDM;
     [SerializeField] private Dialogue_TableSO[] dialogueSOs;
     [SerializeField] private Choice_TableSO[] choiceSOs;
+    [SerializeField] private Npc_TableSO[] npcSOs;
 
     [Header("Setting")]
     [SerializeField] private float messageDelay = 1f;
@@ -46,6 +47,8 @@ public class DMConversationRunner : MonoBehaviour
 
     private int currentProgressState;
     private int currentSelectedChoiceNum;
+    
+    [SerializeField] private Request_TableSO[] requestSOs;
 
     public string LastPreviewText { get; private set; }
 
@@ -61,6 +64,7 @@ public class DMConversationRunner : MonoBehaviour
     }
 
     public Action<int, int, int, string> OnProgressChanged;
+    public Action<int> OnQuestDMCompleted;
 
     private void Awake()
     {
@@ -76,7 +80,27 @@ public class DMConversationRunner : MonoBehaviour
         if (skipAreaButton != null)
             skipAreaButton.onClick.RemoveListener(OnClickSkipArea);
     }
+    
+    private string GetNpcAccountName(int npcId)
+    {
+        if (npcSOs == null)
+            return npcId.ToString();
 
+        foreach (Npc_TableSO npc in npcSOs)
+        {
+            if (npc == null)
+                continue;
+
+            if (npc.npcId == npcId)
+                return npc.npcAccountName;
+        }
+
+        return npcId.ToString();
+    }
+
+    ///<summary>
+    /// NPC DM 대화를 로컬 진행 상태 기준으로 엽니다.
+    ///</summary>
     public void OpenNpcDM(DM_TableSO dmData, int progressState, int selectedChoiceNum)
     {
         if (chatUI == null)
@@ -157,14 +181,35 @@ public class DMConversationRunner : MonoBehaviour
                 currentProgressState = (int)DMProgressState.WaitingChoice;
                 NotifyProgressChanged();
 
+                if (ShouldShowRequestCard(dialogue))
+                {
+                    Request_TableSO requestData = GetRequestData(dialogue.requestId);
+
+                    if (requestData != null)
+                        chatUI.AddRequestCard(
+                            requestData,
+                            GetNpcAccountName(currentDM.senderName)
+                        );
+                }
+
                 ShowChoices(dialogue.choiceGroupId);
                 yield break;
             }
 
             if (dialogue.isEnd)
             {
+                if (ShouldPrintRewardMessage())
+                {
+                    int rewardFollower = GetRewardFollower(currentDM.messageId);
+
+                    chatUI.AddRewardMessage(
+                        $"팔로워 +{rewardFollower}"
+                    );
+                }
+
                 currentProgressState = (int)DMProgressState.Completed;
                 NotifyProgressChanged();
+                NotifyQuestCompleted();
                 yield break;
             }
 
@@ -173,6 +218,95 @@ public class DMConversationRunner : MonoBehaviour
 
             currentDialogId = dialogue.nextDialogId;
         }
+    }
+    
+    private void GiveQuestReward(int messageId)
+    {
+        int rewardFollower = GetRewardFollower(messageId);
+
+        if (rewardFollower <= 0)
+            return;
+
+        // TODO:
+        // 팔로워 증가 처리
+
+        Log.Message($"팔로워 지급 : +{rewardFollower}");
+    }
+    
+    private int GetRewardFollower(int messageId)
+    {
+        foreach (Dialogue_TableSO dialogue in dialogueSOs)
+        {
+            if (dialogue == null)
+                continue;
+
+            if (dialogue.messageId != messageId)
+                continue;
+
+            if (!dialogue.isEnd)
+                continue;
+
+            return dialogue.rewardFollower;
+        }
+
+        return 0;
+    }
+    
+    private bool ShouldShowRequestCard(Dialogue_TableSO dialogue)
+    {
+        if (dialogue == null)
+            return false;
+
+        if (currentDM == null)
+            return false;
+
+        if (currentDM.dmQuestType == DMQuestTypeEnum.Request)
+            return true;
+
+        if (dialogue.isRequest)
+            return true;
+
+        return false;
+    }
+    
+    private Request_TableSO GetRequestData(int requestId)
+    {
+        if (requestSOs == null)
+            return null;
+
+        foreach (Request_TableSO request in requestSOs)
+        {
+            if (request == null)
+                continue;
+
+            if (request.requestId == requestId)
+                return request;
+        }
+
+        Log.Message($"Request_TableSO를 찾을 수 없습니다 : {requestId}");
+        return null;
+    }
+    
+    private bool ShouldPrintRewardMessage()
+    {
+        if (currentDM == null)
+            return false;
+
+        if (currentDM.dmQuestType == DMQuestTypeEnum.Info)
+            return true;
+
+        if (currentDM.dmQuestType == DMQuestTypeEnum.Question ||
+            currentDM.dmQuestType == DMQuestTypeEnum.Request)
+        {
+            Choice_TableSO selectedChoice = GetCurrentSelectedChoice();
+
+            if (selectedChoice == null)
+                return false;
+
+            return selectedChoice.isCorrect;
+        }
+
+        return false;
     }
 
     private void ShowChoices(int choiceGroupId)
@@ -245,6 +379,9 @@ public class DMConversationRunner : MonoBehaviour
             Log.Message($"알 수 없는 SenderType : {senderType}");
     }
 
+    ///<summary>
+    /// 메시지 딜레이 중일 때 대기 시간을 스킵합니다.
+    ///</summary>
     public void OnClickSkipArea()
     {
         if (!isWaitingMessageDelay)
@@ -286,6 +423,20 @@ public class DMConversationRunner : MonoBehaviour
         );
     }
 
+    private void NotifyQuestCompleted()
+    {
+        if (currentDM == null)
+            return;
+
+        if (currentDM.dmQuestType == DMQuestTypeEnum.Dummy)
+            return;
+
+        OnQuestDMCompleted?.Invoke(currentDM.messageId);
+    }
+
+    ///<summary>
+    /// 진행 중인 DM 대화를 중단합니다.
+    ///</summary>
     public void StopConversation()
     {
         if (playRoutine != null)
@@ -393,5 +544,27 @@ public class DMConversationRunner : MonoBehaviour
         {
             pair.Value.Sort((a, b) => a.choiceNum.CompareTo(b.choiceNum));
         }
+    }
+    
+    private Choice_TableSO GetCurrentSelectedChoice()
+    {
+        foreach (Dialogue_TableSO dialogue in dialogueSOs)
+        {
+            if (dialogue == null)
+                continue;
+
+            if (dialogue.messageId != currentDM.messageId)
+                continue;
+
+            if (dialogue.choiceGroupId == 0)
+                continue;
+
+            return GetChoiceByChoiceNum(
+                dialogue.choiceGroupId,
+                currentSelectedChoiceNum
+            );
+        }
+
+        return null;
     }
 }
