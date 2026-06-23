@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
+  m_Name: String_TableSO_Row_82
+  m_EditorClassIdentifier: 
+  stringId: STR_DIA_000001
+  KR: "\uC8C4\uC1A1\uD569\uB2C8\uB2E4! \uD639\uC2DC \uC9C0\uAE08 \uC2DC\uAC04 \uAD1C\uCC2E\uC73C\uC2E0\uAC00\uC694?
+    \u3160\u3160"
+  EN: Sorry! Do you have a moment right now?

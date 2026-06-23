@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58aced0d5befe5040b8e2b4f6ee5208f, type: 3}
+  m_Name: Post_Hashtag_ListSO_Root
+  m_EditorClassIdentifier: 
+  scriptableObjects:
+  - {fileID: 11400000, guid: ce12b1331b1fc5a479ae839275a9a1d4, type: 2}
+  - {fileID: 11400000, guid: 3a359cc9eccc6bb4b9c5a349994beb6c, type: 2}
+  - {fileID: 11400000, guid: 3ea2d61f3aecb6a46a6d7ef166f856b8, type: 2}
+  - {fileID: 11400000, guid: 5a7bf985e512bf941987b0915f666eaf, type: 2}
+  - {fileID: 11400000, guid: 73d3b95ea5145494ebe256cc1098235c, type: 2}
+  - {fileID: 11400000, guid: fec48134b2d501147881f4223354e01d, type: 2}
+  - {fileID: 11400000, guid: 0480d760edab0c1488584d645bde6f49, type: 2}
+  - {fileID: 11400000, guid: 7a40750fcb4640a43adf2b5800947ca7, type: 2}
+  - {fileID: 11400000, guid: 41e569191e4fe274994879cfe520f120, type: 2}
+  - {fileID: 11400000, guid: 2b681462073c0274a8c0ad5c3521bcaf, type: 2}
+  - {fileID: 11400000, guid: b174e452e6354934e962a0726ca328ce, type: 2}
+  - {fileID: 11400000, guid: ed3650dee89b0ee4ca65348ba5157374, type: 2}
+  - {fileID: 11400000, guid: 5081acef63e73a541844f2ae5c152167, type: 2}
+  - {fileID: 11400000, guid: 758db56fe42245843b3590c05dfab7b2, type: 2}
+  - {fileID: 11400000, guid: 3669c8f1e304a8046bbeb07b16bc6f31, type: 2}
+  - {fileID: 11400000, guid: 417b4785ee5a3b140bb3166d046d6b80, type: 2}
+  - {fileID: 11400000, guid: c911ff50dc6cb5e4bbe5c6757612877a, type: 2}
+  - {fileID: 11400000, guid: 672c3e637196eca42a80a2f5ba4d7637, type: 2}
+  - {fileID: 11400000, guid: 976fc793ea36a914b886120ba5f75eda, type: 2}
+  - {fileID: 11400000, guid: 1e07634e4474dcc4eb999e7c554d72f7, type: 2}
+  - {fileID: 11400000, guid: 065099eb1585c0048ab692d0f4751cfe, type: 2}
+  - {fileID: 11400000, guid: beb24aebd5c5be84891f7edb500dab1f, type: 2}

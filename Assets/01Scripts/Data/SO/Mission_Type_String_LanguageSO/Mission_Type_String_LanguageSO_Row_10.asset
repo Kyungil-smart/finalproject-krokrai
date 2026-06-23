@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf2df68c1ba42f1a3476b7c94d191fd, type: 3}
+  m_Name: Mission_Type_String_LanguageSO_Row_10
+  m_EditorClassIdentifier: 
+  Mission_String_Id: Mission_Type_301
+  Mission_Type: 301
+  ko: "\uAC8C\uC784 {1}\uD68C \uC811\uC18D\uD558\uAE30"
+  en: Log in to the game {1} time(s)
+  jp: "\u30B2\u30FC\u30E0\u306B{1}\u56DE\u30ED\u30B0\u30A4\u30F3"
+  ch: "\u767B\u5F55\u6E38\u620F{1}\u6B21\r"

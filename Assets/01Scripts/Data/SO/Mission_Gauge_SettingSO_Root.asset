@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58aced0d5befe5040b8e2b4f6ee5208f, type: 3}
+  m_Name: Mission_Gauge_SettingSO_Root
+  m_EditorClassIdentifier: 
+  scriptableObjects:
+  - {fileID: 11400000, guid: c888601fe218d4b4a95098c8abffdee3, type: 2}
+  - {fileID: 11400000, guid: 9415bd3510977054bb10abc1fcd722c6, type: 2}
+  - {fileID: 11400000, guid: 6a106b01d87a2bd4b97a055226c09d46, type: 2}
+  - {fileID: 11400000, guid: fe2bb0e8baefb1144b5032f73ec65222, type: 2}
+  - {fileID: 11400000, guid: 6a8080629442eec4cbafe4b1b93cd7c0, type: 2}
+  - {fileID: 11400000, guid: 1925cb1451c4ac4429bc7a23f151c276, type: 2}
+  - {fileID: 11400000, guid: b996f124e3b1e684bb800a39744fba77, type: 2}
