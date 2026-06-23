@@ -4,15 +4,13 @@
 
  역할 : 구글 광고 접근을 위한 관리자
  방식 : AdMob sdk를 받아서 형식에 맞춰 접근, AutoMated 함수로 자동 생성 및 광고 팝업
- 폐기 사유 : 해당 게임이 미출시 예정이며, ADMob 정책 위반의 위험 막기를 위해
  */
-//using GoogleMobileAds.Api;
+using GoogleMobileAds.Api;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class ADMobManager : MonoBehaviour//, IADMobManager, IManagerBooter
+public class ADMobManager : MonoBehaviour, IADMobManager, IManagerBooter
 {
-    /*
     // 실제 수익을 발생하지 않을 예정이므로 공개되어 있는 테스트 코드 기입
     private const string AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917";
 
@@ -166,5 +164,4 @@ public class ADMobManager : MonoBehaviour//, IADMobManager, IManagerBooter
     public void Register() => ServiceLocator.Register<IADMobManager>(this);
 
     public void UnRegister() => ServiceLocator.UnRegister<IADMobManager>(this);
-    */
 }
