@@ -150,7 +150,7 @@ public class ReelsController : MonoBehaviour
 
     public async void SeeAd()
     {
-        if (await ServiceLocator.Get<IADMobManager>().AutomatedAd())
+        if (true)//await ServiceLocator.Get<IADMobManager>().AutomatedAd())
         {
             _adPopups.SetActive(false);
             OnPlayButtonClick();
