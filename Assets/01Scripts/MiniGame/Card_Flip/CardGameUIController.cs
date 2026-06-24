@@ -15,7 +15,8 @@ public class CardGameUIController : MonoBehaviour
 
     [SerializeField] GameObject _cardFlipGame;
     [SerializeField] GameObject _mainUI;
-    
+    [SerializeField] GameObject _whiteBG;
+
     [SerializeField] GameObject _endUI;
     [SerializeField] TextMeshProUGUI _rewardText;
     [SerializeField] GameObject _rePlayGameUI;
@@ -27,6 +28,7 @@ public class CardGameUIController : MonoBehaviour
         _reels.SetActive(false);
         _endUI.SetActive(false);
         _mainUI.SetActive(false);
+        _whiteBG.SetActive(false);
         _cardFlipGame.SetActive(true);
         _cardFlipGame.GetComponent<CardGameController>().ResetData();
     }   
@@ -41,6 +43,7 @@ public class CardGameUIController : MonoBehaviour
         _cardFlipGame.SetActive(false);
         _reels.SetActive(true);
         _mainUI.SetActive(true);
+        _whiteBG.SetActive(true);
     }
 
     public void Restart()

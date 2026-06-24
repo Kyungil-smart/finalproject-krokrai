@@ -15,7 +15,6 @@ public class ReelsController : MonoBehaviour
     [SerializeField] private ReelsView _view;
     [SerializeField] private ReelsDrag _drag;
 
-    [SerializeField] private GameObject _whiteBG;
     [SerializeField] private CardGameUIController _cardGame;
 
     [SerializeField] private ReelsNotReadyGame _notReadyGame;
@@ -112,7 +111,6 @@ public class ReelsController : MonoBehaviour
             data.UserDatas.Minigame.Daily_Play_Count++;
             data.UserGoods.Claw_--;
             data.UserDatas.Minigame.ID_Play_Last = _currentGameIndex;
-            _whiteBG.SetActive(false);
             _cardGame.GameStart();
         }
         else
