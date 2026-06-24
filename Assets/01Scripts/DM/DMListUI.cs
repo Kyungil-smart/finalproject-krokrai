@@ -130,7 +130,7 @@ public class DMListUI : MonoBehaviour
         {
             DM_ID = targetDM.messageId,
             DMType = (int)DMTypeEnum.Quest,
-            SentTime = DateTime.Now,
+            SentTime = GetCurrentGameTime(),
             ProgressState = (int)DMProgressState.Unread,
             SelectedChoiceNum = -1,
             QuestRewardState = (int)QuestRewardStateEnum.None,
@@ -483,7 +483,7 @@ public class DMListUI : MonoBehaviour
         if (savedTimestamp != default)
             return;
 
-        SetDMGenerationTimestamp(DateTime.Now);
+        SetDMGenerationTimestamp(GetCurrentGameTime());
     }
     
     public void CheckQuestGenerateDelay()
@@ -496,7 +496,13 @@ public class DMListUI : MonoBehaviour
             return;
         }
 
-        DateTime now = DateTime.Now;
+        TimeSimulator timeSimulator =
+            FindFirstObjectByType<TimeSimulator>();
+
+        DateTime now = timeSimulator != null
+            ? timeSimulator.GetCurrentTime()
+            : DateTime.Now;
+        
         DateTime savedTimestamp = GetDMGenerationTimestamp();
 
         if (savedTimestamp == default)
@@ -593,7 +599,7 @@ public class DMListUI : MonoBehaviour
                     : (int)DMTypeEnum.Quest,
                 SentTime = dmData != null && dmData.dmQuestType == DMQuestTypeEnum.Dummy
                     ? DateTime.MinValue
-                    : DateTime.Now,
+                    : GetCurrentGameTime(),
                 ProgressState = (int)DMProgressState.Unread,
                 SelectedChoiceNum = -1,
                 QuestRewardState = (int)QuestRewardStateEnum.None,
@@ -1014,8 +1020,6 @@ public class DMListUI : MonoBehaviour
         userDatas.DMQuest.DMGenerationTimestamp = timestamp;
 
         dataManager.SaveData();
-
-        Log.Message("DMGenerationTimestamp 저장 완료");
     }
     
     private int GetUnreadDMCount()
@@ -1060,5 +1064,18 @@ public class DMListUI : MonoBehaviour
                 countText.text = unreadCount.ToString();
             }
         }
+    }
+    
+    ///<summary>
+    /// 시뮬레이터 기준 현재 게임 시간을 반환합니다.
+    ///</summary>
+    private DateTime GetCurrentGameTime()
+    {
+        TimeSimulator timeSimulator = FindFirstObjectByType<TimeSimulator>();
+
+        if (timeSimulator == null)
+            return DateTime.Now;
+
+        return timeSimulator.GetCurrentTime();
     }
 }
