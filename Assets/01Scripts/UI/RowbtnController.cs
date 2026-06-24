@@ -48,6 +48,9 @@ public class RowbtnController : MonoBehaviour
         if (index == 2)
         {
             // 1. 업로드 화면 키기
+            if (_currentTab != -1 && _tabs[_currentTab].page != null)
+                _tabs[_currentTab].page.SetActive(false);
+            
             if (_tabs[index].page != null)
                 _tabs[index].page.SetActive(true);
             
@@ -61,7 +64,7 @@ public class RowbtnController : MonoBehaviour
         if (_currentTab == index) return;    // 이미 활성화 된 탭 클릭 시 무시
         
         // [알림 뱃지 자동 삭제] 알림 탭 누르면 알림 아이콘 끄기
-        if (_currentTab == 3 && _notiAlertIcon != null)
+        if (index == 3 && _notiAlertIcon != null)
         {
             _notiAlertIcon.SetActive(false);
             Log.Message("알림 탭 확인 완료: 알림 뱃지 비활성화");
@@ -81,6 +84,10 @@ public class RowbtnController : MonoBehaviour
     /// </summary>
     public void CloseUploadAndRestore()
     {
+        // 업로드 페이지 닫기
+        if (_tabs[2].page != null)
+            _tabs[2].page.SetActive(false);
+        
         // 하단바 다시 키기
         this.gameObject.SetActive(true);
         
