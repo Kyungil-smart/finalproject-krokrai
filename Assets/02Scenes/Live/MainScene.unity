@@ -2050,14 +2050,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 537665603928315674, guid: 6dd96d69d97e86e498dc0fb81bc36f08, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4742358308645207459, guid: 6dd96d69d97e86e498dc0fb81bc36f08, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5645874297123548191, guid: 6dd96d69d97e86e498dc0fb81bc36f08, type: 3}
       propertyPath: _reels
       value: 
@@ -2069,10 +2061,6 @@ PrefabInstance:
     - target: {fileID: 6197961001398455773, guid: 6dd96d69d97e86e498dc0fb81bc36f08, type: 3}
       propertyPath: m_Name
       value: MiniGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 6197961001398455773, guid: 6dd96d69d97e86e498dc0fb81bc36f08, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6200872397333623067, guid: 6dd96d69d97e86e498dc0fb81bc36f08, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2112,10 +2100,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6200872397333623067, guid: 6dd96d69d97e86e498dc0fb81bc36f08, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8539968219498129055, guid: 6dd96d69d97e86e498dc0fb81bc36f08, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9198372944895198023, guid: 6dd96d69d97e86e498dc0fb81bc36f08, type: 3}

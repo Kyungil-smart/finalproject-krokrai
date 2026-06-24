@@ -22,7 +22,6 @@ public class ReelsController : MonoBehaviour
 
     [SerializeField] private GameObject _networkErrorPopup;
     [SerializeField] private GameObject _adPopups;
-    [SerializeField] private GameObject _main;
 
     private List<Minigame_ID_ListSO> _imgs = new List<Minigame_ID_ListSO>(4);
 
@@ -114,7 +113,6 @@ public class ReelsController : MonoBehaviour
             data.UserGoods.Claw_--;
             data.UserDatas.Minigame.ID_Play_Last = _currentGameIndex;
             _whiteBG.SetActive(false);
-            _main.SetActive(false);
             _cardGame.GameStart();
         }
         else
