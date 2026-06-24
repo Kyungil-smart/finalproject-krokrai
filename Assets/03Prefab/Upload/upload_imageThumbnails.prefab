@@ -141,7 +141,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8587773897642900695}
-  - component: {fileID: 5803962189379324556}
+  - component: {fileID: 513474252704649743}
   m_Layer: 5
   m_Name: upload_imageThumbnails
   m_TagString: Untagged
@@ -171,7 +171,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 250, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5803962189379324556
+--- !u!114 &513474252704649743
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4751031125862557184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ead5a0240dca80f44bbcfbc57bb63b26, type: 3}
+  m_Script: {fileID: 11500000, guid: d34cfa62c4a29a143abbcd80e9eb6fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _targetImage: {fileID: 4677933464200059630}

@@ -97,6 +97,13 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
         ImageState s = new ImageState();
         s.getTime = DateTime.Now;
         _userData.Event_Mission.Init();
+        
+        _userData.ImgList.Add("502001", new ImageState());
+        _userData.ImgList.Add("502002", new ImageState());
+        _userData.ImgList.Add("502003", new ImageState());
+        _userData.ImgList.Add("502004", new ImageState());
+        _userData.ImgList.Add("502005", new ImageState());
+
         SaveRTDBData();
         OnUserDataReseted?.Invoke();
     }
@@ -166,6 +173,14 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
                 Log.Message("신규 유저 감지됌. Firestore에 정보 생성");
                 _userData = new();
                 _userData.Event_Mission.Init();
+                
+                _userData.ImgList.Add("502001",new ImageState());
+                _userData.ImgList.Add("502002",new ImageState());
+                _userData.ImgList.Add("502003",new ImageState());
+                _userData.ImgList.Add("502004",new ImageState());
+                _userData.ImgList.Add("502005",new ImageState());
+
+                _userData.NyangBakery.Init();
                 ImageState s = new ImageState();
                 s.getTime = DateTime.Now;
                 _readyToSave = true;
@@ -256,6 +271,7 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
     {
         _userData = new UserDatas();
         _userData.Event_Mission.Init();
+        _userData.NyangBakery.Init();
         _userGoods = new UserGoods();
         ServiceLocator.Get<IDataAutoSaveManager>().SetTestMode();
     }
