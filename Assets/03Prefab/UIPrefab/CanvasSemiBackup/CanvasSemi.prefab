@@ -1013,7 +1013,7 @@ MonoBehaviour:
   _postImg: {fileID: 3584259802749071161}
   _folderDropDown: {fileID: 6448051299831194168}
   _spawnPoint: {fileID: 3536036796126677320}
-  _postPrefab: {fileID: 4751031125862557184, guid: 490efd990e922d64d8d30b83ea0f7b56, type: 3}
+  _postPrefab: {fileID: 4751031125862557184, guid: 995ba4f56b011e44e8f76e532561beba, type: 3}
   _upLoadButton: {fileID: 4311966832461395987}
   _popup: {fileID: 4222266081491722267}
 --- !u!114 &4222266081491722267
@@ -3367,7 +3367,6 @@ MonoBehaviour:
   chatContent: {fileID: 4004528923529401804}
   opponentBubblePrefab: {fileID: 3226740175440533461, guid: d41cb1505cc4c6e4eb82f926f8e96bbd, type: 3}
   playerBubblePrefab: {fileID: 5154558783025098406, guid: fc34531c811514744971c43be9c9174a, type: 3}
-  testProfileSprite: {fileID: 0}
   choiceArea: {fileID: 8160166315871707612}
   choiceContent: {fileID: 3703683286929336223}
   choiceButtonPrefab: {fileID: 1269610756006027175, guid: 294194bda3dd1ad429dd54c5de615cad, type: 3}
@@ -3376,6 +3375,9 @@ MonoBehaviour:
   choiceAreaRect: {fileID: 3703683286929336223}
   defaultBottomPadding: 50
   choicePaddingOffset: 10
+  rewardMessagePrefab: {fileID: 0}
+  messageParent: {fileID: 0}
+  requestCardPrefab: {fileID: 0}
 --- !u!114 &8287537367841264021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3389,6 +3391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chatUI: {fileID: 4006930941685616022}
+  skipAreaButton: {fileID: 0}
   dialogueSOs:
   - {fileID: 11400000, guid: 82d5cb13408d875428014b4b2507837d, type: 2}
   - {fileID: 11400000, guid: 5e627e18d364cd44585a4d1c66d0e167, type: 2}
@@ -3402,7 +3405,9 @@ MonoBehaviour:
   choiceSOs:
   - {fileID: 11400000, guid: 9388200c8bc34d4458f8c1692b91a108, type: 2}
   - {fileID: 11400000, guid: 6b65d3bf58ec8ab418fa01283bfb7bc0, type: 2}
+  npcSOs: []
   messageDelay: 1
+  requestSOs: []
 --- !u!1 &2414900870890083159
 GameObject:
   m_ObjectHideFlags: 0
@@ -9040,23 +9045,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00352a5d23cf5304ba2cc62c384a52c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  content: {fileID: 380665423977141405}
-  dmListItemPrefab: {fileID: 3152977983095122541, guid: 60b6c427ee27e8443b1ed6cfab989079, type: 3}
-  dmListPanel: {fileID: 5651559888359912523}
-  dmChatPanel: {fileID: 2348216843372801685}
-  dmTables:
-  - {fileID: 11400000, guid: f2e24188d3cef1e45815d3317565a85f, type: 2}
-  - {fileID: 11400000, guid: e5780fbd5b563d34db7ec369b9c91b7c, type: 2}
-  dialogueSOs:
-  - {fileID: 11400000, guid: 82d5cb13408d875428014b4b2507837d, type: 2}
-  - {fileID: 11400000, guid: 5e627e18d364cd44585a4d1c66d0e167, type: 2}
-  - {fileID: 11400000, guid: fa585168403329b44b6d5b14beaa3d44, type: 2}
-  - {fileID: 11400000, guid: 98a35a67797a43e45aee0c2eeffea058, type: 2}
-  - {fileID: 11400000, guid: a4ad0683574402d47a6aa8fbd7cd93ed, type: 2}
-  - {fileID: 11400000, guid: fc9f0f726e501824c820132508e57bbc, type: 2}
-  - {fileID: 11400000, guid: 0a0636d2042132b43a6fe89ae9aef2ef, type: 2}
-  - {fileID: 11400000, guid: 0e3827ba91ecb924a89df47ac4864ef7, type: 2}
-  - {fileID: 11400000, guid: bf93b28e55d85034a98aba0ec32aae8b, type: 2}
+  _content: {fileID: 0}
+  _dmListItemPrefab: {fileID: 0}
+  _dmListPanel: {fileID: 0}
+  _dmChatPanel: {fileID: 0}
+  _dmTables: []
+  _dialogueSOs: []
+  _choiceSOs: []
+  _npcSOs: []
+  _maxQuestDMCount: 3
+  _questGenerateHour: 8
+  _unreadBadgeObjects: []
+  _unreadCountTexts: []
+  _post: {fileID: 0}
 --- !u!1 &5684193478780245575
 GameObject:
   m_ObjectHideFlags: 0
