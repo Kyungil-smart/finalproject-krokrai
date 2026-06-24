@@ -2422,6 +2422,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4418695684484258980}
     m_Modifications:
+    - target: {fileID: 2490377346898258734, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906455641442794418, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6544463696385026143, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2502,9 +2510,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7638043335600240370, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7638043335600240370, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1532087864}
+    - target: {fileID: 7638043335600240370, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 7638043335600240370, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 9179235160133233828, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
       propertyPath: m_Name
       value: DM
+      objectReference: {fileID: 0}
+    - target: {fileID: 9179235160133233828, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -112,37 +112,37 @@ public class NyanBakeryShopController : MonoBehaviour
                 case "Shop_sp_001":
                     _special.color = TMProColor;
                     _special_img.color = ImageColor;
-                    _special.text = (_datas[s.Key].Shop_buyLimit - t.BakeryShop[s.Key].Item_buycount).ToString();
+                    _special.text = (_datas[s.Key].Shop_buyCost).ToString();
                     break;
                 case "Shop_nor_001":
                     _pig.color = TMProColor;
                     _pig_img.color = ImageColor;
-                    _pig.text = (_datas[s.Key].Shop_buyLimit - t.BakeryShop[s.Key].Item_buycount).ToString();
+                    _pig.text = (_datas[s.Key].Shop_buyCost).ToString();
                     break;
                 case "Shop_nor_002":
                     _clock.color = TMProColor;
                     _clock_img.color = ImageColor;
-                    _clock.text = (_datas[s.Key].Shop_buyLimit - t.BakeryShop[s.Key].Item_buycount).ToString();
+                    _clock.text = (_datas[s.Key].Shop_buyCost).ToString();
                     break;
                 case "Shop_nor_003":
                     _gem.color = TMProColor;
                     _gem_img.color = ImageColor;
-                    _gem.text = (_datas[s.Key].Shop_buyLimit - t.BakeryShop[s.Key].Item_buycount).ToString();
+                    _gem.text = (_datas[s.Key].Shop_buyCost).ToString();
                     break;
                 case "Shop_nor_004":
                     _energy.color = TMProColor;
                     _energy_img.color = ImageColor;
-                    _energy.text = (_datas[s.Key].Shop_buyLimit - t.BakeryShop[s.Key].Item_buycount).ToString();
+                    _energy.text = (_datas[s.Key].Shop_buyCost).ToString();
                     break;
                 case "Shop_nor_005":
                     _magicHat.color = TMProColor;
                     _magicHat_img.color = ImageColor;
-                    _magicHat.text = (_datas[s.Key].Shop_buyLimit - t.BakeryShop[s.Key].Item_buycount).ToString();
+                    _magicHat.text = (_datas[s.Key].Shop_buyCost).ToString();
                     break;
                 case "Shop_nor_006":
                     _scissors.color = TMProColor;
                     _scissors_img.color = ImageColor;
-                    _scissors.text = (_datas[s.Key].Shop_buyLimit - t.BakeryShop[s.Key].Item_buycount).ToString();
+                    _scissors.text = (_datas[s.Key].Shop_buyCost).ToString();
                     break;
             }
         }

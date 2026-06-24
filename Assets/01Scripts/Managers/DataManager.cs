@@ -166,6 +166,7 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
                 Log.Message("신규 유저 감지됌. Firestore에 정보 생성");
                 _userData = new();
                 _userData.Event_Mission.Init();
+                _userData.NyangBakery.Init();
                 ImageState s = new ImageState();
                 s.getTime = DateTime.Now;
                 _readyToSave = true;
@@ -256,6 +257,7 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
     {
         _userData = new UserDatas();
         _userData.Event_Mission.Init();
+        _userData.NyangBakery.Init();
         _userGoods = new UserGoods();
         ServiceLocator.Get<IDataAutoSaveManager>().SetTestMode();
     }
