@@ -68,6 +68,14 @@ public class MissionPresenter : MonoBehaviour
         {
             _missionView.OnSlotRewardRequested += OnRewardClaimed;
         }
+
+        if (!string.IsNullOrEmpty(_currentDayKey))
+        {
+            if (int.TryParse(_currentDayKey.Replace("Day_", ""), out int currentDay))
+            {
+                OnDayTabChangedMission(currentDay);
+            }
+        }
     }
 
     private void OnDisable()
