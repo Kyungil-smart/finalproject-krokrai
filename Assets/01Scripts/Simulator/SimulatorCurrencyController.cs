@@ -11,7 +11,6 @@
 추후 DataManager 및 Firebase 연동 예정
 */
 
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -25,34 +24,16 @@ public class SimulatorCurrencyController : MonoBehaviour
     [SerializeField] private TMP_Text furDollText;
     [SerializeField] private TMP_Text clawText;
     [SerializeField] private TMP_Text followerText;
-    
-    private UserGoods goods;
-    private ProFile followers;
-    
-    
-    private void Awake()
-    {
-        goods = ServiceLocator.Get<IDataManager>().UserGoods;
-        followers = ServiceLocator.Get<IDataManager>().ProFile;
-        
-    }
 
     private void OnEnable()
     {
-        ServiceLocator.Get<IDataManager>().OnUserDataReseted += ResetClicked;
+        ServiceLocator.Get<IDataManager>().OnUserDataReseted += RefreshUI;
         RefreshUI();
     }
 
     private void OnDisable()
     {
-        ServiceLocator.Get<IDataManager>().OnUserDataReseted -= ResetClicked;
-    }
-
-    private void ResetClicked()
-    {
-        goods = ServiceLocator.Get<IDataManager>().UserGoods;
-        followers = ServiceLocator.Get<IDataManager>().ProFile;
-        RefreshUI();
+        ServiceLocator.Get<IDataManager>().OnUserDataReseted -= RefreshUI;
     }
 
     public void ResetButton()
@@ -60,12 +41,34 @@ public class SimulatorCurrencyController : MonoBehaviour
         ServiceLocator.Get<IDataManager>().ResetUserData();
     }
 
-    
     /// <summary>
     /// 현재 재화 UI 갱신
     /// </summary>
     public void RefreshUI()
     {
+        IDataManager dataManager = ServiceLocator.Get<IDataManager>();
+
+        if (dataManager == null)
+        {
+            Log.Message("IDataManager가 등록되지 않았습니다.");
+            return;
+        }
+
+        if (dataManager.UserGoods == null)
+        {
+            Log.Message("UserGoods 데이터가 없습니다.");
+            return;
+        }
+
+        if (dataManager.ProFile == null)
+        {
+            Log.Message("ProFile 데이터가 없습니다.");
+            return;
+        }
+
+        UserGoods goods = dataManager.UserGoods;
+        ProFile followers = dataManager.ProFile;
+
         energyText.text = $"{goods.Energy_:N0}";
         coinText.text = $"{goods.Coin_:N0}";
         gemText.text = $"{goods.Gem_:N0}";

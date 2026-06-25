@@ -1,7 +1,7 @@
 ﻿/*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-22
+수정일 : 26-06-25
 
 역할 : DM 목록 UI 생성 및 DM 클릭 시 대화창 전환
 방식 : DB 저장과 로컬 Dictionary 기준으로 Dummy DM과 Quest DM을 생성, 진행, 완료, 삭제 처리
@@ -55,7 +55,8 @@ public class DMListUI : MonoBehaviour
 
     [SerializeField] private DMQuestHomeFeedPostLoad _post;
 
-
+    private bool _prevDMListPanelActive;
+    
     private IString_TableManager _stringManager;
 
     private readonly Dictionary<int, DMLocalProgress> _dmProgressTable = new();
@@ -87,11 +88,13 @@ public class DMListUI : MonoBehaviour
     {
         _questGenerateCheckTimer += Time.deltaTime;
 
-        if (_questGenerateCheckTimer < 1f)
-            return;
+        if (_questGenerateCheckTimer >= 1f)
+        {
+            _questGenerateCheckTimer = 0f;
+            CheckQuestGenerateDelay();
+        }
 
-        _questGenerateCheckTimer = 0f;
-        CheckQuestGenerateDelay();
+        CheckDMListPanelOpened();
     }
 
     private void InitLocalProgressData()
@@ -130,7 +133,7 @@ public class DMListUI : MonoBehaviour
         {
             DM_ID = targetDM.messageId,
             DMType = (int)DMTypeEnum.Quest,
-            SentTime = DateTime.Now,
+            SentTime = GetCurrentGameTime(),
             ProgressState = (int)DMProgressState.Unread,
             SelectedChoiceNum = -1,
             QuestRewardState = (int)QuestRewardStateEnum.None,
@@ -483,7 +486,7 @@ public class DMListUI : MonoBehaviour
         if (savedTimestamp != default)
             return;
 
-        SetDMGenerationTimestamp(DateTime.Now);
+        SetDMGenerationTimestamp(GetCurrentGameTime());
     }
     
     public void CheckQuestGenerateDelay()
@@ -496,7 +499,8 @@ public class DMListUI : MonoBehaviour
             return;
         }
 
-        DateTime now = DateTime.Now;
+        DateTime now = GetCurrentGameTime();
+        
         DateTime savedTimestamp = GetDMGenerationTimestamp();
 
         if (savedTimestamp == default)
@@ -593,7 +597,7 @@ public class DMListUI : MonoBehaviour
                     : (int)DMTypeEnum.Quest,
                 SentTime = dmData != null && dmData.dmQuestType == DMQuestTypeEnum.Dummy
                     ? DateTime.MinValue
-                    : DateTime.Now,
+                    : GetCurrentGameTime(),
                 ProgressState = (int)DMProgressState.Unread,
                 SelectedChoiceNum = -1,
                 QuestRewardState = (int)QuestRewardStateEnum.None,
@@ -1014,8 +1018,6 @@ public class DMListUI : MonoBehaviour
         userDatas.DMQuest.DMGenerationTimestamp = timestamp;
 
         dataManager.SaveData();
-
-        Log.Message("DMGenerationTimestamp 저장 완료");
     }
     
     private int GetUnreadDMCount()
@@ -1060,5 +1062,42 @@ public class DMListUI : MonoBehaviour
                 countText.text = unreadCount.ToString();
             }
         }
+    }
+    
+    ///<summary>
+    /// 시뮬레이터 기준 현재 게임 시간을 반환합니다.
+    ///</summary>
+    private DateTime GetCurrentGameTime()
+    {
+        IDataManager dataManager = ServiceLocator.Get<IDataManager>();
+
+        if (dataManager == null || dataManager.Attendance == null)
+            return DateTime.Now;
+
+        DateTime gameTime = dataManager.Attendance.Last_Login_TimeStamp;
+
+        if (gameTime == default)
+            return DateTime.Now;
+
+        return gameTime;
+    }
+    
+    ///<summary>
+    /// DM 목록 패널이 활성화되는 순간 목록을 갱신합니다.
+    ///</summary>
+    private void CheckDMListPanelOpened()
+    {
+        if (_dmListPanel == null)
+            return;
+
+        bool currentActive = _dmListPanel.activeInHierarchy;
+
+        if (!_prevDMListPanelActive && currentActive)
+        {
+            RefreshDMList();
+            UpdateUnreadBadge();
+        }
+
+        _prevDMListPanelActive = currentActive;
     }
 }
