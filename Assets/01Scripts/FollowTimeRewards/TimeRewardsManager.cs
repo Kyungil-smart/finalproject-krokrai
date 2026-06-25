@@ -29,7 +29,6 @@ public class TimeRewardsManager : MonoBehaviour
     private DateTime _startLoginTime;
     
     private readonly float _maxRewardSeconds = 43200f;
-    private float _nowSeconds;
 
     // 현재 방치하여 얻은 에너지, 코인의 양
     // int, float 두 값으로 있는 이유는 보상으로 주는 코인은 정수로 지급하고, 나머지 소수부분을 남기기 위해서
@@ -217,11 +216,5 @@ public class TimeRewardsManager : MonoBehaviour
     {
         _nTPM.SetTierName(_fLM.GetFollowTierName(_follow));
         _nTPM.SetNextTierFollowValueText(_fLM.GetNextTierFollowValue(_follow).ToString());
-    }
-
-    [ContextMenu("test/set follow")]
-    private void TestSetFollow()
-    {
-        _follow = TESTFOLLOW;
     }
 }
