@@ -55,7 +55,8 @@ public class DMListUI : MonoBehaviour
 
     [SerializeField] private DMQuestHomeFeedPostLoad _post;
 
-
+    private bool _prevDMListPanelActive;
+    
     private IString_TableManager _stringManager;
 
     private readonly Dictionary<int, DMLocalProgress> _dmProgressTable = new();
@@ -87,11 +88,13 @@ public class DMListUI : MonoBehaviour
     {
         _questGenerateCheckTimer += Time.deltaTime;
 
-        if (_questGenerateCheckTimer < 1f)
-            return;
+        if (_questGenerateCheckTimer >= 1f)
+        {
+            _questGenerateCheckTimer = 0f;
+            CheckQuestGenerateDelay();
+        }
 
-        _questGenerateCheckTimer = 0f;
-        CheckQuestGenerateDelay();
+        CheckDMListPanelOpened();
     }
 
     private void InitLocalProgressData()
@@ -1077,5 +1080,24 @@ public class DMListUI : MonoBehaviour
             return DateTime.Now;
 
         return gameTime;
+    }
+    
+    ///<summary>
+    /// DM 목록 패널이 활성화되는 순간 목록을 갱신합니다.
+    ///</summary>
+    private void CheckDMListPanelOpened()
+    {
+        if (_dmListPanel == null)
+            return;
+
+        bool currentActive = _dmListPanel.activeInHierarchy;
+
+        if (!_prevDMListPanelActive && currentActive)
+        {
+            RefreshDMList();
+            UpdateUnreadBadge();
+        }
+
+        _prevDMListPanelActive = currentActive;
     }
 }
