@@ -48,6 +48,8 @@ public class TimeRewardsManager : MonoBehaviour
     // 1초를 기다리기 위함
     private readonly WaitForSeconds _oneSecondDelay = new WaitForSeconds(1.0f);
 
+    public int TESTFOLLOW;
+
     private void Awake()
     {
         _startLoginTime = DateTime.Now;
@@ -75,6 +77,7 @@ public class TimeRewardsManager : MonoBehaviour
     {
         _lastLoginTime = ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp;
         _follow = (int)ServiceLocator.Get<IDataManager>().ProFile.followerCount;
+        
         
         _offlineTotalTime = DateTime.Now - _lastLoginTime;
         
@@ -117,9 +120,7 @@ public class TimeRewardsManager : MonoBehaviour
             CanActiveRewardButton();
             
             // 팝업창에 표시할 현재 레벨 칭호
-            var temp = ServiceLocator.Get<IString_TableManager>().GetStringSO(_fLM.GetFollowTierName(_follow));
-            _rPM.SetTierName(temp.KR);
-            //_rPM.SetTierName(_fLM.GetFollowTierName(_follow));
+            _rPM.SetTierName(_fLM.GetFollowTierName(_follow));
             // 팝업창에 표시할 현재 수령 가능한 에너지, 코인 수량 표시
             _rPM.SetRewardText(_rewardEnergyIntValue, _rewardCoinIntValue);
             // 팝업창에 표시할 현재 팔로워 수
@@ -214,9 +215,13 @@ public class TimeRewardsManager : MonoBehaviour
     // 현재 레벨 이름과 다음 레벨까지 필요한 팔로워수를 알려주는 팝업창
     private void SetNextTierPopUpText()
     {
-        var temp = ServiceLocator.Get<IString_TableManager>().GetStringSO(_fLM.GetFollowTierName(_follow));
-        _nTPM.SetTierName(temp.KR);
+        _nTPM.SetTierName(_fLM.GetFollowTierName(_follow));
         _nTPM.SetNextTierFollowValueText(_fLM.GetNextTierFollowValue(_follow).ToString());
     }
-    
+
+    [ContextMenu("test/set follow")]
+    private void TestSetFollow()
+    {
+        _follow = TESTFOLLOW;
+    }
 }

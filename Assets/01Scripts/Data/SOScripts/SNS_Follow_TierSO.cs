@@ -8,10 +8,12 @@
 
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "String_TableSO", menuName = "Scriptable Objects/String_TableSO")]
+[CreateAssetMenu(fileName = "SNS_Follow_TierSO", menuName = "Scriptable Objects/SNS_Follow_TierSO")]
 public class SNS_Follow_TierSO : ScriptableObject
 {
     [SOInject(0)] public string stringId;
     [SOInject(1)] public string KR;
     [SOInject(2)] public string EN;
+
+    
 }

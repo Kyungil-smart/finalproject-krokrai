@@ -205,7 +205,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -250.34631, w: 0}
+  m_margin: {x: -26.854614, y: 0, z: -275.41058, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2475,6 +2475,7 @@ MonoBehaviour:
   _rPM: {fileID: 1793396025298922212}
   _fLM: {fileID: 2762060372680682996}
   _nTPM: {fileID: 6452904123336367457}
+  TESTFOLLOW: 0
 --- !u!114 &2762060372680682996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2487,6 +2488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73546de0245d263489e69cf78a6c7e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tierSOLists: {fileID: 11400000, guid: a0dccfdff1d225a4ca644f78db17a385, type: 2}
   _followLevels:
   - {fileID: 11400000, guid: 249def1ddcc351542bf1b144d7c52e2c, type: 2}
   - {fileID: 11400000, guid: 5e27b7ed54507b149bde471d942e4a0c, type: 2}
@@ -3978,7 +3980,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1453085229454858125
 RectTransform:
   m_ObjectHideFlags: 0
