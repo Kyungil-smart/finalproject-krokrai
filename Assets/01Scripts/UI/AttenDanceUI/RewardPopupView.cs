@@ -17,6 +17,7 @@ public class RewardPopupView : MonoBehaviour
 {
     [SerializeField] private ItemSlotView[] _popupItemSlots;
     [SerializeField] private Button _confirmButton;
+    [SerializeField] private ItemDataModel _itemModel;
 
     private void Awake()
     {
@@ -24,13 +25,8 @@ public class RewardPopupView : MonoBehaviour
         {
             _confirmButton.onClick.AddListener(() =>
             {
-                Log.Message("버튼 클릭됨");
                 gameObject.SetActive(false);
             });
-        }
-        else
-        {
-            Log.Message("confirmButton is null");
         }
     }
 
@@ -47,8 +43,19 @@ public class RewardPopupView : MonoBehaviour
             if (rewardDatas != null && i < rewardDatas.Count)
             {
                 _popupItemSlots[i].gameObject.SetActive(true);
-                // 스프라이트가 없어서 일단 null로 처리, 후에 생기면 바로 교체
-                _popupItemSlots[i].SetItem(null, rewardDatas[i].Amount);
+                string addressableKey = "";
+                
+                if (_itemModel != null)
+                {
+                    var itemData = _itemModel.GetItemTableData(rewardDatas[i].Reward_Id);
+
+                    if (itemData != null)
+                    {
+                        addressableKey = itemData.Item_string_Res_Id.Trim();
+                    }
+                }
+                
+                _popupItemSlots[i].SetItem(addressableKey, rewardDatas[i].Amount);
             }
             else
             {

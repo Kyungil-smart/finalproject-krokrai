@@ -44,7 +44,7 @@ public class DayListPresent : MonoBehaviour
 
         int displayActiveDay = Math.Min(calculatedDay, 7);
         
-        Log.Message($"<color=blue>가입: {joinTime.Date:MM/dd} / 최근접속: {lastLoginTime.Date:MM/dd} -> 현재 {calculatedDay}일차</color>");
+        Log.Message($"<color=cyan>가입: {joinTime.Date:MM/dd} / 최근접속: {lastLoginTime.Date:MM/dd} -> 현재 {calculatedDay}일차</color>");
    
         for (int i = 0; i < 7; i++)
         {
@@ -53,38 +53,5 @@ public class DayListPresent : MonoBehaviour
         }
     }
 }
-
-    /*
-    /// <summary>
-    /// 유저의 최초 접속일과 최근 접속일을 세팅
-    /// </summary>
-    void SetTimestamp()
-    {
-        _joinTimeStamp = ServiceLocator.Get<IDataManager>().Attendance.Join_TimeStamp;
-        _lastLoginTime = ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp;
-
-        Log.Message($"<color=cyan> 데이터 로드 완료 -> 가입일: {_joinTimeStamp}, 마지막 출석인정일: {_lastLoginTime}</color>");
-    }
-    */
-
-    /*
-    /// <summary>
-    /// 날짜가 변경되었으면 누적 출석 일수를 1 증가시킴
-    /// </summary>
-    void SetUserActiveDay()
-    {
-        if (_lastLoginTime.Date != _currentTime.Date)
-        {
-            int previousDay = (int)ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day;
-
-            ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day += 1;
-            ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp = _currentTime.Date;
-
-            int updatedDay = (int)ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day; // 로그용 변수
-
-            Log.Message($"<color=yellow><b>날짜 변경 감지 출석 일수 갱신 ({previousDay} -> {updatedDay}일차)</b></color>");
-        }
-    }
-    */
     
     

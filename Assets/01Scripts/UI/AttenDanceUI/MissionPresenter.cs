@@ -21,7 +21,6 @@ public class MissionPresenter : MonoBehaviour
     [SerializeField] private RewardPopupView _rewardPopupView;
     [SerializeField] private MissionDataModel _missionModel;
     [SerializeField] private RewardDataModel _rewardModel;
-    [SerializeField] private ItemDataModel _itemModel;
 
     [Header("스토리 데이터")] [SerializeField] private List<Story_TableSO> _storyDataList = new();
     [SerializeField] private StoryPopupView _storyPopupView;
@@ -422,7 +421,7 @@ public class MissionPresenter : MonoBehaviour
             case CurrencyType.Stone: return targetId == 100003;
             case CurrencyType.FurDoll: return targetId == 100004;
             case CurrencyType.Claw: return targetId == 100005;
-            case CurrencyType.Energy: return targetId == 10006;
+            case CurrencyType.Energy: return targetId == 100006;
             default:
             {
                 return false;

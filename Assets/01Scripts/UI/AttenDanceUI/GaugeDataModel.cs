@@ -49,7 +49,7 @@ public class GaugeDataModel : MonoBehaviour
             return _gaugeData[gaugeStep];
         }
 
-        Log.Message($"<color=red><b>gaugeRewardId: {gaugeStep}와 일치하는 값이 없어서 null 반환함</b></color>"); // ? 
+        Log.Message($"<color=red><b>gaugeRewardId: {gaugeStep}와 일치하는 값이 없어서 null 반환함</b></color>");
         return null;
     }
 }
