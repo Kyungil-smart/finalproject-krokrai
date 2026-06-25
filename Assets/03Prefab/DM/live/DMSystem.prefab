@@ -44,18 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00352a5d23cf5304ba2cc62c384a52c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  content: {fileID: 0}
-  dmListItemPrefab: {fileID: 3152977983095122541, guid: 60b6c427ee27e8443b1ed6cfab989079, type: 3}
-  dmListPanel: {fileID: 425469320777860927, guid: ff134b2559b384c4cb509c8197d2c580, type: 3}
-  dmChatPanel: {fileID: 9179235160133233828, guid: e6d92b162458ba046b1fb236c3612d24, type: 3}
-  dmTables:
+  _content: {fileID: 0}
+  _dmListItemPrefab: {fileID: 3152977983095122541, guid: 60b6c427ee27e8443b1ed6cfab989079, type: 3}
+  _dmListPanel: {fileID: 0}
+  _dmChatPanel: {fileID: 0}
+  _dmTables:
   - {fileID: 11400000, guid: f2e24188d3cef1e45815d3317565a85f, type: 2}
   - {fileID: 11400000, guid: e5780fbd5b563d34db7ec369b9c91b7c, type: 2}
   - {fileID: 11400000, guid: 2f7b61ce5febe7340af8669eb4d713fc, type: 2}
   - {fileID: 11400000, guid: 12756a007a20b1d4595a8bb9cfcaedb1, type: 2}
   - {fileID: 11400000, guid: d9aa936c292c8b44baedd24a9e00259c, type: 2}
   - {fileID: 11400000, guid: f3cf0b54abf37bf4ca5dc9c91ff67817, type: 2}
-  dialogueSOs:
+  _dialogueSOs:
   - {fileID: 11400000, guid: 82d5cb13408d875428014b4b2507837d, type: 2}
   - {fileID: 11400000, guid: 5e627e18d364cd44585a4d1c66d0e167, type: 2}
   - {fileID: 11400000, guid: fa585168403329b44b6d5b14beaa3d44, type: 2}
@@ -125,7 +125,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9455373c5d1e12f46b1a4b9fd243ae3a, type: 2}
   - {fileID: 11400000, guid: 1db5e53f27d21ad49a90121714151cff, type: 2}
   - {fileID: 11400000, guid: fc6245e5207f2844db8423eb043d2023, type: 2}
-  choiceSOs:
+  _choiceSOs:
   - {fileID: 11400000, guid: 9388200c8bc34d4458f8c1692b91a108, type: 2}
   - {fileID: 11400000, guid: 6b65d3bf58ec8ab418fa01283bfb7bc0, type: 2}
   - {fileID: 11400000, guid: 6cd0276f8ae50aa409dbc3b9eaede8bd, type: 2}
@@ -134,7 +134,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a35fed48e5cd03c4a9a0f5cf161664d2, type: 2}
   - {fileID: 11400000, guid: 8c39ca8510f33f4468eb23630abddc04, type: 2}
   - {fileID: 11400000, guid: d5ee21bb6f4d57f4fa5a5e2a97013eb3, type: 2}
-  npcSOs:
+  _npcSOs:
   - {fileID: 11400000, guid: 06a4bc191ed678b4aa99cb695b352b18, type: 2}
   - {fileID: 11400000, guid: e02004697b23c1c43ab0ee09708c9ff1, type: 2}
   - {fileID: 11400000, guid: 3ef24234bf9fb0c4ab1573c508a7263f, type: 2}
@@ -159,7 +159,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4d94ebd552cf9f94fbd509b2b6358873, type: 2}
   - {fileID: 11400000, guid: d995f5c2470a6154199e4bfe30f40811, type: 2}
   - {fileID: 11400000, guid: cb7bbe09169906a42a0092ed666ba946, type: 2}
-  maxQuestDMCount: 3
-  questGenerateHour: 0.001
-  unreadBadgeObject: {fileID: 0}
-  unreadCountText: {fileID: 0}
+  _maxQuestDMCount: 3
+  _questGenerateHour: 8
+  _unreadBadgeObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  _unreadCountTexts:
+  - {fileID: 0}
+  - {fileID: 0}
+  _post: {fileID: 0}
