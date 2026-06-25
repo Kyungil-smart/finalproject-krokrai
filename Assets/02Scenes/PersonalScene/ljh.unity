@@ -1680,7 +1680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1768673895651015895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3285,11 +3285,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2044293778}
     - target: {fileID: 6438632656685705330, guid: 760e73de9cb98eb4ca129df011231965, type: 3}
+      propertyPath: _content
+      value: 
+      objectReference: {fileID: 2044293778}
+    - target: {fileID: 6438632656685705330, guid: 760e73de9cb98eb4ca129df011231965, type: 3}
       propertyPath: dmChatPanel
       value: 
       objectReference: {fileID: 3368904361188319866}
     - target: {fileID: 6438632656685705330, guid: 760e73de9cb98eb4ca129df011231965, type: 3}
       propertyPath: dmListPanel
+      value: 
+      objectReference: {fileID: 1216046118}
+    - target: {fileID: 6438632656685705330, guid: 760e73de9cb98eb4ca129df011231965, type: 3}
+      propertyPath: _dmChatPanel
+      value: 
+      objectReference: {fileID: 3368904361188319866}
+    - target: {fileID: 6438632656685705330, guid: 760e73de9cb98eb4ca129df011231965, type: 3}
+      propertyPath: _dmListPanel
       value: 
       objectReference: {fileID: 1216046118}
     - target: {fileID: 6438632656685705330, guid: 760e73de9cb98eb4ca129df011231965, type: 3}
@@ -5483,7 +5495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 425469320777860927, guid: ff134b2559b384c4cb509c8197d2c580, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4391503841509471551, guid: ff134b2559b384c4cb509c8197d2c580, type: 3}
       propertyPath: m_Pivot.x
@@ -6911,7 +6923,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &8699317205369155127
 GameObject:
   m_ObjectHideFlags: 0
@@ -7132,5 +7144,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 593625788}
   - {fileID: 2770216449022290481}
-  - {fileID: 1364109444}
   - {fileID: 3195766968335186246}
+  - {fileID: 1364109444}

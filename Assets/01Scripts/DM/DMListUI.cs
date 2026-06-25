@@ -1,7 +1,7 @@
 ﻿/*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-24
+수정일 : 26-06-25
 
 역할 : DM 목록 UI 생성 및 DM 클릭 시 대화창 전환
 방식 : DB 저장과 로컬 Dictionary 기준으로 Dummy DM과 Quest DM을 생성, 진행, 완료, 삭제 처리
@@ -496,12 +496,7 @@ public class DMListUI : MonoBehaviour
             return;
         }
 
-        TimeSimulator timeSimulator =
-            FindFirstObjectByType<TimeSimulator>();
-
-        DateTime now = timeSimulator != null
-            ? timeSimulator.GetCurrentTime()
-            : DateTime.Now;
+        DateTime now = GetCurrentGameTime();
         
         DateTime savedTimestamp = GetDMGenerationTimestamp();
 
@@ -1071,11 +1066,16 @@ public class DMListUI : MonoBehaviour
     ///</summary>
     private DateTime GetCurrentGameTime()
     {
-        TimeSimulator timeSimulator = FindFirstObjectByType<TimeSimulator>();
+        IDataManager dataManager = ServiceLocator.Get<IDataManager>();
 
-        if (timeSimulator == null)
+        if (dataManager == null || dataManager.Attendance == null)
             return DateTime.Now;
 
-        return timeSimulator.GetCurrentTime();
+        DateTime gameTime = dataManager.Attendance.Last_Login_TimeStamp;
+
+        if (gameTime == default)
+            return DateTime.Now;
+
+        return gameTime;
     }
 }
