@@ -3,7 +3,7 @@
 수정자 : NekioEmilia
 
 작성일 : 26-06-08
-수정일 : 26-06-15
+수정일 : 26-06-25
 
 역할 : 미션 UI와 데이터사이를 제어하는 Presenter 스크립트
 방식 : Model(기획 SO 데이터)을 기준으로 DB(유저 진행도) 데이터를 동기화, 이후 탭 전환 및 보상 수령 이벤트를 감지하여 데이터를 가공한 뒤, 각 View(미션 목록, 보상 팝업, 스토리 팝업)에 UI 갱신함.
@@ -21,7 +21,6 @@ public class MissionPresenter : MonoBehaviour
     [SerializeField] private RewardPopupView _rewardPopupView;
     [SerializeField] private MissionDataModel _missionModel;
     [SerializeField] private RewardDataModel _rewardModel;
-    [SerializeField] private ItemDataModel _itemModel;
 
     [Header("스토리 데이터")] [SerializeField] private List<Story_TableSO> _storyDataList = new();
     [SerializeField] private StoryPopupView _storyPopupView;
@@ -68,6 +67,14 @@ public class MissionPresenter : MonoBehaviour
         if (_missionView != null)
         {
             _missionView.OnSlotRewardRequested += OnRewardClaimed;
+        }
+
+        if (!string.IsNullOrEmpty(_currentDayKey))
+        {
+            if (int.TryParse(_currentDayKey.Replace("Day_", ""), out int currentDay))
+            {
+                OnDayTabChangedMission(currentDay);
+            }
         }
     }
 
@@ -422,7 +429,7 @@ public class MissionPresenter : MonoBehaviour
             case CurrencyType.Stone: return targetId == 100003;
             case CurrencyType.FurDoll: return targetId == 100004;
             case CurrencyType.Claw: return targetId == 100005;
-            case CurrencyType.Energy: return targetId == 10006;
+            case CurrencyType.Energy: return targetId == 100006;
             default:
             {
                 return false;

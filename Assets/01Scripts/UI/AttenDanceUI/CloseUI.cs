@@ -14,12 +14,13 @@ using UnityEngine.UI;
 public class CloseUI : MonoBehaviour
 {
     [SerializeField] private Button _closeButton;
+    [SerializeField] private GameObject _targetObject;
 
     private void Awake()
     {
         if (_closeButton != null)
         {
-            _closeButton.onClick.AddListener(() => gameObject.SetActive(false));
+            _closeButton.onClick.AddListener(() => _targetObject.SetActive(false));
         }
     }
 

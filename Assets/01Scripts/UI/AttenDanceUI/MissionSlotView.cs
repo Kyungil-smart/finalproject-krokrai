@@ -32,6 +32,9 @@ public class MissionSlotView : MonoBehaviour
     [SerializeField] private Sprite _defaultSprite;
     [SerializeField] private Sprite _changeSprite;
     
+    [Header("MVP 연결")]
+    [SerializeField] private ItemDataModel _itemModel;
+    
     private int _slotIndex;
 
     /// <summary>
@@ -84,9 +87,20 @@ public class MissionSlotView : MonoBehaviour
             if (rewardData != null && i < rewardData.Count)
             {
                 _rewardItemSlots[i].gameObject.SetActive(true);
+
+                string addressableKey = "";
+
+                if (_itemModel != null)
+                {
+                    var itemData = _itemModel.GetItemTableData(rewardData[i].Reward_Id);
+
+                    if (itemData != null)
+                    {
+                        addressableKey = itemData.Item_string_Res_Id.Trim();
+                    }
+                }
                 
-                // 일단 아이콘이 없어서 null 넘겨주는데, 스프라이트 생기는 즉시 교체
-                _rewardItemSlots[i].SetItem(null, rewardData[i].Amount);
+                _rewardItemSlots[i].SetItem(addressableKey, rewardData[i].Amount);
             }
             else
             {

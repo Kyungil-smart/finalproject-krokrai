@@ -9,8 +9,6 @@
 방식 : DayListPresenter에서 호출받아 UI를 갱신학고, 버튼 클릭시 EventManger를 통해 이벤트를 발생시킴
 */
 
-
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 

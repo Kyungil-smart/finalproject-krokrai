@@ -26,7 +26,7 @@ public class FestaPresenter : MonoBehaviour
     [SerializeField] private RewardDataModel _rewardModel;
     [SerializeField] private RewardPopupView _rewardPopupView;
     
-    private void OnEnable() // Start -> OnEnable
+    private void OnEnable()
     {
         var eventManager = ServiceLocator.Get<IEventManager>();
 

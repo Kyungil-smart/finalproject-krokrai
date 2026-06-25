@@ -19,7 +19,9 @@ public class MissionView : MonoBehaviour
     public event Action<int> OnSlotRewardRequested; // 보상 버튼 클릭 Action
 
     [SerializeField] private MissionSlotView[] _missionSlots;
-    [Header("메인 화면 스토리 UI 연결")] [SerializeField] private GameObject _mainStoryGroup;
+
+    [Header("메인 화면 스토리 UI 연결")] [SerializeField]
+    private GameObject _mainStoryGroup;
 
     private void Awake()
     {
@@ -36,13 +38,14 @@ public class MissionView : MonoBehaviour
     /// <param name="missionSoData">MissionList SO 데이터 리스트</param>
     /// <param name="dbStates">미션 진행도 리스트</param>
     /// <param name="rewardDataList">각 미션별 보상 리스트</param>
-    public void UpdateAllMissions(List<Mission_ListSO> missionSoData, List<EventState> dbStates, List<List<Reward_Group_TableSO>> rewardDataList)
+    public void UpdateAllMissions(List<Mission_ListSO> missionSoData, List<EventState> dbStates,
+        List<List<Reward_Group_TableSO>> rewardDataList)
     {
         foreach (var slot in _missionSlots)
         {
             if (slot != null) slot.gameObject.SetActive(false);
         }
-        
+
         if (missionSoData == null || dbStates == null)
         {
             return;
@@ -54,7 +57,7 @@ public class MissionView : MonoBehaviour
             {
                 continue;
             }
-            
+
             _missionSlots[i].gameObject.SetActive(true);
 
             // 슬롯이 받아야 할 보상 리스트 하나만 넘김
@@ -75,7 +78,8 @@ public class MissionView : MonoBehaviour
     /// <param name="soData">해당 슬롯의 원본 데이터</param>
     /// <param name="dbState">해당 슬롯의 진행도 데이터</param>
     /// <param name="rewardData"></param>
-    public void UpdateSingleSlot(int index, Mission_ListSO soData, EventState dbState, List<Reward_Group_TableSO> rewardData)
+    public void UpdateSingleSlot(int index, Mission_ListSO soData, EventState dbState,
+        List<Reward_Group_TableSO> rewardData)
     {
         string finalDesc = "";
 
@@ -87,7 +91,7 @@ public class MissionView : MonoBehaviour
         {
             finalDesc = soData.Mission_Desc.Replace("n", soData.Goal_Value.ToString());
         }
-        
+
         int goal = soData.Goal_Value;
         int currentState = (int)dbState.Mission_State;
         int flag = (int)dbState.Mission_State_Flag;
