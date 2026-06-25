@@ -1453,8 +1453,13 @@ PrefabInstance:
       propertyPath: _testMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6522408483756104763, guid: 275ec6d5ed7453148a369b8088a7e325, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1043132560464126709, guid: 275ec6d5ed7453148a369b8088a7e325, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 275ec6d5ed7453148a369b8088a7e325, type: 3}
