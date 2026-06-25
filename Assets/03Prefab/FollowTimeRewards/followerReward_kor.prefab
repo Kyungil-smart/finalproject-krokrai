@@ -2471,10 +2471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a959065e0b081548afcc0d107930049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _testEnergyValue: 0
-  _testCoinValue: 0
-  _testSetValue: 0
-  _testIncreaseValue: 0
   _rBM: {fileID: 9152218155926219015}
   _rPM: {fileID: 1793396025298922212}
   _fLM: {fileID: 2762060372680682996}

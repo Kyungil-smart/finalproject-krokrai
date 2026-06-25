@@ -117,7 +117,9 @@ public class TimeRewardsManager : MonoBehaviour
             CanActiveRewardButton();
             
             // 팝업창에 표시할 현재 레벨 칭호
-            _rPM.SetTierName(_fLM.GetFollowTierName(_follow));
+            var temp = ServiceLocator.Get<IString_TableManager>().GetStringSO(_fLM.GetFollowTierName(_follow));
+            _rPM.SetTierName(temp.KR);
+            //_rPM.SetTierName(_fLM.GetFollowTierName(_follow));
             // 팝업창에 표시할 현재 수령 가능한 에너지, 코인 수량 표시
             _rPM.SetRewardText(_rewardEnergyIntValue, _rewardCoinIntValue);
             // 팝업창에 표시할 현재 팔로워 수
@@ -212,7 +214,8 @@ public class TimeRewardsManager : MonoBehaviour
     // 현재 레벨 이름과 다음 레벨까지 필요한 팔로워수를 알려주는 팝업창
     private void SetNextTierPopUpText()
     {
-        _nTPM.SetTierName(_fLM.GetFollowTierName(_follow));
+        var temp = ServiceLocator.Get<IString_TableManager>().GetStringSO(_fLM.GetFollowTierName(_follow));
+        _nTPM.SetTierName(temp.KR);
         _nTPM.SetNextTierFollowValueText(_fLM.GetNextTierFollowValue(_follow).ToString());
     }
     
