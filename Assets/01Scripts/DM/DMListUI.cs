@@ -75,10 +75,12 @@ public class DMListUI : MonoBehaviour
 
         if (_dmChatPanel != null)
             _dmChatPanel.SetActive(false);
-
+        
         InitLocalProgressData();
 
         LoadDMProgressFromDB();
+
+        SaveMissingDummyProgressToDB();
 
         CheckQuestGenerateDelay();
 
@@ -208,6 +210,12 @@ public class DMListUI : MonoBehaviour
                 QuestRewardState = (int)QuestRewardStateEnum.None,
                 PreviewText = ""
             };
+            
+            SaveLocalDMProgress(
+                dm.messageId,
+                progress.ProgressState,
+                progress.SelectedChoiceNum
+            );
 
             _dmProgressTable.Add(dm.messageId, progress);
         }
@@ -1102,5 +1110,41 @@ public class DMListUI : MonoBehaviour
         }
 
         _prevDMListPanelActive = currentActive;
+    }
+    
+    private void SaveMissingDummyProgressToDB()
+    {
+        IDataManager dataManager = ServiceLocator.Get<IDataManager>();
+
+        if (dataManager == null || dataManager.UserDatas == null)
+            return;
+
+        UserDatas userDatas = dataManager.UserDatas;
+
+        if (userDatas.DMProgress == null)
+            userDatas.DMProgress = new Dictionary<string, DMProgress>();
+
+        foreach (DMLocalProgress progress in _dmProgressTable.Values)
+        {
+            if (progress == null)
+                continue;
+
+            DM_TableSO dmData = GetDMTable(progress.DM_ID);
+
+            if (dmData == null)
+                continue;
+
+            if (dmData.dmQuestType != DMQuestTypeEnum.Dummy)
+                continue;
+
+            if (userDatas.DMProgress.ContainsKey(progress.DM_ID.ToString()))
+                continue;
+
+            SaveLocalDMProgress(
+                progress.DM_ID,
+                progress.ProgressState,
+                progress.SelectedChoiceNum
+            );
+        }
     }
 }
