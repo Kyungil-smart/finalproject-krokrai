@@ -3,7 +3,7 @@
 수정자 : 이종현
 
 작성일 : 26-05-27
-수정일 : 26-06-24
+수정일 : 26-06-26
 
 역할 : 인게임 시간을 실제 디바이스의 시간으로 설정 및 변경
 방식 : DateTime을 이용하여 실제 디바이스의 시간 반영
@@ -74,6 +74,7 @@ public class TimeSimulator : MonoBehaviour
 
         ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp = _currentGameTime;
         ServiceLocator.Get<IPlayTimeTracker>().OnTimeAdvanced(_currentGameTime);
+        ServiceLocator.Get<IDataManager>()._simulationCurrentTime = _currentGameTime;
 
         Log.Message($" 적용 완료! -> {_currentGameTime}");
     }
