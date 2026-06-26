@@ -1225,6 +1225,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: followerReward_kor
       objectReference: {fileID: 0}
+    - target: {fileID: 7822148796801971881, guid: 4002bdabf4e6cfa41993dc3b6214309d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8429037731248419968, guid: 4002bdabf4e6cfa41993dc3b6214309d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
