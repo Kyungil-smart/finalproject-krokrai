@@ -10,7 +10,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ReelsDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler // IPointerDownHandler, IPointerUpHandler, IPointerExitHandler, IPointerMoveHandler
+public class ReelsDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private float _restoreSpeed;
     [SerializeField] private float _snapSpeed;
@@ -23,7 +23,6 @@ public class ReelsDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     bool _isPlayAni = false;
 
-#if UNITY_ANDROID
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -41,43 +40,7 @@ public class ReelsDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     {
         CheckPos();
     }
-#endif
 
-#if UNITY_EDITOR
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        _moveYPos = eventData.pressPosition.y;
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (_isPlayAni) return;
-        _isFirst = false;
-        CheckPos();
-    }
-
-    public void OnPointerMove(PointerEventData eventData)
-    {
-        if (_isPlayAni) return;
-
-        if (!_isFirst)
-        {
-            _isFirst = true;
-        }
-        else
-        {
-            transform.localPosition += new Vector3(0, eventData.position.y - _moveYPos, 0);
-        }
-        _moveYPos = eventData.position.y;
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        if (_isPlayAni) return;
-        _isFirst = false;
-        CheckPos();
-    }
-#endif
     private void CheckPos()
     {
         float y = transform.localPosition.y;
