@@ -12,7 +12,7 @@ using UnityEngine.EventSystems;
 
 public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler, IPointerMoveHandler
 {
-    [SerializeField] private float _lerpSpeed;
+    [SerializeField] private float _restoreSpeed;
     [SerializeField] private float _snapSpeed;
     [SerializeField] private ReelsController _reelsCtrl;
 
@@ -66,11 +66,11 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
             StopCoroutine(_aniCoroutine);
             _aniCoroutine = null;
         }
-        if (2490 > y && y > 830) // 830 
+        if (2300 > y && y > 1000) // 830 
         {
             _aniCoroutine = StartCoroutine(RestoreAni());
         }
-        else if (y < 830)
+        else if (y < 1000)
         {
             _aniCoroutine = StartCoroutine(SnapAni(true));
         }
@@ -115,7 +115,7 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
         while (transform.localPosition.y < 1650 || 1670 < transform.localPosition.y)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, 1660, 0), _lerpSpeed);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, 1660, 0), _restoreSpeed);
             yield return null;
         }
 
