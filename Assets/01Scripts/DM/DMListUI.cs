@@ -54,6 +54,9 @@ public class DMListUI : MonoBehaviour
     [SerializeField] private TMP_Text[] _unreadCountTexts;
 
     [SerializeField] private DMQuestHomeFeedPostLoad _post;
+    
+    [Header("하단 바")]
+    [SerializeField] private GameObject _bottomNavigation;
 
     private bool _prevDMListPanelActive;
     
@@ -304,6 +307,9 @@ public class DMListUI : MonoBehaviour
 
         if (_dmChatPanel != null)
             _dmChatPanel.SetActive(true);
+        
+        if (_bottomNavigation != null)
+            _bottomNavigation.SetActive(false);
 
         DMLocalProgress progress = GetProgress(dmData.messageId);
 
