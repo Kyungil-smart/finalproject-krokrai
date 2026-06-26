@@ -1077,15 +1077,12 @@ public class DMListUI : MonoBehaviour
     {
         IDataManager dataManager = ServiceLocator.Get<IDataManager>();
 
-        if (dataManager == null || dataManager.Attendance == null)
-            return DateTime.Now;
+        if (dataManager != null && dataManager._simulationCurrentTime != default)
+        {
+            return dataManager._simulationCurrentTime;
+        }
 
-        DateTime gameTime = dataManager.Attendance.Last_Login_TimeStamp;
-
-        if (gameTime == default)
-            return DateTime.Now;
-
-        return gameTime;
+        return DateTime.Now;
     }
     
     ///<summary>

@@ -74,6 +74,7 @@ public class TimeSimulator : MonoBehaviour
 
         ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp = _currentGameTime;
         ServiceLocator.Get<IPlayTimeTracker>().OnTimeAdvanced(_currentGameTime);
+        ServiceLocator.Get<IDataManager>()._simulationCurrentTime = _currentGameTime;
 
         Log.Message($" 적용 완료! -> {_currentGameTime}");
     }
