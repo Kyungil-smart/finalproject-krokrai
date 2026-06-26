@@ -1,8 +1,8 @@
 /*
  작성자 : 23M-RFT68
- 수정자 : 
+ 수정자 : 23M-RFT68
  작성일 : 26-06-24
- 수정일 : 26-06-24
+ 수정일 : 26-06-25
  
  역할  :  하단바 제어 + 홈 이동(돌아가기 버튼) + 알림의 경우 알림 뱃지 해제 추가
  방식  : RowbtnBar 오브젝트에 붙인 후 배열을 5개 추가 해주고 각각 버튼과 기본 버튼, 눌렸을때 버튼, 페이지를 연결해준 뒤
@@ -27,6 +27,7 @@ public class RowbtnController : MonoBehaviour
     [SerializeField] private TabInfo[] _tabs;
     [SerializeField] private int _defaultTab = 0;            // 시작 탭 (0 = 홈피드)
     [SerializeField] private GameObject _notiAlertIcon;      // 알림이 왔을때 켜지는 아이콘 뱃지
+    [SerializeField] private GameObject _dmList;             // DM 목록
     
     private int _currentTab = -1;   //  현재 활성화 된 탭
 
@@ -67,6 +68,13 @@ public class RowbtnController : MonoBehaviour
         
         if (_currentTab == index) return;    // 이미 활성화 된 탭 클릭 시 무시
         
+        // 하단바 클릭 시 DM 목록 페이지 자동으로 닫기
+        if (_dmList != null && _dmList.activeSelf)
+        {
+            _dmList.SetActive(false);
+            Log.Message("DM 목록 닫힘");
+        }
+
         // [알림 뱃지 자동 삭제] 알림 탭 누르면 알림 아이콘 끄기
         if (index == 3 && _notiAlertIcon != null)
         {
@@ -110,6 +118,36 @@ public class RowbtnController : MonoBehaviour
     {
         Log.Message("뒤로가기 클릭 -> 홈피드 화면으로 이동");
         OnTabClicked(0);
+    }
+
+    /// <summary>
+    /// DM 열렸을때 하단바 비활성화
+    /// </summary>
+    public void OpenDM()
+    {
+        // 현재 페이지 비활성화
+        if (_currentTab != -1 && _tabs[_currentTab].page != null)
+            _tabs[_currentTab].page.SetActive(false);
+        
+        this.gameObject.SetActive(false);
+        Log.Message("DM 진입 -> 하단바 비활성화");
+    }
+
+    /// <summary>
+    /// DM 닫았을때 하단바 복원
+    /// </summary>
+    public void CloseDM()
+    {
+        this.gameObject.SetActive(true);
+        
+        // 이전 페이지 복원
+        if (_currentTab != -1)
+        {
+            for (int i = 0; i < _tabs.Length; i++)
+                SetTabState(i, i == _currentTab);
+        }
+        
+        Log.Message("DM 종료 -> 이전 페이지 복원");
     }
 
     // 탭 상태 변경
