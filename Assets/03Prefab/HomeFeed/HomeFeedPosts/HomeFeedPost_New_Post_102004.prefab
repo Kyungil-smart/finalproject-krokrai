@@ -2325,7 +2325,6 @@ GameObject:
   - component: {fileID: 3893074715277507395}
   - component: {fileID: 1655818138863199724}
   - component: {fileID: 7598943937121213314}
-  - component: {fileID: 8838787121991731720}
   m_Layer: 5
   m_Name: HomeFeedPost_New_Post_102004
   m_TagString: Untagged
@@ -2376,19 +2375,6 @@ MonoBehaviour:
   _hashTag_Table: {fileID: 11400000, guid: 7936aed67575a1446b133d277158ef7c, type: 2}
   _npc_Table: {fileID: 11400000, guid: 48efc221b62b6c440a1d182f65614cd1, type: 2}
 --- !u!114 &7598943937121213314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7893499260340199434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3876eb206f2b364db9ea3900968781e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _postImage: {fileID: 7677621346140281614}
---- !u!114 &8838787121991731720
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2615,7 +2601,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d04ba06078cc9534981e02b4afd758a1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
