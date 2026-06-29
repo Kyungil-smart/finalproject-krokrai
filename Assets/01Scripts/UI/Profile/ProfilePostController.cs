@@ -18,6 +18,7 @@ public class ProfilePostController : MonoBehaviour
     private int _postId;
 
     GameObject _post;
+    ProfileController _ctrl;
 
     private void OnEnable()
     {
@@ -29,7 +30,7 @@ public class ProfilePostController : MonoBehaviour
         _button.onClick.RemoveAllListeners();
     }
 
-    public void SetPost(int postImg, int postId,GameObject post)
+    public void SetPost(int postImg, int postId, ProfileController ctrl) //GameObject post)
     {
         if (postImg == 0 || postImg < 0)
         {
@@ -37,7 +38,8 @@ public class ProfilePostController : MonoBehaviour
             return;
         }
 
-        _post = post;
+        //_post = post;
+        _ctrl = ctrl;
 
         if(_button == null || _image == null)
         {
@@ -54,7 +56,8 @@ public class ProfilePostController : MonoBehaviour
 
     private void OnClicked()
     {
-        _post.GetComponent<PostController>().SetPost(_postImg, _postId);
+        _ctrl.ShowPost(_postImg, _postId);
+        //_post.GetComponent<PostController>().SetPost(_postImg, _postId);
         //ServiceLocator.Get<IUIManager>().UploadedPost(_postNum);
     }
 }

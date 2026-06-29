@@ -28,7 +28,11 @@ public class ProfileController : MonoBehaviour
 
     [Header("게시물 prefab")]
     [SerializeField] private GameObject _postPrefab;
-    [SerializeField] private GameObject _post;
+    //[SerializeField] private GameObject _post;
+    [SerializeField] private PostController _post;
+
+    [Header("그 외")]
+    [SerializeField] private GameObject _rowBar;
 
     List<GameObject> _posts = new(8);
 
@@ -62,8 +66,6 @@ public class ProfileController : MonoBehaviour
 
             var imgs = ServiceLocator.Get<IDataManager>().UserDatas.UserPost;
 
-            _postedCount = 1;
-
             List<int> keys = new List<int>(imgs.Count);
             int count = 0;
 
@@ -83,7 +85,7 @@ public class ProfileController : MonoBehaviour
                 obj.name = $"Post_{i}";
                 post = obj.GetComponent<ProfilePostController>();
                 if (_postTables.ContainsKey(keys[i]))
-                    post.SetPost( _postTables[keys[i]].postImage, _postTables[keys[i]].postID, _post);
+                    post.SetPost(_postTables[keys[i]].postImage, _postTables[keys[i]].postID, this);// _post);
                 else
                 {
                     Log.Message("Table에 존재하지 않습니다.");
@@ -103,5 +105,11 @@ public class ProfileController : MonoBehaviour
     private void Start()
     {
         _profileName.text = ServiceLocator.Get<IDataManager>().UserName;
+    }
+
+    public void ShowPost(int img, int id)
+    {
+        _rowBar.SetActive(false);
+        _post.SetPost(img, id);
     }
 }
