@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_133
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000114
-  KR: "\uBD84\uBA85 \uC5BC\uB9C8 \uC804\uAE4C\uC9C0 \uC54C\uACE0 \uC788\uC5C8\uB294\uB370
-    \uC65C \uB9CC\uB4E4\uB824\uACE0 \uD558\uB2C8\uAE4C \uC0DD\uAC01\uC774 \uC548\uB0A0\uAE4C\uC694?"
-  EN: '"I definitely knew it until recently, so why can''t I remember now that I''m
-    trying to make it?"'
+  stringId: STR_CMT_001008
+  KR: "DM\uC73C\uB85C \uC8FC\uC2E0 \uC88B\uC740 \uC815\uBCF4 \uACE0\uB9D9\uC2B5\uB2C8\uB2E4!"
+  EN: "Thanks for the helpful info you sent by DM!\r"

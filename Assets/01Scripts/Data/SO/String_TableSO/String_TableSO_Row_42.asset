@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_42
   m_EditorClassIdentifier: 
-  stringId: STR_CMT_000004
-  KR: "\uD30C\uBB3B\uD78C \uAC70 \uB108\uBB34 \uC0AC\uB791\uC2A4\uB7EC\uC6B4 \uAC70
-    \uC544\uB2C8\uB0D0\uACE0 \u314B\u314B"
-  EN: "Buried like that? That\u2019s way too cute lol"
+  stringId: STR_TAG_000001
+  KR: "\uB0E5\uC9D1\uC0AC"
+  EN: "Cat parent\r"

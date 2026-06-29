@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stringId: STR_CAP_000008
   KR: "\uC7A1\uD790 \uB4EF \uB9D0 \uB4EF"
-  EN: '"So close, yet so far"'
+  EN: "So close, yet so far\r"

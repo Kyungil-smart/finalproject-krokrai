@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_161
   m_EditorClassIdentifier: 
-  stringId: STR_FOLD_000003
-  KR: "\uC77C\uC0C1"
-  EN: Everyday
+  stringId: STR_CMT_001036
+  KR: "\uBC14\uB85C \uCEA3\uB2D9 \uC0AC\uB7EC \uAC11\uB2C8\uB2E4~"
+  EN: "\r"

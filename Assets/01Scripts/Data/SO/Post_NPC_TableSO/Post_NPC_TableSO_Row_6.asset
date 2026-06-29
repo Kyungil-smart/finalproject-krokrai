@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67d0aa5db61a75a4383733da9a04b0d8, type: 3}
+  m_Name: Post_NPC_TableSO_Row_6
+  m_EditorClassIdentifier: 
+  postID: 102007
+  profileType: 0
+  postProFile: 400001
+  postImage: 502020
+  likeCount: 24582
+  getFollower: 0
+  captionText: STR_CAP_001012
+  displayOrder: 7

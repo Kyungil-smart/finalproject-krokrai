@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_98
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000031
-  KR: "\uC557, \uC544\uC27D\uB124\uC694... \uC5B4\uCA54 \uC218 \uC5C6\uC8E0"
-  EN: '"Oh, that''s too bad... I guess it can''t be helped."'
+  stringId: STR_TAG_000057
+  KR: "\uBBF8\uBB18\uD558\uB0E5"
+  EN: "\r"

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_111
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000051
-  KR: "\uC54C\uB824\uC8FC\uC154\uC11C \uAC10\uC0AC\uD569\uB2C8\uB2E4!"
-  EN: Thanks for letting me know!
+  stringId: STR_CMT_000007
+  KR: "\uC2EC\uC7A5 \uC544\uD30C\uC11C \uAE30\uC808..."
+  EN: "My heart can\u2019t take this...\r"

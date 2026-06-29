@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scriptableObjects:
   - {fileID: 11400000, guid: 95d60a0582d52c341ab685fcc5124f1f, type: 2}
+  - {fileID: 11400000, guid: 9e54f9063a1d61547b47d9b4d340c7ee, type: 2}
+  - {fileID: 11400000, guid: 165718044b2368e49bb051aa2e34d034, type: 2}
+  - {fileID: 11400000, guid: 923bb4843a7c828478425a5303425e78, type: 2}
+  - {fileID: 11400000, guid: 63eb0b95a64b1dc4aad2fc6ba32c990d, type: 2}

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_83
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000002
-  KR: "\uB124? \uBB34\uC2A8\uC77C\uC774\uC2E0\uAC00\uC694?"
-  EN: Huh? What's going on?
+  stringId: STR_TAG_000042
+  KR: "\uC218\uC5FC\uD53C\uB85C\uC99D\uD6C4\uAD70"
+  EN: "\r"

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_93
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000012
-  KR: "\uB9C8\uCE68 \uB0A8\uB294 \uAC8C \uC788\uC5B4\uC694. \uAD50\uD658\uD574\uC694!"
-  EN: I actually have some spare ones. Let's trade!
+  stringId: STR_TAG_000052
+  KR: "\uCD08\uBCF4\uC9D1\uC0AC"
+  EN: "\r"

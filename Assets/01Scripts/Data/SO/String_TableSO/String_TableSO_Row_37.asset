@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_37
   m_EditorClassIdentifier: 
-  stringId: STR_TAG_000022
-  KR: "\uC0B4\uB824\uC8FC\uC138\uC694"
-  EN: Help me
+  stringId: STR_CAP_001030
+  KR: "\uCC98\uC74C\uC73C\uB85C \uC2A4\uD2F8 \uBE0C\uB7EC\uC26C\uB85C \uD138\uAC08\uC774
+    \uD574\uC92C\uB294\uB370 \uB2E4\uD589\uD788\uB3C4 \uC815\uB9D0 \uC88B\uC544\uD558\uB124\uC694!"
+  EN: "\r"

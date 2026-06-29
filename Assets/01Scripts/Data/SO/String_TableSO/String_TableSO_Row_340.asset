@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
+  m_Name: String_TableSO_Row_340
+  m_EditorClassIdentifier: 
+  stringId: STR_DIA_000293
+  KR: "\uB0E5\uCFE0\uC158\uC744 \uB4DC\uB798\uADF8\uD558\uBA74 \uC790\uADF8\uB9C8\uCE58
+    \uD138\uBB49\uCE58\uB97C 3\uAC1C\uB098 \uC5BB\uC744 \uC218 \uC788\uB2E4\uB294
+    \uB180\uB77C\uC6B4 \uC0AC\uC2E4\uC744 \uC54C\uACE0 \uACC4\uC168\uB098\uC694?"
+  EN: "\r"

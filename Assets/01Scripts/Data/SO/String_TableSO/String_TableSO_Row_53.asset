@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_53
   m_EditorClassIdentifier: 
-  stringId: STR_CMT_000015
-  KR: "\uC557 \uACE0\uC591\uC774 \uB0A0\uC544\uAC04\uB2E4! \u314B\u314B"
-  EN: '"Oh no, the cat is flying! lol"'
+  stringId: STR_TAG_000012
+  KR: "\uB2E4\uC774\uBE59"
+  EN: "Diving\r"

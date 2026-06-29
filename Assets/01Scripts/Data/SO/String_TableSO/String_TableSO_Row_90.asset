@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_90
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000009
-  KR: "\uC2A4\uD1A0\uB9AC\uC5D0\uC11C \uBCF4\uB2C8\uAE4C \uADF8 \uBE57 \uC0AC\uC6A9\uD558\uACE0
-    \uACC4\uC2DC\uB358\uB370 \uBE57 \uC880 \uC8FC\uC2E4 \uC218 \uC788\uB098\uC694?"
-  EN: I saw in your story that you're using that brush. Could you give me the brush?
+  stringId: STR_TAG_000049
+  KR: "\uBBF8\uC6B0\uBBF8\uC6B0"
+  EN: "\r"

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_159
   m_EditorClassIdentifier: 
-  stringId: STR_FOLD_000001
-  KR: "\uBAA8\uB4E0 \uC0AC\uC9C4"
-  EN: All Photos
+  stringId: STR_CMT_001034
+  KR: "\uC800\uB7F0..."
+  EN: "\r"
