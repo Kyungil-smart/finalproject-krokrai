@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stringId: STR_CMT_001010
   KR: "\uC218\uC81C \uC7A5\uB09C\uAC10 \uB300\uC131\uACF5 \uCD95\uD558\uB4DC\uB824\uC694!"
-  EN: "Congrats on the successful handmade toy!\r"
+  EN: Congrats on the successful handmade toy!

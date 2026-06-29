@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stringId: STR_CMT_001007
   KR: "\uC798 \uC4F0\uC168\uB2E4\uB2C8 \uB2E4\uD589\uC785\uB2C8\uB2E4!"
-  EN: "Glad to hear it worked well for you!\r"
+  EN: Glad to hear it worked well for you!

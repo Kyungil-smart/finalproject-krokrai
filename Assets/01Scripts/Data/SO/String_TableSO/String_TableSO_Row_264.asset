@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stringId: STR_DIA_000111
   KR: "\uC548\uB155\uD558\uC138\uC694. \uAD81\uAE08\uD55C \uAC8C \uC788\uC2B5\uB2C8\uB2E4!"
-  EN: "Hello. I have a question!\r"
+  EN: Hello. I have a question!

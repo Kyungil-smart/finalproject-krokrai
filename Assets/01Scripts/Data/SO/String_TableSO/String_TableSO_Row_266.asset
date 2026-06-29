@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stringId: STR_DIA_000113
   KR: "\uB124 \uC548\uB155\uD558\uC138\uC694. \uBB50\uAC00 \uAD81\uAE08\uD558\uC2E0\uAC00\uC694?"
-  EN: "Hello. What would you like to know?\r"
+  EN: Hello. What would you like to know?

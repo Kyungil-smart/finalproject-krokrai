@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stringId: STR_NOTI_000001
   KR: "{npcAccountName}\uB2D8\uC774 \uD68C\uC6D0\uB2D8\uC758 \uC0AC\uC9C4\uC744 \uC88B\uC544\uD569\uB2C8\uB2E4."
-  EN: "{npcAccountName} liked your photo.\r"
+  EN: '{npcAccountName} liked your photo.'

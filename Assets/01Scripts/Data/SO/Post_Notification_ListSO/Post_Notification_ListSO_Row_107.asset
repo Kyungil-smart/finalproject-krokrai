@@ -16,5 +16,5 @@ MonoBehaviour:
   postId: 103022
   notiTemplate: 0
   displayOrder: 1
-  commentText: "STR_CMT_001071\r"
+  commentText: STR_CMT_001071
   referencedNpcId: 400002

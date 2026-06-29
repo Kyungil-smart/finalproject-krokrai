@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stringId: STR_CAP_000006
   KR: "\uCE68\uB300 \uB2E4\uC774\uBE59!"
-  EN: "Bed dive!\r"
+  EN: Bed dive!
