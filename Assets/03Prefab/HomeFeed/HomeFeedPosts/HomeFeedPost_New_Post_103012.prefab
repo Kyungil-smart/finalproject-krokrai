@@ -2882,6 +2882,7 @@ GameObject:
   - component: {fileID: 3893074715277507395}
   - component: {fileID: 1655818138863199724}
   - component: {fileID: 7598943937121213314}
+  - component: {fileID: 2511541949722415786}
   m_Layer: 5
   m_Name: HomeFeedPost_New_Post_103012
   m_TagString: Untagged
@@ -2913,7 +2914,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -13}
-  m_SizeDelta: {x: 0, y: 1580}
+  m_SizeDelta: {x: 0, y: 1800}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1655818138863199724
 MonoBehaviour:
@@ -2944,6 +2945,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _postImage: {fileID: 7677621346140281614}
+--- !u!114 &2511541949722415786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7893499260340199434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f20e291081069438f77804e1b0b961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _postText: {fileID: 995057192020716846}
 --- !u!1 &7944183823307855854
 GameObject:
   m_ObjectHideFlags: 0

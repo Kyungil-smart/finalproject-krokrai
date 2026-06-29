@@ -1748,7 +1748,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 80.638916, w: -4.0532227}
+  m_margin: {x: 299.44452, y: 0, z: 80.638916, w: -4.0532227}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1815,6 +1815,7 @@ GameObject:
   - component: {fileID: 3893074715277507395}
   - component: {fileID: 1655818138863199724}
   - component: {fileID: -3102259380613161401}
+  - component: {fileID: 1830271184146001241}
   m_Layer: 5
   m_Name: HomeFeedPost_New_Post_103004
   m_TagString: Untagged
@@ -1877,6 +1878,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _postImage: {fileID: 7677621346140281614}
+--- !u!114 &1830271184146001241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7893499260340199434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da9896e669c3b94697a1e7da15d77d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _commentNameText: {fileID: 8584285560239020687}
 --- !u!1 &8359977451819281636
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,7 +2020,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -299.4445, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
