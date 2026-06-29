@@ -1,7 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-06-04
- 수정일 : 26-06-08
+ 수정일 : 26-06-29
  
  역할 : 게시물 Image 및 선택된 경우 게시물 띄우기
  방식 : ProfileController에서 생성 시점에 SetPost를 호출하여, 초기 값 설정
@@ -54,7 +54,6 @@ public class ProfilePostController : MonoBehaviour
 
     private void OnClicked()
     {
-        _post.SetActive(true);
         _post.GetComponent<PostController>().SetPost(_postImg, _postId);
         //ServiceLocator.Get<IUIManager>().UploadedPost(_postNum);
     }

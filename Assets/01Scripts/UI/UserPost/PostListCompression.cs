@@ -1,6 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-06-08
+ 수정일 : 26-06-29
 
  역할 : 나눠어진 문자 table들을 압축하여 저장
  방식 : 나눠어져 있는 문자 table들을 하나로 합친 후 Dictionary에 보관 및 class로 통해서 한번에 여러개를 출력 가능하게 압축
@@ -41,9 +42,9 @@ public class PostListCompression : MonoBehaviour
 
     private void Awake()
     {
-        _commentComp = new Dictionary<int, List<PostComment>>(8);
-        _hashTagComp = new Dictionary<int, string>(8);
-        _hashTagSTR = new Dictionary<int, string>();
+        _commentComp = new Dictionary<int, List<PostComment>>(128);
+        _hashTagComp = new Dictionary<int, string>(64);
+        _hashTagSTR = new Dictionary<int, string>(64);
         foreach(var t in _hashTag_Table.scriptableObjects)
         {
             if (t is Hashtag_TableSO)
@@ -145,6 +146,7 @@ public class PostListCompression : MonoBehaviour
                 if (currentPostID == 0) currentPostID = t.postId;
                 else if (currentPostID != t.postId)
                 {
+                    Debug.Log($"해시 태그 등록 된 아이디 : {currentPostID} /  내용 {sb.ToString()}");
                     _hashTagComp.Add(currentPostID, sb.ToString());
                     currentPostID = t.postId;
                     sb.Clear();
