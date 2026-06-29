@@ -3,7 +3,7 @@
 수정자 : NekioEmilia
 
 작성일 : 26-06-08
-수정일 : 26-06-25
+수정일 : 26-06-29
 
 역할 : 미션 UI와 데이터사이를 제어하는 Presenter 스크립트
 방식 : Model(기획 SO 데이터)을 기준으로 DB(유저 진행도) 데이터를 동기화, 이후 탭 전환 및 보상 수령 이벤트를 감지하여 데이터를 가공한 뒤, 각 View(미션 목록, 보상 팝업, 스토리 팝업)에 UI 갱신함.
@@ -15,15 +15,16 @@ using UnityEngine;
 
 public class MissionPresenter : MonoBehaviour
 {
-    [Header("View 및 Model 연결")] [SerializeField]
-    private MissionView _missionView;
-
+    [Header("View 및 Model 연결")] 
+    [SerializeField] private MissionView _missionView;
     [SerializeField] private RewardPopupView _rewardPopupView;
     [SerializeField] private MissionDataModel _missionModel;
     [SerializeField] private RewardDataModel _rewardModel;
 
-    [Header("스토리 데이터")] [SerializeField] private List<Story_TableSO> _storyDataList = new();
+    [Header("스토리 데이터")] 
+    [SerializeField] private List<Story_TableSO> _storyDataList = new();
     [SerializeField] private StoryPopupView _storyPopupView;
+    [SerializeField] private GameObject _prologuePopup;
 
     private List<Mission_ListSO> _currentMissions = new();
     private string _currentDayKey;
@@ -33,8 +34,8 @@ public class MissionPresenter : MonoBehaviour
         var eventManager = ServiceLocator.Get<IEventManager>();
 
         if (eventManager != null)
-        { 
-            eventManager.OnCurrencyAdded += HandleCurrecyAdded;
+        {
+            eventManager.OnCurrencyAdded += HandleCurrencyAdded;
             eventManager.OnDayClicked += OnDayTabChangedMission;
         }
     }
@@ -50,45 +51,52 @@ public class MissionPresenter : MonoBehaviour
 
         if (eventManager != null)
         {
-            eventManager.OnCurrencyAdded -= HandleCurrecyAdded;
+            eventManager.OnCurrencyAdded -= HandleCurrencyAdded;
             eventManager.OnDayClicked -= OnDayTabChangedMission;
         }
     }
 
     private void OnEnable()
     {
-        var eventManager = ServiceLocator.Get<IEventManager>();
-        
-        if (eventManager != null)
-        {
-            eventManager.OnDayClicked += OnDayTabChangedMission;
-        }
-
         if (_missionView != null)
         {
             _missionView.OnSlotRewardRequested += OnRewardClaimed;
         }
 
-        if (!string.IsNullOrEmpty(_currentDayKey))
+        int hasSeenPrologue = PlayerPrefs.GetInt("HasSeenPrologue", 0); // HasSeenPrologue 
+
+        if (hasSeenPrologue == 0)
         {
-            if (int.TryParse(_currentDayKey.Replace("Day_", ""), out int currentDay))
-            {
-                OnDayTabChangedMission(currentDay);
-            }
+            _prologuePopup.SetActive(true);
+        }
+        else
+        {
+            InitAttendanceUI();
         }
     }
 
     private void OnDisable()
     {
-        var eventManager = ServiceLocator.Get<IEventManager>();
-        if (eventManager != null)
-        {
-            eventManager.OnDayClicked -= OnDayTabChangedMission;
-        }
-
         if (_missionView != null)
         {
             _missionView.OnSlotRewardRequested -= OnRewardClaimed;
+        }
+    }
+
+    private void InitAttendanceUI()
+    {
+        if (!string.IsNullOrEmpty(_currentDayKey))
+        {
+            if (int.TryParse(_currentDayKey.Replace("Day_", ""), out int currentDay))
+            {
+                ServiceLocator.Get<IEventManager>().ClickDay(currentDay);
+            }
+        }
+        else
+        {
+            int activeDay = (int)ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day;
+            if (activeDay <= 0) activeDay = 1;
+            ServiceLocator.Get<IEventManager>().ClickDay(activeDay);
         }
     }
 
@@ -102,25 +110,11 @@ public class MissionPresenter : MonoBehaviour
         _currentMissions.Clear();
 
         List<Mission_ListSO> todayMissions = _missionModel.GetMissionsByDay(day);
-
-        if (todayMissions == null || todayMissions.Count == 0)
-        {
-            _missionView.UpdateAllMissions(new List<Mission_ListSO>(), new List<EventState>(),
-                new List<List<Reward_Group_TableSO>>());
-            return;
-        }
-
         Dictionary<string, EventState> getDailyDB = null;
         var dataManager = ServiceLocator.Get<IDataManager>();
 
         if (dataManager != null && dataManager.UserDatas != null && dataManager.UserDatas.Event_Mission != null)
         {
-            if (dataManager.UserDatas.Event_Mission.Event_490 == null)
-            {
-                dataManager.UserDatas.Event_Mission.Event_490 =
-                    new Dictionary<string, Dictionary<string, EventState>>();
-            }
-
             if (!dataManager.UserDatas.Event_Mission.Event_490.ContainsKey(_currentDayKey))
             {
                 dataManager.UserDatas.Event_Mission.Event_490[_currentDayKey] = new Dictionary<string, EventState>();
@@ -224,19 +218,15 @@ public class MissionPresenter : MonoBehaviour
             }
         }
 
-        if (_rewardModel == null)
-        {
-            Log.Message("rewardModel이 null입니다. 매니저 초기화 필요");
-        }
-
         var rewardList = _rewardModel.GetRewardGroup(targetMission.Reward_Daliy_Id);
-
+        
+        
         if (rewardList != null && _rewardPopupView != null)
         {
-            _rewardPopupView.OpenRewardPopup(rewardList);
+            //  _rewardPopupView.OpenRewardPopup(rewardList);
 
             var userGoods = ServiceLocator.Get<IDataManager>().UserGoods;
-
+            
             if (userGoods != null)
             {
                 foreach (var reward in rewardList)
@@ -274,9 +264,51 @@ public class MissionPresenter : MonoBehaviour
             _missionView.UpdateSingleSlot(slotIndex, targetMission, displayState, rewardList);
         }
 
-        // 5개 미션 다 채우면 스토리 팝업
-        CheckAndOpenStoryPopup(dailyDB, true);
-        CheckAndEndEvent();
+        bool isAllCleared = CheckIfAllMissionsCleared(dailyDB);
+
+        if (isAllCleared)
+        {
+            int currentDayNum = int.Parse(_currentDayKey.Replace("Day_", ""));
+            string targetStoryId = $"STORY_DAY_{currentDayNum}";
+            Story_TableSO targetStory = _storyDataList.Find(x => x.Story_Id == targetStoryId);
+
+            if (targetStory != null && _storyPopupView != null)
+            {
+                _storyPopupView.gameObject.SetActive(true);
+                
+                _storyPopupView.OpenStoryPopup(targetStory.ko_Title, targetStory.ko_Text, () => 
+                {
+                    if (rewardList != null && _rewardPopupView != null)
+                    {
+                        _rewardPopupView.OpenRewardPopup(rewardList);
+                    }
+                });
+            }
+        }
+        else
+        {
+            if (rewardList != null && _rewardPopupView != null)
+            {
+                _rewardPopupView.OpenRewardPopup(rewardList);
+            }
+        }
+        
+        // CheckAndOpenStoryPopup(dailyDB, true);
+    }
+
+    private bool CheckIfAllMissionsCleared(Dictionary<string, EventState> dailyDB)
+    {
+        if (dailyDB == null) return false;
+
+        foreach (var mission in _currentMissions)
+        {
+            string id = mission.Mission_Id.ToString();
+            if (!dailyDB.ContainsKey(id) || dailyDB[id].Mission_State_Flag != 2)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void CheckAndOpenStoryPopup(Dictionary<string, EventState> dailyDB, bool showPopup)
@@ -289,6 +321,7 @@ public class MissionPresenter : MonoBehaviour
 
         bool isAllCleared = true;
 
+        
         foreach (var mission in _currentMissions)
         {
             string id = mission.Mission_Id.ToString();
@@ -331,54 +364,7 @@ public class MissionPresenter : MonoBehaviour
         }
     }
 
-    private void CheckAndEndEvent()
-    {
-        var dataManager = ServiceLocator.Get<IDataManager>();
-        if (dataManager == null || dataManager.UserDatas == null) return;
-
-        var getEventDB = dataManager.UserDatas.Event_Mission.Event_490;
-        if (getEventDB == null) return;
-
-        bool isAllMissionsCleared = true;
-
-        for (int day = 1; day <= 7; day++)
-        {
-            // 해당 일차의 미션 리스트를 가져옴
-            List<Mission_ListSO> dayMissions = _missionModel.GetMissionsByDay(day);
-            string dayKey = $"Day_{day}";
-
-            foreach (var mission in dayMissions)
-            {
-                string idStr = mission.Mission_Id.ToString();
-
-                if (!getEventDB.ContainsKey(dayKey) || !getEventDB[dayKey].ContainsKey(idStr) ||
-                    getEventDB[dayKey][idStr].Mission_State_Flag != 2)
-                {
-                    isAllMissionsCleared = false;
-                    break;
-                }
-            }
-
-            if (!isAllMissionsCleared)
-            {
-                break;
-            }
-
-            bool isFestaRewardClaimed = false;
-
-            if (dataManager.UserDatas.Attendance.Final_Reward_Received >= 1)
-            {
-                isFestaRewardClaimed = true;
-            }
-
-            if (isAllMissionsCleared && isFestaRewardClaimed)
-            {
-                // TODO : 미션을 모두 완료하였습니다 Panel 출력
-            }
-        }
-    }
-
-    private void HandleCurrecyAdded(CurrencyType type, int amount)
+    private void HandleCurrencyAdded(CurrencyType type, int amount)
     {
         var dataManager = ServiceLocator.Get<IDataManager>();
         if (dataManager == null || dataManager.UserDatas == null) return;
@@ -400,26 +386,42 @@ public class MissionPresenter : MonoBehaviour
                     if (getEventDB.ContainsKey(dayKey) && getEventDB[dayKey].ContainsKey(idStr))
                     {
                         var currentState = getEventDB[dayKey][idStr];
-                        
+
                         if (currentState.Mission_State_Flag == 2 || currentState.Mission_State >= mission.Goal_Value)
                             continue;
-                        
+
                         currentState.Mission_State += amount;
 
-         
+
                         if (currentState.Mission_State >= mission.Goal_Value)
                         {
                             currentState.Mission_State = mission.Goal_Value;
                             currentState.Mission_State_Flag = 1;
                         }
-                        
+
                         getEventDB[dayKey][idStr] = currentState;
                     }
                 }
             }
         }
+
+        if (gameObject.activeInHierarchy && !string.IsNullOrEmpty(_currentDayKey))
+        {
+            int currentDay = int.Parse(_currentDayKey.Replace("Day_", ""));
+            OnDayTabChangedMission(currentDay);
+        }
     }
-    
+
+    public void OnClickPrologueConfirmButton()
+    {
+        PlayerPrefs.SetInt("HasSeenPrologue", 1);
+        PlayerPrefs.Save();
+        
+        _prologuePopup.SetActive(false);
+
+        InitAttendanceUI();
+    }
+
     private bool IsTargetMatch(int targetId, CurrencyType currencyType)
     {
         switch (currencyType)
