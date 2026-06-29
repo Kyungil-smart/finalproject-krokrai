@@ -693,7 +693,8 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: -17
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2395242687814034480, guid: 6c81bc9323fa6704cbf3e7ab295c7795, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1863139608855401785, guid: 6c81bc9323fa6704cbf3e7ab295c7795, type: 3}
@@ -741,7 +742,14 @@ MonoBehaviour:
   - {fileID: 7893499260340199434, guid: f38ed208d9eb5014cb48c9df2ead8468, type: 3}
   - {fileID: 7893499260340199434, guid: 2724f22c2e0c58141babc7a2620dcee4, type: 3}
   - {fileID: 7893499260340199434, guid: 3b0679e0ed2646c4ba5bab5df7146c3c, type: 3}
-  _dmPostIds: 599201005a9201005b9201005c9201005d920100
+  - {fileID: 7893499260340199434, guid: beeba74b1505c454b86df53a95b62cb2, type: 3}
+  - {fileID: 7893499260340199434, guid: d7eea0a35d044bd4a97c3019cc603f2c, type: 3}
+  - {fileID: 7893499260340199434, guid: 5eeb5f384bd6c8f439feda40b3dfe030, type: 3}
+  - {fileID: 7893499260340199434, guid: 47a0664757f14ab46a52b43bad62f8ff, type: 3}
+  - {fileID: 7893499260340199434, guid: 9e80ba5823457ab4e96d091f9524e202, type: 3}
+  - {fileID: 7893499260340199434, guid: 81cd19dae46bec6418c4e20e3f6dae59, type: 3}
+  - {fileID: 7893499260340199434, guid: 8d5bf6edfd9e69c4da69fd0e02129753, type: 3}
+  _dmPostIds: 599201005a9201005b9201005c9201005d9201005e9201005f9201006092010061920100629201006392010064920100
   _postPoint: {fileID: 352284147}
 --- !u!1 &431993974
 GameObject:

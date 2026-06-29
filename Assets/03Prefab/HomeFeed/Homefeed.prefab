@@ -386,6 +386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1040135433218155644}
+  - component: {fileID: 7045479795289109758}
   m_Layer: 5
   m_Name: Homefeed
   m_TagString: Untagged
@@ -422,6 +423,33 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7045479795289109758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2973008775584983069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e0a90f1b1bcaf48b467e61c99d5ff6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _postLists:
+  - {fileID: 7893499260340199434, guid: f4440307ef2034d429c151ebb3342504, type: 3}
+  - {fileID: 7893499260340199434, guid: 0e526963a89fa4047b3a04347f5a68fa, type: 3}
+  - {fileID: 7893499260340199434, guid: f38ed208d9eb5014cb48c9df2ead8468, type: 3}
+  - {fileID: 7893499260340199434, guid: 2724f22c2e0c58141babc7a2620dcee4, type: 3}
+  - {fileID: 7893499260340199434, guid: 3b0679e0ed2646c4ba5bab5df7146c3c, type: 3}
+  - {fileID: 7893499260340199434, guid: beeba74b1505c454b86df53a95b62cb2, type: 3}
+  - {fileID: 7893499260340199434, guid: d7eea0a35d044bd4a97c3019cc603f2c, type: 3}
+  - {fileID: 7893499260340199434, guid: 5eeb5f384bd6c8f439feda40b3dfe030, type: 3}
+  - {fileID: 7893499260340199434, guid: 47a0664757f14ab46a52b43bad62f8ff, type: 3}
+  - {fileID: 7893499260340199434, guid: 9e80ba5823457ab4e96d091f9524e202, type: 3}
+  - {fileID: 7893499260340199434, guid: 81cd19dae46bec6418c4e20e3f6dae59, type: 3}
+  - {fileID: 7893499260340199434, guid: 8d5bf6edfd9e69c4da69fd0e02129753, type: 3}
+  _dmPostIds: 599201005a9201005b9201005c9201005d9201005e9201005f9201006092010061920100629201006392010064920100
+  _postPoint: {fileID: 6422200797994321399}
 --- !u!1 &3535740574965980843
 GameObject:
   m_ObjectHideFlags: 0
