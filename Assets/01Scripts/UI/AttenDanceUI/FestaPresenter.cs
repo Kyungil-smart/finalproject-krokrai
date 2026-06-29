@@ -111,10 +111,27 @@ public class FestaPresenter : MonoBehaviour
 
         int rewardGroupId = gaugeSO.Reward_Accrue_Id;
         var rewardList = _rewardModel.GetRewardGroup(rewardGroupId);
+        
+        _recentGaugeStep = chestIndex + 1;
+        ServiceLocator.Get<IDataManager>().Attendance.Recent_Gauge_Step = _recentGaugeStep;
+        
+        bool isFinalChest = (_recentGaugeStep >= MAX_FESTA_CHEST_COUNT && _finalRewardReceived == 0);
+
+        if (isFinalChest)
+        {
+            _finalRewardReceived = 1;
+            ServiceLocator.Get<IDataManager>().Attendance.Final_Reward_Received = 1;
+        }
 
         if (rewardList != null && _rewardPopupView != null)
         {
-            _rewardPopupView.OpenRewardPopup(rewardList);
+            _rewardPopupView.OpenRewardPopup(rewardList, () =>
+            {
+                if (isFinalChest)
+                {
+                    OpenSpecialThanksPopup();
+                }
+            });
             
             var userGoods = ServiceLocator.Get<IDataManager>().UserGoods;
             
@@ -130,17 +147,6 @@ public class FestaPresenter : MonoBehaviour
                     case 6: userGoods.Stone_ += reward.Amount; break;
                 }
             }
-        }
-
-        _recentGaugeStep = chestIndex + 1;
-        ServiceLocator.Get<IDataManager>().Attendance.Recent_Gauge_Step = _recentGaugeStep;
-        
-        if (_recentGaugeStep >= MAX_FESTA_CHEST_COUNT && _finalRewardReceived == 0)
-        {
-            _finalRewardReceived = 1;
-            ServiceLocator.Get<IDataManager>().Attendance.Final_Reward_Received = 1;
-
-            OpenSpecialThanksPopup();
         }
         
         ReFreshUI();
