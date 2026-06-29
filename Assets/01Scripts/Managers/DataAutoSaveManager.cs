@@ -2,7 +2,7 @@
  작성자 : krokrai
  수정자 : 이종현
  작성일 : 26-05-29
- 수정일 : 26-06-09
+ 수정일 : 26-06-29
 
  역할 : firebase에 저장될 정보를 자동으로 기달렸다가 저장함(firebase에 과도한 요청으로 인한 데이터 유실 방지)
  방식 : 비동기 방식으로 1.5초 대기 후 추가 요청 사항이 없는 경우 DataManager의 SaveData 호출
@@ -44,8 +44,10 @@ public class DataAutoSaveManager : MonoBehaviour, IManagerBooter, IDataAutoSaveM
     public void RequestRTDBSave()
     {
 #if UNITY_EDITOR
+        _mainCurrencyController.RefreshUI();
         if (_testMode) return;
 #endif
+
         if (!ServiceLocator.Get<IDataManager>().CanSave) return;
 
         _mainCurrencyController.RefreshUI();
