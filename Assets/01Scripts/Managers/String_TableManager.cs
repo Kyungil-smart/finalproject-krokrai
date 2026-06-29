@@ -1,6 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-06-04
+ 수정일 : 26-06-29
 
  역할 : 문자열을 직접 탐색하거나, 캐싱하는 것을 막기 위한 전역적 접근
  방식 : Dictionary에 저장 및 SO 또는 string 형태로 반환
@@ -12,7 +13,7 @@ public class String_TableManager : MonoBehaviour, IString_TableManager, IManager
 {
     [SerializeField] private AutoSOGen_ContaineSO _strTableSO;
 
-    private Dictionary<string, String_TableSO> _strings = new();
+    private Dictionary<string, String_TableSO> _strings = new(480);
 
     private void Awake()
     {
