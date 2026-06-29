@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_65
   m_EditorClassIdentifier: 
-  stringId: STR_CMT_001006
-  KR: "\uB9DE\uC544\uC694 \uC774\uAC70 \uC55E\uB2E4\uB9AC \uD0C8\uAD6C \uB420 \uC218\uB3C4
-    \uC788\uC5B4\uC11C \uC9C4\uC9DC \uC870\uC2EC\uD574\uC57C \uD574\uC694.. \uAF2D
-    \uC5C9\uB369\uC774\uB098 \uC55E\uB2E4\uB9AC \uBC1B\uCCD0\uC8FC\uAE30!"
-  EN: '"Yes, this can even dislocate their front legs, so you really have to be careful...
-    Always support their bottom or front legs!"'
+  stringId: STR_TAG_000024
+  KR: "\uACE8\uACE8\uC1A1"
+  EN: "\r"

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_157
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000158
-  KR: "\uB124 \uB3C4\uC6C0\uC774 \uB418\uC9C0 \uBABB\uD574\uC11C \uC544\uC27D\uB124\uC694\u315C"
-  EN: "Sorry I couldn\u2019t be more helpful."
+  stringId: STR_CMT_001032
+  KR: "\uC81C\uAC00 \uC54C\uB824\uB4DC\uB9B4\uAC8C\uC694! DM\uC8FC\uC138\uC694!"
+  EN: "\r"

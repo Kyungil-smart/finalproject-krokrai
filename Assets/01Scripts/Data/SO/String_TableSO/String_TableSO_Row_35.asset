@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_35
   m_EditorClassIdentifier: 
-  stringId: STR_TAG_000020
-  KR: "\uC7A5\uB09C\uAC10"
-  EN: Toys
+  stringId: STR_CAP_001028
+  KR: "\uC9C0\uAE08\uC740 \uC5B4\uC0C9\uD574\uD574\uB3C4 \uC6B0\uB9AC\uB3C4 \uC5B8\uC820\uAC00
+    \uCE5C\uD574\uC9C8\uC218 \uC788\uACA0\uC8E0?"
+  EN: "\r"

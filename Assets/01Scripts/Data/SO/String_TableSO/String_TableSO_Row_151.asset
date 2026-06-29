@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_151
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000152
-  KR: "\uD639\uC2DC \uACE0\uC591\uC774 \uD488\uC885\uC774 \uC5B4\uB5BB\uAC8C \uB418\uB098\uC694?"
-  EN: Do you happen to know what breed your cat is?
+  stringId: STR_CMT_001026
+  KR: "\uC9C0\uAE08 \uBC14\uB85C \uC7A5\uB09C\uAC10 \uC8FC\uBB38\uD558\uB7EC \uAC11\uB2C8\uB2E4!"
+  EN: "\r"

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_129
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000101
-  KR: "\uC800 \uD3B8\uD558\uC790\uACE0 \uC4F4 \uAC74\uB370 \uC560\uB4E4\uD55C\uD14C
-    \uC88C\uC808\uAC10\uC744 \uC8FC\uACE0 \uC788\uC5C8\uB2E4\uB2C8 \uC644\uC804 \uBBF8\uC548\uD574\uC9C0\uB354\uB77C\uACE0\uC694
-    \u3160\u3160"
-  EN: '"I used it because it was convenient for me, but now I feel really bad that
-    I was making them frustrated."'
+  stringId: STR_CMT_001004
+  KR: "\uC131\uBB18\uB77C\uBA74 \uBAB0\uB77C\uB3C4 \uC544\uAE30 \uACE0\uC591\uC774\uB4E4\uC740
+    \uBC18\uB098\uC808\uB9CC \uC790\uB9AC\L\uBE44\uC6CC\uB3C4 \uBD84\uB9AC\uBD88\uC548
+    \uC2EC\uD558\uAC8C \uB290\uAEF4\uC694 \uAD00\uC2EC\uC774 \uD544\uC694\uD569\uB2C8\uB2E4"
+  EN: "Maybe not adult cats, but kittens can get serious separation anxiety if you\u2019re
+    gone for just half a day. They need attention.\r"

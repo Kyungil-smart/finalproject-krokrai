@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_105
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000045
-  KR: "\uADFC\uB370 \uC8FC\uC758\uD560 \uC810\uB3C4 \uC788\uC5B4\uC694!"
-  EN: But there are things to be careful about!
+  stringId: STR_CMT_000001
+  KR: "\uD5C9 \uBCFC\uB530\uAD6C \uD130\uC9C8 \uAC83 \uAC19\uC544 \u3160\u3160"
+  EN: "Omg, those cheeks look like they\u2019re about to burst.\r"

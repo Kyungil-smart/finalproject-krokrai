@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_150
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000151
-  KR: "\uC548\uB155\uD558\uC138\uC694. \uC6B0\uC5F0\uD788 \uD53C\uB4DC\uC5D0 \uB5B4\uB294\uB370
-    \uBB49\uCE58 \uB108\uBB34 \uADC0\uC5EC\uC6CC\uC11C \uC5F0\uB77D\uB4DC\uB838\uC2B5\uB2C8\uB2E4."
-  EN: '"Hi. Your post came up on my feed by chance, and Mungchi was so cute that
-    I wanted to message you."'
+  stringId: STR_CMT_001025
+  KR: "\uCBB8\uB974\uAC00 \uC218\uBD84 \uBCF4\uCDA9\uC5D0 \uC88B\uC740\uC9C0\uB294
+    \uCC98\uC74C \uC54C\uC558\uB124\uC694! \uC88B\uC740 \uC815\uBCF4 \uAC10\uC0AC\uD569\uB2C8\uB2E4!"
+  EN: "\r"

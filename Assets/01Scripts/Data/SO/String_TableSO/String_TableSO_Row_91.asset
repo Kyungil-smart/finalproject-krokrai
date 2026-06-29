@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_91
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000010
-  KR: "\uADF8\uB0E5 \uB2EC\uB77C\uB294 \uAC74 \uC544\uB2C8\uACE0 \uC18C\uACE0\uAE30
-    \uD1B5\uC870\uB9BC\uC774 \uC788\uB294\uB370 \uAD50\uD658\uD574 \uC8FC\uC2E4 \uC218
-    \uC788\uC744\uAE4C\uC694?"
-  EN: I'm not asking for them for free. I have a can of beef. Would you trade?
+  stringId: STR_TAG_000050
+  KR: "\uD138\uD138\uBB49\uCE58"
+  EN: "\r"

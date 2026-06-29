@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_26
   m_EditorClassIdentifier: 
-  stringId: STR_TAG_000011
-  KR: "\uC548\uB294 \uBC29\uBC95"
-  EN: How to hold a cat
+  stringId: STR_CAP_001019
+  KR: "\uC800\uD76C \uACE0\uC591\uC774\uAC00 \uC7A5\uB09C\uAC10\uC5D0 \uAD00\uC2EC\uC774
+    \uC5C6\uC5B4\uC11C/n\uBB34\uC2A8 \uBC29\uBC95\uC774 \uC788\uB098 \uC5B4\uB290
+    \uC9D1\uC0AC\uBD84\uAED8 \uC5EC\uCB64\uBD24\uB294\uB370/n\uB9D0\uB3C4 \uC548\uB418\uB294
+    \uC18C\uB9AC\uB97C.. \uAFC0\uD301\uC740 \uC5C6\uC5C8\uC2B5\uB2C8\uB2E4\u3160"
+  EN: "\r"

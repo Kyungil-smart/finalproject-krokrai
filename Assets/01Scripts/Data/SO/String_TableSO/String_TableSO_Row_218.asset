@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
+  m_Name: String_TableSO_Row_218
+  m_EditorClassIdentifier: 
+  stringId: STR_DIA_000003
+  KR: "\uC774\uC81C \uC7A5\uB9C8\uCCA0\uC774 \uCF54\uC55E\uC774\uB77C \uADF8\uB7F0\uC9C0
+    \uACF5\uAE30\uB3C4 \uAFC9\uAFC9\uD558\uACE0 \uC2B5\uB3C4\uB3C4 \uB108\uBB34 \uB192\uC544\uC694"
+  EN: "Maybe it's because the rainy season is almost here, but the air feels damp
+    and the humidity is really high.\r"

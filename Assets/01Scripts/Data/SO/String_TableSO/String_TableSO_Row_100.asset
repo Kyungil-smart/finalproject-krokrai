@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_100
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000033
-  KR: "\uB2E4\uC74C\uC5D0 \uB610 \uC5F0\uB77D\uD560\uAC8C\uC694!"
-  EN: I'll message you again next time!
+  stringId: STR_TAG_000059
+  KR: "\uB0E5\uC544\uC4F0"
+  EN: "\r"

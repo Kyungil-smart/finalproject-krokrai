@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_144
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000134
-  KR: "\uC77C\uB2E8 \uD55C \uBC88 \uB9CC\uB4E4\uC5B4 \uBCF4\uACA0\uC2B5\uB2C8\uB2E4
-    \uAC10\uC0AC\uD569\uB2C8\uB2E4!"
-  EN: I'll try making one for now. Thank you!
+  stringId: STR_CMT_001019
+  KR: "\uD639\uC2DC\uD574\uC11C \uB9CC\uC838\uBCF4\uB2C8\uAE4C \uC800\uD76C \uB0E5\uC774\uB294
+    \uBE44\uB9CC\uC774\uB124\uC694.."
+  EN: "\r"

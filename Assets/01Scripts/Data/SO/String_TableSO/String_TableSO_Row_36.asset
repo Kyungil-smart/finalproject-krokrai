@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_36
   m_EditorClassIdentifier: 
-  stringId: STR_TAG_000021
-  KR: "\uB728\uAC8C\uC9C8"
-  EN: Knitting
+  stringId: STR_CAP_001029
+  KR: "\uCE68\uB300 \uBC11\uC5D0 \uC228\uC5B4\uC788\uB294 \uB0E5\uC774\uB97C \uC5B5\uC9C0\uB85C
+    \uB044\uC9D1\uC5B4\uB0C8\uB2E4\uAC00 \uC0AC\uC774\uAC00 \uB354 \uBA40\uC5B4\uC9C4\uAC70
+    \uAC19\uC544\uC694./n\uC774\uC81C \uC5B4\uCA4C\uBA74 \uC88B\uC8E0..."
+  EN: "\r"

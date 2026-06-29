@@ -16,5 +16,5 @@ MonoBehaviour:
   postId: 101004
   notiTemplate: 700002
   displayOrder: 1
-  commentText: 0
+  commentText: "\r"
   referencedNpcId: 400009

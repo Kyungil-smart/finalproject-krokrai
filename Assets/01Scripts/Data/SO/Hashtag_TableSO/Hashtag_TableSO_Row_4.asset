@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Hashtag_TableSO_Row_4
   m_EditorClassIdentifier: 
   hashtagId: 200005
-  hashtagText: STR_TAG_000005
+  hashtagText: "STR_TAG_000005\r"
