@@ -48,7 +48,7 @@ public class PostController : MonoBehaviour
 
     private void Awake()
     {
-        _userName.text = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.DisplayName;
+        _userName.text = ServiceLocator.Get<IDataManager>().UserName;
     }
 
     private void OnEnable()
@@ -103,23 +103,31 @@ public class PostController : MonoBehaviour
         _postLikeImg.SetActive(_isLiked);
     }
 
+    private void DeletComment()
+    {
+        for (int i = 0; i < _comments.Count; i++)
+        {
+            Destroy(_comments[i]);
+        }
+        _comments.Clear();
+    }
+
     private void CommentManager()
     {
-        if ( _comments == null)
-        {
-            _comments = new List<GameObject>(8);
-        }
-        
-        int count = _postListComp.GetCommentCounts();
+        if (_comments == null) _comments = new List<GameObject>(8);
+        else if (0 < _comments.Count) DeletComment();
+
+        int count = _postListComp.GetCommentCounts(_postId);
         List<PostComment> list = _postListComp.GetComments(_postId);
         GameObject obj;
 
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
             obj = Instantiate(_postComment, _intantiateTarget);
             obj.name = $"comment_{i}";
             var temp = obj.GetComponent<PostCommentController>();
             temp.SetComment(list[i].comment, list[i].so.npcId.ToString(), list[i].so.npcImage);
+            _comments.Add(obj);
         }
     }
 
