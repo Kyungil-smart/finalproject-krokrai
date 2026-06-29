@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue_TableSO_Row_192
   m_EditorClassIdentifier: 
   dialogId: 900614
-  messageId: 800019
+  messageId: 800020
   senderType: 0
   dialogText: STR_DIA_000614
   nextDialogId: 900615
