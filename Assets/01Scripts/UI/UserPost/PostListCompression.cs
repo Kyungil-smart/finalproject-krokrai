@@ -35,9 +35,9 @@ public class PostListCompression : MonoBehaviour
         return _hashTagComp[postID];
     }
 
-    public int GetCommentCounts()
+    public int GetCommentCounts(int postID)
     {
-        return _commentComp.Count;
+        return _commentComp[postID].Count;
     }
 
     private void Awake()
@@ -82,6 +82,7 @@ public class PostListCompression : MonoBehaviour
             if (_comment.scriptableObjects[i] is Post_Notification_ListSO)
             {
                 var t = (_comment.scriptableObjects[i] as Post_Notification_ListSO);
+                if (t.notiTemplate != 700005) continue;
                 if (currentPostID == 0) currentPostID = t.postId;
                 else if (currentPostID != t.postId)
                 {
@@ -138,6 +139,8 @@ public class PostListCompression : MonoBehaviour
 
         var stringManager = ServiceLocator.Get<IString_TableManager>();
 
+        Log.Message($"{stringManager == null}");
+
         for (int i = 0; i < _hashTag.scriptableObjects.Length; i++)
         {
             if (_hashTag.scriptableObjects[i] is Post_Hashtag_ListSO)
@@ -146,13 +149,15 @@ public class PostListCompression : MonoBehaviour
                 if (currentPostID == 0) currentPostID = t.postId;
                 else if (currentPostID != t.postId)
                 {
-                    Debug.Log($"해시 태그 등록 된 아이디 : {currentPostID} /  내용 {sb.ToString()}");
                     _hashTagComp.Add(currentPostID, sb.ToString());
                     currentPostID = t.postId;
                     sb.Clear();
                 }
 
-                sb.Append(stringManager.GetStringSO(_hashTagSTR[t.hashtagId]).KR);
+                Log.Message($"{stringManager.GetString(_hashTagSTR[t.hashtagId],SystemLanguage.Korean) == null}");
+                sb.Append("#")
+                    .Append(stringManager.GetStringSO(_hashTagSTR[t.hashtagId]).KR)
+                    .Append(" ");
             }
         }
         _hashTagComp.Add(currentPostID, sb.ToString());
