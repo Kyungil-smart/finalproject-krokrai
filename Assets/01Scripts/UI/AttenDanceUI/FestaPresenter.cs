@@ -3,7 +3,7 @@
 수정자 : NekioEmilia
  
 작성일 : 26-06-05
-수정일 : 26-06-25
+수정일 : 26-06-29
 
 역할 : 출석체크 UI의 Festa Slider와 보물상자에 접근한 Presenter 스크립트 FestaView와 통신
 방식 : Presenter를 UI에 적용시키면 View도 같이 따라옴
