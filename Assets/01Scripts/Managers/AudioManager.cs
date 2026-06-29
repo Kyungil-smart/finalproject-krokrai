@@ -68,11 +68,30 @@ public class AudioManager : MonoBehaviour, IAudioManager, IManagerBooter
         _sfx.PlayOneShot(_currentClip);
     }
 
-    public void PlayBGM(int num)
+    public void PlayBGM(string clipName)
     {
-        _bgm.clip = _audios.bgm[num];
+        if (!_clips.TryGetValue(clipName, out _currentClip))
+        {
+            Log.Message($"clip을 찾지 못했습니다. {clipName}");
+            return;
+        }
+
+        _bgm?.Stop();
+        _bgm.clip = _currentClip;
         _bgm.Play();
     }
+
+    public void SetSFXVolume(float volume)
+    {
+        _sfx.volume = ProcessedVolume(volume);
+    }
+
+    public void SetBGMVolume(float volume)
+    {
+        _bgm.volume = ProcessedVolume(volume);
+    }
+
+    private float ProcessedVolume(float value) => Mathf.Log10( Mathf.Clamp(value, 0.001f, 1f) ) * 20f + (value * 20f);
 
     public void Register() => ServiceLocator.Register<IAudioManager>(this);
 
