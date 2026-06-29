@@ -9,17 +9,21 @@
 방식 : Presenter의 명령을 받아 팝업을 띄우거나(최초 클리어), 메인 화면의 텍스트 상태(미클리어/기클리어)를 갱신함
 */
 
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StoryPopupView : MonoBehaviour
 {
+    private Action _onCloseCallback;
+    
     [Header("스토리 팝업 UI")] 
     [SerializeField] private GameObject _storyPopupPanel;    // Story_Popup
     [SerializeField] private TextMeshProUGUI _titleText;     // Story_Popup_Title
     [SerializeField] private TextMeshProUGUI _contentText;   // Story_Popup_Text
     [SerializeField] private Button _closeButton;            // Btn_Popup_Close
+    [SerializeField] private GameObject _backGroundPanel;
 
     [Header("팝업 창 꺼진 뒤 남는 글자")] 
     [SerializeField] private TextMeshProUGUI _mainTitle;     // Story_Main_Title
@@ -38,8 +42,10 @@ public class StoryPopupView : MonoBehaviour
     /// </summary>
     /// <param name="title">팝업 및 메인 화면에 표시할 스토리 제목</param>
     /// <param name="content">팝업 맞 메인 화면에 표시할 스토리 본문 내용</param>
-    public void OpenStoryPopup(string title, string content)
+    public void OpenStoryPopup(string title, string content, Action onClose = null)
     {
+        _onCloseCallback = onClose;
+        
         string realContent = content.Replace("\\n", "\n");
 
         _titleText.text = title;
@@ -47,6 +53,7 @@ public class StoryPopupView : MonoBehaviour
         _mainTitle.text = title;
         _mainText.text = realContent;
         
+        _backGroundPanel.SetActive(true); 
         _storyPopupPanel.SetActive(true);
         _mainText.gameObject.SetActive(false);
         _mainTitle.gameObject.SetActive(true);
@@ -54,8 +61,13 @@ public class StoryPopupView : MonoBehaviour
 
     private void OnCloseButtonClicked()
     {
+        _backGroundPanel.SetActive(false);
         _storyPopupPanel.SetActive(false);
         _mainText.gameObject.SetActive(true);
+
+        _onCloseCallback?.Invoke();
+
+        _onCloseCallback = null;
     }
     
     /// <summary>

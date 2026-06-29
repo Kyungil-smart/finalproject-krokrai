@@ -59,6 +59,8 @@ public class SimulatorCurrencyAddButton : MonoBehaviour
                 followers.followerCount += amount;
                 break;
         }
+        ServiceLocator.Get<IEventManager>().CurrencyAdded(currencyType, amount);
+        
         controller.RefreshUI();
     }
 

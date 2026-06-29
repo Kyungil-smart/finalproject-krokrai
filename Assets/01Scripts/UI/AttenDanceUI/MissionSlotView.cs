@@ -45,7 +45,6 @@ public class MissionSlotView : MonoBehaviour
         _slotIndex = index;
         _rewardButton.onClick.AddListener(() =>
         {
-            Log.Message($"<color=blue> {_slotIndex + 1}번 미션 버튼 터치됨");
             OnRewardClicked?.Invoke(_slotIndex);
         });
     }

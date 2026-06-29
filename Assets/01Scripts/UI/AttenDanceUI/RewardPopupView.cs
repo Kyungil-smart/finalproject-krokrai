@@ -1,6 +1,6 @@
 /*
 작성자 : NekioEmilia
-수정자 : 
+수정자 :
 
 작성일 : 26-06-08
 수정일 : 26-06-15
@@ -44,7 +44,7 @@ public class RewardPopupView : MonoBehaviour
             {
                 _popupItemSlots[i].gameObject.SetActive(true);
                 string addressableKey = "";
-                
+
                 if (_itemModel != null)
                 {
                     var itemData = _itemModel.GetItemTableData(rewardDatas[i].Reward_Id);
@@ -54,7 +54,7 @@ public class RewardPopupView : MonoBehaviour
                         addressableKey = itemData.Item_string_Res_Id.Trim();
                     }
                 }
-                
+
                 _popupItemSlots[i].SetItem(addressableKey, rewardDatas[i].Amount);
             }
             else

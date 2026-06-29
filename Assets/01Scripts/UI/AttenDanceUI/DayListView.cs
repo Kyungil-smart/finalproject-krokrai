@@ -34,6 +34,7 @@ public class DayListView : MonoBehaviour
         }
     }
 
+    // 활성화 되면
     private void OnEnable()
     {
         var eventManager = ServiceLocator.Get<IEventManager>();
@@ -41,8 +42,6 @@ public class DayListView : MonoBehaviour
         {
             eventManager.OnDayClicked += OnDayChangedExternally;
         }
-        
-        ToggleOutline(0);
     }
     
     private void OnDisable()
@@ -52,6 +51,11 @@ public class DayListView : MonoBehaviour
         {
             eventManager.OnDayClicked -= OnDayChangedExternally;
         }
+    }
+
+    public void InitOutline(int dayIndex)
+    {
+        ToggleOutline(dayIndex);
     }
 
     /// <summary>
@@ -73,7 +77,7 @@ public class DayListView : MonoBehaviour
         {
             return;
         }
-
+        
         if (_lastOutline != null) _lastOutline.enabled = false;
 
         if (_outlines[index] != null)

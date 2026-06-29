@@ -23,5 +23,4 @@ public class CloseUI : MonoBehaviour
             _closeButton.onClick.AddListener(() => _targetObject.SetActive(false));
         }
     }
-
 }
