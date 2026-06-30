@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Reward_ID: rewards_45min
   Target_Time: 45
-  Reward_Count: 2
+  Reward_Count: 3
