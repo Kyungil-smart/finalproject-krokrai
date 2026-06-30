@@ -1,7 +1,7 @@
 /*
 작성자 : 23M-RFT68
 작성일 : 26-06-04
-수정일 : 26-06-04
+수정일 : 26-06-30
 
 역할 : 게시물 포스팅 버튼이 눌렸을때 알림 UI 오브젝트를 활성화 하고 알림창에서 프리펩을 타입별로 생성
 방식 : 프리펩화 된 알림 타입을 생성하고 알림 팝업 오브젝트를 활성화 해서 알림을 활성화함
@@ -192,10 +192,16 @@ public class NotificationController : MonoBehaviour
         // extraNumber 타입별로 분류
         string extraNumber = "";
         if (so.notiType == Notification_TableEnum.LIKE && postSO != null)
-            extraNumber = postSO.likeCount.ToString();
+        {
+            int displayLikeCount = Mathf.Max(0, postSO.likeCount -1);
+            extraNumber = displayLikeCount.ToString();
+        }
         else if (so.notiType == Notification_TableEnum.FOLLOW && postSO != null)
-            extraNumber = postSO.getFollower.ToString();
-        
+        {
+            int displayFollowerCount = Mathf.Max(0, postSO.getFollower - 1);
+            extraNumber = displayFollowerCount.ToString();
+        }
+
         finalText = finalText.Replace("{extraNumber}", extraNumber);
         
         // 프리펩을 Content 하위에 생성
