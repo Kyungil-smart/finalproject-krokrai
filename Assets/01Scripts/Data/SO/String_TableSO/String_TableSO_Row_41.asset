@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_41
   m_EditorClassIdentifier: 
-  stringId: STR_CMT_000003
-  KR: "\u315C\u315C \uB098\uB3C4 \uC800\uAE30 \uC606\uC5D0 \uB215\uACE0 \uC2F6\uB2E4"
-  EN: '"Aww, I want to lie down next to them too."'
+  stringId: STR_CAP_001034
+  KR: "\uC950 \uC778\uD615 \uCAD2\uB294 \uAC70\uBCF4\uB2C8 \uB9CC\uD654\uAC00 \uB530\uB85C
+    \uC5C6\uB124\u2026"
+  EN: 0

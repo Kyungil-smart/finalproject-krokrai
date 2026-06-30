@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_88
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000007
-  KR: "\uADF8\uB798\uC11C \uC880 \uCC3E\uC544\uBCF4\uB2C8\uAE4C \uD138 \uC815\uB9AC\uC6A9
-    \uBE57\uB9CC \uC788\uC73C\uBA74 \uAD1C\uCC2E\uB2E4\uB358\uB370"
-  EN: '"So I looked it up, and it seems like a grooming brush for fur care would
-    solve it..."'
+  stringId: STR_TAG_000047
+  KR: "\uC9D1\uC0AC\uD544\uB3C5"
+  EN: 0

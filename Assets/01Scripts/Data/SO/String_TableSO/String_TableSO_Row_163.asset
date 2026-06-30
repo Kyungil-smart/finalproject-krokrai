@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_163
   m_EditorClassIdentifier: 
-  stringId: STR_ITEM_000001
-  KR: "\uC6D0\uD615 \uBE0C\uB7EC\uC26C"
-  EN: Round Brush
+  stringId: STR_CMT_001038
+  KR: "\uC0AC\uB8CC \uAC11\uC790\uAE30 \uBC14\uAFB8\uBA74 \uC548\uB3FC\uC694!! \uD0C8\uC774
+    \uB0A0 \uC218\uB3C4 \uC788\uC5B4\uC694!"
+  EN: 0

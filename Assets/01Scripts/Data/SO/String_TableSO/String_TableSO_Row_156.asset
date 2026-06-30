@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_156
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000157
-  KR: "\uBB49\uCE58 \uB108\uBB34 \uADC0\uC5FD\uAC8C \uC0DD\uACA8\uC11C \uC5EC\uCB64\uBD24\uC2B5\uB2C8\uB2E4"
-  EN: and Mungchi looked so cute that I wanted to ask.
+  stringId: STR_CMT_001031
+  KR: "\uB108\uBB34 \uADC0\uC5EC\uC6CC\uC694*^^*"
+  EN: 0

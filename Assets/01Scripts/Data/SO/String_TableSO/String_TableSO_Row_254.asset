@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
+  m_Name: String_TableSO_Row_254
+  m_EditorClassIdentifier: 
+  stringId: STR_DIA_000083
+  KR: "\uADFC\uB370 \uC774\uAC8C \uC7A1\uD788\uB294 \uC2E4\uCCB4\uAC00 \uC5C6\uC5B4\uC11C
+    \uACC4\uC18D \uBC18\uBCF5\uB418\uBA74 \uC624\uD788\uB824 \uC0AC\uB0E5 \uC2E4\uD328\uB77C\uB294
+    \uC88C\uC808\uAC10\uC744 \uC8FC\uACE0 \uC2A4\uD2B8\uB808\uC2A4 \uC6D0\uC778\uC774
+    \uB420 \uC218 \uC788\uB300\uC694!"
+  EN: But since there's nothing physical for them to catch, doing it over and over
+    can apparently make them feel like they failed the hunt and cause stress!

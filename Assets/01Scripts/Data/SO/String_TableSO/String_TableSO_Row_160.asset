@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_160
   m_EditorClassIdentifier: 
-  stringId: STR_FOLD_000002
-  KR: "\uBB49\uCE58"
-  EN: Mungchi
+  stringId: STR_CMT_001035
+  KR: "\uB108\uBB34 \uC88B\uC740 \uC544\uC774\uB514\uC5B4\uB124\uC694!!!"
+  EN: 0

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_29
   m_EditorClassIdentifier: 
-  stringId: STR_TAG_000014
-  KR: "\uAFC0\uC7A0\uB0E5"
-  EN: Napping cat
+  stringId: STR_CAP_001022
+  KR: "@{userAccountName} \uB2D8\uC774 \uBCF4\uB0B4\uC8FC\uC2E0 \uBC29\uC6B8 \uB09A\uC2DC\uB300!/n\uC800\uD76C
+    \uACE0\uC591\uC774\uB294 \uC720\uB3C5 \uBC29\uC6B8 \uB09A\uC2DC\uB300\uB9CC \uC88B\uC544\uD558\uB294
+    \uAC83 \uAC19\uC544\uC694*^^*"
+  EN: 0

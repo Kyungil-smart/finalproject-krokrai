@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_138
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000122
-  KR: "\uC81C\uAC00 \uC65C \uADF8\uAC78 \uAE5C\uBE61\uD558\uACE0 \uC788\uC5C8\uC744\uAE4C\uC694?"
-  EN: How did I forget that?
+  stringId: STR_CMT_001013
+  KR: "\uC5B4\uCA50\uC9C0 \uB3D9\uBB3C\uBCD1\uC6D0\uC5D0\uC11C \uC81C\uC77C \uD06C\uAC8C
+    \uACE8\uACE8\uB300\uB354\uB77C\uACE0\uC694."
+  EN: 0

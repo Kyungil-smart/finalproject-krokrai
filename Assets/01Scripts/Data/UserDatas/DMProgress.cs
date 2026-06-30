@@ -1,6 +1,11 @@
-﻿using Firebase.Firestore;
+﻿/*
+ 작성자 : 이종현
+ 작성일 : 26-06-17
+ */
+using Firebase.Firestore;
 using System;
 
+[Serializable, FirestoreData]
 public class DMProgress
 {
     private DateTime _sendTime = DateTime.Now;

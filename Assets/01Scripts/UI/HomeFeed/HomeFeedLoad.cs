@@ -1,7 +1,8 @@
-/*
+﻿/*
  작성자 : cminhyeong1999
+ 수정자 : krokrai
  작성일 : 26-06-22
- 수정일 : 26-06-22
+ 수정일 : 26-06-29
 
  역할 : 게시물에 필요한 정보를 홈피드에 맞게끔 출력
  방식 : 댓글을 제외한 모든 데이터를 이 곳에서 처리 및 댓글은 객체로 분리
@@ -97,7 +98,7 @@ public class HomeFeedLoad : MonoBehaviour
             _comments = new List<GameObject>(8);
         }
         
-        int count = _postListComp.GetCommentCounts();
+        int count = _postListComp.GetCommentCounts(_postID);
         List<PostComment> list = _postListComp.GetComments(_postID);
         GameObject obj;
 

@@ -1,7 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-06-04
- 수정일 : 26-06-08
+ 수정일 : 26-06-29
 
  역할 : 게시물에 필요한 정보를 출력
  방식 : 댓글을 제외한 모든 데이터를 이 곳에서 처리 및 댓글은 객체로 분리
@@ -14,6 +14,8 @@ using UnityEngine.UI;
 
 public class PostController : MonoBehaviour
 {
+    [Header("실제 정보")]
+    [SerializeField] private GameObject _posts;
     [Header("데이터 테이블")]
     [SerializeField] private AutoSOGen_ContaineSO _datas;
     [SerializeField] private AutoSOGen_ContaineSO _hashTag;
@@ -46,7 +48,7 @@ public class PostController : MonoBehaviour
 
     private void Awake()
     {
-        _userName.text = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.DisplayName;
+        _userName.text = ServiceLocator.Get<IDataManager>().UserName;
     }
 
     private void OnEnable()
@@ -62,6 +64,7 @@ public class PostController : MonoBehaviour
 
     public void SetPost(int postImg, int postId)
     {
+        _posts.SetActive(true);
         _postImgNum = postImg;
         _postId = postId;
 
@@ -80,7 +83,6 @@ public class PostController : MonoBehaviour
                 _postLikeCount.text = so.likeCount.ToString();
 
                 // 게시물 사진
-                Debug.Log($"{so.postImage.ToString()} / {so.postImage} / {_postId} / {_postImgUI == null}");
                 ServiceLocator.Get<IAddressableManager>().LoadImageSprite(so.postImage.ToString(), _postImgUI);
 
                 // 해쉬 태크
@@ -101,23 +103,31 @@ public class PostController : MonoBehaviour
         _postLikeImg.SetActive(_isLiked);
     }
 
+    private void DeletComment()
+    {
+        for (int i = 0; i < _comments.Count; i++)
+        {
+            Destroy(_comments[i]);
+        }
+        _comments.Clear();
+    }
+
     private void CommentManager()
     {
-        if ( _comments == null)
-        {
-            _comments = new List<GameObject>(8);
-        }
-        
-        int count = _postListComp.GetCommentCounts();
+        if (_comments == null) _comments = new List<GameObject>(8);
+        else if (0 < _comments.Count) DeletComment();
+
+        int count = _postListComp.GetCommentCounts(_postId);
         List<PostComment> list = _postListComp.GetComments(_postId);
         GameObject obj;
 
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
             obj = Instantiate(_postComment, _intantiateTarget);
             obj.name = $"comment_{i}";
             var temp = obj.GetComponent<PostCommentController>();
             temp.SetComment(list[i].comment, list[i].so.npcId.ToString(), list[i].so.npcImage);
+            _comments.Add(obj);
         }
     }
 

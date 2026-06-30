@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Post_NPC_TableSO_Root
   m_EditorClassIdentifier: 
   scriptableObjects:
-  - {fileID: 11400000, guid: 1506c4b6d2227e348b7ce304dc92964b, type: 2}
-  - {fileID: 11400000, guid: 3f31fb9a8addb184ba7ab4fbff633efc, type: 2}
-  - {fileID: 11400000, guid: 72bfa9762789aaf4685623f0014d36bf, type: 2}
-  - {fileID: 11400000, guid: 389ca0c73fb1bba44a9f7ffa0a74b3db, type: 2}
-  - {fileID: 11400000, guid: 56e92b334e3ed1141b786d343e0e3bbf, type: 2}
-  - {fileID: 11400000, guid: 2403ddf95ba8c9e47b9c7095df6114dc, type: 2}
-  - {fileID: 11400000, guid: 59459eee0a336ce4aa660894b7dd9924, type: 2}
-  - {fileID: 11400000, guid: 84ad850c4a37d1d42a7be6bee4f6e449, type: 2}
+  - {fileID: 11400000, guid: 173f7b25c959e0e44819138117c888e2, type: 2}
+  - {fileID: 11400000, guid: 553c96b0b2381a64aacc1e5d1eccbaa8, type: 2}
+  - {fileID: 11400000, guid: b73a000005ffc604b89fffdc96daf356, type: 2}
+  - {fileID: 11400000, guid: adc7a2ef18a3075428b257b44f1a970e, type: 2}
+  - {fileID: 11400000, guid: bdd20a36123994a4f936dd69dcb10d76, type: 2}
+  - {fileID: 11400000, guid: a0346348a8daf7943a0593da10a38ea3, type: 2}
+  - {fileID: 11400000, guid: 9cbedd3dc36b19245a3bb1a5b484437b, type: 2}
+  - {fileID: 11400000, guid: 0f8fc67c312bff74aa951619bbfc12a0, type: 2}
+  - {fileID: 11400000, guid: 4839c2f20340dfc47a5445d8bca85922, type: 2}
+  - {fileID: 11400000, guid: 1e262849a8f19c24e9ebdab78c410192, type: 2}

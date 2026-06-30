@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_114
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000063
-  KR: "\uB0A8\uC740 \uD558\uB8E8\uB3C4 \uB0E5\uC774\uB4E4\uC774\uB791 \uD790\uB9C1\uD558\uC138\uC694!"
-  EN: Hope you spend the rest of the day relaxing with your cats!
+  stringId: STR_CMT_000010
+  KR: "\u3160\u3160 \uB108\uBB34 \uD558\uCC2E\uACE0 \uADC0\uC5EC\uC6CC"
+  EN: So tiny and ridiculously cute.

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_31
   m_EditorClassIdentifier: 
-  stringId: STR_TAG_000016
-  KR: "\uAFB9\uAFB9\uC774"
-  EN: Kneading
+  stringId: STR_CAP_001024
+  KR: "\uACE0\uC591\uC774\uB294 \uC9D1\uC0AC\uBCF4\uB2E4 \uCBB8\uB974\uB97C \uB354
+    \uC88B\uC544\uD55C\uB2F5\uB2C8\uB2E4."
+  EN: 0

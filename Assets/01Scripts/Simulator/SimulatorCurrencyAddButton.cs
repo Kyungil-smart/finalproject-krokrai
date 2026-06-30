@@ -1,8 +1,8 @@
 /*
 작성자 : 이종현
-수정자 : 이종현
+수정자 : NekioEmilia
 작성일 : 26-05-26
-수정일 : 26-06-24
+수정일 : 26-06-29
 
 역할 : 드롭다운 값을 읽어 재화 증가 요청
 방식 : Dropdown 선택값을 숫자로 변환 후 Controller에 전달
@@ -59,6 +59,8 @@ public class SimulatorCurrencyAddButton : MonoBehaviour
                 followers.followerCount += amount;
                 break;
         }
+        ServiceLocator.Get<IEventManager>().CurrencyAdded(currencyType, amount);
+        
         controller.RefreshUI();
     }
 
