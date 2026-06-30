@@ -11,8 +11,10 @@ using UnityEngine;
 
 public interface IAudioManager
 {
-    public void MuteSFX();
-    public void MuteBGM();
+    public void MuteSFX(bool state);
+    public void MuteBGM(bool state);
+    public void PlaySFX(SFXAudiosEnum sfx);
+    public void PlayBGM(BGMAudiosEnum sfx);
     public void PlaySFX(string clipName);
     public void PlayBGM(string clipName);
     public void SetSFXVolume(float volume);
