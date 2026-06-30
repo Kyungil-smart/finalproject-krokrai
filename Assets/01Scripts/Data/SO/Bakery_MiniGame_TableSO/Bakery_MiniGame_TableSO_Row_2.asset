@@ -16,5 +16,5 @@ MonoBehaviour:
   success_Count: 1
   all_Cookie_Count: 3
   isRoundend: 1
-  success_reward_amount: 8
+  success_reward_amount: 4
   fail_reward_amount: 1
