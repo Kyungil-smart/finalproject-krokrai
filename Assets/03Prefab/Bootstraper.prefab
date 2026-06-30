@@ -105,6 +105,7 @@ MonoBehaviour:
   - {fileID: 1773361464113163390}
   - {fileID: 5151302018583268973}
   - {fileID: 303222015933140038}
+  - {fileID: 5328278830329787872}
 --- !u!1 &3360657718720082198
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5055385025327761955
 Transform:
   m_ObjectHideFlags: 0
@@ -299,10 +300,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 7389505501350861565, guid: 785a0911655f47a4bbe1d4170d4be9ff, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
