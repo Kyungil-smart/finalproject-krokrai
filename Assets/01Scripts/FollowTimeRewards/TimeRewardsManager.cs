@@ -1,7 +1,7 @@
 /*
  작성자 : cminhyeong1999
  작성일 : 26-06-15
- 수정일 : 26-06-15
+ 수정일 : 26-06-30
 
  역할 : 전반적인 방치 관련 시스템을 관리하기 위한 매니저
         접속중인 유저의 현재 팔로워, 마지막 로그인 정보, 코인 및 에너지 지급은 여기서 받아서 관련 처리 함
@@ -50,9 +50,31 @@ public class TimeRewardsManager : MonoBehaviour
 
     public int TESTFOLLOW;
 
+    /// <summary>
+    /// Follow 수가 변경되었을 경우 실행하는 메서드
+    /// </summary>
+    public void RefreshFollowCount()
+    {
+        _follow = (int)ServiceLocator.Get<IDataManager>().ProFile.followerCount;
+    }
+
+    /// <summary>
+    /// UI 갱신
+    /// </summary>
+    public void RefreshUI()
+    {
+        // 팝업창에 표시할 현재 레벨 칭호
+        _rPM.SetTierName(_fLM.GetFollowTierName(_follow));
+        // 팝업창에 표시할 현재 수령 가능한 에너지, 코인 수량 표시
+        _rPM.SetRewardText(_rewardEnergyIntValue, _rewardCoinIntValue);
+        // 팝업창에 표시할 현재 팔로워 수
+        _rPM.SetFollowText(_follow);
+    }
+
     private void Awake()
     {
         _startLoginTime = DateTime.Now;
+        ServiceLocator.Get<IDataAutoSaveManager>().SetTimeRewardsManager(this);
     }
     
     private void Start()
@@ -76,7 +98,7 @@ public class TimeRewardsManager : MonoBehaviour
     private void GetLastLoginTime()
     {
         _lastLoginTime = ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp;
-        _follow = (int)ServiceLocator.Get<IDataManager>().ProFile.followerCount;
+        RefreshFollowCount();
         
         
         _offlineTotalTime = DateTime.Now - _lastLoginTime;
@@ -118,13 +140,8 @@ public class TimeRewardsManager : MonoBehaviour
             SetNextTierPopUpText();
             // 에너지, 코인 둘 중 하나라도 받을 보상이 있어야만 버튼이 활성화 되게끔
             CanActiveRewardButton();
-            
-            // 팝업창에 표시할 현재 레벨 칭호
-            _rPM.SetTierName(_fLM.GetFollowTierName(_follow));
-            // 팝업창에 표시할 현재 수령 가능한 에너지, 코인 수량 표시
-            _rPM.SetRewardText(_rewardEnergyIntValue, _rewardCoinIntValue);
-            // 팝업창에 표시할 현재 팔로워 수
-            _rPM.SetFollowText(_follow);
+
+            RefreshUI();
             
             // 온라인 접속시 1초 누적
             _onlineTotalTime += TimeSpan.FromSeconds(1);
