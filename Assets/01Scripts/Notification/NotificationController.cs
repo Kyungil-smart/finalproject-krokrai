@@ -192,10 +192,16 @@ public class NotificationController : MonoBehaviour
         // extraNumber 타입별로 분류
         string extraNumber = "";
         if (so.notiType == Notification_TableEnum.LIKE && postSO != null)
-            extraNumber = postSO.likeCount.ToString();
+        {
+            int displayLikeCount = Mathf.Max(0, postSO.likeCount -1);
+            extraNumber = displayLikeCount.ToString();
+        }
         else if (so.notiType == Notification_TableEnum.FOLLOW && postSO != null)
-            extraNumber = postSO.getFollower.ToString();
-        
+        {
+            int displayFollowerCount = Mathf.Max(0, postSO.getFollower - 1);
+            extraNumber = displayFollowerCount.ToString();
+        }
+
         finalText = finalText.Replace("{extraNumber}", extraNumber);
         
         // 프리펩을 Content 하위에 생성
