@@ -9,31 +9,33 @@
 */
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class SettingsController : MonoBehaviour
 {
     [SerializeField] Slider _bgmSlider;
     [SerializeField] Slider _sfxSlider;
+    [SerializeField] Toggle _bgmMuteToggle;
+    [SerializeField] Toggle _sfxMuteToggle;
 
     private void Start()
     {
         _bgmSlider.onValueChanged.AddListener(SetBGMVolume);
         _sfxSlider.onValueChanged.AddListener(SetSFXVolume);
-
-        ServiceLocator.Get<IAudioManager>().SetSFXVolume(0.5f);
-        ServiceLocator.Get<IAudioManager>().SetBGMVolume(0.5f);
+        _bgmMuteToggle.onValueChanged.AddListener(SetBGMMute);
+        _sfxMuteToggle.onValueChanged.AddListener(SetSFXMute);
     }
 
     private void OnDestroy()
     {
         _bgmSlider.onValueChanged?.RemoveAllListeners();
         _sfxSlider.onValueChanged?.RemoveAllListeners();
+        _bgmMuteToggle.onValueChanged?.RemoveAllListeners();
+        _sfxMuteToggle.onValueChanged?.RemoveAllListeners();
     }
 
     public void SetSFXVolume(float value) => ServiceLocator.Get<IAudioManager>().SetSFXVolume(value);
     public void SetBGMVolume(float value) => ServiceLocator.Get<IAudioManager>().SetBGMVolume(value);
 
-    public void SetSFXMute() => ServiceLocator.Get<IAudioManager>().MuteSFX();
-    public void SetBGMMute() => ServiceLocator.Get<IAudioManager>().MuteBGM();
+    public void SetSFXMute(bool state) => ServiceLocator.Get<IAudioManager>().MuteSFX(!state);
+    public void SetBGMMute(bool state) => ServiceLocator.Get<IAudioManager>().MuteBGM(!state);
 }
