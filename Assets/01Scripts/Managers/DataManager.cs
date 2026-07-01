@@ -98,15 +98,16 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
     {
         _userGoods = new UserGoods();
         _userData = new UserDatas();
+        _userData.Event_Mission.Init();
         ImageState s = new ImageState();
         s.getTime = DateTime.Now;
-        _userData.Event_Mission.Init();
+        s.isUploaded = false;
         
-        _userData.ImgList.Add("502001", new ImageState());
-        _userData.ImgList.Add("502002", new ImageState());
-        _userData.ImgList.Add("502003", new ImageState());
-        _userData.ImgList.Add("502004", new ImageState());
-        _userData.ImgList.Add("502005", new ImageState());
+        _userData.ImgList.Add("502001", s);
+        _userData.ImgList.Add("502002", s);
+        _userData.ImgList.Add("502003", s);
+        _userData.ImgList.Add("502004", s);
+        _userData.ImgList.Add("502005", s);
 
         SaveRTDBData();
         OnUserDataReseted?.Invoke();
@@ -177,16 +178,19 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
                 Log.Message("신규 유저 감지됌. Firestore에 정보 생성");
                 _userData = new();
                 _userData.Event_Mission.Init();
-                
-                _userData.ImgList.Add("502001",new ImageState());
-                _userData.ImgList.Add("502002",new ImageState());
-                _userData.ImgList.Add("502003",new ImageState());
-                _userData.ImgList.Add("502004",new ImageState());
-                _userData.ImgList.Add("502005",new ImageState());
 
-                _userData.NyangBakery.Init();
                 ImageState s = new ImageState();
                 s.getTime = DateTime.Now;
+                s.isUploaded = false;
+
+                _userData.ImgList.Add("502001",s);
+                _userData.ImgList.Add("502002",s);
+                _userData.ImgList.Add("502003",s);
+                _userData.ImgList.Add("502004",s);
+                _userData.ImgList.Add("502005",s);
+
+                _userData.NyangBakery.Init();
+                
                 _readyToSave = true;
                 SaveData();
             }
