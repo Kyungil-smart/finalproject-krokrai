@@ -159,8 +159,11 @@ public class UploadController : MonoBehaviour
 
         var t = ServiceLocator.Get<IDataManager>();
 
-        t.UserDatas.UserPost.Add(_currentPost.ToString(), new UserPostState());
+        //t.UserDatas.UserPost.Add(_currentPost.ToString(), new UserPostState()); // TODO : 변경 사항 map -> array 구조로 전환 됌.
+        t.UserDatas.UserPost.Add(_currentPost);
+
         t.UserDatas.ImgList[_currentPostImg.ToString()].isUploaded = true;
+        t.UserDatas.ImgList[_currentPostImg.ToString()].postTime = DateTime.Now;
         
         _upLoadImgs[_currentPostImg].PostedImg();
         _postImg.sprite = null;
@@ -168,8 +171,6 @@ public class UploadController : MonoBehaviour
         t.ProFile.followerCount += _posts[_currentPostImg].getFollower;
 
         OnUpload?.Invoke(_currentPost);
-
-        Log.Message($"등록 됌 : {_currentPost}");
 
         _currentPost = 0;
         _currentPostImg = 0;

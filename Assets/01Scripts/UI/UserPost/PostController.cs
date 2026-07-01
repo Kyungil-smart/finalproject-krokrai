@@ -54,12 +54,12 @@ public class PostController : MonoBehaviour
     private void OnEnable()
     {
         _user = ServiceLocator.Get<IDataManager>().UserDatas;
-        _postLike.onClick.AddListener(OnClickHeart);
+        //_postLike.onClick.AddListener(OnClickHeart);
     }
 
     private void OnDisable()
     {
-        _postLike.onClick.RemoveListener(OnClickHeart);
+        //_postLike.onClick.RemoveListener(OnClickHeart);
     }
 
     public void SetPost(int postImg, int postId)
@@ -99,8 +99,9 @@ public class PostController : MonoBehaviour
         }
 
         // 좋아요 여부
-        _isLiked = _user.UserPost[_postId.ToString()].isLiked;
-        _postLikeImg.SetActive(_isLiked);
+        //_isLiked = _user.UserPost[_postId.ToString()].isLiked; // TODO : 변경 사항 좋아야 사용 안함;
+        _isLiked = false;
+        //_postLikeImg.SetActive(_isLiked);
     }
 
     private void DeletComment()
@@ -134,7 +135,7 @@ public class PostController : MonoBehaviour
     private void OnClickHeart()
     {
         _isLiked = !_isLiked;
-        _user.UserPost[_postImgNum.ToString()].isLiked = _isLiked;
+        //_user.UserPost[_postImgNum.ToString()].isLiked = _isLiked; // TODO : 변경 사항 "좋아요" 사용안함.
         _postLikeImg.SetActive(_isLiked);
     }
 }
