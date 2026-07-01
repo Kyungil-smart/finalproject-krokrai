@@ -125,6 +125,7 @@ public class ProfileController : MonoBehaviour
                 Log.Message("Table에 존재하지 않습니다.");
                 return;
             }
+            obj.transform.SetAsFirstSibling();
             _posts.Add(obj);
         }
 
