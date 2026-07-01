@@ -8,6 +8,8 @@
  방식  : RowbtnBar 오브젝트에 붙인 후 배열을 5개 추가 해주고 각각 버튼과 기본 버튼, 눌렸을때 버튼, 페이지를 연결해준 뒤
         디폴트 값으로 0번 페이지(홈피드)가 나오도록 defaultTab엔 0을 고정으로 기입 해준다.
 */
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -79,7 +81,16 @@ public class RowbtnController : MonoBehaviour
         if (index == 3 && _notiAlertIcon != null)
         {
             _notiAlertIcon.SetActive(false);
-            Log.Message("알림 탭 확인 완료: 알림 뱃지 비활성화");
+
+            try
+            {
+                ServiceLocator.Get<IDataManager>().UserDatas.Profile.isActive = false;
+                Log.Message("알림 확인 완료: isActive = false 저장");
+            }
+            catch (Exception e)
+            {
+                Log.Message($"알림 상태 저장 실패: {e.Message}");
+            }
         }
 
         // 모든 탭 비활성화
