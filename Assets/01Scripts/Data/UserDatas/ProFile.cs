@@ -15,6 +15,7 @@ public class ProFile
     private long _followerCount = 100;
     private long _followingCount = 10;
     private long _profileImage = 60003;
+    private bool _isActive = false;
 
     [FirestoreProperty]
     public long followerCount
@@ -54,6 +55,20 @@ public class ProFile
         set
         {
             _profileImage = value;
+            ServiceLocator.Get<IDataAutoSaveManager>().RequestSave();
+        }
+    }
+    
+    [FirestoreProperty]
+    public bool isActive
+    {
+        get
+        {
+            return _isActive;
+        }
+        set
+        {
+            _isActive = value;
             ServiceLocator.Get<IDataAutoSaveManager>().RequestSave();
         }
     }

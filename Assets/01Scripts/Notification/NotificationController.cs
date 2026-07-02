@@ -1,7 +1,7 @@
 /*
 작성자 : 23M-RFT68
 작성일 : 26-06-04
-수정일 : 26-06-30
+수정일 : 26-07-01
 
 역할 : 게시물 포스팅 버튼이 눌렸을때 알림 UI 오브젝트를 활성화 하고 알림창에서 프리펩을 타입별로 생성
 방식 : 프리펩화 된 알림 타입을 생성하고 알림 팝업 오브젝트를 활성화 해서 알림을 활성화함
@@ -35,7 +35,22 @@ public class NotificationController : MonoBehaviour
     [SerializeField] private PostController _postController;
     
     private List<GameObject> _items = new List<GameObject>();               // 생성된 알림 축적
-    
+
+
+    /// <summary>
+    /// 게임 실행 시 저장 여부 확인
+    /// </summary>
+    private void Start()
+    {
+        // 알림 아이콘 상태 복원
+        LoadAlertIcon();
+        
+        // 저장된 알림 불러오기
+        if (_items != null && _items.Count == 0)
+        {
+            LoadNotifications();
+        }
+    }
     
     /// <summary>
     /// 포스팅 버튼에 온클릭으로 연결할 함수
@@ -115,6 +130,54 @@ public class NotificationController : MonoBehaviour
 
         TurnOnRedNotice();
         Log.Message($"{postId} 알림 추가 완료");
+    }
+
+    private void AddNotificationFromLoad(int postId)
+    {
+        if (_postNotiSOData == null) return;
+        
+        List<Post_Notification_ListSO> matchedRows = new List<Post_Notification_ListSO>();
+        for (int i = 0; i < _postNotiSOData.scriptableObjects.Length; i++)
+        {
+            if (_postNotiSOData.scriptableObjects[i] is Post_Notification_ListSO row)
+            {
+                bool isTargetPost = row.postId == postId;
+                bool isNotiTemplate = row.notiTemplate >= 700000 && row.notiTemplate <= 799999;
+                if (isTargetPost && isNotiTemplate)
+                    matchedRows.Add(row);
+            }
+        }
+
+        if  (matchedRows.Count == 0) return;
+        
+        matchedRows.Sort((a, b) => a.displayOrder.CompareTo(b.displayOrder));
+
+        foreach (var row in matchedRows)
+        {
+            Notification_TableSO notiSO = FindNotiSO(row.notiTemplate);
+            if  (notiSO == null) continue;
+            
+            string npcName = FindNpcAccountName(row.referencedNpcId);
+            string baseText = GetLocalizedText(notiSO.notiText);
+            string finalText = baseText.Replace("{npcAccountName}", npcName);
+            
+            if (notiSO.notiType == Notification_TableEnum.COMMENT)
+                finalText = finalText.Replace("{commentText}", GetLocalizedText(row.commentText));
+            
+            Post_TableSO postSO = FindPostSO(row.postId);
+            if (postSO != null)
+            {
+                string extraNumber =
+                    notiSO.notiType == Notification_TableEnum.LIKE ? postSO.likeCount.ToString() :
+                    notiSO.notiType == Notification_TableEnum.FOLLOW ? postSO.getFollower.ToString() : "";
+                finalText = finalText.Replace($"{extraNumber}", extraNumber);
+            }
+            
+            // 생성만 하기
+            SpawnNotification(GetPrefabByType(notiSO.notiType), notiSO, finalText, 
+                postId, row.referencedNpcId);
+
+        }
     }
 
     private Notification_TableSO FindNotiSO(int notiTemplateId)
@@ -252,5 +315,57 @@ public class NotificationController : MonoBehaviour
     {
         if (_redNoticePrefab != null) _redNoticePrefab.SetActive(true);
         if (_redExclamationmark != null) _redExclamationmark.SetActive(true);
+        
+        // DB에 알림 아이콘 활성화 저장
+        try
+        {
+            ServiceLocator.Get<IDataManager>().UserDatas.Profile.isActive = true;
+            Log.Message("알림 아이콘 활성화 저장");
+        }
+        catch (Exception e)
+        {
+            Log.Message($" 알림 아이콘 저장 실패: {e.Message}");
+        }
+    }
+
+    private void LoadAlertIcon()
+    {
+        try
+        {
+            bool isActive = ServiceLocator.Get<IDataManager>().UserDatas.Profile.isActive;
+            
+            if (_redNoticePrefab != null) _redNoticePrefab.SetActive(isActive);
+            if (_redExclamationmark != null) _redExclamationmark.SetActive(isActive);
+            
+            Log.Message($"알림 아이콘 상태 복원: {isActive}");
+        }
+        catch (Exception e)
+        {
+            Log.Message("알림 아이콘 복원 실패");
+        }
+    }
+
+    private void LoadNotifications()
+    {
+        try
+        {
+            var userPost = ServiceLocator.Get<IDataManager>().UserDatas.UserPost;
+
+            if (userPost == null || userPost.Count == 0)
+            {
+                Log.Message("저장된 알림 없음");
+                return;
+            }
+            
+            // postId로 SO 탐색 -> 알림 재생성
+            foreach (int postId in userPost)
+                AddNotificationFromLoad(postId);    // SO 데이터로 재생성
+            
+            Log.Message($"{userPost.Count}개 알림 복원 완료");
+        }
+        catch (Exception e)
+        {
+            Log.Message($"알림 불러오기 실패: {e.Message}");
+        }
     }
 }

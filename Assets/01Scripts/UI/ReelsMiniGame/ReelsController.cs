@@ -22,6 +22,8 @@ public class ReelsController : MonoBehaviour
     [SerializeField] private GameObject _networkErrorPopup;
     [SerializeField] private GameObject _adPopups;
 
+    [SerializeField] private AdPopUp_temp _ad;
+
     private List<Minigame_ID_ListSO> _imgs = new List<Minigame_ID_ListSO>(4);
 
     private int _currentGameIndex;
@@ -32,7 +34,7 @@ public class ReelsController : MonoBehaviour
         if (data.Attendance.Join_TimeStamp.Day == DateTime.Now.Day || data.Attendance.Last_Login_TimeStamp.Day != DateTime.Now.Day)
         {
             data.UserDatas.Minigame.Daily_Play_Count = 0;
-            data.UserGoods.Claw_ += 3;
+            //data.UserGoods.Claw_ += 3;
         }
 
         //TODO : DB에 적용된 사항 추가
@@ -111,6 +113,7 @@ public class ReelsController : MonoBehaviour
             data.UserDatas.Minigame.Daily_Play_Count++;
             data.UserGoods.Claw_--;
             data.UserDatas.Minigame.ID_Play_Last = _currentGameIndex;
+            ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN2);
             _cardGame.GameStart();
         }
         else
@@ -146,10 +149,16 @@ public class ReelsController : MonoBehaviour
 
     public async void SeeAd()
     {
-        if (true)//await ServiceLocator.Get<IADMobManager>().AutomatedAd())
+        if (await _ad.OnAd() )//await ServiceLocator.Get<IADMobManager>().AutomatedAd())
         {
             _adPopups.SetActive(false);
             OnPlayButtonClick();
         }
+        else
+        {
+            Log.Message("잘 못된 방식");
+        }
     }
+
+    public void CloseAd() => ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN2);
 }

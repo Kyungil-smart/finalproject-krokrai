@@ -1,6 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-06-19
+ 수정일 : 26-07-02
 
  역할 : 미니게임 상점 관리자
  방식 : 정해진 비용내에서 빠른 처리
@@ -58,7 +59,7 @@ public class MiniGame_TokenShop : MonoBehaviour
 
                 if (_tokenCount < _pigCost)
                     _pigText.color = Color.red;
-                
+                ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.PURCHASED);
                 break;
             case "Clock":
                 if (_tokenCount - _clockCost < 0)
@@ -67,7 +68,7 @@ public class MiniGame_TokenShop : MonoBehaviour
 
                 if (_tokenCount < _clockCost)
                     _clockText.color = Color.red;
-
+                ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.PURCHASED);
                 break;
             case "Scissors":
                 if (_tokenCount - _scissorsCost < 0)
@@ -76,7 +77,7 @@ public class MiniGame_TokenShop : MonoBehaviour
 
                 if (_tokenCount < _scissorsCost)
                     _scissorsText.color = Color.red;
-
+                ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.PURCHASED);
                 break;
             case "MagicHat":
                 if (_tokenCount - _magicHatCost < 0)
@@ -85,7 +86,7 @@ public class MiniGame_TokenShop : MonoBehaviour
 
                 if (_tokenCount < _magicHatCost)
                     _magicHatText.color = Color.red;
-
+                ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.PURCHASED);
                 break;
             case "Energy":
                 if (_tokenCount - _energyCost < 0)
@@ -94,7 +95,7 @@ public class MiniGame_TokenShop : MonoBehaviour
 
                 if (_tokenCount < _energyCost)
                     _energyText.color = Color.red;
-
+                ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.PURCHASED);
                 break;
             case "Box":
                 if (_tokenCount - _boxCost < 0)
@@ -103,7 +104,7 @@ public class MiniGame_TokenShop : MonoBehaviour
 
                 if (_tokenCount < _boxCost)
                     _boxText.color = Color.red;
-
+                ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.PURCHASED);
                 break;
             case "Basket":
                 if (_tokenCount - _basketCost < 0)
@@ -112,7 +113,7 @@ public class MiniGame_TokenShop : MonoBehaviour
 
                 if (_tokenCount < _basketCost)
                     _basketText.color = Color.red;
-
+                ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.PURCHASED);
                 break;
         }
     }

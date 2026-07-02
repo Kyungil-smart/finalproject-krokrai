@@ -29,6 +29,7 @@ public class CardGameUIController : MonoBehaviour
         _endUI.SetActive(false);
         _mainUI.SetActive(false);
         _whiteBG.SetActive(false);
+        ServiceLocator.Get<IAudioManager>().PlayBGM(BGMAudiosEnum.MINIGAME_CARDFLIPPING);
         _cardFlipGame.SetActive(true);
         _cardFlipGame.GetComponent<CardGameController>().ResetData();
     }   
@@ -40,6 +41,7 @@ public class CardGameUIController : MonoBehaviour
 
     public void GameEnd() // 리플레이 조건 검사 확인
     {
+        _rePlayGameUI.SetActive(false);
         _cardFlipGame.SetActive(false);
         _reels.SetActive(true);
         _mainUI.SetActive(true);
@@ -54,6 +56,7 @@ public class CardGameUIController : MonoBehaviour
             _reels.SetActive(true);
             _cardFlipGame.SetActive(false);
             _endUI.SetActive(false);
+            ServiceLocator.Get<IAudioManager>().PlayBGM(BGMAudiosEnum.MINIGAME_CARDFLIPPING);
             return;
         }
         _cardFlipGame.GetComponent<CardGameController>().ResetData();
@@ -76,6 +79,6 @@ public class CardGameUIController : MonoBehaviour
         _rewardText.text = $"x{hitedCards.ToString()}";
         yield return new WaitForSeconds(1f);
         _endUI.SetActive(false);
-        GameEnd();
+        Complite();
     }
 }
