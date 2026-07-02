@@ -170,6 +170,7 @@ public class UploadController : MonoBehaviour
 
         t.ProFile.followerCount += _posts[_currentPostImg].getFollower;
 
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN2);
         OnUpload?.Invoke(_currentPost);
 
         _currentPost = 0;

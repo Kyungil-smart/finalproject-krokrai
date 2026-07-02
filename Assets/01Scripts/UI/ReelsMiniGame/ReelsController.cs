@@ -111,6 +111,7 @@ public class ReelsController : MonoBehaviour
             data.UserDatas.Minigame.Daily_Play_Count++;
             data.UserGoods.Claw_--;
             data.UserDatas.Minigame.ID_Play_Last = _currentGameIndex;
+            ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN2);
             _cardGame.GameStart();
         }
         else
@@ -152,4 +153,6 @@ public class ReelsController : MonoBehaviour
             OnPlayButtonClick();
         }
     }
+
+    public void CloseAd() => ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN2);
 }

@@ -1,6 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-06-19
+ 수정일 : 26-07-02
 
  역할 : 냥베이커리 상점 관리자
  방식 : Dictionary로 SO에 데이터를 사용하여 상점 최신화
@@ -74,6 +75,7 @@ public class NyanBakeryShopController : MonoBehaviour
                 return;
             t.bakerycoin -= consumToken;
             t.BakeryShop[Shop_Index].Item_buycount += 1;
+            ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.PURCHASED);
             RefreshToken();
             RefreshUI();
         }
