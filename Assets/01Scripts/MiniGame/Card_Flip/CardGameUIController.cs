@@ -29,6 +29,7 @@ public class CardGameUIController : MonoBehaviour
         _endUI.SetActive(false);
         _mainUI.SetActive(false);
         _whiteBG.SetActive(false);
+        ServiceLocator.Get<IAudioManager>().PlayBGM(BGMAudiosEnum.MINIGAME_CARDFLIPPING);
         _cardFlipGame.SetActive(true);
         _cardFlipGame.GetComponent<CardGameController>().ResetData();
     }   
@@ -54,6 +55,7 @@ public class CardGameUIController : MonoBehaviour
             _reels.SetActive(true);
             _cardFlipGame.SetActive(false);
             _endUI.SetActive(false);
+            ServiceLocator.Get<IAudioManager>().PlayBGM(BGMAudiosEnum.MINIGAME_CARDFLIPPING);
             return;
         }
         _cardFlipGame.GetComponent<CardGameController>().ResetData();
