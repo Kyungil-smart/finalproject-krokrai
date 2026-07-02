@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2542029810861092647
 RectTransform:
   m_ObjectHideFlags: 0
@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _closeButton: {fileID: 259312147109540615}
+  _targetObject: {fileID: 5059682700955918930}
 --- !u!1001 &2564193269025040673
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -236,14 +237,6 @@ PrefabInstance:
     - target: {fileID: 3253816932204569110, guid: 107048e588f8f514ea31aeeb3b7bc9ed, type: 3}
       propertyPath: m_Name
       value: NyangNyangBakery
-      objectReference: {fileID: 0}
-    - target: {fileID: 7248679075100650866, guid: 107048e588f8f514ea31aeeb3b7bc9ed, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7248679075100650866, guid: 107048e588f8f514ea31aeeb3b7bc9ed, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
