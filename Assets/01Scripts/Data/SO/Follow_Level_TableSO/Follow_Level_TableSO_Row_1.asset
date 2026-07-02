@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Follow_Level_TableSO_Row_1
   m_EditorClassIdentifier: 
   level: 2
-  requiredFollowers: 500
+  requiredFollowers: 100
   tierName: STR_TIER_002
   maxEnergy: 50
   maxCoin: 70

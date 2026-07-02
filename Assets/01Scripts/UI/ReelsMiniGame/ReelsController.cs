@@ -22,6 +22,8 @@ public class ReelsController : MonoBehaviour
     [SerializeField] private GameObject _networkErrorPopup;
     [SerializeField] private GameObject _adPopups;
 
+    [SerializeField] private AdPopUp_temp _ad;
+
     private List<Minigame_ID_ListSO> _imgs = new List<Minigame_ID_ListSO>(4);
 
     private int _currentGameIndex;
@@ -147,10 +149,14 @@ public class ReelsController : MonoBehaviour
 
     public async void SeeAd()
     {
-        if (true)//await ServiceLocator.Get<IADMobManager>().AutomatedAd())
+        if (await _ad.OnAd() )//await ServiceLocator.Get<IADMobManager>().AutomatedAd())
         {
             _adPopups.SetActive(false);
             OnPlayButtonClick();
+        }
+        else
+        {
+            Log.Message("잘 못된 방식");
         }
     }
 
