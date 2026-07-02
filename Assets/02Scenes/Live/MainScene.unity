@@ -3357,6 +3357,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -817.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7859513583333798598, guid: 810bf029fc3dc0f489218ff1158716b9, type: 3}
+      propertyPath: _attendanceIcon
+      value: 
+      objectReference: {fileID: 566063238}
     - target: {fileID: 7926762351247703604, guid: 810bf029fc3dc0f489218ff1158716b9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
