@@ -3,7 +3,7 @@
 수정자 : NekioEmilia
  
 작성일 : 26-06-05
-수정일 : 26-06-29
+수정일 : 26-07-02
 
 역할 : 출석체크 UI의 Festa Slider와 보물상자에 접근한 Presenter 스크립트 FestaView와 통신
 방식 : Presenter를 UI에 적용시키면 View도 같이 따라옴
@@ -37,12 +37,22 @@ public class FestaPresenter : MonoBehaviour
     [Header("출석체크 종료 UI")] 
     [SerializeField] private GameObject _eventEndNotificationPanel;
     [SerializeField] private Button _eventEndConfirmButton;
+
+    [Header("출석체크 아이콘")]
+    [SerializeField] private GameObject _attendanceIcon;
+
     
     private void OnEnable()
     {
         if (PlayerPrefs.GetInt("Festa_Event_Totally_Finished", 0) == 1)
         {
             Log.Message("<color=red><b>완전히 종료된 이벤트. UI를 강제 종료함.</b></color>");
+            
+            if (_attendanceIcon != null)
+            {
+                _attendanceIcon.SetActive(false);
+            }
+            
             transform.root.gameObject.SetActive(false);
             return;
         }
@@ -202,6 +212,11 @@ public class FestaPresenter : MonoBehaviour
         
         PlayerPrefs.SetInt("Festa_Event_Totally_Finished", 1);
         PlayerPrefs.Save();
+        
+        if (_attendanceIcon != null)
+        {
+            _attendanceIcon.SetActive(false);
+        }
         
         transform.root.gameObject.SetActive(false);
     }

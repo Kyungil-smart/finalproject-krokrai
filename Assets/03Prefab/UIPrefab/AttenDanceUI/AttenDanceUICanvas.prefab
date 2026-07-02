@@ -14460,6 +14460,7 @@ MonoBehaviour:
   _specialThanksConfirmButton: {fileID: 4045625220940091833}
   _eventEndNotificationPanel: {fileID: 2467049782319231131}
   _eventEndConfirmButton: {fileID: 3674104351523049913}
+  _attendanceIcon: {fileID: 0}
 --- !u!114 &7437691808617641690
 MonoBehaviour:
   m_ObjectHideFlags: 0
