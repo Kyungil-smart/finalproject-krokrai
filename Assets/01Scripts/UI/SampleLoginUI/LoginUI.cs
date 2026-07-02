@@ -19,10 +19,15 @@ public class LoginUI : MonoBehaviour
     [SerializeField] private Button _loginButton;
     [SerializeField] private Button _logoutButton;
     [SerializeField] private TextMeshProUGUI _statusText;
+    [SerializeField] private TextMeshProUGUI _versionText;
 
     private bool _isProcessing;
 
-    private void Awake() => UpdateStatus("초기화...");
+    private void Awake()
+    {
+        _versionText.text = $"현재 버전 : {Application.version}";
+        UpdateStatus("초기화...");
+    }
     private void OnEnable() => BindButtonEvents();
     private void OnDisable() => UnbindButtonEvents();
     private async void Start() => await TryAutoLoginAsync();
