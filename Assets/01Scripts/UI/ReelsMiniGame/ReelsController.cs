@@ -34,7 +34,7 @@ public class ReelsController : MonoBehaviour
         if (data.Attendance.Join_TimeStamp.Day == DateTime.Now.Day || data.Attendance.Last_Login_TimeStamp.Day != DateTime.Now.Day)
         {
             data.UserDatas.Minigame.Daily_Play_Count = 0;
-            //data.UserGoods.Claw_ += 3;
+            data.UserGoods.Claw_ += 3;
         }
 
         //TODO : DB에 적용된 사항 추가
