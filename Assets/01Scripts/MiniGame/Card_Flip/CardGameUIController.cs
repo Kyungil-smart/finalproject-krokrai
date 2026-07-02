@@ -41,6 +41,7 @@ public class CardGameUIController : MonoBehaviour
 
     public void GameEnd() // 리플레이 조건 검사 확인
     {
+        _rePlayGameUI.SetActive(false);
         _cardFlipGame.SetActive(false);
         _reels.SetActive(true);
         _mainUI.SetActive(true);
@@ -78,6 +79,6 @@ public class CardGameUIController : MonoBehaviour
         _rewardText.text = $"x{hitedCards.ToString()}";
         yield return new WaitForSeconds(1f);
         _endUI.SetActive(false);
-        GameEnd();
+        Complite();
     }
 }
