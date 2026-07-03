@@ -21,6 +21,8 @@ public class CardGameUIController : MonoBehaviour
     [SerializeField] TextMeshProUGUI _rewardText;
     [SerializeField] GameObject _rePlayGameUI;
 
+    [SerializeField] private RowbtnController _rowbtn;
+
     [SerializeField] private ReelsController _reelsCtrl;
 
     public void GameStart()
@@ -29,6 +31,7 @@ public class CardGameUIController : MonoBehaviour
         _endUI.SetActive(false);
         _mainUI.SetActive(false);
         _whiteBG.SetActive(false);
+        _rowbtn.LockEverythingForMiniGame();
         ServiceLocator.Get<IAudioManager>().PlayBGM(BGMAudiosEnum.MINIGAME_CARDFLIPPING);
         _cardFlipGame.SetActive(true);
         _cardFlipGame.GetComponent<CardGameController>().ResetData();
@@ -43,6 +46,9 @@ public class CardGameUIController : MonoBehaviour
     {
         _rePlayGameUI.SetActive(false);
         _cardFlipGame.SetActive(false);
+        
+        _rowbtn.UnlockEverythingOnMiniGameExit();
+        
         _reels.SetActive(true);
         _mainUI.SetActive(true);
         _whiteBG.SetActive(true);

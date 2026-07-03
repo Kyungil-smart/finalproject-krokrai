@@ -114,6 +114,7 @@ public class ReelsController : MonoBehaviour
             data.UserGoods.Claw_--;
             data.UserDatas.Minigame.ID_Play_Last = _currentGameIndex;
             ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN2);
+            
             _cardGame.GameStart();
         }
         else
