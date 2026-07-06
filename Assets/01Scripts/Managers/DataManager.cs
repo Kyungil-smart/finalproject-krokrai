@@ -262,7 +262,6 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
         {
             if (await ServiceLocator.Get<IBackendManager>().ReadyTask)
             {
-                Log.Message(ServiceLocator.Get<IBackendManager>().Auth.CurrentUser == null);
                 _userName = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.DisplayName;
                 _userID = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.UserId;
                 ReadData();
@@ -270,9 +269,14 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
                 Log.Message("User ID 성공적으로 입력됌");
             }
         }
-        catch (Exception e)
+        catch (NullReferenceException e)
         {
-            Debug.Log(e.Message);
+            Log.Message(e.Message);
+        }
+        catch {}
+        finally
+        {
+            Log.Message("User ID 읽기 실패");
         }
     }
 #if UNITY_EDITOR
