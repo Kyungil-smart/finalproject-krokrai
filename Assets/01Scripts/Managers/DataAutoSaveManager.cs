@@ -46,8 +46,8 @@ public class DataAutoSaveManager : MonoBehaviour, IManagerBooter, IDataAutoSaveM
 
         _ = DelaySaveAsync(_cts.Token);
         // SNS Follow 기반 방치 보상 시스템에서 follow 수 및 UI 갱신
-        _timeRewardsManager.RefreshFollowCount();
-        _timeRewardsManager.RefreshUI();
+        _timeRewardsManager?.RefreshFollowCount();
+        _timeRewardsManager?.RefreshUI();
     }
 
     public void RequestRTDBSave()
@@ -59,7 +59,7 @@ public class DataAutoSaveManager : MonoBehaviour, IManagerBooter, IDataAutoSaveM
 
         if (!ServiceLocator.Get<IDataManager>().CanSave) return;
 
-        _mainCurrencyController.RefreshUI();
+        _mainCurrencyController?.RefreshUI();
 
         _rtdbCts?.Cancel();
         _rtdbCts = new CancellationTokenSource();
