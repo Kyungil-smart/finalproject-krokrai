@@ -32,14 +32,13 @@ public class ProfileController : MonoBehaviour
     //[SerializeField] private GameObject _post;
     [SerializeField] private PostController _post;
 
-    [Header("그 외")]
     [SerializeField] private GameObject _rowBar;
 
     List<GameObject> _posts = new(8);
 
     Dictionary<int, Post_TableSO> _postTables = new();
 
-    private int _currentPostNum;
+    private int _currentPostNum = 0;
     private int _postedCount;
 
     private void Awake()
@@ -54,6 +53,27 @@ public class ProfileController : MonoBehaviour
                 _postTables.Add(post.postID, post);
             }
         }
+
+        ServiceLocator.Get<IDataManager>().OnUserDataReseted += DataReset;
+    }
+
+    private void OnDestroy()
+    {
+        ServiceLocator.Get<IDataManager>().OnUserDataReseted -= DataReset;
+    }
+
+    private void DataReset()
+    {
+        _currentPostNum = 0;
+        
+        for (int i = 0; i < _posts.Count; i++)
+        {
+            Destroy(_posts[i]);
+        }
+
+        _posts.Clear();
+
+        _postCount.text = "0";
     }
 
     private void OnEnable()
@@ -131,45 +151,6 @@ public class ProfileController : MonoBehaviour
 
         _currentPostNum = _postedCount;
         _postCount.text = _currentPostNum.ToString();
-    }
-
-    private void SortingPost()
-    {
-        var imgs = ServiceLocator.Get<IDataManager>().UserDatas.ImgList;
-        string pivotString;
-        DateTime pivotTime = new DateTime(2001,1,1);
-        bool isChanged = false;
-
-        int tempSiblingAwait = -1;
-
-        foreach (var t in _posts)
-        {
-            if (imgs.ContainsKey(t.name))
-            {
-                foreach(var tt in imgs)
-                {
-                    if (tt.Key == t.name || !tt.Value.isUploaded)
-                        continue;
-                    if (pivotTime < tt.Value.postTime)
-                    {
-                        t.transform.SetAsFirstSibling();
-                        isChanged = true;
-                    }
-                    else if (pivotTime == tt.Value.postTime)
-                    {
-                        isChanged = true;
-                        t.transform.SetAsFirstSibling();
-                    }
-                    else
-                    {
-                        pivotTime = tt.Value.postTime;
-                    }
-                }
-                if (!isChanged)
-                    t.transform.SetAsFirstSibling();
-                    isChanged = false;
-            }
-        }
     }
 
     private void Start()

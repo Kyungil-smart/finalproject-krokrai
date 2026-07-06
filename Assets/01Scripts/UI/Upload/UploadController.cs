@@ -64,6 +64,24 @@ public class UploadController : MonoBehaviour
                 _folder.Add(_folderSO.ImgId, _folderSO.imgFolder);
             }
         }
+
+        ServiceLocator.Get<IDataManager>().OnUserDataReseted += DataReset;
+    }
+
+    private void OnDestroy()
+    {
+        ServiceLocator.Get<IDataManager>().OnUserDataReseted -= DataReset;
+    }
+
+    void DataReset()
+    {
+        _currentPosts = 0;
+        _upLoadImgs.Clear();
+        foreach (var item in _upLoadobject)
+        {
+            Destroy(item.Value);
+        }
+        _upLoadobject.Clear();
     }
 
     private void OnEnable()
