@@ -1,7 +1,7 @@
 ﻿/*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-07-01
+수정일 : 26-07-06
 
 역할 : DM 목록 UI 생성 및 DM 클릭 시 대화창 전환
 방식 : DB 저장과 로컬 Dictionary 기준으로 Dummy DM과 Quest DM을 생성, 진행, 완료, 삭제 처리
@@ -356,8 +356,8 @@ public class DMListUI : MonoBehaviour
 
         runner.OpenNpcDM(
             dmData,
-            openProgressState,
-            openSelectedChoiceNum
+            progress.ProgressState,
+            progress.SelectedChoiceNum
         );
     }
 
