@@ -46,8 +46,6 @@ public class FestaPresenter : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Festa_Event_Totally_Finished", 0) == 1)
         {
-            Log.Message("<color=red><b>완전히 종료된 이벤트. UI를 강제 종료함.</b></color>");
-            
             if (_attendanceIcon != null)
             {
                 _attendanceIcon.SetActive(false);

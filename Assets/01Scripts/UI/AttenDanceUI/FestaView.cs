@@ -10,6 +10,7 @@
 */
 
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,18 +28,12 @@ public class FestaView : MonoBehaviour
     [SerializeField] private Sprite _closeChestSprite;           // 닫힌 상자 원본 스프라이트
     [SerializeField] private Sprite _openChestSprite;            // 열린 상자 원본 스프라이트
 
-    [Header("노란색, 보라색 색상 세팅 (헥사 코드 입력")] 
-    [SerializeField] private string _lockedHexCode = "#ECAAFF"; // 보라색
-    [SerializeField] private string _unlockedHexCode = "#FFFF94"; // 노란색
-    
-    private Color _lockedColor;
-    private Color _unlockedColor;
+    [Header("노란색, 보라색 색상 세팅")] 
+    [SerializeField] private Color _lockedColor;
+    [SerializeField] private Color _unlockedColor;
     
     private void Awake()
     {
-        ColorUtility.TryParseHtmlString(_lockedHexCode, out _lockedColor);
-        ColorUtility.TryParseHtmlString(_unlockedHexCode, out _unlockedColor);
-        
         for (int i = 0; i < _chestButtons.Length; i++)
         {
             int index = i;
