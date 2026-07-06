@@ -185,7 +185,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 183, y: 59.86609}
+  m_AnchoredPosition: {x: 139, y: 59.86609}
   m_SizeDelta: {x: 888.66, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4416304934792833939
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uADF8 \uBD84 \uC9D1\uC0AC\uAC00 \uB9DE\uB294\uAC70\uC8E0..?"
+  m_text: "\uC804 \uC800\uB807\uAC8C \uBABB \uB9CC\uB4E4\uACA0\uB358\uB370..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
   m_sharedMaterial: {fileID: 3618246716595754706, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
@@ -885,7 +885,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: mya_ong
+  m_text: jiwoo._.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
   m_sharedMaterial: {fileID: 3618246716595754706, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
@@ -1334,10 +1334,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uACE0\uC591\uC774\uB97C \uC785\uC591\uD574\uC11C \uC0AC\uB8CC\uB97C \uC5B4\uB5A4
-    \uAC78 \uBA39\uC5EC\uC57C \uD560\uC9C0 \uBAB0\uB77C\uC11C \uC5B4\uB290 \uC9D1\uC0AC\uBD84\uAED8
-    \uC5EC\uCB64\uBD24\uB294\uB370.. \uBC25\uC744 \uBA39\uC9C8 \uC54A\uC544\uC694..
-    \uBB50\uAC00 \uBB38\uC81C\uC778\uC9C0.."
+  m_text: "\uC624\uB298\uC740 \uD138\uBB49\uCE58\uB97C \uC870\uD569\uD574\uC11C \uD138\uBB49\uCE58
+    \uC778\uD615\uC744 \uD55C\uBC88 \uB9CC\uB4E4\uC5B4\uBD24\uC5B4\uC694! \uC6B0\uB9AC
+    \uC560\uAE30\uB3C4 \uC815\uB9D0 \uC88B\uC544\uD558\uB124\uC694. \uB3C4\uC640\uC900
+    \uC9D1\uC0AC\uB2D8 \uACE0\uB9C8\uC6CC\uC694~"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
   m_sharedMaterial: {fileID: 3618246716595754706, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
@@ -1531,7 +1531,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 183, y: 59.86609}
+  m_AnchoredPosition: {x: 150, y: 59.86609}
   m_SizeDelta: {x: 888.66, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4300533672532475961
@@ -1562,7 +1562,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB3C4\uB300\uCCB4 \uB204\uAC00 \uADF8\uB7F0 \uC798\uBABB\uB41C \uC815\uBCF4\uB97C..."
+  m_text: "\uB799\uB3CC\uC778\uAC00\uC694?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
   m_sharedMaterial: {fileID: 3618246716595754706, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
@@ -1861,7 +1861,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "#\uC0AC\uB8CC\uCD94\uCC9C\uD574\uC8FC\uC138\uC694 #\uB3C4\uC640\uC918"
+  m_text: "#\uBBF8\uC6B0\uBBF8\uC6B0 #\uD138\uD138\uBB49\uCE58"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
   m_sharedMaterial: {fileID: 3618246716595754706, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
@@ -2131,7 +2131,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: lovely_Nyang
+  m_text: meowxmeow
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
   m_sharedMaterial: {fileID: 3618246716595754706, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
@@ -2468,7 +2468,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: lovely_Nyang
+  m_text: meowmoew
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
   m_sharedMaterial: {fileID: 3618246716595754706, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
@@ -2616,7 +2616,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "3123 \uAC1C"
+  m_text: "4259 \uAC1C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
   m_sharedMaterial: {fileID: 3618246716595754706, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
@@ -2720,7 +2720,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 183, y: 59.86609}
+  m_AnchoredPosition: {x: 176, y: 59.86609}
   m_SizeDelta: {x: 888.66, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7654811937450717964
@@ -2751,8 +2751,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC0AC\uB8CC \uAC11\uC790\uAE30 \uBC14\uAFB8\uBA74 \uC548\uB3FC\uC694!!
-    \uD0C8\uC774 \uB0A0 \uC218\uB3C4 \uC788\uC5B4\uC694!"
+  m_text: "\uC640! \uD138\uBB49\uCE58 \uC778\uD615 \uC5C4\uCCAD \uC798 \uB9CC\uB4DC\uC168\uB124\uC694!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
   m_sharedMaterial: {fileID: 3618246716595754706, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
@@ -2870,7 +2869,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -451, y: -1517}
+  m_AnchoredPosition: {x: -451, y: -1511}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7893499260340199434
@@ -2883,7 +2882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3893074715277507395}
   m_Layer: 5
-  m_Name: HomeFeedPost_New_Post_103011
+  m_Name: HomeFeedPost_New_Post_103016
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3071,7 +3070,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: cat.lover
+  m_text: myo.myo
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
   m_sharedMaterial: {fileID: 3618246716595754706, guid: aa10a5341b5317144a76297aa51bb314, type: 2}
@@ -3219,7 +3218,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 48614b8febce0d443b8183bb177ec2f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 96577cb5188817b4b9f2fab66d593723, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
