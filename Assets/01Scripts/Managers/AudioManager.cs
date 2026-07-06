@@ -29,28 +29,6 @@ public class AudioManager : MonoBehaviour, IAudioManager, IManagerBooter
 
         _sfx.volume = 0.5f;
         _bgm.volume = 0.5f;
-
-        for (int i = 0; i < _audios.sfx.Length; i++)
-        {
-            if (_clips.TryAdd(_audios.sfx[i].name, _audios.sfx[i]))
-                continue;
-            else
-            {
-                Log.Message($"Dictionary에 추가 실패 : {_audios.sfx[i]} / {i} 해당 clip이 중복 등록인지 확인해주세요.");
-            }
-        }
-
-        for (int i = 0; i < _audios.bgm.Length; i++)
-        {
-            if (_clips.TryAdd(_audios.bgm[i].name, _audios.bgm[i]))
-                continue;
-            else
-            {
-                Log.Message($"Dictionary에 추가 실패 : {_audios.bgm[i]} / {i} 해당 clip이 중복 등록인지 확인해주세요.");
-            }
-        }
-
-        Log.Message("AudioManager 작동 준비 완료");
     }
 
     public void MuteSFX(bool state) => _sfx.mute = state;
@@ -115,7 +93,31 @@ public class AudioManager : MonoBehaviour, IAudioManager, IManagerBooter
         _bgm.volume = volume * volume;
     }
 
-    public void Register() => ServiceLocator.Register<IAudioManager>(this);
+    public void Register()
+    {
+        for (int i = 0; i < _audios.sfx.Length; i++)
+        {
+            if (_clips.TryAdd(_audios.sfx[i].name, _audios.sfx[i]))
+                continue;
+            else
+            {
+                Log.Message($"Dictionary에 추가 실패 : {_audios.sfx[i]} / {i} 해당 clip이 중복 등록인지 확인해주세요.");
+            }
+        }
+
+        for (int i = 0; i < _audios.bgm.Length; i++)
+        {
+            if (_clips.TryAdd(_audios.bgm[i].name, _audios.bgm[i]))
+                continue;
+            else
+            {
+                Log.Message($"Dictionary에 추가 실패 : {_audios.bgm[i]} / {i} 해당 clip이 중복 등록인지 확인해주세요.");
+            }
+        }
+
+        Log.Message("AudioManager 작동 준비 완료");
+        ServiceLocator.Register<IAudioManager>(this);
+    }
 
     public void UnRegister() => ServiceLocator.UnRegister<IAudioManager>(this);
 }

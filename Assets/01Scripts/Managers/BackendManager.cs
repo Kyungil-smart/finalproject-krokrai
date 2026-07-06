@@ -47,7 +47,7 @@ public class BackendManager : MonoBehaviour, IManagerBooter, IBackendManager
     /// </summary>
     public Task<bool> ReadyTask => _readyTcs.Task;
 
-    private void Awake()
+    public void Register()
     {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
@@ -75,9 +75,8 @@ public class BackendManager : MonoBehaviour, IManagerBooter, IBackendManager
 
             _readyTcs.TrySetResult(isAvailable);
         });
+        ServiceLocator.Register<IBackendManager>(this);
     }
-
-    public void Register() => ServiceLocator.Register<IBackendManager>(this);
 
     public void UnRegister() => ServiceLocator.UnRegister<IBackendManager>(this);
 }
