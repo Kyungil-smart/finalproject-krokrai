@@ -14,7 +14,7 @@ using UnityEngine;
 
 public static class Log
 {
-    private static readonly StringBuilder _stringBuilder = new StringBuilder(512);
+    private static readonly StringBuilder _stringBuilder = new StringBuilder(256);
 
     /// <summary>
     /// [Class : Method] message 형태로 출력
