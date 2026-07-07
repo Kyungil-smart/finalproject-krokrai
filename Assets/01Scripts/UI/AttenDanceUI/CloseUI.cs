@@ -20,7 +20,11 @@ public class CloseUI : MonoBehaviour
     {
         if (_closeButton != null)
         {
-            _closeButton.onClick.AddListener(() => _targetObject.SetActive(false));
+            _closeButton.onClick.AddListener(() =>
+            {
+                _targetObject.SetActive(false);
+                ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN1);
+            });
         }
     }
 }

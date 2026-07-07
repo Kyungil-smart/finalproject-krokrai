@@ -30,6 +30,7 @@ public class DayListView : MonoBehaviour
             {
                 Log.Message($"일 차 눌림 (눌린 일차 {index + 1})");
                 ServiceLocator.Get<IEventManager>().ClickDay(index + 1);
+                ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN1);
             });
         }
     }
@@ -67,7 +68,6 @@ public class DayListView : MonoBehaviour
     {
         _lockObjects[dayIndex].SetActive(!isUnlocked);
         _dayBtns[dayIndex].interactable = isUnlocked;
-        
     }
 
     // Outline 활성화/비활성화 해주는 메서드

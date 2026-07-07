@@ -46,6 +46,7 @@ public class MissionSlotView : MonoBehaviour
         _rewardButton.onClick.AddListener(() =>
         {
             OnRewardClicked?.Invoke(_slotIndex);
+            ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.PURCHASED);
         });
     }
 

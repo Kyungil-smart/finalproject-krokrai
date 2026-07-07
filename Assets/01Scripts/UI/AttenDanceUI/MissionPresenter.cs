@@ -292,8 +292,6 @@ public class MissionPresenter : MonoBehaviour
                 _rewardPopupView.OpenRewardPopup(rewardList);
             }
         }
-        
-        // CheckAndOpenStoryPopup(dailyDB, true);
     }
 
     private bool CheckIfAllMissionsCleared(Dictionary<string, EventState> dailyDB)
@@ -416,7 +414,7 @@ public class MissionPresenter : MonoBehaviour
     {
         PlayerPrefs.SetInt("HasSeenPrologue", 1);
         PlayerPrefs.Save();
-        
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN1);
         _prologuePopup.SetActive(false);
 
         InitAttendanceUI();

@@ -34,6 +34,7 @@ public class StoryPopupView : MonoBehaviour
         if (_closeButton != null)
         {
             _closeButton.onClick.AddListener(OnCloseButtonClicked);
+            
         }
     }
 
@@ -61,6 +62,7 @@ public class StoryPopupView : MonoBehaviour
 
     private void OnCloseButtonClicked()
     {
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN1);
         _backGroundPanel.SetActive(false);
         _storyPopupPanel.SetActive(false);
         _mainText.gameObject.SetActive(true);

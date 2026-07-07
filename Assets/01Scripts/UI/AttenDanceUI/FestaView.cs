@@ -42,6 +42,7 @@ public class FestaView : MonoBehaviour
             {
                 Log.Message($"{index + 1}번 상자 클릭됨");
                 OnChestClicked?.Invoke(index);
+                ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.PURCHASED);
             });
         }
     }
@@ -65,7 +66,7 @@ public class FestaView : MonoBehaviour
             // recentGaugeStep이 2면, 인덱스 0, 1은 수령 완료
             bool isClaimed = (i < recentGaugeStep);
             // 점수는 채웠는데 아직 수령 안 한 상태인지 검사
-            bool isClaimable = (!isClaimed && currentPoint >= targetPoint);
+            bool isClaimable = (!isClaimed && currentPoint >= targetPoint && i == recentGaugeStep);
 
             if (isClaimed)
             {

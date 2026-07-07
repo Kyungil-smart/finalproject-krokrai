@@ -34,7 +34,11 @@ public class BakeryEventView : MonoBehaviour
         {
             int index = i;
 
-            _nyangCoinButtons[i].onClick.AddListener(() => OnClaimButtonClicked?.Invoke(index));
+            _nyangCoinButtons[i].onClick.AddListener(() =>
+            {
+                ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN1);
+                OnClaimButtonClicked?.Invoke(index);
+            });
         }
     }
 
