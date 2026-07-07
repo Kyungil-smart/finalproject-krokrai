@@ -3,7 +3,7 @@
 수정자 : 이종현
 
 작성일 : 26-05-27
-수정일 : 26-06-26
+수정일 : 26-07-07
 
 역할 : 인게임 시간을 실제 디바이스의 시간으로 설정 및 변경
 방식 : DateTime을 이용하여 실제 디바이스의 시간 반영
@@ -57,6 +57,8 @@ public class TimeSimulator : MonoBehaviour
 
     private void OnAdvanceButtonClicked()
     {
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN1);
+        
         // 현재 드롭다운에 선택된 인덱스 가져오기
         int selectedIndex = _timeDropdown.value;
 
