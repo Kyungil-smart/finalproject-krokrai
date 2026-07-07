@@ -1,8 +1,8 @@
 /*
 작성자 : 이종현
+수정자 : 이종현
 작성일 : 26-05-26
-수정일 : 26-05-26
-
+수정일 : 26-07-07
 역할 : 시뮬레이터 재화 데이터 및 UI 관리
 방식 : 버튼 입력을 통해 로컬 재화 데이터를 증가시키고 UI를 갱신
 
@@ -38,6 +38,8 @@ public class SimulatorCurrencyController : MonoBehaviour
 
     public void ResetButton()
     {
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN1);
+        
         ServiceLocator.Get<IDataManager>().ResetUserData();
     }
 
