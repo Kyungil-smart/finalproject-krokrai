@@ -2,7 +2,7 @@
  작성자 : 23M-RFT68
  수정자 : 이종현
  작성일 : 26-06-24
- 수정일 : 26-07-02
+ 수정일 : 26-07-07
  
  역할  :  하단바 제어 + 홈 이동(돌아가기 버튼) + 알림의 경우 알림 뱃지 해제 추가
  방식  : RowbtnBar 오브젝트에 붙인 후 배열을 5개 추가 해주고 각각 버튼과 기본 버튼, 눌렸을때 버튼, 페이지를 연결해준 뒤
@@ -55,6 +55,9 @@ public class RowbtnController : MonoBehaviour
     /// </summary>
     public void OnTabClicked(int index)
     {
+        // 버튼 사운드
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN2);
+        
         // 예외처리 (업로드)
         if (index == 2)
         {
@@ -118,6 +121,9 @@ public class RowbtnController : MonoBehaviour
     /// </summary>
     public void CloseUploadAndRestore()
     {
+        // 버튼 사운드
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN2);
+        
         // 업로드 페이지 닫기
         if (_tabs[2].page != null)
             _tabs[2].page.SetActive(false);
@@ -138,6 +144,9 @@ public class RowbtnController : MonoBehaviour
     /// </summary>
     public void MoveToHomeFeed()
     {
+        // 버튼 사운드
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN2);
+        
         Log.Message("뒤로가기 클릭 -> 홈피드 화면으로 이동");
         OnTabClicked(0);
     }
@@ -147,6 +156,9 @@ public class RowbtnController : MonoBehaviour
     /// </summary>
     public void OpenDM()
     {
+        // 버튼 사운드
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN2);
+        
         // 현재 페이지 비활성화
         _tabBeforeDM = _currentTab;
         Log.Message($"DM 목록 진입 -> 직전 위치 백업: {_tabBeforeDM}");
@@ -170,6 +182,9 @@ public class RowbtnController : MonoBehaviour
     /// </summary>
     public void CloseDM()
     {
+        // 버튼 사운드
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN2);
+        
         // DM 목록 비활성화
         if (_dmList != null)
         {
@@ -212,6 +227,9 @@ public class RowbtnController : MonoBehaviour
     /// </summary>
     public void OnHomeButtonClicked()
     {
+        // 버튼 사운드
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN2);
+        
         if (_canvasSemi != null)
         {
             _canvasSemi.SetActive(false);
