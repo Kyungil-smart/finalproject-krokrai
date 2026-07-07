@@ -46,10 +46,7 @@ public class NotificationController : MonoBehaviour
         LoadAlertIcon();
         
         // 저장된 알림 불러오기
-        if (_items != null && _items.Count == 0)
-        {
-            LoadNotifications();
-        }
+        StartCoroutine(WaitForUserDataRoutine());
     }
     
     /// <summary>
@@ -177,6 +174,33 @@ public class NotificationController : MonoBehaviour
             SpawnNotification(GetPrefabByType(notiSO.notiType), notiSO, finalText, 
                 postId, row.referencedNpcId);
 
+        }
+    }
+
+    private IEnumerator WaitForUserDataRoutine()
+    {
+        Log.Message("DB 데이터 대기 시작..");
+
+        var dataManager = ServiceLocator.Get<IDataManager>();
+
+        float timeout = 5f;
+        float timer = 0f;
+
+        while ((dataManager.UserDatas.UserPost == null || dataManager.UserDatas.UserPost.Count == 0) && timer < timeout)
+        {
+            timer += Time.deltaTime;
+            yield return null;  // 다음 프레임까지 대기
+        }
+        
+        // 대기 종료 후 복원 프로세스 안전하게 가동
+        if (dataManager.UserDatas.UserPost != null && dataManager.UserDatas.UserPost.Count > 0)
+        {
+            Log.Message($"데이터 로드 완료 : {dataManager.UserDatas.UserPost.Count}개");
+            LoadNotifications();
+        }
+        else
+        {
+            Log.Message("복원할 데이터가 없습니다");
         }
     }
 
