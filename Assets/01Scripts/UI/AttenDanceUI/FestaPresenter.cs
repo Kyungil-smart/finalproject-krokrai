@@ -1,7 +1,7 @@
 /*
 작성자 : NekioEmilia
 수정자 : NekioEmilia
- 
+
 작성일 : 26-06-05
 수정일 : 26-07-02
 
@@ -19,29 +19,29 @@ public class FestaPresenter : MonoBehaviour
 {
     private const int MAX_FESTA_CHEST_COUNT = 7;
     private const int GRACE_DAYS = 3;
-    
+
     private int _totalFestaPoint;
     private int _recentGaugeStep;
     private int _finalRewardReceived = 0;
 
-    [Header("MVP 스크립트")]
-    [SerializeField] private GaugeDataModel _gaugeModel;
+    [Header("MVP 스크립트")] [SerializeField] private GaugeDataModel _gaugeModel;
     [SerializeField] private FestaView _view;
     [SerializeField] private RewardDataModel _rewardModel;
     [SerializeField] private RewardPopupView _rewardPopupView;
 
-    [Header("특별 감사 팝업 UI")] 
-    [SerializeField] private GameObject _specialThanksPopupPanel;
+    [Header("특별 감사 팝업 UI")] [SerializeField]
+    private GameObject _specialThanksPopupPanel;
+
     [SerializeField] private Button _specialThanksConfirmButton;
 
-    [Header("출석체크 종료 UI")] 
-    [SerializeField] private GameObject _eventEndNotificationPanel;
+    [Header("출석체크 종료 UI")] [SerializeField]
+    private GameObject _eventEndNotificationPanel;
+
     [SerializeField] private Button _eventEndConfirmButton;
 
-    [Header("출석체크 아이콘")]
-    [SerializeField] private GameObject _attendanceIcon;
+    [Header("출석체크 아이콘")] [SerializeField] private GameObject _attendanceIcon;
 
-    
+
     private void OnEnable()
     {
         if (PlayerPrefs.GetInt("Festa_Event_Totally_Finished", 0) == 1)
@@ -50,24 +50,24 @@ public class FestaPresenter : MonoBehaviour
             {
                 _attendanceIcon.SetActive(false);
             }
-            
+
             transform.root.gameObject.SetActive(false);
             return;
         }
-        
+
         var eventManager = ServiceLocator.Get<IEventManager>();
 
         if (eventManager != null)
         {
             eventManager.OnGaugeIncrease += HandleGaugeIncrease;
         }
-        
+
         if (_specialThanksConfirmButton != null)
         {
             _specialThanksConfirmButton.onClick.RemoveAllListeners();
             _specialThanksConfirmButton.onClick.AddListener(HandleThanksPopupConfirm);
         }
-        
+
         if (_eventEndConfirmButton != null)
         {
             _eventEndConfirmButton.onClick.RemoveAllListeners();
@@ -78,7 +78,7 @@ public class FestaPresenter : MonoBehaviour
         {
             _view.OnChestClicked += HandleChestClick;
         }
-        
+
         SetPoint();
         ReFreshUI();
         CheckSpecialPopups();
@@ -98,31 +98,36 @@ public class FestaPresenter : MonoBehaviour
             _view.OnChestClicked -= HandleChestClick;
         }
     }
-    
+
     /// <summary>
     /// 미션의 Festa 포인트를 매개변수로 받아서 Total_Festa_Point에 대입
     /// </summary>
     /// <param name="point"></param>
     private void HandleGaugeIncrease(int point)
     {
-        _totalFestaPoint += point; 
+        _totalFestaPoint += point;
         ServiceLocator.Get<IDataManager>().Attendance.Total_Festa_Point = _totalFestaPoint;
-        
+
         ReFreshUI();
     }
 
     private void HandleChestClick(int chestIndex)
     {
+        if (chestIndex != _recentGaugeStep)
+        {
+            return;
+        }
+        
         var gaugeSO = _gaugeModel.GetGaugeSetting(chestIndex + 1);
 
         if (gaugeSO == null) return;
 
         int rewardGroupId = gaugeSO.Reward_Accrue_Id;
         var rewardList = _rewardModel.GetRewardGroup(rewardGroupId);
-        
+
         _recentGaugeStep = chestIndex + 1;
         ServiceLocator.Get<IDataManager>().Attendance.Recent_Gauge_Step = _recentGaugeStep;
-        
+
         bool isFinalChest = (_recentGaugeStep >= MAX_FESTA_CHEST_COUNT && _finalRewardReceived == 0);
 
         if (isFinalChest)
@@ -140,9 +145,9 @@ public class FestaPresenter : MonoBehaviour
                     OpenSpecialThanksPopup();
                 }
             });
-            
+
             var userGoods = ServiceLocator.Get<IDataManager>().UserGoods;
-            
+
             foreach (var reward in rewardList)
             {
                 switch (reward.Reward_Group_Id)
@@ -154,9 +159,11 @@ public class FestaPresenter : MonoBehaviour
                     case 5: userGoods.FurDoll_ += reward.Amount; break;
                     case 6: userGoods.Stone_ += reward.Amount; break;
                 }
+                
+                Log.Message($"<color=cyan><b>[Festa 출석 보상] 아이템 ID: {reward.Reward_Id}, 수량: {reward.Amount} 지급 완료! </b></color>");
             }
         }
-        
+
         ReFreshUI();
     }
 
@@ -169,35 +176,36 @@ public class FestaPresenter : MonoBehaviour
 
     private void ReFreshUI()
     {
-        _view.UpdateFestaUI(_totalFestaPoint, _recentGaugeStep); 
+        _view.UpdateFestaUI(_totalFestaPoint, _recentGaugeStep);
     }
 
     private void OpenSpecialThanksPopup()
     {
         if (_specialThanksPopupPanel == null) return;
-        
+
         _specialThanksPopupPanel.SetActive(true);
     }
 
     private void HandleThanksPopupConfirm()
     {
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN1);
         _specialThanksPopupPanel.SetActive(false);
 
         _finalRewardReceived = 2;
-        
+
         var attendanceDB = ServiceLocator.Get<IDataManager>().Attendance;
 
         if (attendanceDB != null)
         {
             attendanceDB.Final_Reward_Received = 2;
         }
-        
+
         DateTime simulatedTime = ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp;
         string todayStr = simulatedTime.ToString("yyyy-MM-dd");
 
         PlayerPrefs.SetString("Festa_Final_Claim_Date", todayStr);
         PlayerPrefs.Save();
-        
+
         transform.root.gameObject.SetActive(false);
     }
 
@@ -205,24 +213,25 @@ public class FestaPresenter : MonoBehaviour
     {
         if (_eventEndNotificationPanel != null)
         {
+            ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN1);
             _eventEndNotificationPanel.SetActive(false);
         }
-        
+
         PlayerPrefs.SetInt("Festa_Event_Totally_Finished", 1);
         PlayerPrefs.Save();
-        
+
         if (_attendanceIcon != null)
         {
             _attendanceIcon.SetActive(false);
         }
-        
+
         transform.root.gameObject.SetActive(false);
     }
 
     private void CheckSpecialPopups()
     {
         var attendanceDB = ServiceLocator.Get<IDataManager>().Attendance;
-        
+
         if (attendanceDB == null) return;
 
         if (_finalRewardReceived == 1)
@@ -234,18 +243,18 @@ public class FestaPresenter : MonoBehaviour
         if (_finalRewardReceived == 2)
         {
             string savedDateStr = PlayerPrefs.GetString("Festa_Final_Claim_Date", "");
-            
+
             if (!string.IsNullOrEmpty(savedDateStr) && DateTime.TryParse(savedDateStr, out DateTime savedDate))
             {
                 DateTime simulatedTime = ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp;
-                
+
                 // 오늘 날짜와 로컬에 저장된 날짜의 차이 계산
                 int elapsedDays = (simulatedTime - savedDate).Days;
 
                 if (elapsedDays >= GRACE_DAYS) // GRACE_DAYS = 3
                 {
                     Log.Message($"<color=red>보상 수령 후 {elapsedDays}일 경과 최종 종료 팝업을 띄웁니다.</color>");
-                    
+
                     if (_eventEndNotificationPanel != null)
                     {
                         _eventEndNotificationPanel.SetActive(true);

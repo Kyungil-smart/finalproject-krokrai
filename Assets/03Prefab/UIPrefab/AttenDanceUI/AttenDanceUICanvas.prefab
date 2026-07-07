@@ -14231,7 +14231,6 @@ MonoBehaviour:
   _openChestSprite: {fileID: 21300000, guid: 980d193770e076f4386bac2278d53c40, type: 3}
   _lockedColor: {r: 0.9254902, g: 0.6666667, b: 1, a: 1}
   _unlockedColor: {r: 1, g: 1, b: 0.5803922, a: 1}
-  _festaGroupRect: {fileID: 7190959045678086026}
 --- !u!114 &7437691808617641690
 MonoBehaviour:
   m_ObjectHideFlags: 0

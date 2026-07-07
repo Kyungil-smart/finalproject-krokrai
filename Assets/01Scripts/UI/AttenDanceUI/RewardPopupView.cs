@@ -28,6 +28,7 @@ public class RewardPopupView : MonoBehaviour
         {
             _confirmButton.onClick.AddListener(() =>
             {
+                ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN1);
                 gameObject.SetActive(false);
 
                 _onCloseCallback?.Invoke();
@@ -46,7 +47,8 @@ public class RewardPopupView : MonoBehaviour
         _onCloseCallback = onClose;
         
         gameObject.SetActive(true);
-
+        // ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.REWARD);
+        
         for (int i = 0; i < _popupItemSlots.Length; i++)
         {
             if (rewardDatas != null && i < rewardDatas.Count)
