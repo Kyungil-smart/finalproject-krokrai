@@ -1,7 +1,7 @@
 /*
  작성자 : 23M-RFT68
  작성일 : 26-06-18
- 수정일 : 26-06-18
+ 수정일 : 26-07-07
 
  역할 : 오브젝트를 꾹 눌러서 프로그래스바가 완전히 찬 후, 편집모드로 들어가지도록 하는 역할
  방식 : 프로그래스바 스크립트와 연결해서 프로그래스바를 활용하고, 편집모드에 들어가는 버튼들을 직접 설정하여, 캡처 시스템의
@@ -181,18 +181,25 @@ public class ObjectEditMode : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     // back버튼 : 뒤로가기 -> 편집 모드 종료
     private void OnBackClicked()
     {
+        // 버튼 사운드
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN1);
         ExitEditMode();
     }
 
     // X버튼: 취소 -> 편집 모드 종료
     private void OnXclicked()
     {
+        // 버튼 사운드
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN1);
         ExitEditMode();
     }
     
     // rotate버튼: 좌우반전
     private void OnRotateClicked()
     {
+        //버튼 사운드
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN1);
+        
         Vector3 scale = _objImg.localScale;
         scale.x *= -1;
         _objImg.localScale = scale;
