@@ -5,6 +5,12 @@ using UnityEngine;
 public class SNSExitButton : MonoBehaviour
 {
     [SerializeField] GameObject _snsCanvas;
+
+    private void OnEnable()
+    {
+        ServiceLocator.Get<IAudioManager>().PlayBGM(BGMAudiosEnum.SNS);
+    }
+
     public void OnExitButtonClicked()
     {
         ServiceLocator.Get<IAudioManager>().PlayBGM(BGMAudiosEnum.MAIN);
