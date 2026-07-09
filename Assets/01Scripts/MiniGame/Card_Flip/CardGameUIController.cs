@@ -48,7 +48,8 @@ public class CardGameUIController : MonoBehaviour
         _cardFlipGame.SetActive(false);
         
         _rowbtn.UnlockEverythingOnMiniGameExit();
-        
+        ServiceLocator.Get<IAudioManager>().PlayBGM(BGMAudiosEnum.SNS);
+
         _reels.SetActive(true);
         _mainUI.SetActive(true);
         _whiteBG.SetActive(true);

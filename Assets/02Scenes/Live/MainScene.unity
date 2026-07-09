@@ -27639,6 +27639,22 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3059868908056533311, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059868908056533311, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5695548355599975792}
+    - target: {fileID: 3059868908056533311, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnExitButtonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059868908056533311, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SNSExitButton, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3092611537257776672, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -28090,13 +28106,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7854501319937859145, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5695548355599975792}
   m_SourcePrefab: {fileID: 100100000, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
+--- !u!1 &5695548355599975790 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7854501319937859145, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
+  m_PrefabInstance: {fileID: 5695548355599975789}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5695548355599975791 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3319570394314726610, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
   m_PrefabInstance: {fileID: 5695548355599975789}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5695548355599975792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5695548355599975790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1efd32e0062b6304fb79026765f26279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _snsCanvas: {fileID: 5585720274084162035}
 --- !u!114 &5695548355599975793 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8383234647032964828, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
