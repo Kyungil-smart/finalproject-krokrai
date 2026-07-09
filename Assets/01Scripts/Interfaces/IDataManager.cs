@@ -29,5 +29,7 @@ public interface IDataManager
 
     public void SaveData();
 
+    public void ReadUserID();
+
     public void SaveRTDBData();
 }

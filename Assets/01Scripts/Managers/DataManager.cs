@@ -256,30 +256,36 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
         SaveData();
     }
 
-    private async void ReadUserID()
+    public void ReadUserID()
     {
-        try
-        {
-            if (await ServiceLocator.Get<IBackendManager>().ReadyTask)
-            {
-                //_userName = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.DisplayName;
-                _userName = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.Email.Split('@')[0];
-                _userID = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.UserId;
-                ReadData();
-                ReadRTDBData();
-                Log.Message("User ID 성공적으로 입력됌");
-            }
-        }
-        catch (NullReferenceException e)
-        {
-            Log.Message(e.Message);
-        }
-        catch {}
-        finally
-        {
-            Log.Message("User ID 읽기 실패");
-        }
+        _userName = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.Email.Split('@')[0];
+        _userID = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.UserId;
+        ReadData();
+        ReadRTDBData();
+        Log.Message("User ID 성공적으로 입력됌");
     }
+
+    //private async void ReadUserID()
+    //{
+    //    try
+    //    {
+    //        if (await ServiceLocator.Get<IBackendManager>().ReadyTask)
+    //        {
+    //            //_userName = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.DisplayName;
+    //            _userName = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.Email.Split('@')[0];
+    //            _userID = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.UserId;
+    //            ReadData();
+    //            ReadRTDBData();
+    //            Log.Message("User ID 성공적으로 입력됌");
+    //        }
+    //    }
+    //    catch (NullReferenceException e)
+    //    {
+    //        Log.Message(e.Message);
+    //    }
+    //    catch {}
+    //}
+
 #if UNITY_EDITOR
     private void TestMod()
     {
@@ -304,7 +310,7 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
             return;
         }
 #endif
-        ReadUserID();
+        //ReadUserID();
     }
     public void UnRegister() => ServiceLocator.UnRegister<IDataManager>(this);
 }
