@@ -262,7 +262,8 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
         {
             if (await ServiceLocator.Get<IBackendManager>().ReadyTask)
             {
-                _userName = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.DisplayName;
+                //_userName = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.DisplayName;
+                _userName = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.Email.Split('@')[0];
                 _userID = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.UserId;
                 ReadData();
                 ReadRTDBData();
