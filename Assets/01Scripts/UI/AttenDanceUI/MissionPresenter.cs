@@ -15,14 +15,14 @@ using UnityEngine;
 
 public class MissionPresenter : MonoBehaviour
 {
-    [Header("View 및 Model 연결")] 
-    [SerializeField] private MissionView _missionView;
+    [Header("View 및 Model 연결")] [SerializeField]
+    private MissionView _missionView;
+
     [SerializeField] private RewardPopupView _rewardPopupView;
     [SerializeField] private MissionDataModel _missionModel;
     [SerializeField] private RewardDataModel _rewardModel;
 
-    [Header("스토리 데이터")] 
-    [SerializeField] private List<Story_TableSO> _storyDataList = new();
+    [Header("스토리 데이터")] [SerializeField] private List<Story_TableSO> _storyDataList = new();
     [SerializeField] private StoryPopupView _storyPopupView;
     [SerializeField] private GameObject _prologuePopup;
 
@@ -85,19 +85,19 @@ public class MissionPresenter : MonoBehaviour
 
     private void InitAttendanceUI()
     {
-        if (!string.IsNullOrEmpty(_currentDayKey))
-        {
-            if (int.TryParse(_currentDayKey.Replace("Day_", ""), out int currentDay))
-            {
-                ServiceLocator.Get<IEventManager>().ClickDay(currentDay);
-            }
-        }
-        else
+        var dataManager = ServiceLocator.Get<IDataManager>();
+
+        if (dataManager != null && dataManager.Attendance != null)
         {
             int activeDay = (int)ServiceLocator.Get<IDataManager>().Attendance.User_Active_Day;
             if (activeDay <= 0) activeDay = 1;
+            
             ServiceLocator.Get<IEventManager>().ClickDay(activeDay);
         }
+        
+        
+
+        // ServiceLocator.Get<IEventManager>().ClickDay(currentDay);
     }
 
     /// <summary>
@@ -219,14 +219,14 @@ public class MissionPresenter : MonoBehaviour
         }
 
         var rewardList = _rewardModel.GetRewardGroup(targetMission.Reward_Daliy_Id);
-        
-        
+
+
         if (rewardList != null && _rewardPopupView != null)
         {
             //  _rewardPopupView.OpenRewardPopup(rewardList);
 
             var userGoods = ServiceLocator.Get<IDataManager>().UserGoods;
-            
+
             if (userGoods != null)
             {
                 foreach (var reward in rewardList)
@@ -275,8 +275,8 @@ public class MissionPresenter : MonoBehaviour
             if (targetStory != null && _storyPopupView != null)
             {
                 _storyPopupView.gameObject.SetActive(true);
-                
-                _storyPopupView.OpenStoryPopup(targetStory.ko_Title, targetStory.ko_Text, () => 
+
+                _storyPopupView.OpenStoryPopup(targetStory.ko_Title, targetStory.ko_Text, () =>
                 {
                     if (rewardList != null && _rewardPopupView != null)
                     {
@@ -306,6 +306,7 @@ public class MissionPresenter : MonoBehaviour
                 return false;
             }
         }
+
         return true;
     }
 
@@ -319,7 +320,7 @@ public class MissionPresenter : MonoBehaviour
 
         bool isAllCleared = true;
 
-        
+
         foreach (var mission in _currentMissions)
         {
             string id = mission.Mission_Id.ToString();
