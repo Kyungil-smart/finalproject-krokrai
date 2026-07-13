@@ -19,6 +19,7 @@ public class PostController : MonoBehaviour
     [Header("데이터 테이블")]
     [SerializeField] private AutoSOGen_ContaineSO _datas;
     [SerializeField] private AutoSOGen_ContaineSO _hashTag;
+    [SerializeField] private AutoSOGen_ContaineSO _npcData;
 
     [Header("유저 정보")]
     [SerializeField] TextMeshProUGUI _userName;
@@ -39,21 +40,36 @@ public class PostController : MonoBehaviour
     [SerializeField] PostListCompression _postListComp;
 
     private List<GameObject> _comments;
-    private UserDatas _user;
 
-    private int _postImgNum;
     private int _postId;
 
     bool _isLiked = false;
 
+    Dictionary<int, string> _npcNames;
+
     private void Awake()
     {
         _userName.text = ServiceLocator.Get<IDataManager>().UserName;
+
+        _npcNames = new Dictionary<int, string>(_npcData.scriptableObjects.Length);
+
+        Npc_TableSO t;
+
+        foreach(var item in _npcData.scriptableObjects)
+        {
+            if (item is Npc_TableSO)
+            {
+                t = (item as Npc_TableSO);
+                _npcNames.Add(t.npcId, t.npcAccountName);
+            }
+            else
+                Log.Message($"해당 형식은 변환할 수 없습니다. {item.name}");
+        }
     }
 
     private void OnEnable()
     {
-        _user = ServiceLocator.Get<IDataManager>().UserDatas;
+        //_user = ServiceLocator.Get<IDataManager>().UserDatas;
         //_postLike.onClick.AddListener(OnClickHeart);
     }
 
@@ -65,7 +81,7 @@ public class PostController : MonoBehaviour
     public void SetPost(int postImg, int postId)
     {
         _posts.SetActive(true);
-        _postImgNum = postImg;
+        //_postImgNum = postImg;
         _postId = postId;
 
         // 좋아요 여부에 따른 활성화 체크 db UserPost 참조
@@ -127,7 +143,8 @@ public class PostController : MonoBehaviour
             obj = Instantiate(_postComment, _intantiateTarget);
             obj.name = $"comment_{i}";
             var temp = obj.GetComponent<PostCommentController>();
-            temp.SetComment(list[i].comment, list[i].so.npcId.ToString(), list[i].so.npcImage);
+            //temp.SetComment(list[i].comment, list[i].so.npcId.ToString(), list[i].so.npcImage);
+            temp.SetComment(list[i].comment, _npcNames[list[i].so.npcId], list[i].so.npcImage);
             _comments.Add(obj);
         }
     }

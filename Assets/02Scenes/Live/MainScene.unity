@@ -27923,6 +27923,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6701831482215395957, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: 48efc221b62b6c440a1d182f65614cd1, type: 2}
     - target: {fileID: 6927406034443530640, guid: 726cf06bb6d01f640a60e96b827311f9, type: 3}
       propertyPath: m_Name
       value: CanvasSemi

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   messageId: 800014
   senderName: 400046
-  dmQuestType: 1
+  dmQuestType: 0
