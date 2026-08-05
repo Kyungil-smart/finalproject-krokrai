@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: String_TableSO_Row_8
   m_EditorClassIdentifier: 
   stringId: STR_CAP_001001
-  KR: "\"\uC911\uC131\uD654 \uC218\uC220 \uD6C4, \uB125\uCE74\uB77C\uB294 \uBD88\uD3B8\uD574
+  KR: "\uC911\uC131\uD654 \uC218\uC220 \uD6C4, \uB125\uCE74\uB77C\uB294 \uBD88\uD3B8\uD574
     \uBCF4\uC5EC\uB3C4 \uC808\uB300 \uBE7C\uC8FC\uBA74 \uC548 \uB3FC\uC694! \uD600\uB85C
     \uD565\uC73C\uBA74\uC11C \uC2E4\uBC25\uC774 \uD480\uB9AC\uAC70\uB098 2\uCC28
-    \uAC10\uC5FC\uC73C\uB85C \uC774\uC5B4\uC9C8 \uC218 \uC788\uC5B4\uC694!\""
-  EN: '"After spay or neuter surgery, never remove the cone, even if it looks uncomfortable!
+    \uAC10\uC5FC\uC73C\uB85C \uC774\uC5B4\uC9C8 \uC218 \uC788\uC5B4\uC694!"
+  EN: After spay or neuter surgery, never remove the cone, even if it looks uncomfortable!
     If they lick the incision, the stitches can come loose or it can lead to a secondary
-    infection!"'
+    infection!

@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_34
   m_EditorClassIdentifier: 
-  stringId: STR_TAG_000019
-  KR: "\uD658\uBB18\uBCF5"
-  EN: Recovery suit
+  stringId: STR_CAP_001027
+  KR: "\uD138\uBB49\uCE58 \uC778\uD615\uC744 \uB9CC\uB4E4\uAE30\uC704\uD574 \uC5B4\uB290
+    \uC9D1\uC0AC\uB2D8\uAED8 \uB178\uD558\uC6B0\uB97C \uC5EC\uCB64\uBD24\uB294\uB370
+    \uC0AC\uB8CC \uC0D8\uD50C\uC744 \uC870\uD569\uD558\uB77C\uACE0 \uD558\uC2DC\uB354\uB77C\uACE0\uC694?
+    \u3161\u3161/n\uC5B4\uC774\uAC00 \uC5C6\uC5B4\uC11C \uC99D\uB9D0\u2026/n\uC6B0\uB9AC
+    \uC560\uAE30\uB3C4 \uD654\uB09C\uAC70 \uBCF4\uC774\uC2DC\uB098\uC694?"
+  EN: 0

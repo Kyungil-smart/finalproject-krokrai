@@ -22,4 +22,4 @@ MonoBehaviour:
   isRequest: 0
   feedPostId: 103005
   requestId: 0
-  rewardFollower: 50
+  rewardFollower: 0

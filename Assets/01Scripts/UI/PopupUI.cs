@@ -1,7 +1,7 @@
 /*
 작성자 : 이종현
 작성일 : 26-06-04
-수정일 : 26-06-05
+수정일 : 26-07-06
 
 역할 : 팝업 활성화 / 비활성화 담당
 방식 : 버튼 클릭 시 지정된 팝업을 활성화하거나 비활성화하고 Dropdown 잔여 오브젝트를 정리
@@ -15,6 +15,8 @@ public class PopupUI : MonoBehaviour
 
     public void OpenPopup()
     {
+        PlayButtonSound();
+
         ClearDropdownObjects();
 
         if (_targetPopup == null)
@@ -28,6 +30,8 @@ public class PopupUI : MonoBehaviour
 
     public void ClosePopup()
     {
+        PlayButtonSound();
+
         ClearDropdownObjects();
 
         if (_targetPopup == null)
@@ -37,6 +41,16 @@ public class PopupUI : MonoBehaviour
         }
         Log.Message("ClosePopup 호출");
         _targetPopup.SetActive(false);
+    }
+
+    private void PlayButtonSound()
+    {
+        IAudioManager audioManager = ServiceLocator.Get<IAudioManager>();
+
+        if (audioManager == null)
+            return;
+
+        audioManager.PlaySFX(SFXAudiosEnum.BTN1);
     }
 
     private void ClearDropdownObjects()

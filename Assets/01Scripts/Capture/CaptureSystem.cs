@@ -1,7 +1,7 @@
 /*
  작성자 : 23M-RFT68
  작성일 : 26-06-18
- 수정일 : 26-06-18
+ 수정일 : 26-07-07
 
  역할 : Object_TableSO와 Post_TableSO를 이용하여, 초회 획득 여부를 판단하고 캡처를 진행해주는 역할
  방식 : SO 데이터를 연결해서 데이터 조회 후, 초회 획득 여부를 판단하고 맞다면 캡처 후 미리보기 스크립트에게 전달하고,
@@ -36,6 +36,10 @@ public class CaptureSystem : MonoBehaviour
     public void OnCaptureClick(int objectImg)
     {
         if (_isCapturing) return;  // 중복 클릭 방지
+        
+        // sfx - 캡처 사운드
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.REWARD);
+        
         StartCoroutine(CaptureRoutine(objectImg));
     }
 

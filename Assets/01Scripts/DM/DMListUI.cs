@@ -1,7 +1,7 @@
 ﻿/*
 작성자 : 이종현
 작성일 : 26-06-01
-수정일 : 26-06-22
+수정일 : 26-07-06
 
 역할 : DM 목록 UI 생성 및 DM 클릭 시 대화창 전환
 방식 : DB 저장과 로컬 Dictionary 기준으로 Dummy DM과 Quest DM을 생성, 진행, 완료, 삭제 처리
@@ -54,8 +54,12 @@ public class DMListUI : MonoBehaviour
     [SerializeField] private TMP_Text[] _unreadCountTexts;
 
     [SerializeField] private DMQuestHomeFeedPostLoad _post;
+    
+    [Header("하단 바")]
+    [SerializeField] private GameObject _bottomNavigation;
 
-
+    private bool _prevDMListPanelActive;
+    
     private IString_TableManager _stringManager;
 
     private readonly Dictionary<int, DMLocalProgress> _dmProgressTable = new();
@@ -71,10 +75,12 @@ public class DMListUI : MonoBehaviour
 
         if (_dmChatPanel != null)
             _dmChatPanel.SetActive(false);
-
+        
         InitLocalProgressData();
 
         LoadDMProgressFromDB();
+
+        SaveMissingDummyProgressToDB();
 
         CheckQuestGenerateDelay();
 
@@ -87,11 +93,13 @@ public class DMListUI : MonoBehaviour
     {
         _questGenerateCheckTimer += Time.deltaTime;
 
-        if (_questGenerateCheckTimer < 1f)
-            return;
+        if (_questGenerateCheckTimer >= 1f)
+        {
+            _questGenerateCheckTimer = 0f;
+            CheckQuestGenerateDelay();
+        }
 
-        _questGenerateCheckTimer = 0f;
-        CheckQuestGenerateDelay();
+        CheckDMListPanelOpened();
     }
 
     private void InitLocalProgressData()
@@ -130,7 +138,7 @@ public class DMListUI : MonoBehaviour
         {
             DM_ID = targetDM.messageId,
             DMType = (int)DMTypeEnum.Quest,
-            SentTime = DateTime.Now,
+            SentTime = GetCurrentGameTime(),
             ProgressState = (int)DMProgressState.Unread,
             SelectedChoiceNum = -1,
             QuestRewardState = (int)QuestRewardStateEnum.None,
@@ -202,7 +210,7 @@ public class DMListUI : MonoBehaviour
                 QuestRewardState = (int)QuestRewardStateEnum.None,
                 PreviewText = ""
             };
-
+            
             _dmProgressTable.Add(dm.messageId, progress);
         }
     }
@@ -284,6 +292,8 @@ public class DMListUI : MonoBehaviour
 
     private void OnClickDM(DM_TableSO dmData)
     {
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN2);
+        
         if (dmData == null)
         {
             Log.Message("선택된 DM 데이터가 없습니다.");
@@ -301,6 +311,9 @@ public class DMListUI : MonoBehaviour
 
         if (_dmChatPanel != null)
             _dmChatPanel.SetActive(true);
+        
+        if (_bottomNavigation != null)
+            _bottomNavigation.SetActive(false);
 
         DMLocalProgress progress = GetProgress(dmData.messageId);
 
@@ -343,8 +356,8 @@ public class DMListUI : MonoBehaviour
 
         runner.OpenNpcDM(
             dmData,
-            openProgressState,
-            openSelectedChoiceNum
+            progress.ProgressState,
+            progress.SelectedChoiceNum
         );
     }
 
@@ -423,29 +436,27 @@ public class DMListUI : MonoBehaviour
     {
         DMLocalProgress progress = GetProgress(messageId);
 
-        if (progress.QuestRewardState == (int)QuestRewardStateEnum.RewardMessagePrinted)
-            return;
-
         GiveQuestReward(messageId);
 
         if (feedPostId != 0)
             SendAfterStoryFeedToHome(feedPostId);
 
-        progress.QuestRewardState = (int)QuestRewardStateEnum.RewardMessagePrinted;
-
-        SaveLocalDMProgress(
-            messageId,
-            progress.ProgressState,
-            progress.SelectedChoiceNum
-        );
-
         SaveDMGenerationTimestamp();
 
         RemoveQuestDMFromListAndDB(messageId);
+
+        RefreshDMList();
+        UpdateUnreadBadge();
     }
     
     private void SendAfterStoryFeedToHome(int feedPostId)
     {
+        if (_post == null)
+        {
+            Log.Message("DMQuestHomeFeedPostLoad 연결 안됨");
+            return;
+        }
+
         _post.GetPost(feedPostId);
     }
     
@@ -454,25 +465,35 @@ public class DMListUI : MonoBehaviour
     ///</summary>
     private void RemoveQuestDMFromListAndDB(int messageId)
     {
-        _dmProgressTable.Remove(messageId);
+        DM_TableSO dmData = GetDMTable(messageId);
 
-        IDataManager dataManager = ServiceLocator.Get<IDataManager>();
-
-        if (dataManager == null || dataManager.UserDatas == null)
+        if (dmData == null)
         {
-            Log.Message("DMProgress 삭제 실패 : DataManager 또는 UserDatas가 없습니다.");
+            Log.Message($"삭제 실패 : DM_TableSO 없음 {messageId}");
+            return;
+        }
+        
+        if (dmData.dmQuestType == DMQuestTypeEnum.Dummy)
+        {
+            Log.Message($"삭제 중단 : Dummy DM {messageId}");
             return;
         }
 
-        UserDatas userDatas = dataManager.UserDatas;
+        bool localRemoved = _dmProgressTable.Remove(messageId);
 
-        if (userDatas.DMProgress != null)
-            userDatas.DMProgress.Remove(messageId.ToString());
+        IDataManager dataManager = ServiceLocator.Get<IDataManager>();
 
-        dataManager.SaveData();
+        if (dataManager != null &&
+            dataManager.UserDatas != null &&
+            dataManager.UserDatas.DMProgress != null)
+        {
+            bool dbRemoved =
+                dataManager.UserDatas.DMProgress.Remove(messageId.ToString());
 
-        Log.Message($"DMProgress 삭제 저장 완료 : {messageId}");
-        
+            dataManager.SaveData();
+        }
+
+        RefreshDMList();
         UpdateUnreadBadge();
     }
     
@@ -483,7 +504,7 @@ public class DMListUI : MonoBehaviour
         if (savedTimestamp != default)
             return;
 
-        SetDMGenerationTimestamp(DateTime.Now);
+        SetDMGenerationTimestamp(GetCurrentGameTime());
     }
     
     public void CheckQuestGenerateDelay()
@@ -496,7 +517,8 @@ public class DMListUI : MonoBehaviour
             return;
         }
 
-        DateTime now = DateTime.Now;
+        DateTime now = GetCurrentGameTime();
+        
         DateTime savedTimestamp = GetDMGenerationTimestamp();
 
         if (savedTimestamp == default)
@@ -593,7 +615,7 @@ public class DMListUI : MonoBehaviour
                     : (int)DMTypeEnum.Quest,
                 SentTime = dmData != null && dmData.dmQuestType == DMQuestTypeEnum.Dummy
                     ? DateTime.MinValue
-                    : DateTime.Now,
+                    : GetCurrentGameTime(),
                 ProgressState = (int)DMProgressState.Unread,
                 SelectedChoiceNum = -1,
                 QuestRewardState = (int)QuestRewardStateEnum.None,
@@ -1014,8 +1036,6 @@ public class DMListUI : MonoBehaviour
         userDatas.DMQuest.DMGenerationTimestamp = timestamp;
 
         dataManager.SaveData();
-
-        Log.Message("DMGenerationTimestamp 저장 완료");
     }
     
     private int GetUnreadDMCount()
@@ -1059,6 +1079,76 @@ public class DMListUI : MonoBehaviour
 
                 countText.text = unreadCount.ToString();
             }
+        }
+    }
+    
+    ///<summary>
+    /// 시뮬레이터 기준 현재 게임 시간을 반환합니다.
+    ///</summary>
+    private DateTime GetCurrentGameTime()
+    {
+        IDataManager dataManager = ServiceLocator.Get<IDataManager>();
+
+        if (dataManager != null && dataManager._simulationCurrentTime != default)
+        {
+            return dataManager._simulationCurrentTime;
+        }
+
+        return DateTime.Now;
+    }
+    
+    ///<summary>
+    /// DM 목록 패널이 활성화되는 순간 목록을 갱신합니다.
+    ///</summary>
+    private void CheckDMListPanelOpened()
+    {
+        if (_dmListPanel == null)
+            return;
+
+        bool currentActive = _dmListPanel.activeInHierarchy;
+
+        if (!_prevDMListPanelActive && currentActive)
+        {
+            RefreshDMList();
+            UpdateUnreadBadge();
+        }
+
+        _prevDMListPanelActive = currentActive;
+    }
+    
+    private void SaveMissingDummyProgressToDB()
+    {
+        IDataManager dataManager = ServiceLocator.Get<IDataManager>();
+
+        if (dataManager == null || dataManager.UserDatas == null)
+            return;
+
+        UserDatas userDatas = dataManager.UserDatas;
+
+        if (userDatas.DMProgress == null)
+            userDatas.DMProgress = new Dictionary<string, DMProgress>();
+
+        foreach (DMLocalProgress progress in _dmProgressTable.Values)
+        {
+            if (progress == null)
+                continue;
+
+            DM_TableSO dmData = GetDMTable(progress.DM_ID);
+
+            if (dmData == null)
+                continue;
+
+            if (dmData.dmQuestType != DMQuestTypeEnum.Dummy)
+                continue;
+
+            if (userDatas.DMProgress.ContainsKey(progress.DM_ID.ToString()))
+                continue;
+
+            SaveLocalDMProgress(
+                progress.DM_ID,
+                progress.ProgressState,
+                progress.SelectedChoiceNum
+            );
         }
     }
 }

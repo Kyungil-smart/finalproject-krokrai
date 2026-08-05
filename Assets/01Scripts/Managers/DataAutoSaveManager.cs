@@ -1,8 +1,8 @@
 ﻿/*
  작성자 : krokrai
- 수정자 : 이종현
+ 수정자 : 이종현, cminhyeong1999
  작성일 : 26-05-29
- 수정일 : 26-06-09
+ 수정일 : 26-06-30
 
  역할 : firebase에 저장될 정보를 자동으로 기달렸다가 저장함(firebase에 과도한 요청으로 인한 데이터 유실 방지)
  방식 : 비동기 방식으로 1.5초 대기 후 추가 요청 사항이 없는 경우 DataManager의 SaveData 호출
@@ -18,6 +18,7 @@ public class DataAutoSaveManager : MonoBehaviour, IManagerBooter, IDataAutoSaveM
     private CancellationTokenSource _cts;
     private CancellationTokenSource _rtdbCts;
     private MainCurrencyController _mainCurrencyController;
+    private TimeRewardsManager _timeRewardsManager;
 
 #if UNITY_EDITOR
     private bool _testMode = false;
@@ -29,6 +30,11 @@ public class DataAutoSaveManager : MonoBehaviour, IManagerBooter, IDataAutoSaveM
     {
         _mainCurrencyController = mainCurrencyController;
     }
+
+    public void SetTimeRewardsManager(TimeRewardsManager timeRewardsManager)
+    {
+        _timeRewardsManager = timeRewardsManager;
+    }
     public void RequestSave()
     {
 #if UNITY_EDITOR
@@ -39,16 +45,21 @@ public class DataAutoSaveManager : MonoBehaviour, IManagerBooter, IDataAutoSaveM
         _cts = new CancellationTokenSource();
 
         _ = DelaySaveAsync(_cts.Token);
+        // SNS Follow 기반 방치 보상 시스템에서 follow 수 및 UI 갱신
+        _timeRewardsManager?.RefreshFollowCount();
+        _timeRewardsManager?.RefreshUI();
     }
 
     public void RequestRTDBSave()
     {
 #if UNITY_EDITOR
+        _mainCurrencyController.RefreshUI();
         if (_testMode) return;
 #endif
+
         if (!ServiceLocator.Get<IDataManager>().CanSave) return;
 
-        _mainCurrencyController.RefreshUI();
+        _mainCurrencyController?.RefreshUI();
 
         _rtdbCts?.Cancel();
         _rtdbCts = new CancellationTokenSource();

@@ -10,6 +10,7 @@
 */
 
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,18 +28,12 @@ public class FestaView : MonoBehaviour
     [SerializeField] private Sprite _closeChestSprite;           // 닫힌 상자 원본 스프라이트
     [SerializeField] private Sprite _openChestSprite;            // 열린 상자 원본 스프라이트
 
-    [Header("노란색, 보라색 색상 세팅 (헥사 코드 입력")] 
-    [SerializeField] private string _lockedHexCode = "#ECAAFF"; // 보라색
-    [SerializeField] private string _unlockedHexCode = "#FFFF94"; // 노란색
-    
-    private Color _lockedColor;
-    private Color _unlockedColor;
+    [Header("노란색, 보라색 색상 세팅")] 
+    [SerializeField] private Color _lockedColor;
+    [SerializeField] private Color _unlockedColor;
     
     private void Awake()
     {
-        ColorUtility.TryParseHtmlString(_lockedHexCode, out _lockedColor);
-        ColorUtility.TryParseHtmlString(_unlockedHexCode, out _unlockedColor);
-        
         for (int i = 0; i < _chestButtons.Length; i++)
         {
             int index = i;
@@ -47,6 +42,7 @@ public class FestaView : MonoBehaviour
             {
                 Log.Message($"{index + 1}번 상자 클릭됨");
                 OnChestClicked?.Invoke(index);
+                ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.PURCHASED);
             });
         }
     }
@@ -70,7 +66,7 @@ public class FestaView : MonoBehaviour
             // recentGaugeStep이 2면, 인덱스 0, 1은 수령 완료
             bool isClaimed = (i < recentGaugeStep);
             // 점수는 채웠는데 아직 수령 안 한 상태인지 검사
-            bool isClaimable = (!isClaimed && currentPoint >= targetPoint);
+            bool isClaimable = (!isClaimed && currentPoint >= targetPoint && i == recentGaugeStep);
 
             if (isClaimed)
             {

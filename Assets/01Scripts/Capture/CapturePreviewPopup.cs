@@ -1,7 +1,7 @@
 /*
  작성자 : 23M-RFT68
  작성일 : 26-06-16
- 수정일 : 26-06-16
+ 수정일 : 26-07-07
 
  역할 : 캡처 버튼 눌렀을때 초회 획득 이미지라면 팝업을 띄우는 시스템
  방식 : 캡처 시스템을 통해서 초회인지 확인하고 확인후 맞다면 팝업을 띄우고 팝업에 해당 획득 사진을 넣고 업로드 버튼까지 연결
@@ -15,6 +15,7 @@ using UnityEngine.UI;
 public class CapturePreviewPopup : MonoBehaviour
 {
     [SerializeField] private GameObject _semiCanvas;            // 스마트폰의 캔버스
+    [SerializeField] private RowbtnController _rowbtnController;// 하단바 컨트롤러
     
     [Header("팝업 UI")]
     [SerializeField] private Image _captureImg;                 // 획득 이미지
@@ -55,6 +56,9 @@ public class CapturePreviewPopup : MonoBehaviour
     // -> 팝업 닫기 -> 편집 모드 종료 -> 업로드 화면으로 이동
     private void OnPostButtonClicked()
     {
+        // 버튼 사운드
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN1);
+        
         StartCoroutine(CloseWithAnimation(() =>
         {
             // 호출한 가구의 편집 모드 종료
@@ -64,9 +68,9 @@ public class CapturePreviewPopup : MonoBehaviour
             if (_semiCanvas != null)
                 _semiCanvas.SetActive(true);
 
-            // 업로드 화면으로 이동 (UploadController에 해당 이미지 선택 상태로)
-             _uploadController.SetPost(_currentGetImg, _currentPostId);
-            Log.Message($"업로드 화면으로 이동:  {_currentGetImg} / {_currentPostId}");
+            // 업로드 화면으로 이동
+             _rowbtnController.OnTabClicked(2);
+            Log.Message("업로드 화면으로 이동");
         }));
     }
     

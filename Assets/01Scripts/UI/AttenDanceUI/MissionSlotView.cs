@@ -1,9 +1,9 @@
 /*
 작성자 : NekioEmilia
-수정자 : 
+수정자 : NekioEmilia
  
 작성일 : 26-06-08
-수정일 : 
+수정일 : 26-06-29
 
 역할 : 단일 미션 슬롯의 시각적 요소(게이지, 텍스트, 보상 아이콘 등)를 담당하는 View 스크립트
 방식 : MissionView의 명령을 받아 자신(1개 슬롯)의 UI 상태만 갱신함
@@ -32,6 +32,9 @@ public class MissionSlotView : MonoBehaviour
     [SerializeField] private Sprite _defaultSprite;
     [SerializeField] private Sprite _changeSprite;
     
+    [Header("MVP 연결")]
+    [SerializeField] private ItemDataModel _itemModel;
+    
     private int _slotIndex;
 
     /// <summary>
@@ -42,8 +45,8 @@ public class MissionSlotView : MonoBehaviour
         _slotIndex = index;
         _rewardButton.onClick.AddListener(() =>
         {
-            Log.Message($"<color=blue> {_slotIndex + 1}번 미션 버튼 터치됨");
             OnRewardClicked?.Invoke(_slotIndex);
+            ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.PURCHASED);
         });
     }
 
@@ -84,9 +87,20 @@ public class MissionSlotView : MonoBehaviour
             if (rewardData != null && i < rewardData.Count)
             {
                 _rewardItemSlots[i].gameObject.SetActive(true);
+
+                string addressableKey = "";
+
+                if (_itemModel != null)
+                {
+                    var itemData = _itemModel.GetItemTableData(rewardData[i].Reward_Id);
+
+                    if (itemData != null)
+                    {
+                        addressableKey = itemData.Item_string_Res_Id.Trim();
+                    }
+                }
                 
-                // 일단 아이콘이 없어서 null 넘겨주는데, 스프라이트 생기는 즉시 교체
-                _rewardItemSlots[i].SetItem(null, rewardData[i].Amount);
+                _rewardItemSlots[i].SetItem(addressableKey, rewardData[i].Amount);
             }
             else
             {

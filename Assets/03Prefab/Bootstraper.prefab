@@ -44,50 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da0fa65143da6f64097af585e4a77116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1043132560464126709
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2073581147418642567}
-  - component: {fileID: 8750935735468071038}
-  m_Layer: 0
-  m_Name: GoogleAds
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2073581147418642567
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1043132560464126709}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 540, y: 1280, z: 45}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2645528157958487817}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8750935735468071038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1043132560464126709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a76e3b87bf3c494d9f40b390b3928fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1184689318074343023
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +79,6 @@ Transform:
   - {fileID: 3181925879964379185}
   - {fileID: 2065029822434360255}
   - {fileID: 5055385025327761955}
-  - {fileID: 2073581147418642567}
   - {fileID: 7825323422094267126}
   - {fileID: 6104313003287540661}
   - {fileID: 4595001215680974665}
@@ -148,9 +103,9 @@ MonoBehaviour:
   - {fileID: 5630065043130961673}
   - {fileID: 6206898581703667139}
   - {fileID: 1773361464113163390}
-  - {fileID: 8750935735468071038}
   - {fileID: 5151302018583268973}
   - {fileID: 303222015933140038}
+  - {fileID: 5328278830329787872}
 --- !u!1 &3360657718720082198
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5055385025327761955
 Transform:
   m_ObjectHideFlags: 0
@@ -345,10 +300,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 7389505501350861565, guid: 785a0911655f47a4bbe1d4170d4be9ff, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

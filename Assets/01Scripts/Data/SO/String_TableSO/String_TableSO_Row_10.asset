@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: String_TableSO_Row_10
   m_EditorClassIdentifier: 
   stringId: STR_CAP_001003
-  KR: "\"\uADC0\uC5FD\uB2E4\uACE0 \uC0AC\uC9C4\uCC98\uB7FC \uACA8\uB4DC\uB791\uC774\uB9CC
+  KR: "\uADC0\uC5FD\uB2E4\uACE0 \uC0AC\uC9C4\uCC98\uB7FC \uACA8\uB4DC\uB791\uC774\uB9CC
     \uD6C5 \uC7A1\uACE0 \uB4E4\uC5B4 \uC62C\uB9AC\uC2E0 \uC801 \uC788\uB098\uC694?
     \uC5C9\uB369\uC774\uB098 \uD558\uCCB4\uB97C \uBC15\uCCD0\uC8FC\uC9C0 \uC54A\uC73C\uBA74
     \uB0E5\uC774\uC758 \uD5C8\uB9AC\uC640 \uCC99\uCD94,\uC55E \uAD00\uC808\uC5D0
-    \uD070 \uBB34\uB9AC\uAC00 \uAC11\uB2C8\uB2E4.\""
-  EN: "\"Have you ever grabbed a cat under the armpits and lifted them up because
-    they looked cute, like in the photo? If you don\u2019t support their bottom or
-    lower body, it can put serious strain on their back, spine, and front-leg joints.\""
+    \uD070 \uBB34\uB9AC\uAC00 \uAC11\uB2C8\uB2E4."
+  EN: "Have you ever grabbed a cat under the armpits and lifted them up because they
+    looked cute, like in the photo? If you don\u2019t support their bottom or lower
+    body, it can put serious strain on their back, spine, and front-leg joints."

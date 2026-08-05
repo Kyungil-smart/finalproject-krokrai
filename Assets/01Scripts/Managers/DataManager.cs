@@ -1,7 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-05-27
- 수정일 : 26-06-09
+ 수정일 : 26-06-29
 
  역할 : Firebase Store 및 RTDB와 연동으로 데이터 읽기 및 쓰기
  방식 : Firestore에는 최상위 경로에서 User만 찾은 후 Script에 밀어 넣는 방식
@@ -24,6 +24,10 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
     public bool CanSave => _readyToSave;
 
     private string _userID;
+
+    private string _userName;
+
+    public string UserName => _userName;
 
     public DateTime _simulationCurrentTime { get; set; }
 
@@ -94,9 +98,17 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
     {
         _userGoods = new UserGoods();
         _userData = new UserDatas();
+        _userData.Event_Mission.Init();
         ImageState s = new ImageState();
         s.getTime = DateTime.Now;
-        _userData.Event_Mission.Init();
+        s.isUploaded = false;
+        
+        _userData.ImgList.Add("502001", s);
+        _userData.ImgList.Add("502002", s);
+        _userData.ImgList.Add("502003", s);
+        _userData.ImgList.Add("502004", s);
+        _userData.ImgList.Add("502005", s);
+
         SaveRTDBData();
         OnUserDataReseted?.Invoke();
     }
@@ -166,8 +178,19 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
                 Log.Message("신규 유저 감지됌. Firestore에 정보 생성");
                 _userData = new();
                 _userData.Event_Mission.Init();
+
                 ImageState s = new ImageState();
                 s.getTime = DateTime.Now;
+                s.isUploaded = false;
+
+                _userData.ImgList.Add("502001",s);
+                _userData.ImgList.Add("502002",s);
+                _userData.ImgList.Add("502003",s);
+                _userData.ImgList.Add("502004",s);
+                _userData.ImgList.Add("502005",s);
+
+                _userData.NyangBakery.Init();
+                
                 _readyToSave = true;
                 SaveData();
             }
@@ -233,29 +256,43 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
         SaveData();
     }
 
-    private async void ReadUserID()
+    public void ReadUserID()
     {
-        try
-        {
-            if (await ServiceLocator.Get<IBackendManager>().ReadyTask)
-            {
-                Log.Message(ServiceLocator.Get<IBackendManager>().Auth.CurrentUser == null);
-                _userID = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.UserId;
-                ReadData();
-                ReadRTDBData();
-                Log.Message("User ID 성공적으로 입력됌");
-            }
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e.Message);
-        }
+        _userName = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.Email.Split('@')[0];
+        _userID = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.UserId;
+        ReadData();
+        ReadRTDBData();
+        Log.Message("User ID 성공적으로 입력됌");
     }
+
+    //private async void ReadUserID()
+    //{
+    //    try
+    //    {
+    //        if (await ServiceLocator.Get<IBackendManager>().ReadyTask)
+    //        {
+    //            //_userName = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.DisplayName;
+    //            _userName = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.Email.Split('@')[0];
+    //            _userID = ServiceLocator.Get<IBackendManager>().Auth.CurrentUser.UserId;
+    //            ReadData();
+    //            ReadRTDBData();
+    //            Log.Message("User ID 성공적으로 입력됌");
+    //        }
+    //    }
+    //    catch (NullReferenceException e)
+    //    {
+    //        Log.Message(e.Message);
+    //    }
+    //    catch {}
+    //}
+
 #if UNITY_EDITOR
     private void TestMod()
     {
+        _userName = "TestModeName";
         _userData = new UserDatas();
         _userData.Event_Mission.Init();
+        _userData.NyangBakery.Init();
         _userGoods = new UserGoods();
         ServiceLocator.Get<IDataAutoSaveManager>().SetTestMode();
     }
@@ -273,7 +310,7 @@ public class DataManager : MonoBehaviour, IManagerBooter, IDataManager // 현재
             return;
         }
 #endif
-        ReadUserID();
+        //ReadUserID();
     }
     public void UnRegister() => ServiceLocator.UnRegister<IDataManager>(this);
 }

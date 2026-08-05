@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matchedPairs: 4
   rewardType: 0
-  rewardAmount: 2
+  rewardAmount: 3

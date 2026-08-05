@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
+  m_Name: String_TableSO_Row_262
+  m_EditorClassIdentifier: 
+  stringId: STR_DIA_000092
+  KR: "\uC800\uB294 \uADF8\uAC83\uB3C4 \uBAA8\uB974\uACE0 \uC5EC\uD0DC \uD5C8\uACF5\uB9CC
+    \uC7A1\uAC8C \uD588\uC73C\uB2C8 \uC560\uAC00 \uC5BC\uB9C8\uB098 \uB2F5\uB2F5\uD588\uC744\uAE4C\uC694!"
+  EN: I didn't know that either, so I've just been making my cat chase empty air
+    this whole time. They must have been so frustrated!

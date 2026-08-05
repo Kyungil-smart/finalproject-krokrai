@@ -1,16 +1,14 @@
 /*
 작성자 : NekioEmilia
-수정자 : 
+수정자 : NekioEmilia
  
 작성일 : 26-06-04
-수정일 : 26-06-15
+수정일 : 26-06-29
 
 역할 : 출석체크 UI의 1~7일차 UI에 MVP 패턴을 적용해 DayListPresenter와 통신
 방식 : DayListPresenter에서 호출받아 UI를 갱신학고, 버튼 클릭시 EventManger를 통해 이벤트를 발생시킴
 */
 
-
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,10 +30,12 @@ public class DayListView : MonoBehaviour
             {
                 Log.Message($"일 차 눌림 (눌린 일차 {index + 1})");
                 ServiceLocator.Get<IEventManager>().ClickDay(index + 1);
+                ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN1);
             });
         }
     }
 
+    // 활성화 되면
     private void OnEnable()
     {
         var eventManager = ServiceLocator.Get<IEventManager>();
@@ -43,8 +43,6 @@ public class DayListView : MonoBehaviour
         {
             eventManager.OnDayClicked += OnDayChangedExternally;
         }
-        
-        ToggleOutline(0);
     }
     
     private void OnDisable()
@@ -56,6 +54,11 @@ public class DayListView : MonoBehaviour
         }
     }
 
+    public void InitOutline(int dayIndex)
+    {
+        ToggleOutline(dayIndex);
+    }
+
     /// <summary>
     /// 특정 일차 슬롯의 자물쇠 및 버튼 상호작용 상태를 갱신
     /// </summary>
@@ -65,7 +68,6 @@ public class DayListView : MonoBehaviour
     {
         _lockObjects[dayIndex].SetActive(!isUnlocked);
         _dayBtns[dayIndex].interactable = isUnlocked;
-        
     }
 
     // Outline 활성화/비활성화 해주는 메서드
@@ -75,7 +77,7 @@ public class DayListView : MonoBehaviour
         {
             return;
         }
-
+        
         if (_lastOutline != null) _lastOutline.enabled = false;
 
         if (_outlines[index] != null)

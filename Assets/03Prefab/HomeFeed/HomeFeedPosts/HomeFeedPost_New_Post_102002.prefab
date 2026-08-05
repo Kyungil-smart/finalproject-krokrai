@@ -1065,7 +1065,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 2941.8652, w: 0}
+  m_margin: {x: 249.42981, y: 0, z: 2941.8652, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2250,8 +2250,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3893074715277507395}
-  - component: {fileID: 1655818138863199724}
-  - component: {fileID: -5855011030007952464}
+  - component: {fileID: 978790097936769229}
   m_Layer: 5
   m_Name: HomeFeedPost_New_Post_102002
   m_TagString: Untagged
@@ -2283,9 +2282,9 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -13}
-  m_SizeDelta: {x: 0, y: 1777}
+  m_SizeDelta: {x: 0, y: 1900}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1655818138863199724
+--- !u!114 &978790097936769229
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2294,26 +2293,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7893499260340199434}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48f166bab1e8fe6498419c169cc7bd43, type: 3}
+  m_Script: {fileID: 11500000, guid: 4da9896e669c3b94697a1e7da15d77d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _comment: {fileID: 11400000, guid: 4e165a431d6271a40b1b89a2d697b825, type: 2}
-  _hashTag: {fileID: 11400000, guid: dd81ca779902205428d868444ec061c5, type: 2}
-  _hashTag_Table: {fileID: 11400000, guid: 7936aed67575a1446b133d277158ef7c, type: 2}
-  _npc_Table: {fileID: 11400000, guid: 48efc221b62b6c440a1d182f65614cd1, type: 2}
---- !u!114 &-5855011030007952464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7893499260340199434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3876eb206f2b364db9ea3900968781e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _postImage: {fileID: 7677621346140281614}
+  _commentNameText: {fileID: 6121736153393398570}
 --- !u!1 &8359977451819281636
 GameObject:
   m_ObjectHideFlags: 0
@@ -2592,7 +2575,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -254.4183, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2677,7 +2660,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 7dc20012d114bc54b8d08498fe4a1b39, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

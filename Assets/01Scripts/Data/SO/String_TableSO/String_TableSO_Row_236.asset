@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
+  m_Name: String_TableSO_Row_236
+  m_EditorClassIdentifier: 
+  stringId: STR_DIA_000042
+  KR: "\uC218\uC220\uD558\uACE0 \uB098\uC11C \uC560\uB4E4\uC774 \uB125\uCE74\uB77C
+    \uCC28\uACE0 \uC788\uC73C\uBA74 \uBC25 \uBA39\uC744 \uB584\uB3C4 \uADF8\uB807\uACE0
+    \uC5C4\uCCAD \uBD88\uD3B8\uD574 \uD558\uC796\uC544\uC694?"
+  EN: After surgery, cats get so uncomfortable wearing cones, even when they're eating,
+    right?

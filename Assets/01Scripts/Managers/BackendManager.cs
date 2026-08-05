@@ -53,7 +53,7 @@ public class BackendManager : MonoBehaviour, IManagerBooter, IBackendManager
         {
             bool isAvailable = task.Result == DependencyStatus.Available; // 자동 로그인을 위해 변경 되었음.
 
-            if (isAvailable)
+            if (isAvailable) // 첫 로그인 시 백엔드가 대기 없이 진행 되는 것이 문제 인듯 "재형님 말씀".
             {
                 _app = FirebaseApp.DefaultInstance;
                 _auth = FirebaseAuth.DefaultInstance;
@@ -72,12 +72,15 @@ public class BackendManager : MonoBehaviour, IManagerBooter, IBackendManager
                 _database = null;
                 _firestore = null;
             }
-
             _readyTcs.TrySetResult(isAvailable);
         });
+        ServiceLocator.Register<IBackendManager>(this);
     }
 
-    public void Register() => ServiceLocator.Register<IBackendManager>(this);
+    public void Register()
+    {
+        ServiceLocator.Register<IBackendManager>(this);
+    }
 
     public void UnRegister() => ServiceLocator.UnRegister<IBackendManager>(this);
 }

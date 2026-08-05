@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_25
   m_EditorClassIdentifier: 
-  stringId: STR_TAG_000010
-  KR: "\uACE0\uC591\uC774 \uC9C0\uC2DD"
-  EN: Cat tips
+  stringId: STR_CAP_001018
+  KR: "\uD3C9\uC18C\uC5D0\uB294 \uAD00\uC2EC\uB3C4 \uC548 \uAC00\uC838\uC11C \uC5B4\uB5BB\uAC8C
+    \uB180\uC544\uC918\uC57C \uD560\uC9C0 \uACE0\uBBFC\uC744 \uB9CE\uC774 \uD588\uB294\uB370/n\uBC29\uC6B8
+    \uB09A\uC2EF\uB300 \uB05D\uC5D0 \uCEA3\uB2D9\uC744 \uB2EC\uC558\uB354\uB2C8 \uB108\uBB34
+    \uC88B\uC544\uD558\uB124\uC694\u314E/n\uC774\uB807\uAC8C \uC2E0\uB098\uAC8C \uB6F0\uC5B4\uB178\uB294
+    \uAC74 \uCC98\uC74C \uBCF4\uB294 \uAC83 \uAC19\uC544\uC694!"
+  EN: 0

@@ -5,12 +5,31 @@
 
  역할 : FollowLevelSO를 쉽게 접근하기 위한 매니저
 */
+
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowLevelSOManager : MonoBehaviour
 {
+    [SerializeField] private AutoSOGen_ContaineSO _tierSOLists;
     [SerializeField] private Follow_Level_TableSO[] _followLevels;
 
+    private Dictionary<string, SNS_Follow_TierSO> _SNSSOLists;
+
+    private void Awake()
+    {
+        _SNSSOLists = new Dictionary<string, SNS_Follow_TierSO>();
+
+        foreach (var SOitem in _tierSOLists.scriptableObjects)
+        {
+            if (SOitem is SNS_Follow_TierSO)
+            {
+                var SNSitem = (SNS_Follow_TierSO)SOitem;
+                _SNSSOLists.TryAdd(SNSitem.stringId, SNSitem);
+            }
+        }
+    }
+    
     /// <summary>
     /// 현재 팔로워 레벨의 이름을 가져오는 메서드
     /// </summary>
@@ -19,7 +38,7 @@ public class FollowLevelSOManager : MonoBehaviour
     public string GetFollowTierName(int follow)
     {
         int index = GetFollowLevel(follow);
-        return _followLevels[index].tierName;
+        return GetTierName(_followLevels[index].tierName);
     }
     
     /// <summary>
@@ -52,7 +71,7 @@ public class FollowLevelSOManager : MonoBehaviour
     public int GetNextTierFollowValue(int follow)
     {
         int index = GetFollowLevel(follow);
-        int nextIndex = Mathf.Clamp(index + 1, 0, _followLevels.Length);
+        int nextIndex = Mathf.Clamp(index + 1, 0, _followLevels.Length - 1);
         return _followLevels[nextIndex].requiredFollowers;
     }
 
@@ -78,5 +97,20 @@ public class FollowLevelSOManager : MonoBehaviour
             >= 1000000      => 9,
         };
         return result;
+    }
+
+    /// <summary>
+    /// StringID에 맞는 실제 이름을 가져오는 메서드
+    /// </summary>
+    /// <param name="stringID">불러올 string의 ID</param>
+    /// <returns>해당 ID의 실제 이름 / 찾지 못하면 ERROR! return</returns>
+    private string GetTierName(string stringID)
+    {
+        if (_SNSSOLists.TryGetValue(stringID, out var result))
+        {
+            return result.KR;
+        }
+        
+        return "ERROR!";
     }
 }

@@ -5,6 +5,7 @@
  역할 : 카드 뒤집기 게임에 필요한 UI 제어
  방식 : 화면 구성을 위해 GameObject의 활성화를 변경하여, 화면 구성
  */
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -13,10 +14,14 @@ public class CardGameUIController : MonoBehaviour
     [SerializeField] GameObject _reels;
 
     [SerializeField] GameObject _cardFlipGame;
-    
+    [SerializeField] GameObject _mainUI;
+    [SerializeField] GameObject _whiteBG;
+
     [SerializeField] GameObject _endUI;
     [SerializeField] TextMeshProUGUI _rewardText;
     [SerializeField] GameObject _rePlayGameUI;
+
+    [SerializeField] private RowbtnController _rowbtn;
 
     [SerializeField] private ReelsController _reelsCtrl;
 
@@ -24,20 +29,30 @@ public class CardGameUIController : MonoBehaviour
     {
         _reels.SetActive(false);
         _endUI.SetActive(false);
+        _mainUI.SetActive(false);
+        _whiteBG.SetActive(false);
+        _rowbtn.LockEverythingForMiniGame();
+        ServiceLocator.Get<IAudioManager>().PlayBGM(BGMAudiosEnum.MINIGAME_CARDFLIPPING);
         _cardFlipGame.SetActive(true);
         _cardFlipGame.GetComponent<CardGameController>().ResetData();
-    }
+    }   
 
     public void GameResult(int hitedCards)
     {
-        _endUI.SetActive(true);
-        _rewardText.text = $"x{hitedCards.ToString()}";
+        StartCoroutine(RewardPopUp(hitedCards));
     }
 
     public void GameEnd() // 리플레이 조건 검사 확인
     {
+        _rePlayGameUI.SetActive(false);
         _cardFlipGame.SetActive(false);
+        
+        _rowbtn.UnlockEverythingOnMiniGameExit();
+        ServiceLocator.Get<IAudioManager>().PlayBGM(BGMAudiosEnum.SNS);
+
         _reels.SetActive(true);
+        _mainUI.SetActive(true);
+        _whiteBG.SetActive(true);
     }
 
     public void Restart()
@@ -48,6 +63,7 @@ public class CardGameUIController : MonoBehaviour
             _reels.SetActive(true);
             _cardFlipGame.SetActive(false);
             _endUI.SetActive(false);
+            ServiceLocator.Get<IAudioManager>().PlayBGM(BGMAudiosEnum.MINIGAME_CARDFLIPPING);
             return;
         }
         _cardFlipGame.GetComponent<CardGameController>().ResetData();
@@ -62,5 +78,14 @@ public class CardGameUIController : MonoBehaviour
     public void DeleteGameData()
     {
         _cardFlipGame.GetComponent<CardGameController>().DeleteCards();
+    }
+
+    IEnumerator RewardPopUp(int hitedCards)
+    {
+        _endUI.SetActive(true);
+        _rewardText.text = $"x{hitedCards.ToString()}";
+        yield return new WaitForSeconds(1f);
+        _endUI.SetActive(false);
+        Complite();
     }
 }

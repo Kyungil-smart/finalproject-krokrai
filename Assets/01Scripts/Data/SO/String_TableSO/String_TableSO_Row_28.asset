@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_28
   m_EditorClassIdentifier: 
-  stringId: STR_TAG_000013
-  KR: "\uB0E5\uC2A4\uD0C0"
-  EN: Catstagram
+  stringId: STR_CAP_001021
+  KR: "\uACE0\uC591\uC774\uB97C \uC785\uC591\uD574\uC11C \uC0AC\uB8CC\uB97C \uC5B4\uB5A4
+    \uAC78 \uBA39\uC5EC\uC57C \uD560\uC9C0 \uBAB0\uB77C\uC11C/n\uC5B4\uB290 \uC9D1\uC0AC\uBD84\uAED8
+    \uC5EC\uCB64\uBD24\uB294\uB370.. \uBC25\uC744 \uBA39\uC9C8 \uC54A\uC544\uC694../n\uBB50\uAC00
+    \uBB38\uC81C\uC778\uC9C0.."
+  EN: 0

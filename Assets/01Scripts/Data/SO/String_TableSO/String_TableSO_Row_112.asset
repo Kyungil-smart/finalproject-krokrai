@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_112
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000061
-  KR: "\uC644\uC804 \uC900\uBE44\uB41C \uD504\uB85C \uC9D1\uC0AC\uC2DC\uB124\uC694
-    \u314B\u314B\u314B \uC800\uB9CC \uB2A6\uAC8C \uC54C\uC558\uB098\uBD10\uC694"
-  EN: You're such a prepared pro cat parent lol I guess I'm the only one who found
-    out late.
+  stringId: STR_CMT_000008
+  KR: "\uBC1C\uC0AC 1\uCD08 \uC804 \u315C\u315C\u315C"
+  EN: Launch in one second...

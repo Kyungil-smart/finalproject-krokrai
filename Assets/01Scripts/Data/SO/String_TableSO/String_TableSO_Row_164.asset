@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_164
   m_EditorClassIdentifier: 
-  stringId: STR_ITEM_000002
-  KR: "\uC18C\uACE0\uAE30 \uCE94"
-  EN: Canned Beef
+  stringId: STR_CMT_001039
+  KR: "\uB3C4\uB300\uCCB4 \uB204\uAC00 \uADF8\uB7F0 \uC798\uBABB\uB41C \uC815\uBCF4\uB97C..."
+  EN: 0

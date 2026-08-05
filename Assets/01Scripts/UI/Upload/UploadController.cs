@@ -1,7 +1,7 @@
 ﻿/*
  작성자 : krokrai
  작성일 : 26-06-08
- 수정일 : 26-06-10
+ 수정일 : 26-06-29
 
  역할 : Upload system 관리 및 Image 등록
  방식 : prefab화 된 객체를 생성 후 Image를 밀어 넣어 객체를 완성 및 자신을 주입하여 반환 받을 수 있음
@@ -35,7 +35,7 @@ public class UploadController : MonoBehaviour
 
     private Dictionary<int, UIAddressableImageLoader> _upLoadImgs = new();
     private Dictionary<int, GameObject> _upLoadobject = new();
-    private Dictionary<int, int> _postIDs = new();
+    private Dictionary<int, Post_TableSO> _posts = new();
     private Dictionary<int, int> _folder = new();
 
     private void Awake()
@@ -50,7 +50,7 @@ public class UploadController : MonoBehaviour
                 _postTableSO = t as Post_TableSO;
                 if (_postTableSO.postImage == 0)
                     continue;
-                _postIDs.Add(_postTableSO.postImage, _postTableSO.postID);
+                _posts.Add(_postTableSO.postImage, _postTableSO);
             }
         }
 
@@ -64,6 +64,24 @@ public class UploadController : MonoBehaviour
                 _folder.Add(_folderSO.ImgId, _folderSO.imgFolder);
             }
         }
+
+        ServiceLocator.Get<IDataManager>().OnUserDataReseted += DataReset;
+    }
+
+    private void OnDestroy()
+    {
+        ServiceLocator.Get<IDataManager>().OnUserDataReseted -= DataReset;
+    }
+
+    void DataReset()
+    {
+        _currentPosts = 0;
+        _upLoadImgs.Clear();
+        foreach (var item in _upLoadobject)
+        {
+            Destroy(item.Value);
+        }
+        _upLoadobject.Clear();
     }
 
     private void OnEnable()
@@ -86,10 +104,11 @@ public class UploadController : MonoBehaviour
                 // 이미지 저장용 한 개  생성
                 obj = Instantiate(_postPrefab, _spawnPoint);
                 obj.name = $"Post_{key}";
-                Log.Message(key);
                 // 지정하기 위해 컴포넌트 갖고 오기 및 주입
                 temp = obj.GetComponent<UIAddressableImageLoader>();
-                temp.ChangeImageByAddress(key, _postIDs[key],this);
+                temp.ChangeImageByAddress(key, _posts[key].postID,this);
+                if (data.Value.isUploaded)
+                    temp.PostedImg();
 
                 // 관리를 위해 등록
                 _upLoadImgs.Add(key, temp);
@@ -147,23 +166,33 @@ public class UploadController : MonoBehaviour
 
     private void OnUpLoadClick()
     {
-        if (_currentPost == 0 || !(100000 < _currentPost && _currentPost < 200000))
+        if ( !(100000 < _currentPost && _currentPost < 200000) )
             return;
+
         if (ServiceLocator.Get<IDataManager>().UserGoods.Stone_ < 1)
         {
             _popup.SetPopUp();
             return;
         }
 
-        ServiceLocator.Get<IDataManager>().UserDatas.UserPost.Add(_currentPost.ToString(), new UserPostState());
-        ServiceLocator.Get<IDataManager>().UserDatas.ImgList[_currentPostImg.ToString()].isUploaded = true;
+        var t = ServiceLocator.Get<IDataManager>();
+
+        //t.UserDatas.UserPost.Add(_currentPost.ToString(), new UserPostState()); // TODO : 변경 사항 map -> array 구조로 전환 됌.
+        t.UserDatas.UserPost.Add(_currentPost);
+
+        t.UserDatas.ImgList[_currentPostImg.ToString()].isUploaded = true;
+        t.UserDatas.ImgList[_currentPostImg.ToString()].postTime = DateTime.Now;
         
         _upLoadImgs[_currentPostImg].PostedImg();
         _postImg.sprite = null;
 
+        t.ProFile.followerCount += _posts[_currentPostImg].getFollower;
+
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN2);
         OnUpload?.Invoke(_currentPost);
 
-        Log.Message($"등록 됌 : {_currentPost}");
+        _currentPost = 0;
+        _currentPostImg = 0;
     }
 
     public void SetPost(int imgID,int PostID)

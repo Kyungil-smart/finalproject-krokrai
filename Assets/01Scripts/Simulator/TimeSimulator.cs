@@ -1,9 +1,9 @@
 /*
 작성자 : 23M-RFT68
-수정자 : NekioEmilia
+수정자 : 이종현
 
 작성일 : 26-05-27
-수정일 : 26-06-19
+수정일 : 26-07-07
 
 역할 : 인게임 시간을 실제 디바이스의 시간으로 설정 및 변경
 방식 : DateTime을 이용하여 실제 디바이스의 시간 반영
@@ -24,8 +24,6 @@ public class TimeSimulator : MonoBehaviour
     // 드롭다운에 들어갈 추가 시간(분), 추가 할 시간이 더있다면 배열에 추가하시면 됩니당
     private readonly DateTime[] _timeOptions =
     {
-        DateTime.MinValue.AddMinutes(1),
-        DateTime.MinValue.AddMinutes(5),
         DateTime.MinValue.AddMinutes(10),
         DateTime.MinValue.AddHours(1),
         DateTime.MinValue.AddDays(1),
@@ -59,6 +57,8 @@ public class TimeSimulator : MonoBehaviour
 
     private void OnAdvanceButtonClicked()
     {
+        ServiceLocator.Get<IAudioManager>().PlaySFX(SFXAudiosEnum.BTN1);
+        
         // 현재 드롭다운에 선택된 인덱스 가져오기
         int selectedIndex = _timeDropdown.value;
 
@@ -76,6 +76,7 @@ public class TimeSimulator : MonoBehaviour
 
         ServiceLocator.Get<IDataManager>().Attendance.Last_Login_TimeStamp = _currentGameTime;
         ServiceLocator.Get<IPlayTimeTracker>().OnTimeAdvanced(_currentGameTime);
+        ServiceLocator.Get<IDataManager>()._simulationCurrentTime = _currentGameTime;
 
         Log.Message($" 적용 완료! -> {_currentGameTime}");
     }

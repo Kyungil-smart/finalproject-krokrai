@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_146
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000142
-  KR: "\uC548\uB155\uD558\uC138\uC694!"
-  EN: Hi!
+  stringId: STR_CMT_001021
+  KR: "\uB2E8 \uB9DB\uC774 \uC544\uB2C8\uB77C \uB0C4\uC0C8\uC5D0 \uB09A\uC5EC\uC11C
+    \uB2E4\uAC00\uC628\uB2E4\uB2C8\L\uC2E0\uAE30\uD558\uB124\uC694!!"
+  EN: 0

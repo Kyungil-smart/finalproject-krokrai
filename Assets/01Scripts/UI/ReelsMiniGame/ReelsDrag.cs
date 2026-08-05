@@ -10,9 +10,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler, IPointerMoveHandler
+public class ReelsDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    [SerializeField] private float _lerpSpeed;
+    [SerializeField] private float _restoreSpeed;
     [SerializeField] private float _snapSpeed;
     [SerializeField] private ReelsController _reelsCtrl;
 
@@ -23,37 +23,21 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
     bool _isPlayAni = false;
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        _moveYPos = eventData.pressPosition.y;
-    }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnBeginDrag(PointerEventData eventData)
     {
-        if (_isPlayAni) return;
-        _isFirst = false;
-        CheckPos();
-    }
-
-    public void OnPointerMove(PointerEventData eventData)
-    {
-        if (_isPlayAni) return;
-
-        if(!_isFirst)
-        {
-            _isFirst = true;
-        }
-        else
-        {
-            transform.localPosition += new Vector3(0, eventData.position.y - _moveYPos, 0);
-        }
         _moveYPos = eventData.position.y;
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    public void OnDrag(PointerEventData eventData)
     {
         if (_isPlayAni) return;
-        _isFirst = false;
+        transform.localPosition += new Vector3(0, eventData.position.y - _moveYPos, 0);
+        _moveYPos = eventData.position.y;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
         CheckPos();
     }
 
@@ -66,11 +50,11 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
             StopCoroutine(_aniCoroutine);
             _aniCoroutine = null;
         }
-        if (2490 > y && y > 830) // 830 
+        if (2300 > y && y > 1000) // 830 
         {
             _aniCoroutine = StartCoroutine(RestoreAni());
         }
-        else if (y < 830)
+        else if (y < 1000)
         {
             _aniCoroutine = StartCoroutine(SnapAni(true));
         }
@@ -115,11 +99,12 @@ public class ReelsDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
         while (transform.localPosition.y < 1650 || 1670 < transform.localPosition.y)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, 1660, 0), _lerpSpeed);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, 1660, 0), _restoreSpeed);
             yield return null;
         }
 
         transform.localPosition = new Vector3(0,1660,0);
         _isPlayAni = false;
     }
+
 }

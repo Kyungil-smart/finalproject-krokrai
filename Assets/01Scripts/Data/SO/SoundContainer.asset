@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 831ca5f73e916d648b1be3c811bbdf95, type: 3}
   m_Name: SoundContainer
   m_EditorClassIdentifier: 
-  sounds: []
+  sfx:
+  - {fileID: 8300000, guid: 17dc5148d3ac7534e9660e2643c543ca, type: 3}
+  - {fileID: 8300000, guid: 3a7da2b30ab4fdc47bffca9afe391c51, type: 3}
+  - {fileID: 8300000, guid: c88513ff59b171b44a6dcc13af3700e3, type: 3}
+  - {fileID: 8300000, guid: 103e582336dfaf44dbc281208fe65820, type: 3}
+  - {fileID: 8300000, guid: 747b85341eb9eaa43b3e4635cb81d287, type: 3}
+  bgm:
+  - {fileID: 8300000, guid: b44a5b23c78862243b989db84155c1bd, type: 3}
+  - {fileID: 8300000, guid: 2530c53216c9e224ca1cf21cb42c311a, type: 3}
+  - {fileID: 8300000, guid: 2e1fbda4d675a45468bc60c0fa3337f7, type: 3}

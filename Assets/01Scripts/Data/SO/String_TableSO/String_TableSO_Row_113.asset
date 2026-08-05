@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6985fccce15500246b33636acfcb2661, type: 3}
   m_Name: String_TableSO_Row_113
   m_EditorClassIdentifier: 
-  stringId: STR_DIA_000062
-  KR: "\uADF8\uB798\uB3C4 \uC6B0\uB9AC \uC560\uB4E4 \uC2A4\uD2B8\uB808\uC2A4 \uB35C
-    \uBC1B\uACE0 \uC548\uC544\uD508\uAC8C \uCD5C\uACE0\uB2C8\uAE4C\uC694!"
-  EN: '"Still, the most important thing is that our cats are less stressed and not
-    in pain!"'
+  stringId: STR_CMT_000009
+  KR: "\uC720\uB9AC\uBCFC\uC5D0 \uCC0C\uBD80\uB41C \uBCFC\uB530\uAD6C \uB108\uBB34
+    \uADC0\uC5FD\uB2E4"
+  EN: Those cheeks squished against the glass bowl are so cute

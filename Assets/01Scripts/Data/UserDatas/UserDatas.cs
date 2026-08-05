@@ -26,8 +26,24 @@ public class UserDatas
     [FirestoreProperty]
     public Dictionary<string, ImageState> ImgList { get; set; } = new();
 
+    //public List<int> UserPost { get; set; } = new();
+    private List<int> _userPost = new();
+
     [FirestoreProperty]
-    public Dictionary<string, UserPostState> UserPost { get; set; } = new();
+    public List<int> UserPost
+    {
+        get
+        {
+            return _userPost;
+        }
+        set
+        {
+            _userPost = value;
+            ServiceLocator.Get<IDataAutoSaveManager>().RequestSave();
+        }
+    }
+
+    //public Dictionary<string, UserPostState> UserPost { get; set; } = new();
 
     [FirestoreProperty]
     public Dictionary<string, DMProgress> DMProgress { get; set; } = new();

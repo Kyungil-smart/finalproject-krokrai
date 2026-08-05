@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: TradeItem Image Group
+  m_EditorClassIdentifier: 
+  m_GroupName: TradeItem Image Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: c4a6cf1247ca0244fa1b1f4e580b1987
+  m_SerializeEntries:
+  - m_GUID: 0ce036556be9fd54f813e4ecd9832c87
+    m_Address: 504003
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 37dc5a08fc0ded74f98b3aeae0676723
+    m_Address: 504009
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3a54c6c4f25ef5f439f71ef777fff6aa
+    m_Address: 504002
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 568c8baf08bacb7418c8506134e6f51f
+    m_Address: 504005
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7035a4c6063deb14f925096f66fac2f9
+    m_Address: 504008
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7bce67fdde4637145be3adbd61d7ac57
+    m_Address: 504004
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 92b1b0518680cf44ba766ab04c085eb6
+    m_Address: 504010
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a73320be5c3be3a4ab27acb36f5ebab0
+    m_Address: 504001
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed7b127817473c840a54d3913c4484f4
+    m_Address: 504007
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f9e6fc99b512018468ac213350664374
+    m_Address: 504006
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: b84efa8f0358a0c4fbab56ba3c693270, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 7ec613e229e66a24da2324605972e5cf, type: 2}
+    - {fileID: 11400000, guid: b93a4e13811e8154d8ce0877278142c6, type: 2}

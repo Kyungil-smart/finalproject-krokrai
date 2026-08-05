@@ -19,10 +19,15 @@ public class LoginUI : MonoBehaviour
     [SerializeField] private Button _loginButton;
     [SerializeField] private Button _logoutButton;
     [SerializeField] private TextMeshProUGUI _statusText;
+    [SerializeField] private TextMeshProUGUI _versionText;
 
     private bool _isProcessing;
 
-    private void Awake() => UpdateStatus("초기화...");
+    private void Awake()
+    {
+        _versionText.text = $"현재 버전 : {Application.version}";
+        UpdateStatus("초기화...");
+    }
     private void OnEnable() => BindButtonEvents();
     private void OnDisable() => UnbindButtonEvents();
     private async void Start() => await TryAutoLoginAsync();
@@ -80,6 +85,9 @@ public class LoginUI : MonoBehaviour
         UpdateStatus("세션 복원...");
         string firebaseIdToken = await user.TokenAsync(false);
         await UnityAuthService.SignInWithGoogleAsync(firebaseIdToken);
+
+        ServiceLocator.Get<IDataManager>().ReadUserID();
+
         UpdateStatus($"환영합니다, {GetDisplayName(user)}님");
         _gameStart.interactable = true;
     }
@@ -103,7 +111,6 @@ public class LoginUI : MonoBehaviour
         {
             _isProcessing = false;
             SetButtonsInteractable(true);
-            SceneManager.LoadScene(0);
         }
     }
 
@@ -118,6 +125,8 @@ public class LoginUI : MonoBehaviour
         UpdateStatus("UGS 인증 시도...");
         string firebaseIdToken = await user.TokenAsync(false);
         await UnityAuthService.SignInWithGoogleAsync(firebaseIdToken);
+
+        ServiceLocator.Get<IDataManager>().ReadUserID();
 
         UpdateStatus($"환영합니다, {GetDisplayName(user)}님");
         _gameStart.interactable = true;
